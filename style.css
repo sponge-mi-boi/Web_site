@@ -6,12 +6,15 @@
     color: white;
     font-family: Arial, sans-serif;
 }
-
+ul{
+    font-size: 18px;
+}
 
 h1{
     text-align: center;
     font-size: 60px;
-    width: 1000px;
+    width: 100%;
+    align-self: center;
 }
 
 h4{
