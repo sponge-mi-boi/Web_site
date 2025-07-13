@@ -32,6 +32,15 @@ h5{
     width: 1000px;
 }
 
+h6{
+    text-align: center;
+    font-size: 15px;
+    width: 1050px;
+    align-self: center;
+    margin-top: -5px;
+    margin-bottom: -5px;
+}
+
 p{
     text-align: left;
     font-size: 18px;
