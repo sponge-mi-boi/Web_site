@@ -40,7 +40,13 @@ h6{
     margin-top: -5px;
     margin-bottom: -5px;
 }
-
+note{
+    display: flex;
+    font-size: 10px;
+    text-align: center;
+    align-self: center;
+    width: 200px;
+}
 p{
     text-align: left;
     font-size: 18px;
@@ -49,10 +55,31 @@ p{
     margin-top: 10px;
 }
 
+.column_container{
+    display: flex;
+    gap: 30px;
+    padding: 20px;
+    justify-content: center;
+}
+.column{
+    display: flex;
+    gap: 5px;
+    padding: 10px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.note_container{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+}
+
 .buttons{
     display: flex;
     flex-direction: column;
-    margin-top: 40px;
+    margin-top: -5px;
     align-items: center;
 }
 
