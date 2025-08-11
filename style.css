@@ -1,99 +1,63 @@
 ﻿body{
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     background-color:#111;
     color: white;
     font-family: Arial, sans-serif;
 }
-ul{
-    font-size: 18px;
-}
 
-h1{
-    text-align: center;
+
+.large{
     font-size: 60px;
-    width: 100%;
-    align-self: center;
+    text-align: center;
 }
-mspace{
-    margin: 5px;
+.space{
+    margin: 20px;
 }
-h4{
-    margin-top: -5px;
-    text-align: left;
-    font-size: 15px;
-    width: 1050px;
-    align-self: center;
-    align-content: center;
+.center{
+    text-align: center;
 }
 
-h5{
-    margin-top: 110px;
-    text-align: center;
-    font-size: 15px;
-    width: 1000px;
-}
-
-h6{
-    text-align: center;
-    font-size: 15px;
-    width: 1050px;
-    align-self: center;
-    margin-top: -5px;
-    margin-bottom: -5px;
-}
-note{
-    display: flex;
-    font-size: 10px;
-    text-align: left;
-    align-self: center;
-    width: 200px;
-}
-p{
-    text-align: left;
-    font-size: 18px;
-    color: #ccc;
-    width:1000px;
-    margin-top: 10px;
-}
-.note_two{
-    display: flex;
-    margin-top: -5px;
-    text-align: left;
-    font-size: 15px;
-    width: 1050px;
-    align-self: center;
-    align-content: center;
-}
-.column_container{
-    display: flex;
-    gap: 30px;
-    padding: 20px;
-    justify-content: center;
-}
 .column{
     display: flex;
+    justify-content: center;
+    align-items: center;
     gap: 5px;
     padding: 10px;
     flex-direction: column;
-    align-items: center;
-    text-align: left;
+    flex-basis: 50%;
 }
-
-.note_container{
+.width{
+    flex-basis: 80%;
+}
+.p{
+    font-size: 18px;
+}
+.large_ish{
+    font-size: xxx-large;
+}
+.hori{
     display: flex;
-    flex-direction: row;
-    align-content: center;
+    justify-content: center;
     align-items: center;
-    text-align: left;
+    gap: 5px;
+    padding: 10px;
+    flex-direction: row;
 }
-
+.shrink{
+    margin: 10px;
+}
+.left{
+    text-align: left;
+    align-self: flex-start;
+}
 .buttons{
     display: flex;
-    flex-direction: column;
     margin-top: -5px;
-    align-items: center;
+    justify-content: inherit;
+    align-items: inherit;
+    flex-direction: inherit;
 }
 
 .buttons a{
@@ -105,25 +69,8 @@ p{
     text-decoration: none;
     border-radius: 6px;
     transition: background 0.3s;
-}
-
-.buttons_vertical{
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
-    margin-top: 40px;
-    align-items: center;
-}
-
-.buttons_vertical a{
-    display: inline-block;
-    margin: 10px;
-    padding: 10px 20px;
-    background: #444;
-    color: white;
-    text-decoration: none;
-    border-radius: 6px;
-    transition: background 0.3s;
+    flex-direction: inherit;
+    white-space: nowrap;
 }
 
 .buttons a:hover{
