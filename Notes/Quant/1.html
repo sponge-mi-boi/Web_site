@@ -3,7 +3,7 @@
 <html lang="en">
 <head><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Part1</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>1</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <style type="text/css">
     pre { line-height: 125%; }
 td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
@@ -7509,137 +7509,166 @@ a.anchor-link {
   }
 </style>
 <!-- End of mermaid configuration --></head>
-
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
 <main>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=9e99da19-e64d-4234-a5b9-b0081156fb8f">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=70409472-3189-49e3-9b3d-e97da85beeef">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="The-Quant-Testing-Framework-I-use-to-create-profitable-strategies">The Quant Testing Framework I use to create profitable strategies<a class="anchor-link" href="#The-Quant-Testing-Framework-I-use-to-create-profitable-strategies">¶</a></h1><p>Here is my setup for creating profitable strategies in quant. The framework is quite large and still expanding, meaning that I will post each of its aspects individually, and explain how they all fit together.</p>
-<p>The modules I have created are:</p>
-<ul>
-<li>yggdrasil.py: contains the class Yggdrasil, which is the root of all my code; it creates an
-instance of a strategy which acts on a set of stocks. Combines StockAnalyzer and
-StrategyHelper (see below).</li>
-<li>market_analy: contains a detailed retrieval method which obtains either live data or
-previously stored personal data given a set of parameters including trading frequency
-and number of data points</li>
-<li>useful_methods: this is a module of helper functions which helps display code and various
-results easier and helps in analysis</li>
-<li>strategy_analy: contains the class StockAnalyzer which can run various types of analysis,
-given a set of stocks</li>
-<li>strategy_helper.py: contains the class StrategyHelper which creates an instance of a
-working strategy depending on which strategy is picked; does not contain a stock list
-but merely the strategy logic</li>
-<li>test_live_helper.py: runs the actual live trading bot based on the tested strategy logic of
-the other modules.</li>
-</ul>
-<p>Below, I post the root module and explain in detail.</p>
-<ul>
-<li>Module: yggdrasil.py  #Contains the class Yggdrasil<ul>
-<li>class: Yggdrasil #This is the root of all my strategies and analysis. Creates a general
-instance of a test.<ul>
-<li>Instance variables:<ul>
-<li>stock_universe: StockUniverse object which contains the list of stocks that will be used in this test</li>
-<li>cur_strat: StrategyHelper object which sets and executes the basic framework of the given strategy in this test</li>
-<li>strat_list: List of available executable strategies; mostly for convenience.</li>
-<li>analysis: Various aspects of the stock list and the method being used; mostly for convenience</li>
-<li>title: Defines the various aspects of the strategy being used; mostly for convenience</li>
+<h1 id="Chapter-1">Chapter 1<a class="anchor-link" href="#Chapter-1">¶</a></h1><h2 id="Content">Content<a class="anchor-link" href="#Content">¶</a></h2><ul>
+<li>Probability theory is built from set theory just like how statistics is built from probability theory.</li>
+<li>The set S of all possible outcomes of an experiment is called the sample space of the given experiment. For tossing a coin, $S = \{H,T\}$ would be the sample space. Usually, only countable sample spaces should exist because it is physically not possible really, or obviously, to have an uncountable number of measurements, but this approximation is very accurate and makes the description easier.</li>
+<li>An event is any collection of possible outcomes of an experiment, meaning any subset of S. Event A occurs if the outcome of the experiment is in the set A, a subset of S.</li>
+<li>The property of containment: $A \subset B \Leftrightarrow x \in A \Rightarrow x \in B$</li>
+<li>The property of equality: $A = B \Leftrightarrow A \subset B$ and $ B \subset A$</li>
+<li>Union: $A \cup B = \{x: x \in A $ or $ x \in B \}$</li>
+<li>Intersection: $A \cap B = \{x: x \in A $ and $ x \in B \}$</li>
+<li>Complementation: $A^c = \{x:x \notin A \}$</li>
+<li>ex) $S = \{1,2,3,4\}$. Events possible are $A = \{1,4\}$ and $B=\{2,3,4\}$. Then, $A \cup B = S, A \cap B = \{4\}, A^c = \{2,3\}$. Also, $(A \cup B) ^c = \not 0$, where $\not 0$ is the empty set, or the set with no elements.</li>
+<li>These elementary set operations have the properties of commutativity, associativity, distributivity, and satisfy DeMorgan's Laws.</li>
+<li>An example is the proof of the first law in the last one, DeMorgan's Laws.<ul>
+<li>Proof: $x \in (A \cup B)^c \Rightarrow x \in A^c \cap B^c $ will be proved first. $x \in (A \cup B)^c$ means $x \notin A$ and $ x \notin B$ which means $x \in A^c$ and $x \in B^c$. Similarly, $x \in A^c$ and $x \in B^c$ means $x \notin A$ and $x \notin B$, means $x \in (A \cup B)^c$, meaning $x$ is neither in $A$ nor in $B$. Therefore, $(A \cup B)^c = A^c \cap B^c$.</li>
 </ul>
 </li>
-<li>Constructor<ul>
-<li>__ init __ (self, freq, strategy_,custom,shift_= 0, num_points = 500, stock_list = None)</li>
-<li>Creates an instance of a test which is made of a strategy and a list of stocks. Executes this test upon instantiation</li>
-<li>Parameters:<ul>
-<li>freq: the frequency of the strategy being used</li>
-<li>strategy_: the type of strategy being used</li>
-<li>custom: the type ofdata being used, if custom or live</li>
-<li>shift: how much the data isbeing shifted in its extraction. Measured in days regardless of the units of freq. Default value of 0.</li>
-<li>num_points: number of data points in the extracted data. Note that this does not always return the exact number passed,but has a minimal error range in most cases ( ±10). Default value is 500.</li>
-<li>stock_list: the list of stocks the strategy as defined by theprevious parameters will act on</li>
+<li>Similar proofs follow for the rest of the properties.</li>
+<li>This concept can be extended to infinite collections such $\cup_{i=1}^{\inf} A_i = \{ x \in S : x \in A_i$ for some $i\}$ for an infinite union and $\cap_{i=1}^{\inf} A_i = \{ x \in S : x \in A_i$ for all $i\}$.</li>
+<li>ex) if $S = (0,1]$ and $A_i = [(\frac{1}{i}),1]$ for some $i$, then $\cup_{i=1}^\inf A_i = \cup_{i=1}^\inf [(\frac{1}{i}),1] = (0,1]$. Note here the $[$ means that the set includes the given boundary point and $($ means it does not. Then, $\cap_{i=1}^\inf A_i = \cap_{i=1}^\inf [(\frac{1}{i}),1] = \{1\} $.</li>
+<li>If the indices, meaning the set being used to describe the index of the elements of the index set, is uncountable, then unions and intersections for uncountable sets are easily defined. These are not important in probability.</li>
+<li>Two events A and B are disjoint, or mutually exclusive, if $A \cap B = \not 0$. The set of events $\{A_i\}_i$ are mutually exclusive if $A_i \cup A_j = \not 0$ for all $ i \neq j$. They have no elements in common.</li>
+<li>ex) $\{A_i\}_i$ such $A_i =[i,i+1)$ for $i \in \mathcal N$, (0,1,2...), is a collection of pairwise disjoint sets, meaning $\cup_{i=0}^\inf A_i = [0,\inf)$.</li>
+<li>If $\{A_i\}_i$ is mutually exclusive and $\cup_{i=0}^\inf A_i = S$, then the collection $\{A_i\}_i$ is said to form a partition of $S$.</li>
+<li>The axiomatic foundations of prob thy need to be studied</li>
+<li>A collection of subsets of S is called a sigma algebra, or (Borel field), and is denoted by B if it satisfies<ul>
+<li>a) $\not 0 \in B$ meaning the empty set is an element of B</li>
+<li>b) If $A \in B$, then $A^c \in B$, meaning that B is closed under complementation</li>
+<li>c) If $\{A_i\}_i \in B$, then $\cup_{i=1}^\inf A_i \in B$ meaning that B is closed under countable unions.</li>
+</ul>
+</li>
+<li>A sigma algebra therefore always contains $S$, the set itself too, since for every sigma algebra, $\not 0 \in B \Rightarrow \not 0^c = S \in B$ from the first and second properties.</li>
+<li>Also by De Morgan's laws, $\cup_{i=1}^\inf A_i \in B \Rightarrow (\cup_{i=1}^\inf A_i)^c = \cap_{i=1}^\inf A^c_i \in B $ and the replacement $A_i^c \Rightarrow A_i$ can be made since if $A_i \in B$, then $A_i^c \in B$ too. Therefore, $\cap_{i=1}^\inf A_i \in B$ meaning B is closed under countable intersections as well</li>
+<li>A space S can have many different sigma algebras. The trivial sigma algebra is the collection of sets $B = \{\not 0, S\}$ where the properties are trivially shown to be satisfied.</li>
+<li>The most important example is the sigma algebra-I, which is defined for a countable set S as the collection of all subsets of S, meaning $B = P(S)$, where $P$ indicates the power set. The length, or cardinality, of the power set is merely, given the set is of size n, $2^n$, since every element in B can be chosen to be either included or excluded from a given set independently</li>
+<li>ex) $\S = \{a,b,c\}$, then $B = \{\{a\},\{b\},\{c\},\{a,b\},\{a,c\},\{b,c\},\not 0, S\}$</li>
+<li>The sigma algebra-II is given that $S = (-\inf,\inf)$, all sets of the form $[a,b],(a,b],[a,b),(a,b)$, for all  $a,b \in \mathcal R$</li>
+<li>This leads to the defintion of a probability function: Given a sample space S and an associated sigma algebra B, a probability function is a function denoted P with domain B such that<ul>
+<li>$P(A)\geq 0$ for all $A \in B$</li>
+<li>$P(S) = 1$</li>
+<li>If $\{A_i\}_i \in B$ are mutually exclusive, then $P(\cup_{i=1}^\inf A_i) = \sum_{i=1}^\inf P(A_i)$</li>
+</ul>
+</li>
+<li>These are called the Kolmogorov Axioms and define a probability function. There can be several of these associated with a given sample set.</li>
+<li>ex) The tossing of a fair coin has the sample space $S= \{H,T\}$. The definition of fair implies that $P(\{H\}) = P(\{T\})$ and $P(S) = P(\{H\} \cup \{T\}) = P(\{H\}) + P(\{T\})$ by axioms 2 and 3. Therefore, $2P(\{H\}) = 1 \Rightarrow  P(\{H\}) = P(\{T\} )= \frac{1}{2}$</li>
+<li>To define a probability function in a general manner $ S = \{s_1,...,s_n\}$ be a finite set and B be any sigma algebra of the subsets of that. Let $p_i$ be nonnegative numbers that sum to * For any $A \in B$, define $P(A) = \sum_{\{i,s_i \in A\} } p_i$, P is a probability function on B. This is true for even a countable set.</li>
+<li>ex) A dart boardd with radius $r$ and each ring is of width $r/5$ meaning that if the assumption is the board is always hit then $P(i) = $ Area of region i / Area of dart board, meaning for example $P(1) = (\pi r^2 * \pi (4r/5)^2)/ \pi r^2 = 1 * (4/5)^2$ which should for all 5 regions sum to 1, meaning it is a probability distribution.</li>
+<li>Theorem: If P is a probability function and A is any set in B,<ul>
+<li>$P(\not 0) = 0$</li>
+<li>$P(A) \leq 1$</li>
+<li>$P(A^c) = 1 * P(A)$</li>
+</ul>
+</li>
+<li>Proof: For the last one $P(S) = P(A \cup A^c) = 1$ by the 2nd axiom, meaning then by the 3rd axiom $P(A \cup A^c) = P(A) + P(A^c)$, leading to $P(A^c) = 1 * P(A)$. $P(A^c) \geq 0 \Rightarrow P(A) \leq 1$. For the first statement $P(S) = P(S \cup \not 0) = 1 \Rightarrow P(S) + P(\not 0) = 1 + P(\not 0) = 1 \Rightarrow P(\not 0 ) = 0$</li>
+<li>Theorem: If P is a probability function and A and B are any sets in B,<ul>
+<li>$P(B \cap A^c) = P(B) * P(A \cap B)$</li>
+<li>$P(A \cup B) = P(A) + P(B) * P(A \cap B)$</li>
+<li>If $A \subset B$, then $P(A) \leq P(B)$</li>
+</ul>
+</li>
+<li>Proof: For the first statement, note that $B = \{B \cap A\} \cup \{B \cap A^c\}$, meaning since this is a partition of B, $P(B) = P(B \cap A)+ P(B \cap A^c) \Rightarrow P(B \cap A^c) = P(B) * P(A \cap B)$. For the second, note $A \cup B = A \cup \{ B \cap A^c \}$, meaning $P(A \cup B) = P(A) + P(B \cap A^c) = P(A) + P(B) * P(A \cap B)$ by the first statement. For the last one, $A \subset B \Rightarrow A \cap B = A \Rightarrow P(B \cap A^c) = P(B) * P(A) \geq 0$ where the first statement was used in the last step. This means that $P(A) \leq P(B)$.</li>
+<li>A useful corollary is since $P(A \cup B) \leq 1 \Rightarrow P(A) + P(B) * P(A \cap B) \leq 1 \Rightarrow P(A \cap B) \geq P(A) + P(B) * 1$ where the second statement was used in the last step. This is known as Bonferroni's Inequality. Useful for large individual probabiliites since it gives in those situations a non negative lower bound if the intersectional probability is hard to calculate</li>
+<li>Theorem: If P is a probability function,<ul>
+<li>$P(A) = \sum_{i=1}^\inf P(A \cap C_i)$ for any partition $\{C_i\}_i$</li>
+<li>$P(\cup_{i=1}^\inf A_i) \leq \sum_{i=1}^\inf P(A_i)$ known as Boole's inequality</li>
+</ul>
+</li>
+<li>Proof: For the first, $A = A \cap S = A \cap (\cup_{i=1}^\inf C_i) = \cup_{i=1}^\inf (A \cap C_i )$ where the distributive property was used in the last step. Then, $P(A) = P(\cup_{i=1}^\inf (A \cap C_i ) ) = \sum_{i=1}^\inf P(A \cap C_i)$ since the $A \cup C_i$ are disjoint, allowing for the laws of the probability function's definition to be used. For the second, ...</li>
+<li>Counting can become complicated, but starts simple.</li>
+<li>The Fundamental Theorem of Counting: If a job consists of k separate tasks, the ith of which can be done in $n_i$ ways, $i \in \{1,...,k\}$, then the entire job can be done in $n_1 \times n_2 ... n_k = \Pi_{i=1}^k n_i$ ways totally.</li>
+<li>The two important aspects of counting are if replacement is allowed and if the ordering is important.</li>
+<li>For a positive integer n, $n! = n(n-1)...1$ with the definition $0! = 1$.</li>
+<li>There are four unique cases of counting then to be looked<ul>
+<li>Ordered, without replacement<ul>
+<li>To pick k objects from a set of n objects $n(n-1)...(n-k) = \frac{n!}{(n-k)!}$ is the number of possibilities.</li>
+</ul>
+</li>
+<li>Ordered, with replacement<ul>
+<li>$n(n)...n = n^k$ possibilities</li>
+</ul>
+</li>
+<li>Unordered, without replacement<ul>
+<li>$n(n-1)...(n-k)/k(k-1)...1 = \frac{n!}{(n-k)! \ k \ !}$ since there are $k(k-1)...1 = k!$ ways to order $k$ objects, and these are all the same exact outcome if there is no ordering.</li>
+<li>For example, the set $\{1,2\}$ has two ordered possibilities of being arranged $\{1,2\}, \{2,1\}$, but only one way of being arranged if order does not matter.</li>
+<li>This is represented as $n$ choose $k$, $n \geq k$, where $\frac{n!}{k!(n-k)!}$ which is the amount of ways k objects can be chosen from n total objects in an unordered way, or if the objects are exactly identical, meaning their order does not matter.</li>
+</ul>
+</li>
+<li>Unordered with replacement<ul>
+<li>This is the toughest case to measure intuitively, but it can be looked at by looking at each possibility in terms of each individual replacement. There are n possibilities for the first choice, but for the second, because of unordering there are $n+1$ possibilities, not just n. This is because the 2nd object could have just as easily been chosen first, meaning the size of the sample space initially is not big enough to be the whole. In fact, for k chosen objects, there will be $n(n+1)...(n+k-1)$ total possibilities of choosing, since upon each pick, an object gets added to the overall space. Therefore, it is better to regard this situation as the choice of k objects from $n+k-1$ total objects and the $k$ objects themselves being indistinguishable makes the result to be $\frac{n(n+1)...(n+k-1)}{k!} = \frac{(n+k-1)!}{k!(n+k-1-k)!} = \frac{(n+k-1)!}{k!(n-1)!}$</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>Instance methods:<ul>
-<li>__ set_title(self): Private method called upon instantiation which sets the title of the strategy if needed<br/></li>
+<li>Counting analysis is important in the situation of randomness, meaning that S is a finite set, and all outcomes in S are equally likely. In this situation, $S = \{s_i\}_i, i \in \{1,...,N\}$, meaning $P(\{s_i\}) = \frac{1}{N}$, leading to the fact for any given event, subset, $A$ that occurs in $S$, $P(A) = \sum_{s_i \in A} P(\{s_i\}) = \sum_{s_i \in A} \frac{1}{N} = \frac{A_N}{N}$ where $A_N$ is the number of events, or elements, in N.</li>
+<li>ex) Consider drawing 5 cards from a deck of 52 cards, without replacement, and unordered. The number of total events, or possible draws, $\frac{52!}{5!47!} = 2598960$. The probability of having 4 aces in the hand would be the number of events, or sets, with 4 aces, which is 48 since the first 4 cards need to be aces and there are 48 possibilites for the 5th card, divided by the total number of events, meaning $P($four aces$) = \frac{48}{2598960}$. The chance of having 4 cards of the same rank would be the number of cards 13, times the number of possibilities of 5th $\frac{13*48}{2598960}$, and the chance of exactly one pair would be the number of different cards times the number of ways to choose 2 cards out of the 4 of each type which exist in deck which is unordered of course, times the number of ways to choose 3 different types of cards from the remaining 12 types of cards left times the number left of each of these types, which is just $4*4*4$. Note that type means number of the card here, and there is 4 of each num in the deck of course. Therefore, the total number of hands, or sets, with a pair $13* \binom{4}{2} \binom{12}{3}*64$, which is divided by the total number of possible events, or hands, in this space.</li>
+<li>For sampling without replacement, the probability of an outcome is independent of whether the set is considered ordered or not. However, this is not true for sampling with replacement interestingly as can be seen from a basic example. Choosing 2 items out of 3 total items gives an unordered outcome of $\{1,2\}$ as one of the possibilities. However, if the space is considered ordered, this unordered outcome corresponds to two ordered outcomes formed of the same elements $\{1,2\},\{2,1\}$. The space of unordered events is less than the space of ordered events for a given sample space, unless there is only one event in the whole set. This is fascinating because the choice, or more accurately, information about an ordered set means that the probability assigned to the set by an observer is different compared to one who does not have that information, and considers the set as merely unordered. In the above example, the probability of $1/6$ in the unordered sample space corresponds to the probability of $2/9$ in the ordered sample space. However, if the second observer was able to distinguish two elements apart, but then chooses to consider them unordered, he would still get $2/9$ for that event since he knows the total number of events possible in this space is $9$.</li>
+<li>Conditional probability is another huge aspect when it comes to calculations.</li>
+<li>ex) What is the chance of 4 aces being drawn from a deck if only 4 cards are drawn? From before, $\binom{52}{4}$ is the total number of possibilities for these 4 cards, and because of unorderness, only one of these can be 4 aces, meaning the probability is 1 over that.</li>
+<li>Another way of doing this is to use conditional probabilities and to update the sample space after every interaction with it. The probability the first card is an ace is $4/52$, the second card being an ace is $3/51$, and so on meaning $(4/52)(3/51)(2/50)(1/49)$ is the chance</li>
+<li>If A and B are events, or subsets, in S, and $P(B) \geq 0 $, then the conditional probability of A given B is $P(A|B) = \frac{P(A \cap B)}{P(B)}$</li>
+<li>$P(x) = P(x|B)$ is a probability function which satisfies Kolmogorov's Axioms.</li>
+<li>ex) A,B,C one of them will be pardoned but A is told that B will be executed. If W is the event that A is told that B will die, $P(A|W) = \frac{P(A \cap W)}{P(W)}$. Then, $P(W) = P($warden says B dies$) = P($warden says B dies and A is pardoned$) + P($warden says B dies and B is pardoned)$ + P($ warden says B dies and C is pardoned$)$ since there are all the possible subsets of the given event of the warden telling A that B dies, meaning that either one of these three things have to happen. Assuming the warden is telling the truth, $P($B dies and B is pardoned)=0. However, note that the chance A or B or C gets pardoned is random as dictated by the problem, meaning that $1/3$ of each happening. Also, the warden cannot tell A whether he dies, because then A would know for sure, and there is nothing for him to calculate. That means the warden tells A that B dies, but A is pardoned or C is pardoned, or the warden tells A that C dies, but A is pardoned or B is pardoned. Therefore, P(warden says B dies and A is pardoned$) = 1/2(1/3) = 1/6$ and P( warden says B dies and C is pardoned$) = 1/3$. Therefore, $P(W) = 1/6 + 1/3 = 1/2$, and $P(A|W) =$ P(warden says B dies and A is pardoned) / P(warden says that B dies)  $ = (1/6)/(1/2) = 1/3$ as expected</li>
+<li>Thm: Bayes' Rule<ul>
+<li>Let $A_i$ be a partition of the sample space and let B be any set. Then for each $i$, $P(A_i|B) = \frac{P(B|A_i)P(A_i)}{\sum_{j=1}^\inf P(B|A_j)P(A_j)} $</li>
 </ul>
 </li>
+<li>ex) Either a dot or dash is sent in Morse code with $P(A) = 3/7, P(B) = 4/7$. Say there is an interference and a dot is mistakenly received as a dash with probability $1/8$ and vice versa meaning $P(B_r|A) = 1/8$. What is the chance a dot was sent, given a dot is received? $P(A|A_r) = \frac{P(A_r|A) P(A)}{P(A_r)}$. Then, from above, it is known $P(A_r|A) = 7/8$, $P(A) = 3/7$, and $P(A_r) = P(A_r \cap A) + P(A_r \cap B) = P(A_r|A)P(A) + P(A_r|B)P(B)$ from the bottom part of Bayes' Rule meaning $P(A_r) =7/8 3/7 + 1/8 4/7 = 3/8 + 1/14 = 25/56$, meaning $P(A|A_r) = 7/8(3/7)/(25/56) = 21/25$</li>
+<li>If B and A are independent, $P(A|B) = P(A)$. Note if this is true, $P(B|A) = \frac{P(A|B)P(B)}{P(A)} = P(A) \frac{P(B)}{P(A)} = P(B)$. Therefore, if A is independent of B, B is independent of A. Also, since $P(B|A)P(A) = P(A \cap B) \Rightarrow P(A \cap B) = P(A)P(B)$ This is taken to be the defintion of statistical independence.</li>
+<li>ex) The probability to throw at least 1 six in 4 rolls of a die would be P(1 six at least) = 1 * P(no six in the four rolls) = 1 * $(5/6)^4$ = .518 since each roll is independent and the chance of not getting a 6 in a given roll is $5/6$.</li>
+<li>Thm: If A and B are independent events, then the following pairs are also independent<ul>
+<li>A and $B^c$</li>
+<li>$A^c$ and B</li>
+<li>$A^c$ and $B^c$</li>
 </ul>
 </li>
-<li>free code: Saves the results of an example test run in a JSON file.<br/><ul>
-<li>The set of parameters is defined first and then the strategy is tested upon a list of variousstocks. In the given example, the set of parameters is the shift of the data and the parameters of the strategy being used, which is Mean Reversion in this case defined by two metrics.<ul>
-<li>These are the size of the rolling data used to compute metrics like the mean, and the cutoff z-score used to enter/exit the strategy. Everything else is held constant.</li>
+<li>Proof: For the first statement, $P(A \cup B^c) = P(A) * P(A \cup B) = P(A) * P(A)P(B) = P(A)(1-P(B)) = P(A)P(B^c)$. The others are similiar.</li>
+<li>Independence among multiple events, more 2, requires a strong condition. A collection of events $A_n$ are mutually independent if for any subcollection $A_{i_j}$, $P(\cap_{j=1}^k A_{i_j}) = \Pi_{j=1}^k P(A_{ij})$. This means for 3 events $A,B,C \rightarrow P(AB)=P(A)P(B),P(BC)=P(B)P(C),P(ABC)=P(A)P(B)P(C),P(AC)=P(A)P(C)$.</li>
+<li>Random variables are used to reudce the size of the sample space to simplify situations. For example, tossing a coin 10 times results in a sample space of $2^{10}$.However, this situation can just be described without loss of information by how many of these coins land in heads, or its opposite, meaning a set of numbers inclusive, the integers, from 0 to 10. This is defined explictly by an surjective mapping from the orignal smaple space to this new one. This is the defintion of a random variable, a function from the sample space S to the real numbers.</li>
+<li>To define a probability function $P$ on this new sample space, consider a random variable $X: S \rightarrow \chi, S = \{s_i\}_i, \chi = X() = \{x_i\}_i $. The induced probability function is to merely state that $P_X(x_i) = P(\{s_j \in S: X(s_j) = x_i\})$. The probabilities of all the elements in S associted, or mapped to, an element in X are all simply added together, and those give the probability of the element in X occuring. This induced probability function can be shown to satisfy the Kolmogorov Axioms, which is not too difficult. $P_X \equiv P$, meaning just P can be used from now on to represent $P_X$.</li>
+<li>ex) Let S be the strings of all possible 50 0s and 1s. If equally likely, and X is defined as the number of 1s, the number of strings with 27 1s merely has the probability $P(X = 27) = \binom{50}{27}/ 2^{50}$. In general, for any $i \in \chi$, $P(X = i) = \binom{50}{i}/2^{50}$</li>
+<li>An induced probability func is defined similarily for countable sets and uncountable</li>
+<li>The cummulative distribution function or cdf of a random variable X, for every random variable X, $F_X(x) = P_X(X \leq x)$ for all $x$.</li>
+<li>ex)The experiment of tossing three coins, and $X$ is the number of heads, $F_X(x) = \begin{cases} 0 &amp; \text{if  } -\inf &lt; x &lt; 0\\ 1/8 &amp;  \text{if  }  0 \leq x &lt; 1  \\ 1/2 &amp; \text{if } 1 \leq x &lt; 2 \\ 7/8  &amp; \text{if } 2 \leq 3 \\ 1 &amp; \text{if } 3 \leq x &lt; \inf  \end{cases}$</li>
+<li>This is a right continious function, meaning any point is continious if approached from the right hand side. Also, the size of the jump at any point is equal to $P(X = x)$</li>
+<li>Thm: The function F(x) is a cdf if and only if the following three conditions hold:<ul>
+<li>a) $\lim_{x\rightarrow \inf} F(x) = 0$, and $\lim_{x \rightarrow \inf} F(x) = 1$</li>
+<li>b) $F(x)$ is a nondecreasing function of x</li>
+<li>c) $F(x)$ is right-continuous, meaning for every number $x_0, \lim_{x \downarrow x_0} F(x) = F(x_0)$</li>
 </ul>
 </li>
-<li>Note that in this example, I'm currently in the process of creating viable classes for stock classification, meaning that each allocation of stocks being tested asthe last parameter is merely just each individual stock only. The classification inthe example given is simply that the number of completed trades is above 30 in the given data set and the profit is positive.</li>
+<li>ex) The number of tosses required to get a head if $p$ is the probability of getting a head on a given toss, has the probability function $P(X=x) = (1 * p)^{x-1}p$ where $x$ is the random variable that counts the number of tosses needed to get a head. $P(X \leq x) = \sum_{i=1}^x P(X = i) = \sum_{i=1}^x (1 * p)^{i-1}p$. Since $\sum_{l=1}^n t^{l-1} = \frac{1 * t^n}{1 * t}$(since $\sum_{i=0}^n ar^n = a + a\sum_{i=1}^n r^n = a\frac{1 -r^{n+1}}{1-r} \Rightarrow \sum_{i=1}^n r^n =  \frac{1 -r^{n+1}}{1-r} * 1 = \frac{r(1-r^n)}{1-r} \Rightarrow \sum_{i=1}^n r^{n-1} = \frac{1-r^n}{1-r})$, $F_X(x) = P(X \leq x) = \frac{1 * (1-p)^x}{1-(1-p)}p = 1 * (1-p)^x, x \in N $. This is called a geometric distribution.</li>
+<li>ex) A continious cdf example is the function $F_X(x) = \frac{1}{1+e^{-x}}$, which can be shown to satisfy all three conditions. For the first, $\lim_{x\rightarrow -\inf} F_X(x) = 0$ since $e^{-x}$ diverges in this limit, and $\lim_{x\rightarrow \inf} F_X(x) = 1$ since $e^{-x}$ vanishes in this limit. For the increasing property, $\frac{d}{dx}F_X(x) = \frac{e^{-x}}{(1+e^-x)^2}$ is always greater than 0, meaning that $F_X(x)$ is always increasing. $F_X(x)$ is fully continious since $e^{-x}$ is fully continious, meaning it is of course right continious. This is an exmpale of a logistic distribution.</li>
+<li>A xdf can be formed from a set of continious functions too, with discontinuity being the situation at a finite number of points.</li>
+<li>A random variable X is defined to be continious if $F_X(x)$ is a continious function of x and discrete if $F_X(x)$ is a step function.</li>
+<li>The random variables $X$ and $Y$ are identically distributed if for every set $A \in B^1 ,P(X \in A) = P( Y \in A)$ where $B^1$ is the samllest sigma algebra containing all intervals of real numbers of the form $(a,b),[a,b),[a,b],(a,b]$. Note if probabilites are defined for a larger class of the set, it is possible that two random vrailbes have the same distribution function but not the same prob for every given event, meaning the cdf does not completely define the probability distribution it is associted with, (not 1-1).</li>
+<li>Thm: The following two statements are equivalent<ul>
+<li>a) Two random variables are identically distributed.</li>
+<li>b) They have the same cdf.</li>
 </ul>
 </li>
+<li>Associated with a random variable X and its cdf is another function, called the probability density function, pdf, or probability mass function, pmf, in the continious and discrete situations respectively</li>
+<li>The probability mass function of a discrete variable X is given $f_X(x) = P(X=x)$ for all x.</li>
+<li>ex) The geometric distribution from before has the pmf $f_X(x) = P(X = x) = \begin{cases} (1-p)^{x-1}p&amp; \text{ for } x = 1,2,... \\ 0 &amp; \text{ otherwise}\end{cases}$.</li>
+<li>$P(a \leq X \leq b) = \sum_{k=a}^bf_x(k)$ with the special situation $P(X \leq b) = F_X(b)$</li>
+<li>For the continious situation, the probability density function is defined as $P(X \leq x) = F_X(x) = \int_{-\inf}^xf_X(t)dt$. Using the Fundamental Theorem of Calculus with the assumption that $f_X(x)$ is continious, which is true $\frac{d}{dx} F_X(x) = f_X(x)$</li>
+<li>Either the cmf or the pmf,pdf can be used to solve problems, and the simpler one should be chosen</li>
+<li>ex) For the logistic distribution, $F_X(x) = \frac{1}{1+e^{-x}}$. $f_X(x) = \frac{e^{-x}}{(1+e^{-x})^2}$. The area under the curve gives the interval probabilities.</li>
+<li>Thm: A function $f_X(x)$ is a pdf or pmf of a random variable X if and only if<ul>
+<li>a) $f_X(x) \geq 0$ for all $x$</li>
+<li>b) $\sum_x{f_X(x)} = 1$ or $\int_{-\inf}^\inf f_X(x)dx = 1$</li>
 </ul>
 </li>
+<li>Mathematically, any non-negative function with a finite positive integral or sum can be turned into a pdf or pmf. There are edge cases where $F_X(x)$ is continious but not discrete, but those can be ignored for now, meaning to restrict the class of functions.</li>
 </ul>
-<div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">useful_methods</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">market_analy</span><span class="w"> </span><span class="kn">import</span> <span class="n">full_stocks</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">strategy_analy</span><span class="w"> </span><span class="kn">import</span> <span class="n">StockAnalyzer</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">strategy_helper</span><span class="w"> </span><span class="kn">import</span> <span class="n">StrategyHelper</span>
-
-
-<span class="k">class</span><span class="w"> </span><span class="nc">Yggdrasil</span><span class="p">:</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">freq</span><span class="p">,</span> <span class="n">strategy_</span><span class="p">,</span> <span class="n">custom</span><span class="p">,</span> <span class="n">shift_</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">num_points</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">stock_list</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">strat_list</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">cur_strat</span> <span class="o">=</span> <span class="n">StrategyHelper</span><span class="p">(</span><span class="n">freq</span><span class="p">,</span> <span class="n">strategy_</span><span class="p">,</span> <span class="n">custom</span><span class="o">=</span><span class="n">custom</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="n">shift_</span><span class="p">,</span> <span class="n">num_points</span><span class="o">=</span><span class="n">num_points</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">stock_universe</span> <span class="o">=</span> <span class="n">StockAnalyzer</span><span class="p">(</span><span class="n">stock_list</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cur_strat</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">cur_strat</span><span class="o">.</span><span class="n">run_method</span><span class="p">(</span><span class="n">stock_list</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">analysis</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__set_title</span><span class="p">()</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">__set_title</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">title</span> <span class="o">=</span> <span class="p">(</span><span class="s1">'freq: '</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">cur_strat</span><span class="o">.</span><span class="n">freq</span> <span class="o">+</span> <span class="s1">'_ '</span> <span class="o">+</span> <span class="s1">'num of data points: '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cur_strat</span><span class="o">.</span><span class="n">num_points</span><span class="p">)</span> <span class="o">+</span>
-                 <span class="s1">'_ custom: '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cur_strat</span><span class="o">.</span><span class="n">custom</span><span class="p">)</span> <span class="o">+</span> <span class="s1">'_ shift: '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cur_strat</span><span class="o">.</span><span class="n">shift</span><span class="p">)</span>
-                 <span class="o">+</span> <span class="s1">'_ start date: '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cur_strat</span><span class="o">.</span><span class="n">start</span><span class="p">)</span> <span class="o">+</span> <span class="s1">'_ end date: '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cur_strat</span><span class="o">.</span><span class="n">end</span><span class="p">)</span>
-                 <span class="o">+</span> <span class="s1">'_ strategy:'</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cur_strat</span><span class="o">.</span><span class="n">strategy</span><span class="p">)</span> <span class="o">+</span> <span class="s1">''</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">title</span>
-
-<span class="c1">#Generates the various parameters which can be tested in a clean manner. </span>
-<span class="n">para_test</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">shift</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">roll</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">cutoff</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
-            <span class="k">for</span> <span class="n">stock</span> <span class="ow">in</span> <span class="n">full_stocks</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">100</span><span class="p">]:</span>
-                <span class="n">para_test</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">stock</span><span class="p">,</span> <span class="n">shift</span><span class="p">,</span> <span class="n">roll</span><span class="p">,</span> <span class="n">cutoff</span> <span class="o">/</span> <span class="mi">10</span><span class="p">])</span>
-
-<span class="c1">#Runs the tests for various combinations of the parameters. Only two full stock iterations are ran for brevity. </span>
-<span class="n">stock_pass_test</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">stock_pass_condition</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">para_test</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">100</span> <span class="o">*</span><span class="mi">2</span><span class="p">]:</span>                                        
-    <span class="n">strategy</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'Mean Rev'</span><span class="p">]</span> <span class="o">+</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
-    <span class="n">ygg</span> <span class="o">=</span> <span class="n">Yggdrasil</span><span class="p">(</span><span class="s1">'5m'</span><span class="p">,</span> <span class="n">strategy</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">shift_</span><span class="o">=</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">num_points</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span> <span class="n">stock_list</span><span class="o">=</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
-
-    <span class="c1">#Condition for stock classification is given here to filter the backtests </span>
-    <span class="n">results</span> <span class="o">=</span> <span class="p">[</span><span class="n">ygg</span><span class="o">.</span><span class="n">cur_strat</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">'Profit'</span><span class="p">,</span> <span class="s1">'Number of Completed Trades'</span><span class="p">]]</span>
-    <span class="k">if</span> <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">results</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">30</span><span class="p">:</span>
-        <span class="n">stock_pass_test</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ygg</span><span class="o">.</span><span class="n">cur_strat</span><span class="o">.</span><span class="n">get_params</span><span class="p">())</span>
-        
-<span class="c1">#Data from all the tests is stored in a JSON file for easy viewing and extraction </span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'example_data.json'</span><span class="p">,</span> <span class="s1">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">pdf</span><span class="p">:</span>
-    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">stock_pass_test</span><span class="p">,</span> <span class="n">pdf</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-</pre></div>
-<h2 id="Data">Data<a class="anchor-link" href="#Data">¶</a></h2><p>Link to the JSON file is given $\rightarrow$ <a href="https://github.com/sponge-mi-boi/Quant-data/blob/main/example_data.json">data</a></p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c729390d-eb2c-415d-af22-b178180aa10f">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 </div>
 </div>
 </div>

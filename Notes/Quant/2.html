@@ -3,7 +3,7 @@
 <html lang="en">
 <head><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Part1</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>1</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <style type="text/css">
     pre { line-height: 125%; }
 td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
@@ -7509,132 +7509,174 @@ a.anchor-link {
   }
 </style>
 <!-- End of mermaid configuration --></head>
-
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
 <main>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=9e99da19-e64d-4234-a5b9-b0081156fb8f">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=70409472-3189-49e3-9b3d-e97da85beeef">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="The-Quant-Testing-Framework-I-use-to-create-profitable-strategies">The Quant Testing Framework I use to create profitable strategies<a class="anchor-link" href="#The-Quant-Testing-Framework-I-use-to-create-profitable-strategies">¶</a></h1><p>Here is my setup for creating profitable strategies in quant. The framework is quite large and still expanding, meaning that I will post each of its aspects individually, and explain how they all fit together.</p>
-<p>The modules I have created are:</p>
-<ul>
-<li>yggdrasil.py: contains the class Yggdrasil, which is the root of all my code; it creates an
-instance of a strategy which acts on a set of stocks. Combines StockAnalyzer and
-StrategyHelper (see below).</li>
-<li>market_analy: contains a detailed retrieval method which obtains either live data or
-previously stored personal data given a set of parameters including trading frequency
-and number of data points</li>
-<li>useful_methods: this is a module of helper functions which helps display code and various
-results easier and helps in analysis</li>
-<li>strategy_analy: contains the class StockAnalyzer which can run various types of analysis,
-given a set of stocks</li>
-<li>strategy_helper.py: contains the class StrategyHelper which creates an instance of a
-working strategy depending on which strategy is picked; does not contain a stock list
-but merely the strategy logic</li>
-<li>test_live_helper.py: runs the actual live trading bot based on the tested strategy logic of
-the other modules.</li>
-</ul>
-<p>Below, I post the root module and explain in detail.</p>
-<ul>
-<li>Module: yggdrasil.py  #Contains the class Yggdrasil<ul>
-<li>class: Yggdrasil #This is the root of all my strategies and analysis. Creates a general
-instance of a test.<ul>
-<li>Instance variables:<ul>
-<li>stock_universe: StockUniverse object which contains the list of stocks that will be used in this test</li>
-<li>cur_strat: StrategyHelper object which sets and executes the basic framework of the given strategy in this test</li>
-<li>strat_list: List of available executable strategies; mostly for convenience.</li>
-<li>analysis: Various aspects of the stock list and the method being used; mostly for convenience</li>
-<li>title: Defines the various aspects of the strategy being used; mostly for convenience</li>
+<h1 id="Chapter-2">Chapter 2<a class="anchor-link" href="#Chapter-2">¶</a></h1><h2 id="Content">Content<a class="anchor-link" href="#Content">¶</a></h2><ul>
+<li>If X is a random variable with cdf $F_X(x)$, then any function of X $g(X)$ is also a random variable. The probabilistic behavior of $Y = g(X)$ can be described in terms of $X$ meaning $P(Y \in A) = P(g(X) \in A)$ for any set $A$. In more detail if $y = g(x)$, $\chi$ is the sample space of $X$ and $\mathcal Y$ is the sample space of $Y$, $g(x): \chi \rightarrow \mathcal Y$, with an inverse mapping $g^{-1}(A = \{ x \in X: g(x) \in A\} $.</li>
+<li>If $Y = g(X)$, $P(Y\in A) = P(X \in g^{-1}(A))$. This is the probability distribution of Y which can be shown to satisfy the Kolmogorov Axioms.</li>
+<li>If X is a discrete random variable, $\chi$ is also countable. The sample space $Y = g(X)$ is also a countable set, meaning $Y$ is a discrete random variable as well. $f_Y(y) = P(Y = y) = \sum_{x \in g^{-1}(y)} P(X = x) = \sum{_x \in g^{-1}(y)}f_X(x)$ for $y \in \mathcal Y$ and 0 otherwise, for $y \notin \mathcal Y$. Then, finding the pmf of Y means to simply find $g^{-1}(y)$</li>
+<li>ex) A discrete random variable X has a binomial distribution if its pmf is $f_X(x) = P(X = x) = \binom{n}{x}p^x(1-p)^{n-x}$ for $x \in 0,1,...,n$ where $n$ is a positive integer and p ranges from 0 to * Values such as n and p can be set to different values and produce different probability distributions are called parameters.<ul>
+<li>If $g(x) = n -x, Y = g \Rightarrow Y = n * X$. $\mathcal Y = \{ y: y = g(x), x \in \chi \} = {0,1,...,n}$. Then, $g^{-1}(y) = n * y$, which means $f_Y(y) = \sum_{x \in g^{-1}(y)} f_X(x) = f_{X}(n-y) = \binom{n}{n-y}p^{n-y}(1-p)^{n-(n-y)} = \binom{n}{y}(1-p)^yp^{n-y}$. $Y$ is also binomial distribution but with parameters n, which is the same, and $1-p$ which is different</li>
 </ul>
 </li>
-<li>Constructor<ul>
-<li>__ init __ (self, freq, strategy_,custom,shift_= 0, num_points = 500, stock_list = None)</li>
-<li>Creates an instance of a test which is made of a strategy and a list of stocks. Executes this test upon instantiation</li>
-<li>Parameters:<ul>
-<li>freq: the frequency of the strategy being used</li>
-<li>strategy_: the type of strategy being used</li>
-<li>custom: the type ofdata being used, if custom or live</li>
-<li>shift: how much the data isbeing shifted in its extraction. Measured in days regardless of the units of freq. Default value of 0.</li>
-<li>num_points: number of data points in the extracted data. Note that this does not always return the exact number passed,but has a minimal error range in most cases ( ±10). Default value is 500.</li>
-<li>stock_list: the list of stocks the strategy as defined by theprevious parameters will act on</li>
+<li>For a continuous distribution, $F_Y(y) = P(Y \leq y) = P(g(X) \leq y) = P(\{x \in \chi: g(x) \leq y\}) = \int_{\{x \in \chi: g(x) \leq y\}}f_X(x)dx$. However, the region of integration is not always easy to identify.</li>
+<li>ex) Uniform transformation</li>
+<li>$\chi = \{x: f_X(x) &gt; 0\},\mathcal Y = \{Y: y = g(x) \text{ for some } x \in \chi\}$. The pdf of the random variable X is positive only on the set $\chi,$ but 0 elsewhere, called the support set of a distribution.</li>
+<li>The best functions $g(x)$ are those that are monotone, meaning they are either increasing or decreasing, $u &gt; v \Rightarrow g(u) &gt; g(v)$, or $u &lt; v \Rightarrow  g(u) &lt; g(v)$. If this is true, then $g: x \rightarrow y = g(x)$ forms a bijection from $\chi \rightarrow \mathcal Y$.</li>
+<li>Thm: Let X have cdf $F_X(x)$, $Y=g(X)$, and $\chi,\mathcal Y$ are the corresponding domain and range of $g$.<ul>
+<li>a) If g is an increasing function on $\chi$, $F_Y(y) = F_X(g^{-1}(y)), \text{ for } y \in \mathcal Y$</li>
+<li>b) If g is a decreasing function on $\chi$ and X is a continuous random variable $F_Y(y) = 1 * F_X(g^{-1}(y))$ for $y \in \mathcal Y$</li>
 </ul>
 </li>
+<li>ex) If for X, $f_X(x) = 1, 0 &lt; x &lt; 1 \Rightarrow F_X(x) = x, 0 &lt; x &lt; 1$. Then, define the transformation $Y = g(X) = -\ln x$. Since $\frac{d}{dx}g(x) = \frac{-1}{x} &lt; 0, 0 &lt; x &lt; 1$, g(x) is a decreasing function. $X \in (0,1), Y \in (0,\inf)$. Also, $g^{-1}(y) = e^{-y} \Rightarrow y&gt;0, F_Y(y) = 1 * F_X(g^{-1}(y)) = 1 * F_X(e^{-y}) = 1 * e^{-y} $</li>
+<li>Thm: Let X have pdf $f_X(x), Y = g(X)$, g is a monotone function. Let $\chi,\mathcal Y$ be the domain and range of g. $f_X(x)$ is continuous on $\chi$ and $g^{-1}(y)$ has a continuous derivative on $\mathcal Y$ means $f_Y(y) = \begin{cases}f_X(g^{-1}(y)|\frac{d}{dy})g^{-1}(y)| &amp; y \in \mathcal Y \\ 0 &amp; \text {else} \end{cases}$</li>
+<li>ex) Inverted gamma pdf $f_X(x) = \frac{1}{(n-1)!\beta^n}x^{n-1}e^{-x/\beta}, 0 &lt; x &lt; \inf$, where $\beta &gt; 0, n $ is a positive integer. If $g(X) = 1/X$, with the support sets being the same for $\chi= \mathcal Y = (0,\inf), y = g(x) \Rightarrow g^{-1}(y) = 1/y \Rightarrow \frac{d}{dy}g^{-1}(y) = -1/(y^2)$ means that $f_Y(y) = f_X(g^{-1}(y))|\frac{d}{dy}g^{-1}(y)| = \frac{1}{(n-1)!\beta^n}(1/y)^{n-1}e^{-1/y\beta}(1/y^2) = \frac{1}{(n-1)!\beta^n}(1/y)^{n+1}e^{-1/y\beta}$</li>
+<li>A lot of the time g is neither increasing nor decreasing $x \in \chi$, but over certain intervals or a finite sum of such intervals.</li>
+<li>ex) Square transformation where for a continuous random variable $X$, $Y = X^2$ has the cdf $F_Y(y) = P(Y \leq y) = P(X^2 \leq y) = P(-y^{1/2} \leq X \leq y^{1/2}) = P(X \leq y^{1/2}) * P(X \leq -y^{1/2}) = F_X(y^{1/2}) * F_X(-y^{1/2})$ where x having continuity implies the equality on the left endpoint could be removed $f_Y(y) = \frac{d}{dy}F_Y(y) = \frac{1}{2y^{1/2}}(f_X(y^{1/2}) + f_X(-y^{1/2}))\ $. This is the sum of the two pieces of the interval where $g(x)$ is monotone.</li>
+<li>ex) Normal-chi squared relationship. Let X have the standard normal distribution $f_X(x) = (1/(2\pi)^{1/2})e^{-x^2/2},-\inf &lt; x &lt; \inf,$. If $Y = X^2$, $\chi$ can be split into two monotone intervals $(-\inf,0),(0,\inf)$ with $\mathcal Y = (0,\inf),$then $f_Y(y) =f_X(g_1^{-1}(y))|\frac{d}{dy}g^{-1}(y)| + f_X(g_2^{-1}(y))|\frac{d}{dy}g^{-1}(y)|$ with $g_1^{-1}(y) = -y^{1/2}, g_2^{-1}(y) = y^{1/2}$ meaning $ f_Y(y) = (1/(2\pi)^{1/2})(e^-{(-(y^{1/2})^2)/2}|-1/(2y^{1/2})| + (1/(2\pi)^{1/2})(e^-{((y^{1/2})^2)/2}|1/(2y^{1/2})| = (1/(2y\pi)^{1/2})e^{-y/2}$.<ul>
+<li>The pdf of Y is one of a chi squared random variable with 1 degree of freedom</li>
 </ul>
 </li>
-<li>Instance methods:<ul>
-<li>__ set_title(self): Private method called upon instantiation which sets the title of the strategy if needed<br/></li>
+<li>Thm: Probability integral transformation<ul>
+<li>Let X have continuous cdf $F_X(x), Y = F_X(X)$. Then, $Y$ is uniformly distributed on $y,(0,1), P(Y \leq y) = y$</li>
+<li>Used to generate random samples from a particular distribution.</li>
 </ul>
 </li>
+<li>The expected value or mean of a random variable $g(X)$, $Eg(X) = \begin{cases} ,\int_{-\inf}^\inf g(x) f_X(x)dx &amp; \text{cont}\\ \sum_{x \in \chi}g(x)f_X(x) &amp; \text{discrete} \end{cases}$. If $E|g(X)| \rightarrow \inf$, say that Eg(X) DNE.</li>
+<li>ex) Exponential distribution, pdf $f_X(x) = (1/\lambda)e^{-x/\lambda}, 0 \leq x \leq \inf, \lambda &gt; 0$. Then $EX = \int_0^\inf (1/\lambda)xe^{-x/\lambda}dx = -xe^{-x/\lambda}|_0^\inf * \int_0^\inf -e^{-x/\lambda}dx = \lambda$</li>
+<li>ex) Binomial distribution, pdf $f_X(x) = P(X = x) = \binom{n}{x}p^x(1-p)^{n-x}, x = 0,1,..,n, 0 \leq p \leq 1$. Then, $EX = \sum_{x=0}^nx \binom{n}{x}p^x(1-p)^{n-x} = \sum_{x=1}^nx \binom{n}{x}p^x(1-p)^{n-x}$. Note the identity $x\binom{n}{x} = x \frac{n!}{x!(n-x)!} = n \frac{(n-1)!}{(x-1)!((n-1)-(x-1)!)} = n \binom{n-1}{x-1}$ which makes $EX = \sum_{x=1}^nn \binom{n-1}{x-1}p^x(1-p)^{n-x}$. With $y = x * 1 \Rightarrow \sum_{y=0}^{n-1}n \binom{n-1}{y}p^{y+1}(1-p)^{n-(y+1)} = np\sum_{y=0}^{n-1} \binom{n-1}{y}p^y(1-p)^{(n-1) -y}$. The sum is just that of the pdf of a binomial distribution with parameters $n-1,p$, meaning it equals * Therefore, $EX = np$</li>
+<li>ex) A Cauchy random variable has a mean which does not exist. It has a pdf $f_X(x) = (1/\pi)\frac{1}{1+x^2},-\inf &lt; x &lt; \inf$. Since $\int_0^\inf\frac{1}{1+x^2}dx,x = \tan \theta, dx = \sec^2\theta d\theta \Rightarrow \int_0^{\pi/2}\frac{1}{1+\tan^2\theta}\sec^2\theta d\theta = \int_0^{\pi/2}d \theta = \pi/2$, this means $\int_{-\inf}^{\inf}f_X(x)dx =(1/\pi)(\pi) =  1$ but $E|X| = \int_{-\inf}^{\inf}(1/\pi)\frac{|x|}{1+x^2}dx = (2/\pi)\int_0^{\inf}\frac{x}{1+x^2}dx = (1/\pi)\ln(1+x^2)|_0^\inf \rightarrow \inf$</li>
+<li>The operation of taking expectations is linear, meaning for constants a and b $E(aX +b) = aEX + b$. An example is if the pdf of X is a binomial distribution with parameters n,p $E(X * np) = EX * np = 0$.</li>
+<li>Thm: Let X be a random variable and a,b,c be constants. Then for any functions $g_1(x),g_2(x),$ with existing expectation values<ul>
+<li>a) $E(ag_1(X) + bg_2(X) + c) = aEg_1(X) + bEg_x(X) + c$</li>
+<li>b) If $g_1(x) \geq 0$ for all x, then $Eg_1(X) \geq 0$</li>
+<li>c) If $g_1(x) \geq g_2(x)$ for all x, then $Eg_1(X) \geq Eg_2(X)$</li>
+<li>d) If $a \leq g_1(x) \leq b$ for all x, then $ a\leq Eg_1(x) \leq b$.</li>
 </ul>
 </li>
-<li>free code: Saves the results of an example test run in a JSON file.<br/><ul>
-<li>The set of parameters is defined first and then the strategy is tested upon a list of variousstocks. In the given example, the set of parameters is the shift of the data and the parameters of the strategy being used, which is Mean Reversion in this case defined by two metrics.<ul>
-<li>These are the size of the rolling data used to compute metrics like the mean, and the cutoff z-score used to enter/exit the strategy. Everything else is held constant.</li>
+<li>ex) Minimizing the distance of a random variable from a given constant b is also an important property of the mean. Say the goal is to find b such that $E((X * b)^2)$ is minimized, meaning that b would be a good predictor of X. $E((X * b)^2) = E(X^2 -2Xb + b^2) = E(X^2) -2bE(X) + b^2$.<ul>
+<li>Then, $\frac{d}{db}E((X * b)^2) = 2b + \frac{d}{db}E(X^2) * 2E(X) * 2b\frac{d}{db}E(X) = 0 \Rightarrow b + (1/2)\frac{d}{db}\int_{-\inf}^{\inf}x^2f_X(x)dx * \int_{-\inf}^{\inf}xf_X(x)dx * b\frac{d}{db}\int_{-\inf}^{\inf}xf_X(x)dx =b + \int_{-\inf}^{\inf} dx((1/2)\frac{d}{db}(x^2f(x)) -xf(x) -xb\frac{d}{db}f)$</li>
+<li>An easier way to do this is to note that $E((X -b)^2) = E((X * EX + EX * b)^2) = E((X * EX)^2) + (EX * b)^2 + 2E((X-EX)(EX-b))$ and since $E((X-EX)(EX-b) = E(X(EX) -bX -(EX)^2+bEX) = 0$, then $E((X-b)^2) =E((X * EX)^2) + (EX * b)^2 $. If $b = EX$ this quantity is minimized.</li>
 </ul>
 </li>
-<li>Note that in this example, I'm currently in the process of creating viable classes for stock classification, meaning that each allocation of stocks being tested asthe last parameter is merely just each individual stock only. The classification inthe example given is simply that the number of completed trades is above 30 in the given data set and the profit is positive.</li>
+<li>When finding the expectation value of a function of a random variable, there are two ways to proceed.<ul>
+<li>$Eg(x) = \int_{-\inf}^\inf g(x) f_X(x)dx$</li>
+<li>$Eg(x) = EY = \int_{-\inf}^\inf y f_Y(y)dy$</li>
 </ul>
 </li>
+<li>ex) X has an uniform distribution with pdf $f_X(x) = \begin{cases} 1 &amp; 0 \leq x \leq 1 \\ 0 &amp; \text{else} \end{cases} $ and if $g(X) = * \ln x \Rightarrow Eg(X) = \int_0^1(1)(-\ln x) dx = -x \ln x |_0^1+ \int_0^1 x(1/x)dx = 1$. Another way is $Y = \ln X, f_Y(y) = e^{-y}$ from before, meaning $\int_0^\inf y e^{-y}dy = 1$</li>
+<li>The nth moment of X for every integer n $u'_n = EX^n$.</li>
+<li>The nth central moment of X $u_n = E(X * u)^n, u = u'_1 = EX$</li>
+<li>The variance of a random variable X is its second central moment $Var X = E(X * EX)^2$. The positive square root of Var X is the standard deviation of X.</li>
+<li>ex) For the exponential distribution, $EX = \lambda, Var X = E(X * \lambda)^2 = \int_0^\inf (x * \lambda)^2 (1/\lambda)e^{-x/\lambda}dx = \int_0^\inf dx(x^2 + \lambda^2 * 2 x \lambda)e^{-x/\lambda} = \lambda^2 + A -2\lambda B$. Since $A = \int_0^\inf dx(x^2e^{-x/\lambda}), u = x^2, v = -\lambda e^{-x/\lambda} \Rightarrow A = x^2(-\lambda e^{-x/\lambda})|_0^\inf +\lambda 2\int_0^\inf x e^{-x/\lambda} dx = 0 + 2 \lambda B $, then $Var X = \lambda^2 + 2\lambda B * 2 \lambda B = \lambda^2$</li>
+<li>If X is a random variable with finite variance for any constants a,b, $Var(aX + b) = a^2 Var X$. This is because $Var(aX + b) = E(aX+b * E(aX+b))^2 = E(aX * a EX)^2 = E(a(X * EX))^2 = E(a^2(X * EX)^2)= a^2 Var X$</li>
+<li>Another formula for the variance $Var X = E(X * EX)^2 = E(X^2 * 2(EX) X + (EX)^2) = E(X^2) -2(EX)^2 + (EX)^2 = E(X^2) * (EX)^2$</li>
+<li>ex) For a binomial distribution with pdf $P(X = x) = \binom{n}{x}p^x(1-p)^{n-x}, x = 0,1,...,n, EX = np$. Then, $EX^2 = \sum_{x=0}^nx^2\binom{n}{x}p^x(1-p)^{n-x}$. With $x\binom{n}{x} = n\binom{n-1}{x-1}$, $EX^2 = n\sum_{x=1}^nx\binom{n-1}{x-1}p^x(1-p)^{n-x}, y = x * 1 \Rightarrow EX^2 = n\sum_{x=1}^{n-1}(y+1)\binom{n-1}{y}p^{y+1}(1-p)^{n-y-1}= (np)(\sum_{x=1}^{n-1}(y)\binom{n-1}{y}p^y(1-p)^{n-y-1}+ \sum_{x=1}^{n-1}\binom{n-1}{y}p^y(1-p)^{n-y-1}) = np((n-1)(p) + 1) = n(n-1)p^2 + np$. Then, $Var X = EX^2 * (EX)^2 = n(n-1)p^2 + np * (np)^2 = np -np^2 = np(1-p)$</li>
+<li>Usually only up to this is needed to be calculated, maybe a 3rd or 4th moment.</li>
+<li>Another function associated with a probability distribution or random variable X is the moment generating function mgf</li>
+<li>It's defined as $M_X(t) = Ee^{tX}$ as long as this quantity, meaning the expectation, exists for t in some neighborhood of 0.<ul>
+<li>For a continuous variable, $M_X(t) = \int_{-\inf}^\inf e^{tx} f_X(x) dx$</li>
+<li>For a discrete variable, $M_X(t) = \sum_x e^{tx} P(X=x)$.</li>
 </ul>
 </li>
+<li>Thm: If X has mgf $M_X(t)$,$EX^n = M_X^{(n)}(0)$ where $M_X^{(n)}(0) = \frac{d^n}{dt^n}M_X(t)|_{t=0}$. The nth moment is equal to the nth derivative of $M_X(t)$ evaluated at t = 0.<ul>
+<li>Note that using the operator expansion of the exponential $M_X(t) = E(1 + tX + (1/2!)(tX)^2+...) = u'_0 + tu'_1 + (t^2/2!)u'_2+...=\sum_{i=0}^\inf\frac{t^i u'_i}{i!}$. The theorem is easily seen from this.</li>
 </ul>
-<div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">useful_methods</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">market_analy</span><span class="w"> </span><span class="kn">import</span> <span class="n">full_stocks</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">strategy_analy</span><span class="w"> </span><span class="kn">import</span> <span class="n">StockAnalyzer</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">strategy_helper</span><span class="w"> </span><span class="kn">import</span> <span class="n">StrategyHelper</span>
-
-
-<span class="k">class</span><span class="w"> </span><span class="nc">Yggdrasil</span><span class="p">:</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">freq</span><span class="p">,</span> <span class="n">strategy_</span><span class="p">,</span> <span class="n">custom</span><span class="p">,</span> <span class="n">shift_</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">num_points</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">stock_list</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">strat_list</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">cur_strat</span> <span class="o">=</span> <span class="n">StrategyHelper</span><span class="p">(</span><span class="n">freq</span><span class="p">,</span> <span class="n">strategy_</span><span class="p">,</span> <span class="n">custom</span><span class="o">=</span><span class="n">custom</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="n">shift_</span><span class="p">,</span> <span class="n">num_points</span><span class="o">=</span><span class="n">num_points</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">stock_universe</span> <span class="o">=</span> <span class="n">StockAnalyzer</span><span class="p">(</span><span class="n">stock_list</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cur_strat</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">cur_strat</span><span class="o">.</span><span class="n">run_method</span><span class="p">(</span><span class="n">stock_list</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">analysis</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__set_title</span><span class="p">()</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">__set_title</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">title</span> <span class="o">=</span> <span class="p">(</span><span class="s1">'freq: '</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">cur_strat</span><span class="o">.</span><span class="n">freq</span> <span class="o">+</span> <span class="s1">'_ '</span> <span class="o">+</span> <span class="s1">'num of data points: '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cur_strat</span><span class="o">.</span><span class="n">num_points</span><span class="p">)</span> <span class="o">+</span>
-                 <span class="s1">'_ custom: '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cur_strat</span><span class="o">.</span><span class="n">custom</span><span class="p">)</span> <span class="o">+</span> <span class="s1">'_ shift: '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cur_strat</span><span class="o">.</span><span class="n">shift</span><span class="p">)</span>
-                 <span class="o">+</span> <span class="s1">'_ start date: '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cur_strat</span><span class="o">.</span><span class="n">start</span><span class="p">)</span> <span class="o">+</span> <span class="s1">'_ end date: '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cur_strat</span><span class="o">.</span><span class="n">end</span><span class="p">)</span>
-                 <span class="o">+</span> <span class="s1">'_ strategy:'</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cur_strat</span><span class="o">.</span><span class="n">strategy</span><span class="p">)</span> <span class="o">+</span> <span class="s1">''</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">title</span>
-
-<span class="c1">#Generates the various parameters which can be tested in a clean manner. </span>
-<span class="n">para_test</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">shift</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">roll</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">cutoff</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
-            <span class="k">for</span> <span class="n">stock</span> <span class="ow">in</span> <span class="n">full_stocks</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">100</span><span class="p">]:</span>
-                <span class="n">para_test</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">stock</span><span class="p">,</span> <span class="n">shift</span><span class="p">,</span> <span class="n">roll</span><span class="p">,</span> <span class="n">cutoff</span> <span class="o">/</span> <span class="mi">10</span><span class="p">])</span>
-
-<span class="c1">#Runs the tests for various combinations of the parameters. Only two full stock iterations are ran for brevity. </span>
-<span class="n">stock_pass_test</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">stock_pass_condition</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">para_test</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">100</span> <span class="o">*</span><span class="mi">2</span><span class="p">]:</span>                                        
-    <span class="n">strategy</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'Mean Rev'</span><span class="p">]</span> <span class="o">+</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
-    <span class="n">ygg</span> <span class="o">=</span> <span class="n">Yggdrasil</span><span class="p">(</span><span class="s1">'5m'</span><span class="p">,</span> <span class="n">strategy</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">shift_</span><span class="o">=</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">num_points</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span> <span class="n">stock_list</span><span class="o">=</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
-
-    <span class="c1">#Condition for stock classification is given here to filter the backtests </span>
-    <span class="n">results</span> <span class="o">=</span> <span class="p">[</span><span class="n">ygg</span><span class="o">.</span><span class="n">cur_strat</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">'Profit'</span><span class="p">,</span> <span class="s1">'Number of Completed Trades'</span><span class="p">]]</span>
-    <span class="k">if</span> <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">results</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">30</span><span class="p">:</span>
-        <span class="n">stock_pass_test</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ygg</span><span class="o">.</span><span class="n">cur_strat</span><span class="o">.</span><span class="n">get_params</span><span class="p">())</span>
-        
-<span class="c1">#Data from all the tests is stored in a JSON file for easy viewing and extraction </span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'example_data.json'</span><span class="p">,</span> <span class="s1">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">pdf</span><span class="p">:</span>
-    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">stock_pass_test</span><span class="p">,</span> <span class="n">pdf</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-</pre></div>
-<h2 id="Data">Data<a class="anchor-link" href="#Data">¶</a></h2><p>Link to the JSON file is given $\rightarrow$ <a href="https://github.com/sponge-mi-boi/Quant-data/blob/main/example_data.json">data</a></p>
+</li>
+<li>ex) The gamma pdf is defined as $f_X(x) =\frac{1}{\Gamma(\alpha)\beta^\alpha}x^{\alpha * 1}e^{-x/\beta}, 0 &lt; x &lt; \inf, \alpha &gt; 0, \beta &gt; 0 $. This means $M_X(t) = \int_0^\inf dx e^{tx}\frac{1}{\Gamma(\alpha)\beta^\alpha}x^{\alpha * 1}e^{-x/\beta} = \frac{1}{\Gamma(\alpha)\beta^\alpha}\int_0^\inf dx e^{-((1/\beta) -t)}x^{\alpha * 1}  $. Note that this is just another gamma pdf with a different $\beta \rightarrow \frac{\beta}{1-\beta t}$, meaning $1 = \int_0^\inf dx\frac{1}{\Gamma(\alpha)(\frac{\beta}{1-\beta t})^\alpha}x^{\alpha * 1}e^{-x/\frac{\beta}{1-\beta t}} \Rightarrow \Gamma(\alpha)(\frac{\beta}{1-\beta t})^\alpha =  \int_0^\inf dx x^{\alpha * 1}e^{-x/\frac{\beta}{1-\beta t}}$. This means $M_X(t) = \frac{1}{\Gamma(\alpha)\beta^\alpha}\Gamma(\alpha)(\frac{\beta}{1-\beta t})^\alpha = (\frac{1}{1-\beta t})^\alpha$ which is true note $\frac{\beta}{1-\beta t} &gt; 0 \Rightarrow \frac{1}{1/\beta -t} &gt; 0 \Rightarrow 1/\beta -t &gt; 0\Rightarrow 1/\beta &gt; t$ . The integrand diverges otherwise, meaning the mgf cannot be defined in those situations.h<ul>
+<li>$EX = \frac{d}{dt}M_X(t)|_{t=0} = (-\alpha)(-\beta)1/(1-\beta t)^{\alpha + 1}|_{t=0} = \alpha \beta,$ then with all other moments being calculated in a similar way</li>
+</ul>
+</li>
+<li>ex) binomial distribution has mgf $M_X(t) = \sum_{x=0}^ne^{tx} \binom{n}{x}p^x(1-p)^{n-x} = \sum_{x=0}^n \binom{n}{x}(pe^t)^x(1-p)^{n-x}$. The binomial formula $ \sum_{x=0}^n\binom{n}{x}u^xv^{n-x} = (u+v)^n$ implies $M_X(t) = (pe^t +1-p)^n$</li>
+<li>The specification of all the moments of a pdf does not uniquely define the pdf since it is possible for two random variables to have the same moments.</li>
+<li>Thm: Let $F_X(x),F_Y(y)$ be two cdfs all of whose moments exist.<ul>
+<li>a) If X and Y have bounded support, then $F_X(u) = F_Y(u)$ for all u if and only if $EX^r = EY^r$ for all natural numbers r.</li>
+<li>b) If the moment generating functions exist and $M_X(t) =M_Y(t)$ for all t in some neighborhood of 0, then $F_X(u) = F_Y(u)$ for all u</li>
+</ul>
+</li>
+<li>Thm: Concerning the convergence of mgfs<ul>
+<li>Suppose $\{X_i, i= 1,2,...\} $ is a sequence of random variables, each with mgf $M_{X_i}(t)$. Also if $\lim_{i \rightarrow \inf} M_{X_i}(t) = M_X(t)$ for all $t$ in a neighborhood of 0 and $M_X(t)$ is an mgf of some random variable $X$. Then there is an unique cdf $F_X$ whose moments are determined by $M_X(t)$ and for all x where $F_X(x)$ is continuous, $\lim_{i \rightarrow \inf}F_{X_i}(x) = F_X(x)$ meaning convergence of mgfs to an mgf implies convergence of cdfs</li>
+<li>The proof for the last two theorems is technical, so it is considered definitely reasonable. The Laplace transform of $M_X(t)$ is $f_X(x)$ actually since $M_X(t) = \int_{-\inf}^\inf e^{tx}f_X(x)dx$ and an important fact about Laplace transforms is their uniqueness in a neighborhood of t where the Laplace transform is valid. There is a 1-1 correspondence then.</li>
+</ul>
+</li>
+<li>ex) The Poisson approximation is used for binomial probabilities where the Poisson pmf is $P(X = x) = \frac{e^{-\lambda}\lambda^x}{x!}, x = 0,1,2..., \lambda &gt; 0$ a positive constant. If X is a binomial pmf and Y is a Poisson pmf, with n being large and defining $\lambda = np$ being small, then $P(X = x) \approx P(Y =x)$<ul>
+<li>This is fine by showing their mgfs convergence with $M_X(t) = (pe^t +1-p)^n, M_Y(t) = e^{\lambda(e^t -1)}$<ul>
+<li>$M_Y(t) = \sum_{y = 0}^\inf e^{ty}\frac{e^{-\lambda}\lambda^y}{y!} = e^{-\lambda} \sum_{y = 0}^\inf \frac{(e^t \lambda)^y}{y!} = e^{-\lambda}e^{e^t \lambda} = e^{\lambda(e^t * 1)}$.</li>
+<li>Also, this result of the exponential is needed. Let $\{a_i\},i = 1,2,...$ be a sequence of numbers converging to a, $\lim_{n \rightarrow \inf}a_n = a$. Then, $\lim_{n \rightarrow \inf}(1 + \frac{a_n}{n})^n = e^a$.</li>
+<li>It can be shown as follows. Defining $ L = \lim_{n \rightarrow \inf}(1 + \frac{a_n}{n})^n \Rightarrow \ln L = \ln(\lim_{n \rightarrow \inf}(1 + \frac{a_n}{n})^n) = \lim_{n \rightarrow \inf}(\ln(1 + \frac{a_n}{n})^n) $$ =\lim_{n \rightarrow \inf}n \ln(1 + \frac{a_n}{n})  =\lim_{n \rightarrow \inf}\frac{\ln(1 + \frac{a_n}{n})}{1/n}=\lim_{n \rightarrow \inf}\frac{n/(a_n + n)(-1/n^2)(a'<em>n)}{-1/n^2}= \lim</em>{n \rightarrow \inf} \frac{na'<em>n}{a_n + n}$$=\lim</em>{n \rightarrow \inf} \frac{a'<em>n}{1} = a'_n = a' \Rightarrow L = e^{a'}$. Note that the slightly tricky part is taking the derivative of the sequence with respect to n if it is considered as a continuous variable. Since it is not really defined, it is fine to merely treat it as a constant in the sense that one can imagine writing the whole sequence out $\lim</em>{n \rightarrow \inf} \frac{nan}{a_n + n}$</li>
+</ul>
+</li>
+<li>Returning to the task $M_X(t) = (1 + p(e^t * 1))^n  = (1 + \frac{(np)(e^t * 1)}{n})^n =(1 + \frac{(\lambda( e^t * 1)}{n})^n$ since $\lambda = np$ is held fixed for a given Poisson dist. Taking the limit such that $\lim_{n \rightarrow \inf} M_{X_n}(t)$ with taking n as discrete variable to define the sequence $M_{X_n}(t)$, then $\lim_{n \rightarrow \inf} M_{X_n}(t) = \lim_{n \rightarrow \inf}(1 + \frac{\lambda (e^t * 1)}{n})^n = e^{\lambda (e^t * 1)} = M_Y(t)$. Since the limit was only valid in the limit of the numerator being small within the expression for the power and $n$ being large, this approximation does make sense in these situations.</li>
+</ul>
+</li>
+<li>Thm: For any constants a,b with a random variable $X, M_{aX +b}(t) = e^{bt}M_X (at)$<ul>
+<li>Proof:$M_{aX +b}(t) = Ee^{(aX +b)t} = e^{bt}Ee^{at X} = e^{bt} M_X (at)$</li>
+</ul>
+</li>
+<li>An important process is to differentiate under the integral sign meaning when does the process
+of integration commute with differentiation.</li>
+<li>Note there will not be any detailed proofs since that is better suited for a real analysis study but the important results will be examined.</li>
+<li>$\frac{d}{d\theta}\int_{a(\theta)}^{b(\theta)} f(x,\theta) dx $ where $-\inf&lt; a,b &lt; \inf$</li>
+<li>Thm: Leibnitz's Rule<ul>
+<li>If $f(x,\theta),a(\theta),b(\theta)$ are differentiable with respect to $\theta$</li>
+</ul>
+</li>
+<li>This question is merely if the process of taking a limit and integration can be interchanged, $\frac{\partial}{\partial\theta}f(x,\theta) = \lim_{\delta \rightarrow 0}\frac{f(x,\theta + \delta) -f(x,\theta)}{\delta} \Rightarrow \int_{-\inf}^\inf\frac{\partial}{\partial\theta}f(x,\theta) dx = \int_{-\inf}^\inf \lim_{\delta \rightarrow 0}\frac{f(x,\theta + \delta) -f(x,\theta)}{\delta} dx ,$</li>
+<li>Thm: Suppose the function $h(x,y),x,y$ is continuous at $y_0$ for each $x$ and there exists a function $g(x)$ satisfying<ul>
+<li>i. $|h(x,y)| \leq g(x)$ for all $x,y$</li>
+<li>ii. $\int_{-\inf}^\inf g(x) dx &lt; \inf$</li>
+</ul>
+</li>
+<li>then, $\lim_{y \rightarrow y_0}\int_{-\inf}^\inf h(x,y) dx =\int_{-\inf}^\inf \lim_{y \rightarrow y_0}h(x,y) dx $.<ul>
+<li>This ensures that essentially the integral does not diverge to infinity which allows for the interchange since the integrating variable and the variable the limit is being taken on are independent</li>
+</ul>
+</li>
+<li>Applying this theorem to the derivative definition means to assume such a function $g(x,\theta_0)$ exists for every x such that $|\frac{f(x,\theta + \delta) -f(x,\theta)}{\delta}| \leq g(x,\theta_0)$ for all $x, |\delta| \leq \delta_0$ where $\delta_0 &gt;0,$ meaning the limiting value has to exist in this neighborhood essentially around the point $\theta_0$. Then with the additional condition $\int_{-\inf}^\inf g(x,\theta_0) dx &lt; \inf$, then $ \lim_{\delta \rightarrow 0}\int_{-\inf}^\inf \frac{f(x,\theta + \delta) -f(x,\theta)}{\delta} dx = \int_{-\inf}^\inf \lim_{\delta \rightarrow 0}\frac{f(x,\theta + \delta) -f(x,\theta)}{\delta} dx$$ \Rightarrow \frac{d}{d \theta}(\int_{-\inf}^\inf f(x,\theta)dx)|<em>{\theta =\theta_0} = \int</em>{-\inf}^\inf (\frac{\partial}{\partial \theta}f(x,\theta)dx)|_{\theta =\theta_0} dx $<ul>
+<li>This is called a Lipschitz condition, which imposes smoothness on a function</li>
+</ul>
+</li>
+<li>As long as this applies in a range of $\theta$, the distinction between $\theta, \theta_0$ is not needed to be looked at.</li>
+<li>If differentiability is true for all $\theta$, the condition $|\frac{f(x,\theta + \delta) -f(x,\theta)}{\delta}| \leq g(x,\theta_0)$ can just be taken to be $\frac{\partial}{\partial \theta}f(x,\theta)|_{\theta = \theta'} \leq g(x,\theta)$, for all $\theta', |\theta' * \theta| \leq \delta_0$</li>
+<li>ex) The exponential pdf $f(x) = (1/\lambda)e^{-x/\lambda}, 0 &lt; x &lt; \inf$. IF wish to find $\frac{d}{d\lambda}EX^n = \frac{d}{d \lambda}\int_0^\inf x^n(1/\lambda)e^{-x/\lambda}dx = \int_0^\inf \frac{d}{d \lambda}(x^n(1/\lambda)e^{-x/\lambda})dx = \int_0^\inf x^n ((-1/\lambda^2)e^{-x/\lambda} + 1/\lambda(x/\lambda^2)e^{-x/\lambda}) dx $$ = \int_0^\inf x^n(1/\lambda^2)e^{-x/\lambda} (x/\lambda * 1) dx = (1/\lambda^2) E X^{n +1} * ( 1/\lambda)EX^n$<ul>
+<li>Proof of exchange being allowed</li>
+<li>The recursion relation $\frac{d}{d\lambda}EX^n = (1/\lambda^2) E X^{n +1} * ( 1/\lambda)EX^n \Rightarrow \lambda^2\frac{d}{d\lambda}EX^n =  E X^{n +1} * \lambda EX^n$</li>
+</ul>
+</li>
+<li>ex) The normal distribution with mean u, variance 1, pdf $f(x) = \frac{1}{(2\pi)^{1/2}}e^{-(x-u)^2/2}$<ul>
+<li>$EX = \int_{-\inf}^\inf dx x f(x) =  \int_{-\inf}^\inf dx x\frac{1}{(2\pi)^{1/2}}e^{-(x-u)^2/2}, y = x * u, dy = dx \Rightarrow \int_{-\inf}^\inf dy (y+u)\frac{1}{(2\pi)^{1/2}}e^{-y^2/2} = u\frac{1}{(2\pi)^{1/2}}(2\pi)^{1/2} = u$.</li>
+<li>$E(X * EX)^2 = E(X^2) * (EX)^2$</li>
+<li>$\frac{d}{d u}EX^n = \frac{d}{du} \int_{-\inf}^\inf dx x^n\frac{1}{(2\pi)^{1/2}}e^{-(x-u)^2/2}$</li>
+</ul>
+</li>
+<li>The interchange of summation and differentiation has certain conditions for com as well.</li>
+<li>ex) The geometric distribution $P(X=x) = \theta(1-\theta)^x, x = 0,1,..., 0 &lt; x &lt;1 ,\frac{d}{d\theta}\sum_{x=0}^\inf  \theta(1-\theta)^x = 0$ since the sum is just * Also, $\frac{d}{d\theta}\sum_{x=0}^\inf  \theta(1-\theta)^x =\sum_{x=0}^\inf  \frac{d}{d\theta}\theta(1-\theta)^x = \sum_{x=0}^\inf ((1-\theta)^x * \theta x (1-\theta)^{x-1}) $$= (1/\theta)\sum_{x=0}^\inf \theta (1-\theta)^x * (1/(1-\theta))\sum_{x=0}^\inf\theta x (1-\theta)^x = 0$ $\Rightarrow(1/\theta)\sum_{x=0}^\inf \theta (1-\theta)^x = (1/(1-\theta))\sum_{x=0}^\inf\theta x (1-\theta)^x \Rightarrow (1/\theta) * (1/(1-\theta)) EX = 0 \Rightarrow EX = \frac{1-\theta}{\theta}$</li>
+<li>Thm: Summation and Differentiation commutation<ul>
+<li>Supposed the series $\sum_{x=0}^\inf h(\theta,x)$ converges for all $\theta$ in an interval $(a,b)$ of real numbers and<ul>
+<li>$\frac{\partial}{\partial\theta}h(\theta,x)$ is continious in $\theta$ for each x</li>
+<li>and $\sum_{x=0}^\inf \frac{\partial}{\partial \theta} h(\theta,x)$ converges uniformly on every closed bounded subinterval of $(a,b)$.</li>
+</ul>
+</li>
+<li>Then, $\frac{d}{d\theta} \sum_{x=0}^\inf = \sum_{x=0}^\inf \frac{\partial}{\partial\theta} h(\theta,x)$</li>
+<li>Uniform convergence is the most important property.</li>
+</ul>
+</li>
+<li>ex) Continued to prove for the geometric distribution<ul>
+<li>$h(\theta,x) = \theta(1-\theta)^x\Rightarrow \frac{\partial}{\partial\theta}h(\theta,x) = (1-\theta)^x * \theta x (1-\theta)^{x-1}$. Defining $S_n(\theta) =\sum_{x=0}^n (1-\theta)^x * \theta x (1-\theta)^{x-1}, [c,b] \subset (0,1)$ will have uniform con if for all $\epsilon &gt; 0,$ there is$n &gt; N \Rightarrow |S_n(\theta) * S_\inf(\theta) &lt; \epsilon$ for the given range of $\theta$ def $\theta \in [c,d]$, meaning $\sum_{x=0}^n (1-\theta)^x = \frac{1-(1-\theta)^{n+1}}{\theta}, \sum_{x=0}^n \theta x (1-\theta)^{x-1}  = \theta \sum_{x=0}^n  -\frac{\partial}{\partial\theta}(1-\theta)^{x} = -\theta \frac{d}{d\theta} \sum_{x=0}^n(1-\theta)^{x}$$ =\theta(1/\theta^2)(-(-(n+1)\theta(1-\theta)^n + (1-(1-\theta)^{n+1})) \Rightarrow S_n(\theta)  =(n+1)(1-\theta)^n$  which is true for all positive integers $n$ given that \ $\theta$ is a postive number less than 1</li>
+</ul>
+</li>
+<li>Thm: Summation and Integration commutation: Same.</li>
+</ul>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c729390d-eb2c-415d-af22-b178180aa10f">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=cf64ad70-672e-4a0b-9a9a-402b9abd95c7">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Current Setup</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h2 id="module-of-methods">Module of methods</h2>
+<ul>
+<li>The current setup is a simple module of various methods.</li>
+<li>Group of methods creates a list of stock pairs that should be tested
+for whatever requirement and then executes the given test on them with
+parallel processing across multiple data ranges. Example will be given
+with a cointegration filter.</li>
+</ul>
+<h2 id="the-basic-methods">The Basic Methods</h2>
+<h3 id="primary-variables">Primary Variables</h3>
+<ul>
+<li><code>stock_pair_list</code>: list of stock pairs which were chosen
+at random, all possible combinations, or from whatever other filter
+based elsewhere</li>
+<li><code>shift_parameter</code>: an integer which uniquely
+characterizes the data range being selected. It is essentially the
+starting point of the data list, meaning how much the data has been
+rolled forward from its initial starting point, which varies by
+frequency of the data. It is measured units as that of the freq
+<ul>
+<li>Note that this is based on a custom data extraction method which is
+very simple and merely is based on stored ‘close price’ from Yahoo
+finance which will be explained later in more detail ### Methods</li>
+</ul></li>
+<li><code>cointegration_filter(one_pair):</code> executes the ADF test
+for a single pair of stocks
+<ul>
+<li>`runner_multiple(): takes a list of stock pairs and list of shift
+parameters and returns the list of pairs which pass the ADF test across
+all given data ranges</li>
+</ul></li>
+<li><code>runner()</code>:
+<ul>
+<li><code>stock_pair_list,shift_parameter</code> -<code>&gt;</code>
+<code>list_of_pairs_with_required_p_value,shift_parameter</code></li>
+<li>takes a list of stock pairs as tuples and a shift parameter as an
+integer and returns a list of stock pairs which pass the ADF test</li>
+<li>handling the parallel processing<br />
+</li>
+</ul></li>
+<li><code>runner_multiple()</code>:
+<ul>
+<li><code>stock_pair_list, list_of_shift_parameters -&gt; list_of_pairs_with_required_p_values_final</code>
+<ul>
+<li>handles the iterations over various data sets and returns all the
+pairs of stocks which pass the ADF test in the give<br />
+</li>
+</ul></li>
+</ul></li>
+<li>The executed flow is
+<code>runner_multiple() &gt; runner() &gt; cointegration_filter()</code></li>
+<li>Note I use a custom overarching method <code>run</code>() which is
+the same as main for all intents and purposes</li>
+</ul>
+<h2 id="code">Code</h2>
+<pre><code>def cointegration_filter(cur_stock):  
+  
+    cur_pair=get_time_period(list(cur_stock[0:2]), custom_data=True, num_data_points=500,shift=cur_stock[2],freq=&#39;5m&#39;).dropna()  
+    model = m.OLS(cur_pair[cur_stock[0]], m.add_constant(cur_pair[cur_stock[1]])).fit()  
+  
+    resudials = model.resid  
+    adf_result = adfuller(resudials)  
+    if adf_result[1] &lt; .0501:  
+        return model.params.iloc[1]  
+    else:  
+        return -1000000  
+  
+def runner(stock_pair: pd.Series, shift_parameter: int,filter_func,args= None):  
+  
+    if args is not None:  
+        p_list = [list(x) + [shift_parameter] + [float(y)] for x,y in zip(stock_pair.index,args)]  
+    else:  
+        p_list = [list(x) + [shift_parameter] for x in stock_pair.index]  
+  
+    with Pool(processes=15) as pool:  
+        filter_results = pool.map(filter_func, p_list)  
+    series_coint = pd.Series(index=stock_pair.index,data= filter_results)  
+  
+    filt = series_coint[[x for x in series_coint.index if -1000000 not in  series_coint[x]]]  
+  
+    return pd.Series(data=[[x] for x in filt],index=filt.index)  
+  
+def runner_multiple(stock_pair_list: pd.Series, shift_parameter_list: list,filter_func,args=None):  
+    
+
+    if all([len(x) == 1 for x in stock_pair_list]):  
+        args = pd.DataFrame([x[:len(x)-1] for x in args],index=stock_pair_list.index)  
+        args = [list(args.iloc[:,x]) for x in range(len(args.columns))]  
+  
+    stock_pairs_final = runner(stock_pair_list,shift_parameter_list[0],filter_func,args[0])  
+  
+    if len(shift_parameter_list) == 1:  
+        return (stock_pairs_final + stock_pair_list).dropna()  
+    return runner_multiple((stock_pairs_final + stock_pair_list).dropna(),shift_parameter_list[1:],  
+                           filter_func,args[1:])
+                           
+def run():
+
+    #Example pair of stock pairs and shift parameters
+    stock_pair_list = pd.Series([(&#39;AAPL&#39;,&#39;AMAC&#39;),(&#39;FICO&#39;,&#39;GE&#39;)])
+    shift_parameter_list = [0,50]
+    
+    runner_multiple(stock_pair_list,shift_parameter_list,cointegration_filter)</code></pre>
+</body>
+</html>
