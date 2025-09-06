@@ -1,41 +1,361 @@
-﻿## List of Strategies
+﻿Pandas is going to be understood through an example from daily time series data.
+First, there will be data, closing prices to be precise, extracted from various stocks with the yahoo finance api and then shown.
+```
+import yfinance as yf
 
-+ List of the strategies that will be attempted to be implemented for positive results
-    + Combinations will also be used of several of these
-    + Cointegration
-    + Mean reversion
-    + Momentum trending
-    + PCA
-    + Correlation
-    + Note an overall filter of optimization can be used in all these situations for parameters
+stock_list = ['ORLY', 'MAA', 'MDLZ', 'CVS', 'CHTR', 'SYK', 'POOL', 'CMG', 'CHD', 'MMM']  
+df = yfinance.download(stock_example)['Close']
+print(df)
+```
 
-## Approach
+This prints
+```
 
-+ Backtesting on roughly 500 data points of several frequencies, parameter optimization on roughly 200 data points, and testing on 100 data points
-+ This will constitute one backtest and at least 4-5 such backtests will be done with the use of the walk-forward analysis by roughly 100 points.
-+ Data extraction will be done by a custom function
-    + `get_time_period(stock_list,custom_data=True,num_data_points=num_points,shift=r,freq='freq')` -> `pd.Dataframe`
-    + `stock_list`
-        + list of stocks to get the closing
-    + `custom_data`
-        + decides if the data is extracted live or from already stored data
-    + `num_data_points`
-        + number of data points to obtain
-    + `shift`
-        + shifts the data by a certain number of points to basically allow for extraction from various time periods
-    + returns a Dataframe with the columns being the stocks and the indices being the datetimes
+	Ticker            CHD        CHTR        CMG        CVS         MAA       MDLZ         MMM        ORLY        POOL         SYK
+	Date                                                                                                                          
+	2025-08-06  92.205315  262.040009  42.689999  63.520000  140.610001  62.070000  150.126343  104.440002  308.390015  374.940002
+	2025-08-07  92.334900  258.779999  42.689999  63.580002  142.149994  62.400002  151.042114  103.470001  307.473511  376.369995
+	2025-08-08  90.630348  256.570007  41.439999  65.540001  140.479996  61.830002  152.594940  103.330002  304.524658  377.579987
+	2025-08-11  91.367996  258.769989  41.619999  64.879997  138.479996  61.560001  154.595688  103.599998  305.490997  376.670013
+	2025-08-12  91.956116  263.100006  42.830002  65.510002  138.380005  61.389999  157.124008  101.889999  311.667572  376.609985
+	2025-08-13  93.391533  269.000000  43.480000  65.900002  139.770004  62.189999  159.463196  102.639999  329.480011  378.950012
+	2025-08-14  92.305000  263.200012  43.169998  66.730003  140.029999  61.459999  155.929520  101.500000  326.089996  378.519989
+	2025-08-15  92.480003  267.799988  44.040001  68.599998  140.899994  62.080002  151.689117  101.540001  321.750000  381.910004
+	2025-08-18  92.800003  266.809998  43.380001  70.169998  140.059998  61.840000  152.156952  101.389999  316.079987  381.609985
+	2025-08-19  94.059998  267.010010  43.250000  70.970001  142.399994  62.660000  153.630142  103.059998  324.779999  389.940002
+	2025-08-20  94.910004  266.619995  43.070000  70.820000  142.360001  63.169998  154.038269  104.000000  314.950012  391.869995
+	2025-08-21  94.959999  267.980011  42.910000  71.430000  141.009995  62.939999  153.669968  102.870003  308.630005  384.829987
+	2025-08-22  95.019997  277.579987  43.639999  71.300003  143.029999  63.410000  157.990005  102.309998  323.730011  394.220001
+	2025-08-25  92.750000  273.440002  42.750000  71.209999  142.029999  61.959999  155.850006  102.470001  321.429993  390.880005
+	2025-08-26  92.379997  266.670013  42.520000  71.550003  142.619995  62.049999  156.570007  103.180000  318.380005  394.329987
+	2025-08-27  93.029999  269.149994  42.650002  71.930000  144.419998  61.759998  156.529999  104.050003  317.850006  393.149994
+	2025-08-28  92.089996  263.630005  42.410000  72.139999  144.130005  61.279999  157.559998  103.989998  314.970001  389.670013
+	2025-08-29  93.160004  265.579987  42.139999  73.150002  145.820007  61.439999  155.529999  103.680000  310.709991  391.410004
+	2025-09-02  93.250000  264.420013  41.750000  74.089996  142.300003  61.790001  154.270004  103.190002  305.070007  389.940002
+	2025-09-03  93.279999  261.220001  41.790001  73.320000  143.410004  61.299999  152.000000  103.839996  304.739990  388.559998
+	2025-09-04  95.230003  259.510010  41.410000  73.690002  144.000000  60.900002  155.520004  105.040001  315.799988  394.339996
+	2025-09-05  95.800003  261.500000  41.060001  73.779999  145.399994  61.740002  155.300003  104.839996  333.089996  392.309998
+```
+Note the results are shown as a dataframe object.
 
-## Tools
+Dataframe indexing works as follows:
+There are two main ways to index, position based and label based indices.
+Column labels are the direct access labels, meaning for example
+```
+close_prices = df['CHD']
+print(close_prices)
+```
+returns the column of the 'MO' prices
+```
+	Date
+	2025-08-06    92.205315
+	2025-08-07    92.334900
+	2025-08-08    90.630348
+	2025-08-11    91.367996
+	2025-08-12    91.956116
+	2025-08-13    93.391533
+	2025-08-14    92.305000
+	2025-08-15    92.480003
+	2025-08-18    92.800003
+	2025-08-19    94.059998
+	2025-08-20    94.910004
+	2025-08-21    94.959999
+	2025-08-22    95.019997
+	2025-08-25    92.750000
+	2025-08-26    92.379997
+	2025-08-27    93.029999
+	2025-08-28    92.089996
+	2025-08-29    93.160004
+	2025-09-02    93.250000
+	2025-09-03    93.279999
+	2025-09-04    95.230003
+	2025-09-05    95.800003
+```
+`loc` is used for index based accessing meaning for example
+```
+print(df.loc['2025-08-28','CHD'])
+```
+returns the value at that horizontal label and the vertical column label
+```
+	92.08999633789062
+```
+Note the general format `dataframe.loc[horizontal_label,vertical_label]`
 
-+ Pandas Series/Dataframe
-    + For labeled data and for organization purposes within the execution mostly
-+ Optuna
-    + For Bayesian optimization mostly of parameters
-+ VectorBt
-    + For simulation of day and intraday trading
-+ Multiprocessing.pool
-    + For parallel processing
-+ Statsmodels
-    + For simple execution of filters
-+ Plotly
-    + For easy data visualization
+`iloc` is used for position based accessing meaning for example
+```
+print(df.iloc[16,0])
+```
+prints or accesses the same value as the previous operation.
+Note the general format `dataframe.iloc[horizontal_position,vertical_position]`
+
+There are also important properties for dataframe objects.
+The columns of a dataframe can be obtained as for example
+```
+print(df.columns)
+```
+returns the columns of a dataframe as an index object
+```
+	Index(['CHD', 'CHTR', 'CMG', 'CVS', 'MAA', 'MDLZ', 'MMM', 'ORLY', 'POOL',
+	       'SYK'],
+	      dtype='object', name='Ticker')
+```
+The index of a dataframe can be obtained
+```
+print(df.index)
+```
+returns an index object of the actual indices
+```
+	DatetimeIndex(['2025-08-06', '2025-08-07', '2025-08-08', '2025-08-11',
+	               '2025-08-12', '2025-08-13', '2025-08-14', '2025-08-15',
+	               '2025-08-18', '2025-08-19', '2025-08-20', '2025-08-21',
+	               '2025-08-22', '2025-08-25', '2025-08-26', '2025-08-27',
+	               '2025-08-28', '2025-08-29', '2025-09-02', '2025-09-03',
+	               '2025-09-04', '2025-09-05'],
+	              dtype='datetime64[ns]', name='Date', freq=None)
+```
+Note the index objects can be easily cast as a list
+```
+print(list(df.columns))
+print(list(df.index))
+```
+returning
+```
+	['CHD', 'CHTR', 'CMG', 'CVS', 'MAA', 'MDLZ', 'MMM', 'ORLY', 'POOL',
+	       'SYK']
+	[Timestamp('2025-08-06 00:00:00'), Timestamp('2025-08-07 00:00:00'), Timestamp('2025-08-08 00:00:00'), Timestamp('2025-08-11 00:00:00'), Timestamp('2025-08-12 00:00:00'), Timestamp('2025-08-13 00:00:00'), Timestamp('2025-08-14 00:00:00'), Timestamp('2025-08-15 00:00:00'), Timestamp('2025-08-18 00:00:00'), Timestamp('2025-08-19 00:00:00'), Timestamp('2025-08-20 00:00:00'), Timestamp('2025-08-21 00:00:00'), Timestamp('2025-08-22 00:00:00'), Timestamp('2025-08-25 00:00:00'), Timestamp('2025-08-26 00:00:00'), Timestamp('2025-08-27 00:00:00'), Timestamp('2025-08-28 00:00:00'), Timestamp('2025-08-29 00:00:00'), Timestamp('2025-09-02 00:00:00'), Timestamp('2025-09-03 00:00:00'), Timestamp('2025-09-04 00:00:00'), Timestamp('2025-09-05 00:00:00')]  
+```
+The size of a dataframe can be obtained with the shape property
+```
+print(df.shape)
+```
+which returns a tuple
+```
+	(22, 10)
+```
+of the length of the number of horizontal labels, and the length of the columns
+
+The total size
+```
+print(df.shape[0]*df.shape[1])
+print(df.size)
+```
+can be obtained in both ways
+```
+	220
+	220
+```
+Important dataframe operations include the following
+To get the entire horizontal line at an index
+```
+print(df.loc['2025-08-29'])
+print(df.iloc[-5])
+```
+both return
+```
+	Ticker
+	CHD      93.160004
+	CHTR    265.579987
+	CMG      42.139999
+	CVS      73.150002
+	MAA     145.820007
+	MDLZ     61.439999
+	MMM     155.529999
+	ORLY    103.680000
+	POOL    310.709991
+	SYK     391.410004
+	Ticker
+	CHD      93.160004
+	CHTR    265.579987
+	CMG      42.139999
+	CVS      73.150002
+	MAA     145.820007
+	MDLZ     61.439999
+	MMM     155.529999
+	ORLY    103.680000
+	POOL    310.709991
+	SYK     391.410004
+```
+the entire corresponding line as a series in its own right
+To get multiple columns, the format
+```
+print(df[df.columns[0:2]])
+```
+is allowed for example
+```
+	Ticker            CHD        CHTR
+	Date                             
+	2025-08-06  92.205315  262.040009
+	2025-08-07  92.334900  258.779999
+	2025-08-08  90.630348  256.570007
+	2025-08-11  91.367996  258.769989
+	2025-08-12  91.956116  263.100006
+	2025-08-13  93.391533  269.000000
+	2025-08-14  92.305000  263.200012
+	2025-08-15  92.480003  267.799988
+	2025-08-18  92.800003  266.809998
+	2025-08-19  94.059998  267.010010
+	2025-08-20  94.910004  266.619995
+	2025-08-21  94.959999  267.980011
+	2025-08-22  95.019997  277.579987
+	2025-08-25  92.750000  273.440002
+	2025-08-26  92.379997  266.670013
+	2025-08-27  93.029999  269.149994
+	2025-08-28  92.089996  263.630005
+	2025-08-29  93.160004  265.579987
+	2025-09-02  93.250000  264.420013
+	2025-09-03  93.279999  261.220001
+	2025-09-04  95.230003  259.510010
+	2025-09-05  95.800003  261.500000
+```
+to get the first two columns
+Note this is the same
+```
+print(df.loc[:,df.columns[0:2]])
+```
+where the `:` is used to indicate all
+To get the horizontal matching list of values for a given range
+```
+print(df.loc[df.index[0:2]])
+```
+returns the first two horizontal values
+Note this is the same as
+```
+	Ticker            CHD        CHTR        CMG        CVS         MAA       MDLZ         MMM        ORLY        POOL         SYK
+	Date                                                                                                                          
+	2025-08-06  92.205315  262.040009  42.689999  63.520000  140.610001  62.070000  150.126343  104.440002  308.390015  374.940002
+	2025-08-07  92.334900  258.779999  42.689999  63.580002  142.149994  62.400002  151.042114  103.470001  307.473511  376.369995
+print(df.loc[df.index[0:2]])  
+print(df.loc[df.index[0:2],:])
+```
+Note that these are the same
+```
+print(df.loc[df.index[0:2]])
+print(df.iloc[0:2])
+```
+and also
+```
+print(df.loc[:,df.columns[0:2]])
+print(df.iloc)
+```
+If arrays are easier to use all the values can be found as an array as
+```
+print(df.values)
+```
+To get all the values satisfying a Boolean condition
+```
+print(df > 200)
+```
+returns a Boolean valued dataframe of the condition of the value at each point
+```
+	Ticker        CHD  CHTR    CMG    CVS    MAA   MDLZ    MMM   ORLY  POOL   SYK
+	Date                                                                         
+	2025-08-06  False  True  False  False  False  False  False  False  True  True
+	2025-08-07  False  True  False  False  False  False  False  False  True  True
+	2025-08-08  False  True  False  False  False  False  False  False  True  True
+	2025-08-11  False  True  False  False  False  False  False  False  True  True
+	2025-08-12  False  True  False  False  False  False  False  False  True  True
+	2025-08-13  False  True  False  False  False  False  False  False  True  True
+	2025-08-14  False  True  False  False  False  False  False  False  True  True
+	2025-08-15  False  True  False  False  False  False  False  False  True  True
+	2025-08-18  False  True  False  False  False  False  False  False  True  True
+	2025-08-19  False  True  False  False  False  False  False  False  True  True
+	2025-08-20  False  True  False  False  False  False  False  False  True  True
+	2025-08-21  False  True  False  False  False  False  False  False  True  True
+	2025-08-22  False  True  False  False  False  False  False  False  True  True
+	2025-08-25  False  True  False  False  False  False  False  False  True  True
+	2025-08-26  False  True  False  False  False  False  False  False  True  True
+	2025-08-27  False  True  False  False  False  False  False  False  True  True
+	2025-08-28  False  True  False  False  False  False  False  False  True  True
+	2025-08-29  False  True  False  False  False  False  False  False  True  True
+	2025-09-02  False  True  False  False  False  False  False  False  True  True
+	2025-09-03  False  True  False  False  False  False  False  False  True  True
+	2025-09-04  False  True  False  False  False  False  False  False  True  True
+	2025-09-05  False  True  False  False  False  False  False  False  True  True
+```
+Note the idea of Boolean masking from Pandas.series can be extended to here
+```
+print(df[df > 200])
+```
+returns all the values where this is matched
+```
+	Ticker      CHD        CHTR  CMG  CVS  MAA  MDLZ  MMM  ORLY        POOL         SYK
+	Date                                                                               
+	2025-08-06  NaN  262.040009  NaN  NaN  NaN   NaN  NaN   NaN  308.390015  374.940002
+	2025-08-07  NaN  258.779999  NaN  NaN  NaN   NaN  NaN   NaN  307.473511  376.369995
+	2025-08-08  NaN  256.570007  NaN  NaN  NaN   NaN  NaN   NaN  304.524658  377.579987
+	2025-08-11  NaN  258.769989  NaN  NaN  NaN   NaN  NaN   NaN  305.490997  376.670013
+	2025-08-12  NaN  263.100006  NaN  NaN  NaN   NaN  NaN   NaN  311.667572  376.609985
+	2025-08-13  NaN  269.000000  NaN  NaN  NaN   NaN  NaN   NaN  329.480011  378.950012
+	2025-08-14  NaN  263.200012  NaN  NaN  NaN   NaN  NaN   NaN  326.089996  378.519989
+	2025-08-15  NaN  267.799988  NaN  NaN  NaN   NaN  NaN   NaN  321.750000  381.910004
+	2025-08-18  NaN  266.809998  NaN  NaN  NaN   NaN  NaN   NaN  316.079987  381.609985
+	2025-08-19  NaN  267.010010  NaN  NaN  NaN   NaN  NaN   NaN  324.779999  389.940002
+	2025-08-20  NaN  266.619995  NaN  NaN  NaN   NaN  NaN   NaN  314.950012  391.869995
+	2025-08-21  NaN  267.980011  NaN  NaN  NaN   NaN  NaN   NaN  308.630005  384.829987
+	2025-08-22  NaN  277.579987  NaN  NaN  NaN   NaN  NaN   NaN  323.730011  394.220001
+	2025-08-25  NaN  273.440002  NaN  NaN  NaN   NaN  NaN   NaN  321.429993  390.880005
+	2025-08-26  NaN  266.670013  NaN  NaN  NaN   NaN  NaN   NaN  318.380005  394.329987
+	2025-08-27  NaN  269.149994  NaN  NaN  NaN   NaN  NaN   NaN  317.850006  393.149994
+	2025-08-28  NaN  263.630005  NaN  NaN  NaN   NaN  NaN   NaN  314.970001  389.670013
+	2025-08-29  NaN  265.579987  NaN  NaN  NaN   NaN  NaN   NaN  310.709991  391.410004
+	2025-09-02  NaN  264.420013  NaN  NaN  NaN   NaN  NaN   NaN  305.070007  389.940002
+	2025-09-03  NaN  261.220001  NaN  NaN  NaN   NaN  NaN   NaN  304.739990  388.559998
+	2025-09-04  NaN  259.510010  NaN  NaN  NaN   NaN  NaN   NaN  315.799988  394.339996
+	2025-09-05  NaN  261.500000  NaN  NaN  NaN   NaN  NaN   NaN  333.089996  392.309998
+```
+and to get only the points where this is true and dropping all the `na` values
+```
+print(df[df > 200].fillna(0))
+```
+where all the values are filled by whichever dummy value
+```
+	Ticker      CHD        CHTR  CMG  CVS  MAA  MDLZ  MMM  ORLY        POOL         SYK
+	Date                                                                               
+	2025-08-06  0.0  262.040009  0.0  0.0  0.0   0.0  0.0   0.0  308.390015  374.940002
+	2025-08-07  0.0  258.779999  0.0  0.0  0.0   0.0  0.0   0.0  307.473511  376.369995
+	2025-08-08  0.0  256.570007  0.0  0.0  0.0   0.0  0.0   0.0  304.524658  377.579987
+	2025-08-11  0.0  258.769989  0.0  0.0  0.0   0.0  0.0   0.0  305.490997  376.670013
+	2025-08-12  0.0  263.100006  0.0  0.0  0.0   0.0  0.0   0.0  311.667572  376.609985
+	2025-08-13  0.0  269.000000  0.0  0.0  0.0   0.0  0.0   0.0  329.480011  378.950012
+	2025-08-14  0.0  263.200012  0.0  0.0  0.0   0.0  0.0   0.0  326.089996  378.519989
+	2025-08-15  0.0  267.799988  0.0  0.0  0.0   0.0  0.0   0.0  321.750000  381.910004
+	2025-08-18  0.0  266.809998  0.0  0.0  0.0   0.0  0.0   0.0  316.079987  381.609985
+	2025-08-19  0.0  267.010010  0.0  0.0  0.0   0.0  0.0   0.0  324.779999  389.940002
+	2025-08-20  0.0  266.619995  0.0  0.0  0.0   0.0  0.0   0.0  314.950012  391.869995
+	2025-08-21  0.0  267.980011  0.0  0.0  0.0   0.0  0.0   0.0  308.630005  384.829987
+	2025-08-22  0.0  277.579987  0.0  0.0  0.0   0.0  0.0   0.0  323.730011  394.220001
+	2025-08-25  0.0  273.440002  0.0  0.0  0.0   0.0  0.0   0.0  321.429993  390.880005
+	2025-08-26  0.0  266.670013  0.0  0.0  0.0   0.0  0.0   0.0  318.380005  394.329987
+	2025-08-27  0.0  269.149994  0.0  0.0  0.0   0.0  0.0   0.0  317.850006  393.149994
+	2025-08-28  0.0  263.630005  0.0  0.0  0.0   0.0  0.0   0.0  314.970001  389.670013
+	2025-08-29  0.0  265.579987  0.0  0.0  0.0   0.0  0.0   0.0  310.709991  391.410004
+	2025-09-02  0.0  264.420013  0.0  0.0  0.0   0.0  0.0   0.0  305.070007  389.940002
+	2025-09-03  0.0  261.220001  0.0  0.0  0.0   0.0  0.0   0.0  304.739990  388.559998
+	2025-09-04  0.0  259.510010  0.0  0.0  0.0   0.0  0.0   0.0  315.799988  394.339996
+	2025-09-05  0.0  261.500000  0.0  0.0  0.0   0.0  0.0   0.0  333.089996  392.309998
+```
+To get the total number of points where a Boolean is true
+Boolean addition can be done with the method
+```
+print((df > 200).sum().sum())
+```
+which returns the total number of points where the Boolean is true
+```
+	66
+```
+Note the first sum does column wise summation for a df
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
