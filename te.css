@@ -157,6 +157,23 @@ span.c1{
     color: purple;
 }
 code{white-space: pre-wrap;}
+div.buttons a{
+    display: inline-block;
+    margin: 10px;
+    padding: 10px 20px;
+    background: #444;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background 0.3s;
+    flex-direction: inherit;
+    white-space: nowrap;
+}
+div.buttons a:hover{
+
+        background: #888;
+
+}
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
 div.column{flex: auto; overflow-x: auto;}
@@ -171,3 +188,12 @@ ul.task-list li input[type="checkbox"] {
     vertical-align: middle;
 }
 .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+
+div.hori{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    padding: 10px;
+    flex-direction: row;
+}
