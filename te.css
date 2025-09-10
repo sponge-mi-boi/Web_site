@@ -4,18 +4,26 @@ html {
     background-color: black;
     font-family: Arial, sans-serif;
 }
+
+
+div.column{display: flex; flex: 1; flex-direction: column; padding: 0; width: 40em;align-items: center; column-gap: 0; justify-content: flex-start}
+
+
 body {
     margin: 0 auto;
-    max-width: 36em;
-    padding-left: 50px;
-    padding-right: 50px;
-    padding-top: 50px;
-    padding-bottom: 50px;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    max-width: 60em;
+    gap: 0;
+    align-items: center;
+    justify-content: space-between;
     hyphens: auto;
     overflow-wrap: break-word;
     text-rendering: optimizeLegibility;
     font-kerning: normal;
 }
+div.hori{display: flex; flex: 0 1 0; gap: 0}
 @media (max-width: 600px) {
     body {
         font-size: 0.9em;
@@ -45,14 +53,15 @@ body.notes{
         page-break-after: avoid;
     }
 }
+header{
+    font-size: 4em;
+    font-family: 'Sans Serif Collection',serif;
+    font-weight: bold;
+    word-spacing: 0.5em;
+    margin: 0;
+}
 p {
     margin: 1em 0;
-}
-a {
-    color: #1a1a1a;
-}
-a:visited {
-    color: #1a1a1a;
 }
 img {
     max-width: 100%;
@@ -103,6 +112,10 @@ pre code {
     overflow: visible;
     overflow-wrap: normal;
     text-wrap: nowrap;
+    display: flex;
+    flex-direction: column;
+    max-width: 100em;
+
 }
 .sourceCode {
     background-color: transparent;
@@ -154,10 +167,13 @@ header {
     text-decoration: none;
 }
 span.c1{
+    display: flex;
+    max-width: inherit;
     color: purple;
+
 }
 code{white-space: pre-wrap;}
-div.buttons a{
+div.column a{
     display: inline-block;
     margin: 10px;
     padding: 10px 20px;
@@ -168,15 +184,16 @@ div.buttons a{
     transition: background 0.3s;
     flex-direction: inherit;
     white-space: nowrap;
+    font-size: 1em;
 }
-div.buttons a:hover{
+div.column a:hover{
 
         background: #888;
 
 }
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 /* The extra [class] is a hack that increases specificity enough to
    override a similar rule in reveal.js */
@@ -189,11 +206,4 @@ ul.task-list li input[type="checkbox"] {
 }
 .display.math{display: block; text-align: center; margin: 0.5rem auto;}
 
-div.hori{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
-    padding: 10px;
-    flex-direction: row;
-}
+
