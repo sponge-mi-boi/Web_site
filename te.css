@@ -101,11 +101,12 @@ code {
     font-size: 85%;
     margin: 0;
     hyphens: manual;
-    color: yellow;
+    color: lightgoldenrodyellow;
 }
 pre {
     margin: 1em 0;
     overflow: auto;
+
 }
 pre code {
     padding: 0;
@@ -169,7 +170,8 @@ header {
 span.c1{
     display: flex;
     max-width: inherit;
-    color: purple;
+    color: turquoise;
+
 
 }
 code{white-space: pre-wrap;}

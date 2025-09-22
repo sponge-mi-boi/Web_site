@@ -1,361 +1,402 @@
-﻿Pandas is going to be understood through an example from daily time series data.
-First, there will be data, closing prices to be precise, extracted from various stocks with the yahoo finance api and then shown.
-```
-import yfinance as yf
+﻿```
+# Pandas is a module which contains mainly Pandas.series and  Pandas.Dataframe, both of which are very reliable and efficient to use for time series analysis.
 
-stock_list = ['ORLY', 'MAA', 'MDLZ', 'CVS', 'CHTR', 'SYK', 'POOL', 'CMG', 'CHD', 'MMM']  
-df = yfinance.download(stock_example)['Close']
-print(df)
-```
+## imports the module pandas to be used
+	
+import pandas as pd
 
-This prints
-```
+# creates an example series based on a list to describe an index and a list to describe a data set
 
-	Ticker            CHD        CHTR        CMG        CVS         MAA       MDLZ         MMM        ORLY        POOL         SYK
-	Date                                                                                                                          
-	2025-08-06  92.205315  262.040009  42.689999  63.520000  140.610001  62.070000  150.126343  104.440002  308.390015  374.940002
-	2025-08-07  92.334900  258.779999  42.689999  63.580002  142.149994  62.400002  151.042114  103.470001  307.473511  376.369995
-	2025-08-08  90.630348  256.570007  41.439999  65.540001  140.479996  61.830002  152.594940  103.330002  304.524658  377.579987
-	2025-08-11  91.367996  258.769989  41.619999  64.879997  138.479996  61.560001  154.595688  103.599998  305.490997  376.670013
-	2025-08-12  91.956116  263.100006  42.830002  65.510002  138.380005  61.389999  157.124008  101.889999  311.667572  376.609985
-	2025-08-13  93.391533  269.000000  43.480000  65.900002  139.770004  62.189999  159.463196  102.639999  329.480011  378.950012
-	2025-08-14  92.305000  263.200012  43.169998  66.730003  140.029999  61.459999  155.929520  101.500000  326.089996  378.519989
-	2025-08-15  92.480003  267.799988  44.040001  68.599998  140.899994  62.080002  151.689117  101.540001  321.750000  381.910004
-	2025-08-18  92.800003  266.809998  43.380001  70.169998  140.059998  61.840000  152.156952  101.389999  316.079987  381.609985
-	2025-08-19  94.059998  267.010010  43.250000  70.970001  142.399994  62.660000  153.630142  103.059998  324.779999  389.940002
-	2025-08-20  94.910004  266.619995  43.070000  70.820000  142.360001  63.169998  154.038269  104.000000  314.950012  391.869995
-	2025-08-21  94.959999  267.980011  42.910000  71.430000  141.009995  62.939999  153.669968  102.870003  308.630005  384.829987
-	2025-08-22  95.019997  277.579987  43.639999  71.300003  143.029999  63.410000  157.990005  102.309998  323.730011  394.220001
-	2025-08-25  92.750000  273.440002  42.750000  71.209999  142.029999  61.959999  155.850006  102.470001  321.429993  390.880005
-	2025-08-26  92.379997  266.670013  42.520000  71.550003  142.619995  62.049999  156.570007  103.180000  318.380005  394.329987
-	2025-08-27  93.029999  269.149994  42.650002  71.930000  144.419998  61.759998  156.529999  104.050003  317.850006  393.149994
-	2025-08-28  92.089996  263.630005  42.410000  72.139999  144.130005  61.279999  157.559998  103.989998  314.970001  389.670013
-	2025-08-29  93.160004  265.579987  42.139999  73.150002  145.820007  61.439999  155.529999  103.680000  310.709991  391.410004
-	2025-09-02  93.250000  264.420013  41.750000  74.089996  142.300003  61.790001  154.270004  103.190002  305.070007  389.940002
-	2025-09-03  93.279999  261.220001  41.790001  73.320000  143.410004  61.299999  152.000000  103.839996  304.739990  388.559998
-	2025-09-04  95.230003  259.510010  41.410000  73.690002  144.000000  60.900002  155.520004  105.040001  315.799988  394.339996
-	2025-09-05  95.800003  261.500000  41.060001  73.779999  145.399994  61.740002  155.300003  104.839996  333.089996  392.309998
-```
-Note the results are shown as a dataframe object.
+## in this example, the index is a list of stocks and the data is the corresponding closing prices on some given day
 
-Dataframe indexing works as follows:
-There are two main ways to index, position based and label based indices.
-Column labels are the direct access labels, meaning for example
-```
-close_prices = df['CHD']
-print(close_prices)
-```
-returns the column of the 'MO' prices
-```
+ex_index = ['BRO', 'DIS', 'ICE', 'CSX', 'AAPL', 'KR', 'CBRE', 'CCL', 'BRO', 'INCY', 'HON', 'DD', 'CNP', 'AOS', 'CL', 'CTRA', 'FRT', 'KEYS', 'BR', 'JCI']
+
+ex_data = [15.312822341918945, 112.20580291748047, 40.59511184692383, 8.820080757141113, 25.675556182861328, 31.671602249145508, 37.630001068115234, 44.74552917480469, 15.312822341918945, 109.73999786376953, 81.06645202636719, 52.7418212890625, 13.334376335144043, 30.626880645751953, 54.17769241333008, 18.849369049072266, 95.1009750366211, 30.40999984741211, 45.62876892089844, 28.291528701782227]
+
+example_series = pd.Series(index = ex_index,data = ex_data)
+print(example_series)
+
+->
+
+	Ticker
+	BRO      15.312822
+	DIS     112.205803
+	ICE      40.595112
+	CSX       8.820081
+	AAPL     25.675556
+	KR       31.671602
+	CBRE     37.630001
+	CCL      44.745529
+	BRO      15.312822
+	INCY    109.739998
+	HON      81.066452
+	DD       52.741821
+	CNP      13.334376
+	AOS      30.626881
+	CL       54.177692
+	CTRA     18.849369
+	FRT      95.100975
+	KEYS     30.410000
+	BR       45.628769
+	JCI      28.291529
+	dtype: float64
+
+## note that the following are identical ways to instantiate a pd.Series obj
+
+example_series = pd.Series(ex_data,ex_index)
+example_series = pd.Series(data = ex_data, index = ex_index)
+
+## data is the only required parameter, called a non-named parameter
+
+## the values to be passed are called named parameters in python compared to non-named parameters which need explict values to be passed, index is a named parameter and the default index value is just the list of integers starting from 0, in the syntax of python functions, named parameters always go first in the order given in the function documentation, or can be expliclty defined like unnamed parameters which is usually prefered if there are many parameters involved, and both types are being used repeatedly 
+ 
+
+# The easiest way to index a series is the same as a list or a key-value pair
+ 
+ val_1 = example_series['BRO']
+ print(val_1)
+
+->
+ 2 
+
+# But these concepts of indexing are better understood in terms of label based indexing and position based
+
+## label based indexing uses the keyword, or property, `loc`
+
+val_1=example_series.loc['BRO']
+print(val_1)
+
+## position based indexing uses the keyword, or property 'iloc'
+
+val_1=example_series.iloc[1]
+print(val_1)
+
+## note that for pd.Series, label based indexing is exactly the same as direct indexing, meaning that it is not usually used, however, position based indexing is still useful if the index labels are not exactly known, or if the code being done fits position based indexing better, note however that in any situation
+
+i = 1
+val_1=example_series.iloc[i]
+val_1=example_series.loc[example_series.index[i]]
+
+## both print the exact same value since an index can be accessed as a list
+
+## direct indexing always supports labels remember and direct indexing based on positioning if the labels are different will always throw a warning, if not an error since position based direct indexing will be removed soon from pandas
+
+print(examples_series[1])
+
+-> 
+	Deappreciation Error
+
+# the best method that is commonly used is the rolling method `.rolling(roll_size)` which returns a rolling object upon which rolling operations can be performed
+
+# for example say that a series of close prices is given with date time indices extracted from yahoo finance or any financial time series api
+
+print(series_close)
+
+-> 
 	Date
-	2025-08-06    92.205315
-	2025-08-07    92.334900
-	2025-08-08    90.630348
-	2025-08-11    91.367996
-	2025-08-12    91.956116
-	2025-08-13    93.391533
-	2025-08-14    92.305000
-	2025-08-15    92.480003
-	2025-08-18    92.800003
-	2025-08-19    94.059998
-	2025-08-20    94.910004
-	2025-08-21    94.959999
-	2025-08-22    95.019997
-	2025-08-25    92.750000
-	2025-08-26    92.379997
-	2025-08-27    93.029999
-	2025-08-28    92.089996
-	2025-08-29    93.160004
-	2025-09-02    93.250000
-	2025-09-03    93.279999
-	2025-09-04    95.230003
-	2025-09-05    95.800003
-```
-`loc` is used for index based accessing meaning for example
-```
-print(df.loc['2025-08-28','CHD'])
-```
-returns the value at that horizontal label and the vertical column label
-```
-	92.08999633789062
-```
-Note the general format `dataframe.loc[horizontal_label,vertical_label]`
+	2015-07-31    110.647507
+	2015-08-03    111.680229
+	2015-08-04    112.205803
+	2015-08-05    101.915573
+	2015-08-06    100.089890
+	2015-08-07    100.827530
+	2015-08-10    102.348946
+	2015-08-11     99.582756
+	2015-08-12     98.651482
+	2015-08-13     99.140152
+	2015-08-14     98.808228
+	2015-08-17    100.550911
+	2015-08-18     98.605385
+	2015-08-19     98.153557
+	2015-08-20     92.224693
+	2015-08-21     91.136650
+	2015-08-24     87.927887
+	2015-08-25     88.416573
+	2015-08-26     91.496277
+	2015-08-27     94.207130
+	2015-08-28     94.492973
+	2015-08-31     93.939735
+	2015-09-01     91.754448
+	2015-09-02     93.948952
+	2015-09-03     94.041168
+	2015-09-04     93.100655
+	2015-09-08     95.903725
+	2015-09-09     93.967392
+	2015-09-10     94.603615
+	2015-09-11     96.337105
+	2015-09-14     95.728539
+	2015-09-15     95.368935
+	2015-09-16     95.857628
+	2015-09-17     96.078918
 
-`iloc` is used for position based accessing meaning for example
-```
-print(df.iloc[16,0])
-```
-prints or accesses the same value as the previous operation.
-Note the general format `dataframe.iloc[horizontal_position,vertical_position]`
+##
+a rolling object can be created with a roll size of siey 20
 
-There are also important properties for dataframe objects.
-The columns of a dataframe can be obtained as for example
-```
-print(df.columns)
-```
-returns the columns of a dataframe as an index object
-```
-	Index(['CHD', 'CHTR', 'CMG', 'CVS', 'MAA', 'MDLZ', 'MMM', 'ORLY', 'POOL',
-	       'SYK'],
-	      dtype='object', name='Ticker')
-```
-The index of a dataframe can be obtained
-```
-print(df.index)
-```
-returns an index object of the actual indices
-```
-	DatetimeIndex(['2025-08-06', '2025-08-07', '2025-08-08', '2025-08-11',
-	               '2025-08-12', '2025-08-13', '2025-08-14', '2025-08-15',
-	               '2025-08-18', '2025-08-19', '2025-08-20', '2025-08-21',
-	               '2025-08-22', '2025-08-25', '2025-08-26', '2025-08-27',
-	               '2025-08-28', '2025-08-29', '2025-09-02', '2025-09-03',
-	               '2025-09-04', '2025-09-05'],
-	              dtype='datetime64[ns]', name='Date', freq=None)
-```
-Note the index objects can be easily cast as a list
-```
-print(list(df.columns))
-print(list(df.index))
-```
-returning
-```
-	['CHD', 'CHTR', 'CMG', 'CVS', 'MAA', 'MDLZ', 'MMM', 'ORLY', 'POOL',
-	       'SYK']
-	[Timestamp('2025-08-06 00:00:00'), Timestamp('2025-08-07 00:00:00'), Timestamp('2025-08-08 00:00:00'), Timestamp('2025-08-11 00:00:00'), Timestamp('2025-08-12 00:00:00'), Timestamp('2025-08-13 00:00:00'), Timestamp('2025-08-14 00:00:00'), Timestamp('2025-08-15 00:00:00'), Timestamp('2025-08-18 00:00:00'), Timestamp('2025-08-19 00:00:00'), Timestamp('2025-08-20 00:00:00'), Timestamp('2025-08-21 00:00:00'), Timestamp('2025-08-22 00:00:00'), Timestamp('2025-08-25 00:00:00'), Timestamp('2025-08-26 00:00:00'), Timestamp('2025-08-27 00:00:00'), Timestamp('2025-08-28 00:00:00'), Timestamp('2025-08-29 00:00:00'), Timestamp('2025-09-02 00:00:00'), Timestamp('2025-09-03 00:00:00'), Timestamp('2025-09-04 00:00:00'), Timestamp('2025-09-05 00:00:00')]  
-```
-The size of a dataframe can be obtained with the shape property
-```
-print(df.shape)
-```
-which returns a tuple
-```
-	(22, 10)
-```
-of the length of the number of horizontal labels, and the length of the columns
+roll = series_close.rolling(window = 20)
 
-The total size
-```
-print(df.shape[0]*df.shape[1])
-print(df.size)
-```
-can be obtained in both ways
-```
-	220
-	220
-```
-Important dataframe operations include the following
-To get the entire horizontal line at an index
-```
-print(df.loc['2025-08-29'])
-print(df.iloc[-5])
-```
-both return
-```
-	Ticker
-	CHD      93.160004
-	CHTR    265.579987
-	CMG      42.139999
-	CVS      73.150002
-	MAA     145.820007
-	MDLZ     61.439999
-	MMM     155.529999
-	ORLY    103.680000
-	POOL    310.709991
-	SYK     391.410004
-	Ticker
-	CHD      93.160004
-	CHTR    265.579987
-	CMG      42.139999
-	CVS      73.150002
-	MAA     145.820007
-	MDLZ     61.439999
-	MMM     155.529999
-	ORLY    103.680000
-	POOL    310.709991
-	SYK     391.410004
-```
-the entire corresponding line as a series in its own right
-To get multiple columns, the format
-```
-print(df[df.columns[0:2]])
-```
-is allowed for example
-```
-	Ticker            CHD        CHTR
-	Date                             
-	2025-08-06  92.205315  262.040009
-	2025-08-07  92.334900  258.779999
-	2025-08-08  90.630348  256.570007
-	2025-08-11  91.367996  258.769989
-	2025-08-12  91.956116  263.100006
-	2025-08-13  93.391533  269.000000
-	2025-08-14  92.305000  263.200012
-	2025-08-15  92.480003  267.799988
-	2025-08-18  92.800003  266.809998
-	2025-08-19  94.059998  267.010010
-	2025-08-20  94.910004  266.619995
-	2025-08-21  94.959999  267.980011
-	2025-08-22  95.019997  277.579987
-	2025-08-25  92.750000  273.440002
-	2025-08-26  92.379997  266.670013
-	2025-08-27  93.029999  269.149994
-	2025-08-28  92.089996  263.630005
-	2025-08-29  93.160004  265.579987
-	2025-09-02  93.250000  264.420013
-	2025-09-03  93.279999  261.220001
-	2025-09-04  95.230003  259.510010
-	2025-09-05  95.800003  261.500000
-```
-to get the first two columns
-Note this is the same
-```
-print(df.loc[:,df.columns[0:2]])
-```
-where the `:` is used to indicate all
-To get the horizontal matching list of values for a given range
-```
-print(df.loc[df.index[0:2]])
-```
-returns the first two horizontal values
-Note this is the same as
-```
-	Ticker            CHD        CHTR        CMG        CVS         MAA       MDLZ         MMM        ORLY        POOL         SYK
-	Date                                                                                                                          
-	2025-08-06  92.205315  262.040009  42.689999  63.520000  140.610001  62.070000  150.126343  104.440002  308.390015  374.940002
-	2025-08-07  92.334900  258.779999  42.689999  63.580002  142.149994  62.400002  151.042114  103.470001  307.473511  376.369995
-print(df.loc[df.index[0:2]])  
-print(df.loc[df.index[0:2],:])
-```
-Note that these are the same
-```
-print(df.loc[df.index[0:2]])
-print(df.iloc[0:2])
-```
-and also
-```
-print(df.loc[:,df.columns[0:2]])
-print(df.iloc)
-```
-If arrays are easier to use all the values can be found as an array as
-```
-print(df.values)
-```
-To get all the values satisfying a Boolean condition
-```
-print(df > 200)
-```
-returns a Boolean valued dataframe of the condition of the value at each point
-```
-	Ticker        CHD  CHTR    CMG    CVS    MAA   MDLZ    MMM   ORLY  POOL   SYK
-	Date                                                                         
-	2025-08-06  False  True  False  False  False  False  False  False  True  True
-	2025-08-07  False  True  False  False  False  False  False  False  True  True
-	2025-08-08  False  True  False  False  False  False  False  False  True  True
-	2025-08-11  False  True  False  False  False  False  False  False  True  True
-	2025-08-12  False  True  False  False  False  False  False  False  True  True
-	2025-08-13  False  True  False  False  False  False  False  False  True  True
-	2025-08-14  False  True  False  False  False  False  False  False  True  True
-	2025-08-15  False  True  False  False  False  False  False  False  True  True
-	2025-08-18  False  True  False  False  False  False  False  False  True  True
-	2025-08-19  False  True  False  False  False  False  False  False  True  True
-	2025-08-20  False  True  False  False  False  False  False  False  True  True
-	2025-08-21  False  True  False  False  False  False  False  False  True  True
-	2025-08-22  False  True  False  False  False  False  False  False  True  True
-	2025-08-25  False  True  False  False  False  False  False  False  True  True
-	2025-08-26  False  True  False  False  False  False  False  False  True  True
-	2025-08-27  False  True  False  False  False  False  False  False  True  True
-	2025-08-28  False  True  False  False  False  False  False  False  True  True
-	2025-08-29  False  True  False  False  False  False  False  False  True  True
-	2025-09-02  False  True  False  False  False  False  False  False  True  True
-	2025-09-03  False  True  False  False  False  False  False  False  True  True
-	2025-09-04  False  True  False  False  False  False  False  False  True  True
-	2025-09-05  False  True  False  False  False  False  False  False  True  True
-```
-Note the idea of Boolean masking from Pandas.series can be extended to here
-```
-print(df[df > 200])
-```
-returns all the values where this is matched
-```
-	Ticker      CHD        CHTR  CMG  CVS  MAA  MDLZ  MMM  ORLY        POOL         SYK
-	Date                                                                               
-	2025-08-06  NaN  262.040009  NaN  NaN  NaN   NaN  NaN   NaN  308.390015  374.940002
-	2025-08-07  NaN  258.779999  NaN  NaN  NaN   NaN  NaN   NaN  307.473511  376.369995
-	2025-08-08  NaN  256.570007  NaN  NaN  NaN   NaN  NaN   NaN  304.524658  377.579987
-	2025-08-11  NaN  258.769989  NaN  NaN  NaN   NaN  NaN   NaN  305.490997  376.670013
-	2025-08-12  NaN  263.100006  NaN  NaN  NaN   NaN  NaN   NaN  311.667572  376.609985
-	2025-08-13  NaN  269.000000  NaN  NaN  NaN   NaN  NaN   NaN  329.480011  378.950012
-	2025-08-14  NaN  263.200012  NaN  NaN  NaN   NaN  NaN   NaN  326.089996  378.519989
-	2025-08-15  NaN  267.799988  NaN  NaN  NaN   NaN  NaN   NaN  321.750000  381.910004
-	2025-08-18  NaN  266.809998  NaN  NaN  NaN   NaN  NaN   NaN  316.079987  381.609985
-	2025-08-19  NaN  267.010010  NaN  NaN  NaN   NaN  NaN   NaN  324.779999  389.940002
-	2025-08-20  NaN  266.619995  NaN  NaN  NaN   NaN  NaN   NaN  314.950012  391.869995
-	2025-08-21  NaN  267.980011  NaN  NaN  NaN   NaN  NaN   NaN  308.630005  384.829987
-	2025-08-22  NaN  277.579987  NaN  NaN  NaN   NaN  NaN   NaN  323.730011  394.220001
-	2025-08-25  NaN  273.440002  NaN  NaN  NaN   NaN  NaN   NaN  321.429993  390.880005
-	2025-08-26  NaN  266.670013  NaN  NaN  NaN   NaN  NaN   NaN  318.380005  394.329987
-	2025-08-27  NaN  269.149994  NaN  NaN  NaN   NaN  NaN   NaN  317.850006  393.149994
-	2025-08-28  NaN  263.630005  NaN  NaN  NaN   NaN  NaN   NaN  314.970001  389.670013
-	2025-08-29  NaN  265.579987  NaN  NaN  NaN   NaN  NaN   NaN  310.709991  391.410004
-	2025-09-02  NaN  264.420013  NaN  NaN  NaN   NaN  NaN   NaN  305.070007  389.940002
-	2025-09-03  NaN  261.220001  NaN  NaN  NaN   NaN  NaN   NaN  304.739990  388.559998
-	2025-09-04  NaN  259.510010  NaN  NaN  NaN   NaN  NaN   NaN  315.799988  394.339996
-	2025-09-05  NaN  261.500000  NaN  NaN  NaN   NaN  NaN   NaN  333.089996  392.309998
-```
-and to get only the points where this is true and dropping all the `na` values
-```
-print(df[df > 200].fillna(0))
-```
-where all the values are filled by whichever dummy value
-```
-	Ticker      CHD        CHTR  CMG  CVS  MAA  MDLZ  MMM  ORLY        POOL         SYK
-	Date                                                                               
-	2025-08-06  0.0  262.040009  0.0  0.0  0.0   0.0  0.0   0.0  308.390015  374.940002
-	2025-08-07  0.0  258.779999  0.0  0.0  0.0   0.0  0.0   0.0  307.473511  376.369995
-	2025-08-08  0.0  256.570007  0.0  0.0  0.0   0.0  0.0   0.0  304.524658  377.579987
-	2025-08-11  0.0  258.769989  0.0  0.0  0.0   0.0  0.0   0.0  305.490997  376.670013
-	2025-08-12  0.0  263.100006  0.0  0.0  0.0   0.0  0.0   0.0  311.667572  376.609985
-	2025-08-13  0.0  269.000000  0.0  0.0  0.0   0.0  0.0   0.0  329.480011  378.950012
-	2025-08-14  0.0  263.200012  0.0  0.0  0.0   0.0  0.0   0.0  326.089996  378.519989
-	2025-08-15  0.0  267.799988  0.0  0.0  0.0   0.0  0.0   0.0  321.750000  381.910004
-	2025-08-18  0.0  266.809998  0.0  0.0  0.0   0.0  0.0   0.0  316.079987  381.609985
-	2025-08-19  0.0  267.010010  0.0  0.0  0.0   0.0  0.0   0.0  324.779999  389.940002
-	2025-08-20  0.0  266.619995  0.0  0.0  0.0   0.0  0.0   0.0  314.950012  391.869995
-	2025-08-21  0.0  267.980011  0.0  0.0  0.0   0.0  0.0   0.0  308.630005  384.829987
-	2025-08-22  0.0  277.579987  0.0  0.0  0.0   0.0  0.0   0.0  323.730011  394.220001
-	2025-08-25  0.0  273.440002  0.0  0.0  0.0   0.0  0.0   0.0  321.429993  390.880005
-	2025-08-26  0.0  266.670013  0.0  0.0  0.0   0.0  0.0   0.0  318.380005  394.329987
-	2025-08-27  0.0  269.149994  0.0  0.0  0.0   0.0  0.0   0.0  317.850006  393.149994
-	2025-08-28  0.0  263.630005  0.0  0.0  0.0   0.0  0.0   0.0  314.970001  389.670013
-	2025-08-29  0.0  265.579987  0.0  0.0  0.0   0.0  0.0   0.0  310.709991  391.410004
-	2025-09-02  0.0  264.420013  0.0  0.0  0.0   0.0  0.0   0.0  305.070007  389.940002
-	2025-09-03  0.0  261.220001  0.0  0.0  0.0   0.0  0.0   0.0  304.739990  388.559998
-	2025-09-04  0.0  259.510010  0.0  0.0  0.0   0.0  0.0   0.0  315.799988  394.339996
-	2025-09-05  0.0  261.500000  0.0  0.0  0.0   0.0  0.0   0.0  333.089996  392.309998
-```
-To get the total number of points where a Boolean is true
-Boolean addition can be done with the method
-```
-print((df > 200).sum().sum())
-```
-which returns the total number of points where the Boolean is true
-```
-	66
-```
-Note the first sum does column wise summation for a df
+## rolling operations can be performed on this rolling object such as obtaining the rolling mean, std, correlation, and other statistical quantiti
+
+mean_series = roll.mean()
+std_series = roll.std()
+
+print(mean_series)
+print(std_series)
+
+->	  
+
+	Date
+	2015-07-31           NaN
+	2015-08-03           NaN
+	2015-08-04           NaN
+	2015-08-05           NaN
+	2015-08-06           NaN
+	2015-08-07           NaN
+	2015-08-10           NaN
+	2015-08-11           NaN
+	2015-08-12           NaN
+	2015-08-13           NaN
+	2015-08-14           NaN
+	2015-08-17           NaN
+	2015-08-18           NaN
+	2015-08-19           NaN
+	2015-08-20           NaN
+	2015-08-21           NaN
+	2015-08-24           NaN
+	2015-08-25           NaN
+	2015-08-26           NaN
+	2015-08-27     98.930858
+	2015-08-28     98.123131
+	2015-08-31     97.236106
+	2015-09-01     96.213539
+	2015-09-02     95.815208
+	2015-09-03     95.512772
+	2015-09-04     95.126428
+	2015-09-08     94.804167
+	2015-09-09     94.523399
+	2015-09-10     94.321005
+	2015-09-11     94.180853
+	2015-09-14     94.026868
+	2015-09-15     93.767770
+	2015-09-16     93.630382
+	2015-09-17     93.526650
+	dtype: float64
+	
+	Date
+	2015-07-31         NaN
+	2015-08-03         NaN
+	2015-08-04         NaN
+	2015-08-05         NaN
+	2015-08-06         NaN
+	2015-08-07         NaN
+	2015-08-10         NaN
+	2015-08-11         NaN
+	2015-08-12         NaN
+	2015-08-13    5.515884
+	2015-08-14    5.117316
+	2015-08-17    3.991327
+	2015-08-18    1.343852
+	2015-08-19    1.289702
+	2015-08-20    2.669429
+	2015-08-21    3.513299
+	2015-08-24    4.352872
+	2015-08-25    4.869520
+	2015-08-26    4.858063
+	2015-08-27    4.594309
+	2015-08-28    4.301796
+	2015-08-31    3.583622
+	2015-09-01    3.015551
+	2015-09-02    2.337130
+	2015-09-03    2.429236
+	2015-09-04    2.418818
+	2015-09-08    2.098849
+	2015-09-09    1.293073
+	2015-09-10    1.061163
+	2015-09-11    1.296029
+	2015-09-14    1.382147
+	2015-09-15    1.410616
+	2015-09-16    1.091964
+	2015-09-17    1.096649
+	dtype: float64
 
 
+## note there are NaN values given where the operation cannot be performed because the roll is not big enough at those points,'NaN' translates to literally not a number
+they are advised to be removed from a series n
+
+## example of a series dropping the na values with the 'dropna' metho
+
+std_values_final = std_values.dropna()
+print(std_values_final)
+
+## the dropna method has a key,ord inplace,
+
+std_values.dropna(inplace=True)
+print(std_values)
+
+## the values can also be filled with some
+
+std_values_final_two = std_values.fillna(0)
+print(std_values_final_two)
 
 
+->
+
+	Date
+	2015-08-13    5.515884
+	2015-08-14    5.117316
+	2015-08-17    3.991327
+	2015-08-18    1.343852
+	2015-08-19    1.289702
+	2015-08-20    2.669429
+	2015-08-21    3.513299
+	2015-08-24    4.352872
+	2015-08-25    4.869520
+	2015-08-26    4.858063
+	2015-08-27    4.594309
+	2015-08-28    4.301796
+	2015-08-31    3.583622
+	2015-09-01    3.015551
+	2015-09-02    2.337130
+	2015-09-03    2.429236
+	2015-09-04    2.418818
+	2015-09-08    2.098849
+	2015-09-09    1.293073
+	2015-09-10    1.061163
+	2015-09-11    1.296029
+	2015-09-14    1.382147
+	2015-09-15    1.410616
+	2015-09-16    1.091964
+	2015-09-17    1.096649
+	
+	Date
+	2015-08-13    5.515884
+	2015-08-14    5.117316
+	2015-08-17    3.991327
+	2015-08-18    1.343852
+	2015-08-19    1.289702
+	2015-08-20    2.669429
+	2015-08-21    3.513299
+	2015-08-24    4.352872
+	2015-08-25    4.869520
+	2015-08-26    4.858063
+	2015-08-27    4.594309
+	2015-08-28    4.301796
+	2015-08-31    3.583622
+	2015-09-01    3.015551
+	2015-09-02    2.337130
+	2015-09-03    2.429236
+	2015-09-04    2.418818
+	2015-09-08    2.098849
+	2015-09-09    1.293073
+	2015-09-10    1.061163
+	2015-09-11    1.296029
+	2015-09-14    1.382147
+	2015-09-15    1.410616
+	2015-09-16    1.091964
+	2015-09-17    1.096649
+	
+	Date
+	2015-07-31    0.000000
+	2015-08-03    0.000000
+	2015-08-04    0.000000
+	2015-08-05    0.000000
+	2015-08-06    0.000000
+	2015-08-07    0.000000
+	2015-08-10    0.000000
+	2015-08-11    0.000000
+	2015-08-12    0.000000
+	2015-08-13    5.515884
+	2015-08-14    5.117316
+	2015-08-17    3.991327
+	2015-08-18    1.343852
+	2015-08-19    1.289702
+	2015-08-20    2.669429
+	2015-08-21    3.513299
+	2015-08-24    4.352872
+	2015-08-25    4.869520
+	2015-08-26    4.858063
+	2015-08-27    4.594309
+	2015-08-28    4.301796
+	2015-08-31    3.583622
+	2015-09-01    3.015551
+	2015-09-02    2.337130
+	2015-09-03    2.429236
+	2015-09-04    2.418818
+	2015-09-08    2.098849
+	2015-09-09    1.293073
+	2015-09-10    1.061163
+	2015-09-11    1.296029
+	2015-09-14    1.382147
+	2015-09-15    1.410616
+	2015-09-16    1.091964
+	2015-09-17    1.096649
 
 
+## This leads to an important point about series in that they are immutable in terms of size. The dropna() function returns a new series which is smaller in size in this example and the inplace=true keyword just does the same, but 'underneath' 
+
+## Values can of course be replaced with little issue 
 
 
+# This leads to another important concept, which is boolean masking,  essentially a dynamic index vise boolean comparision. 
 
+boolean_mask = [False]*len(series_example)
+for i in range(len(boolean_mask)): if i mod 2 == 0 boolean_mask[i] = True 
+series_mask = series_close[boolean_mask]
+print(series_mask)	
+	
+# there can also be dynamic comparing in the following qty
 
+series_mask = series_close > 200
+print(series_mask)
+	
+# A series can be indexed like a list with a boolean list of equal length
 
+This leads to the idea of chaining these operations 
 
+print(series_close[series_close > 10000])
+	
+# a series can have its length obtained in the same way as a list
 
+length = len(series_mask)
+print(length)
 
+# this is the same as 
 
+length = len(series_mask.index)
+
+# there is also the shape property can 
+
+length_tuple = series_mask.shape
+print(length_tuple)
+
+# there is also a method to shift a series
+
+series_shifted = series_example.shift(periods=amount_of_shift)
+print(series_shifted)
+ 
+## there are na values of course from the shift which can be removed by either dropping or filling 
+ 
+# there is also a way to sort a series
+
+series.sort_values(inplace=boolean_inplace,by=function_to_sort,ascending=boolean_ascending) 
+
+# where the keywords are used to define the sorting
+
+# a good example of all these is the creation of z score based entry, exit signals
+
+## Example with z-score based mean reversion where there is a z score 
+ 
+ 
+ series_mean = series_example.rolling(20).mean().fillna(0)
+ series_std = series_example.rolling(20).st().fillna(0)
+ series_z_score = (mean - series_clos
+ z_score = 
+ z_threshold = 1.5
+ series_close_indicator = (series_close > z_threshold) &(series_close.shift(1) < z_threshold)
+ 
+# A signal indicator event driven series
+This is in contrast to state based signals which are usually not as good.	
+
+series_indicator_example = series_indicator > k
+
+	
+```

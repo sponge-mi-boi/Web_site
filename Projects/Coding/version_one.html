@@ -1,0 +1,194 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <link rel="stylesheet" href="../../te.css">
+    <title>Current Setup</title>
+</head>
+<body>
+<h2 id="module-of-methods">Module of methods Finalized</h2>
+<ul>
+    <li>Group of methods creates a list of stock pairs that should be tested
+        for whatever requirement and then executes the given test on them with
+        parallel processing across multiple data ranges. Equity curves are given at the link in the bottom or here: <br>
+        <a href="all_plots.html" style="display: flex; justify-content: center; margin: 1em 0 0 0; color: lightskyblue;
+        text-decoration: none; border-radius: 2em;"> Graphs </a>
+        <br><br>Note that each stock pair is labeled with its equity curve graphed with respect to the benchmark. Various
+        metrics of the backtest are also given along with all held positions.
+    </li>
+</ul>
+
+<h2 id="code">Code</h2>
+
+<pre><code>
+    <span class="c1">
+        # The order here is to have a list of pair of stocks, along with each of their beta values in terms
+        of the periods they were tested on. For example, there are 5 different time periods that were tested here previously
+        each categorized by an unique shift variable which is merely the shift in data backwards from the given last date,
+        and each time period is required to have 500 data points roughly, with a walk forward of 100 data points. There is
+        no parameter validation period yet, but it will be implemented next, anticipated to be in a fairly easily manner.
+
+        ## Note the assumed correlation values used are those obtained from the ADF test on the previous period, meaning
+        only those periods, characterized by the shift variables 300 onwards, can have the portfolio simulation executed
+    </span>
+    <span class="c1" style="margin-bottom: -3em">
+        # This is the helper method for the parallel processing and takes as inputs a dataframe of stock pairs as the
+        indices with the respective input parameters, the correlations in this situation, as the columns, each of which
+        is also characterized by the time period, and it also takes the shift parameter for the time period this test
+        will be executed on. The outputs are the desired parameters and metric/metrics one desires to obtain from the
+        test, which in this situation are for example the total profit %, the Sharpe Ratio, and the alpha value when
+        compared to the benchmark of the SPY performance in this same time period.
+    </span>
+
+        def runner(stock_pair, shift_parameter: int,filter_func,inputs=None,outputs=None,*args):
+
+        parameters = args
+
+        if inputs:
+
+            args = stock_pair[[x for x in stock_pair.columns if (str(shift_parameter+100) + inputs[0]) == x]]
+            print(args)
+            args = args.squeeze(1)
+            args.index = [tuple(x) for x in args.index]
+
+            p_list = [[x[0],x[1],shift_parameter,args[x]] + list(parameters) for x in stock_pair.index]
+
+        else:
+            p_list = [[x[0], x[1], shift_parameter] + list(parameters) for x in stock_pair.index]
+
+        with Pool(processes=15) as pool:
+            filter_results = pool.map(filter_func, p_list)
+        filter_results = np.array(filter_results)
+        col = outputs
+
+        val = [str(shift_parameter) +  ' '  + col[x] for x in range(len(col))]
+
+        series_coint = pd.DataFrame(index=stock_pair.index,data= filter_results,columns=val)
+        series_coint = series_coint[series_coint != 0].dropna(axis=0)
+
+        return pd.concat([series_coint,stock_pair],axis=1,join='outer').dropna()
+    <span class="c1" style="margin-bottom: -2em">
+        # This is a simple recursive method to independently handle the iterations over the time periods.
+    </span>
+        def runner_multiple(stock_pair_list, shift_parameter_list,filter_func,*args):
+            inner = [' correlation']
+            outer = ['Sharpe Ratio','Total Return [%]','Alpha']
+
+            if len(shift_parameter_list) == 1:
+                return runner(stock_pair_list, shift_parameter_list[0], filter_func, inner, outer,*args)
+            return runner_multiple(runner(stock_pair_list, shift_parameter_list[0], filter_func,inner,outer,*args),shift_parameter_list[1:],
+                                   filter_func,*args)
+        <span class="c1" style="margin-bottom: -2em">
+        # This is the method which actually executes the portfolio backtest. It is given a list in the form of the first two
+        entries being the cointegrated stock pair which is being tested, the third entry contains the shift parameter, the
+        next few contains any input parameters as related to the stock itself, which is just the correlation in this, and
+        the rest contain any parameters related to the method being implemented, which in this is merely the roll value and
+        the z-score threshold cutoff for entries and exits.
+    </span>
+        def port_sim(pa,graphs=False):
+                args = pa[-2:]
+
+                outer = ['Sharpe Ratio','Total Return [%]','Alpha']
+                va = get_time_period(pa[0:2], custom_data=True, num_data_points=500,shift=int(pa[2])+1)
+                base = pd.read_parquet('base.parquet').loc[va.index[0]:va.index[-1]]
+                if not all(va.index == base.index):
+                    print((va.index == base.index))
+                    sys.exit()
+
+
+                va_ = va
+                va = va[pa[0]] - va[pa[1]]
+
+                rolling = args[0]
+
+                list_r = va.rolling(rolling)
+                z_score = (va - list_r.mean()) / list_r.std()
+                z_score = z_score.dropna()
+
+                combined_storage = pd.concat([va_,va,base.pct_change(),z_score],axis=1)
+                combined_storage = combined_storage.dropna()
+                z_threshold = args[1]
+                z_score = combined_storage[combined_storage.columns[-1]]
+                exits = (z_score > z_threshold) & (z_score.shift(1) < z_threshold)
+
+                entries = (z_score < -1 * z_threshold) & (z_score.shift(1) > -1 * z_threshold)
+
+            <span class="c1" style=" margin: -2em 0">
+                # The event based signals have been generated. There will now be beta derived portfolio weights
+                defined.
+            </span>
+
+
+                beta = np.abs(pa[3])
+                factor = beta + 1
+
+                a_1 = 1/factor
+                a_2 = 1 - 1/factor
+
+                entries_exits = a_1 *(entries.astype(int) + exits.astype(int) * -1)
+
+                combined_storage['entries/exits'] = pd.to_numeric(entries_exits.replace(0,pd.NA).ffill())
+
+                entries_exits_ = a_2 *(-1*entries.astype(int) + -1*exits.astype(int) * -1)
+
+
+                combined_storage['entries/exits stock two'] = pd.to_numeric(entries_exits_.replace(0,pd.NA).ffill())
+                combined_storage.fillna(0,inplace=True)
+
+
+                data_close = combined_storage.iloc[:,0:2].astype(float)
+
+            <span class="c1">
+                # The actual portfolio is now constructed and the equity curves are generated directly afterwards
+            </span>
+
+                p = v.Portfolio.from_orders(close=data_close, size=combined_storage[combined_storage.columns[-2:]],size_type='targetpercent',
+                                             init_cash=10000, freq='d',cash_sharing=True)
+
+
+                strategy_metrics = p.stats(group_by=np.array(['Object'] * 2))
+
+
+                strategy_results_benchmark_com = p.returns_stats(group_by= np.array(['Object'] * 2),benchmark_rets=combined_storage.iloc[:,3].squeeze() .astype(float))
+                benchmark_r = combined_storage.iloc[:,3].squeeze() .astype(float)
+                benchmark = benchmark_r
+                benchmark = (1 + benchmark).cumprod()
+                port_returns = (1 + p.returns()).cumprod()
+                metrics = [x for x in p.stats().index if 'Trade' not in x ]
+                metrics.remove('Benchmark Return [%]')
+                metrics.remove('Win Rate [%]')
+                metrics_values = pd.concat([p.stats()[metrics].to_frame(),p.returns_stats(benchmark_rets=benchmark_r).iloc[-7:].to_frame()]).squeeze()
+                print(p.returns_stats(benchmark_rets=benchmark_r))
+
+            <span class="c1">
+                # This is the important filtration of what stocks to include. Note the graphs keyword can be set to true to
+                generate html formatted plots with the relevant data.
+            </span>
+                if metrics_values['Total Return [%]'] > 0 and metrics_values['Sharpe Ratio'] > 1.7:
+
+                    plot_list = port_returns.vbt.plot().update_layout(title=pa[0] + ' '+  pa[1])
+
+                    benchmark.vbt.plot(fig=plot_list)
+
+
+                    if graphs: return plot_list.to_html(),metrics_values.to_frame().to_html(),p.positions.records_readable.to_html(),
+
+                    return np.array(metrics_values[outer])
+                else:
+                    if graphs: return None
+                    else: return np.zeros(len(outer))
+</code></pre>
+<div style="align-self: baseline">
+    Here is the link for the graphs which are a sample backtest, specifically one of the four roll forward time periods
+    tests which are possible here, in this situation being the one with shift parameter 0:
+    <a href="all_plots.html" style="display: flex; justify-content: center; margin: 1em 0 0 0; color: lightskyblue;
+        text-decoration: none; border-radius: 2em;"> Graphs </a>
+    <br>Note the best performing stock pair, in the sense that it was the only one which had an average alpha greater than
+    one across all the time frames, is shown here with equity curves of its performance across all time frames.
+    <a href="alpha_average_greater_than_one_plots.html" style="display: flex; justify-content: center; margin: 1em 0 0 0; color: lightskyblue;
+        text-decoration: none; border-radius: 2em;"> plot </a>
+</div>
+</body>
+</html>
