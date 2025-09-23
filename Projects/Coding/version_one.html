@@ -30,8 +30,7 @@
         and each time period is required to have 500 data points roughly, with a walk forward of 100 data points. There is
         no parameter validation period yet, but it will be implemented next, anticipated to be in a fairly easily manner.
 
-        ## Note the assumed correlation values used are those obtained from the ADF test on the previous period, meaning
-        only those periods, characterized by the shift variables 300 onwards, can have the portfolio simulation executed
+        ## Note the assumed correlation values used are those obtained from the ADF test on that previous period.
     </span>
     <span class="c1" style="margin-bottom: -3em">
         # This is the helper method for the parallel processing and takes as inputs a dataframe of stock pairs as the
@@ -48,8 +47,7 @@
 
         if inputs:
 
-            args = stock_pair[[x for x in stock_pair.columns if (str(shift_parameter+100) + inputs[0]) == x]]
-            print(args)
+            args = stock_pair[[x for x in stock_pair.columns if (str(shift_parameter) + inputs[0]) == x]]
             args = args.squeeze(1)
             args.index = [tuple(x) for x in args.index]
 
@@ -166,7 +164,8 @@
                 # This is the important filtration of what stocks to include. Note the graphs keyword can be set to true to
                 generate html formatted plots with the relevant data.
             </span>
-                if metrics_values['Total Return [%]'] > 0 and metrics_values['Sharpe Ratio'] > 1.7:
+                cond = metrics_values['Total Return [%]'] > 0 and metrics_values['Sharpe Ratio'] > 1.7
+                if cond:
 
                     plot_list = port_returns.vbt.plot().update_layout(title=pa[0] + ' '+  pa[1])
 
@@ -181,14 +180,11 @@
                     else: return np.zeros(len(outer))
 </code></pre>
 <div style="align-self: baseline">
-    Here is the link for the graphs which are a sample backtest, specifically one of the four roll forward time periods
-    tests which are possible here, in this situation being the one with shift parameter 0:
-    <a href="all_plots.html" style="display: flex; justify-content: center; margin: 1em 0 0 0; color: lightskyblue;
+    Here is the link for the graphs which pass the given conditions of having a positive average profit across all time
+    periods with the testing periods being 500 points from each shift parameter. Note only the first three shift para
+    have enough points left in the data set to do this test:
+    <a href="alpha_average_greater_than_one_plots.html"  style="display: flex; justify-content: center; margin: 1em 0 0 0; color: lightskyblue;
         text-decoration: none; border-radius: 2em;"> Graphs </a>
-    <br>Note the best performing stock pair, in the sense that it was the only one which had an average alpha greater than
-    one across all the time frames, is shown here with equity curves of its performance across all time frames.
-    <a href="alpha_average_greater_than_one_plots.html" style="display: flex; justify-content: center; margin: 1em 0 0 0; color: lightskyblue;
-        text-decoration: none; border-radius: 2em;"> plot </a>
 </div>
 </body>
 </html>
