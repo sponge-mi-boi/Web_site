@@ -171,7 +171,7 @@ span.c1{
     display: flex;
     max-width: inherit;
     color: turquoise;
-
+margin-bottom: -2em;
 
 }
 code{white-space: pre-wrap;}
@@ -195,7 +195,10 @@ div.column a:hover{
 }
 span.smallcaps{font-variant: small-caps;}
 div.columns{display: flex; gap: min(4vw, 1.5em);}
-
+a{
+    display: flex; justify-content: center; margin: 1em 0 0 0; color: lightskyblue;
+    text-decoration: none; border-radius: 2em;
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 /* The extra [class] is a hack that increases specificity enough to
    override a similar rule in reveal.js */

@@ -6,38 +6,40 @@
     <script src="../../marked.min.js"></script>
     <script src ='../../script.js'></script>
 </head>
-<body>
-<div class='column'>
+<body style="display: flex;  flex-direction: column; align-items: center; margin: 0 5em">
     <h1 >Alpha-Generation Backtesting Framework</h1>
     <h4>This is a documentation and description of my Python-based signal generation and analysis framework to create alpha-generating (α Gen) strategies based on time-series data of various stocks in the SP 500.</h4>
-    This provides an overview of the approach, including list of methods that will be experimented, the tools that will be used, and the approaches which will be looked at. <br>
-    <div class='buttons'>
+    <div class="column" style="max-width: 40em; align-self: baseline">
+        This provides an overview of the approach, including list of methods that will be experimented, the tools that will be used, and the approaches which will be looked at. <br>
+
+        <br> <div class='buttons'style="justify-content: center">
         <a href="output_b.html">Overview (|) </a>
         <a href="output___.html">Pandas Dataframe reference</a>
-    </div> <br>
-    <div style="font-size: medium">Version 0.1 </div>
-    The initial focus is on OOP design for efficiency,
-    but different classes of strategies and methods of portfolio allocation will be tested and analyzed later.
-    <div class='buttons'>
-        <a href="Part1.html"> Basic α Gen. Framework: Part 1 (|)</a>
-        <a href="Part2.html"> Basic α Gen. Framework: Part 2 (|)</a>
+        </div> <br>
+
+        <div style="font-size: medium">Version 0.1 </div>
+        The initial focus is on OOP design for efficiency,
+        but different classes of strategies and methods of portfolio allocation will be tested and analyzed later.
+        <div class='buttons'>
+            <a href="Part1.html"> Basic α Gen. Framework: Part 1 (|)</a>
+            <a href="Part2.html"> Basic α Gen. Framework: Part 2 (|)</a>
+        </div>
+        Conclusion: Using OOP is horrible for strategy testing since it seems it is difficult to define an instance of a
+        strategy with a method that is scalable, and it does not seem natural to give such a description.
+        <br>
+        <div style="font-size: medium"><br>Version 0.2 </div>
+        A module of various methods is used and the focus is on execution, not architecture.
+        <div class='buttons'>
+        <a href="output_.html">Function based Framework: Part 1 (|) </a>
+        </div>
+        <div style="font-size: medium"><br>Version 1.0 </div>
+        The operations are fully vectorized with the use of Dataframes instead of series with lists. The result is a working
+        model of backtesting which was done on various pairs, or all found pairs through the ADF test,
+        of cointegrated stocks in the SP 500. Parallel processing is also used to speed up operations, which was accurately
+        implemented, and parquet files are used for storage. Walk forward testing is used based upon a series of 5 tests and
+        stocks which satisfy various attributes are categorized. Also, graphs are given of greatly performing pairs in the
+        example time period. Parameter optimization will be done next, along with validation testing.
+        <div class='buttons'><a href="version_one.html">Function based, Working, Backtesting Framework </a></div>
     </div>
-    Conclusion: Using OOP is horrible for strategy testing since it seems it is difficult to define an instance of a
-    strategy with a method that is scalable, and it does not seem natural to give such a description.
-    <br>
-    <div style="font-size: medium"><br>Version 0.2 </div>
-    A module of various methods is used and the focus is on execution, not architecture.
-    <div class='buttons'>
-    <a href="output_.html">Function based Framework: Part 1 (|) </a>
-    </div>
-    <div style="font-size: medium"><br>Version 1.0 </div>
-    The operations are fully vectorized with the use of Dataframes instead of series with lists. The result is a working
-    model of backtesting which was done on various pairs, or all found pairs through the ADF test,
-    of cointegrated stocks in the SP 500. Parallel processing is also used to speed up operations, which was accurately
-    implemented, and parquet files are used for storage. Walk forward testing is used based upon a series of 5 tests and
-    stocks which satisfy various attributes are categorized. Also, graphs are given of greatly performing pairs in the
-    example time period. Parameter optimization will be done next, along with validation testing.
-    <div class='buttons'><a href="version_one.html">Function based, Working, Backtesting Framework </a></div>
-</div>
 </body>
 </html>

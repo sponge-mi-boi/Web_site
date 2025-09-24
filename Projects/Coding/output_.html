@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="../../te.css">
   <title>Current Setup</title>
 </head>
-<body>
-<h2 id="module-of-methods">Module of methods</h2>
+<body style="align-items: baseline">
+<h2 id="module-of-methods" style="align-self: center">Module of methods</h2>
 <ul>
 <li>The current setup is a simple module of various methods.</li>
 <li>Group of methods creates a list of stock pairs that should be tested
@@ -66,7 +66,7 @@ the same as main for all intents and purposes</li>
 </ul>
 <h2 id="code">Code</h2>
 
-<pre><code><span class='c1'> # This is the first filter that can be used in terms of determining if a stock, or in this situation, a pair of stocks, is cointegrated, from the ADF test with a p value requirement of .05
+<pre style="max-width: 70em"><code><span class='c1' style="text-wrap: auto"> # This is the first filter that can be used in terms of determining if a stock, or in this situation, a pair of stocks, is cointegrated, from the ADF test with a p value requirement of .05
 </span>
 def cointegration_filter(cur_stock):  
   
@@ -80,9 +80,9 @@ def cointegration_filter(cur_stock):
     else:  
         return -1000000  
   
-<span class='c1'> # This is the executer of the parallel processing where the joblib class, specifically pool, is used. 15 concurrent processes are being run in this situation.(Note there is essentially a splitting based on the time period being run on by the data, which is characterized by the shift parameter
+<span class='c1' style="text-wrap: auto"> # This is the executer of the parallel processing where the joblib class, specifically pool, is used. 15 concurrent processes are being run in this situation.(Note there is essentially a splitting based on the time period being run on by the data, which is characterized by the shift parameter
 </span>
-<span class='c1'> ## args is an optional argument which stores time period related information. An example would be the beta values which can be used in the beta based weighing of stocks when executing a portfolio backtest upon a given set of time period
+<span class='c1' style="text-wrap: auto"> ## args is an optional argument which stores time period related information. An example would be the beta values which can be used in the beta based weighing of stocks when executing a portfolio backtest upon a given set of time period
 </span>
 def runner(stock_pair: pd.Series, shift_parameter: int,filter_func,args= None):  
   
