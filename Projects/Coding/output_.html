@@ -66,7 +66,7 @@ the same as main for all intents and purposes</li>
 </ul>
 <h2 id="code">Code</h2>
 
-<pre style="max-width: 70em"><code><span class='c1' style="text-wrap: auto"> # This is the first filter that can be used in terms of determining if a stock, or in this situation, a pair of stocks, is cointegrated, from the ADF test with a p value requirement of .05
+<pre style="max-width: 70em"><code><span class='c1' style="text-wrap: auto;margin-bottom: 0;margin-top: 1em"> # This is the first filter that can be used in terms of determining if a stock, or in this situation, a pair of stocks, is cointegrated, from the ADF test with a p value requirement of .05
 </span>
 def cointegration_filter(cur_stock):  
   
@@ -80,9 +80,9 @@ def cointegration_filter(cur_stock):
     else:  
         return -1000000  
   
-<span class='c1' style="text-wrap: auto"> # This is the executer of the parallel processing where the joblib class, specifically pool, is used. 15 concurrent processes are being run in this situation.(Note there is essentially a splitting based on the time period being run on by the data, which is characterized by the shift parameter
+<span class='c1' style="text-wrap: auto;margin-top: 1em; margin-bottom: 2em"> # This is the executer of the parallel processing where the joblib class, specifically pool, is used. 15 concurrent processes are being run in this situation.(Note there is essentially a splitting based on the time period being run on by the data, which is characterized by the shift parameter
 </span>
-<span class='c1' style="text-wrap: auto"> ## args is an optional argument which stores time period related information. An example would be the beta values which can be used in the beta based weighing of stocks when executing a portfolio backtest upon a given set of time period
+<span class='c1' style="text-wrap: auto;margin-top: 1em; margin-bottom: 0"> ## args is an optional argument which stores time period related information. An example would be the beta values which can be used in the beta based weighing of stocks when executing a portfolio backtest upon a given set of time period
 </span>
 def runner(stock_pair: pd.Series, shift_parameter: int,filter_func,args= None):  
   
@@ -99,7 +99,7 @@ def runner(stock_pair: pd.Series, shift_parameter: int,filter_func,args= None):
   
     return pd.Series(data=[[x] for x in filt],index=filt.index)  
 
-<span class='c1'> # This handles the iteration of each of the stock pairs by time period.
+<span class='c1' style="margin-bottom: 0;margin-top: 1em"> # This handles the iteration of each of the stock pairs by time period.
 </span>
 def runner_multiple(stock_pair_list: pd.Series, shift_parameter_list: list,filter_func,args=None):  
 	
@@ -117,7 +117,7 @@ def runner_multiple(stock_pair_list: pd.Series, shift_parameter_list: list,filte
                            
 def run():
 
-	<span class='c1'> #Example pair of stock pairs and shift parameters</span>
+	<span class='c1' style="margin-bottom: 0;margin-top: 0"> # Example pair of stock pairs and shift parameters</span>
 	stock_pair_list = pd.Series([('AAPL','AMAC'),('FICO','GE')])
 	shift_parameter_list = [0,50]
 	

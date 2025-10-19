@@ -7,7 +7,7 @@
     <script src ='../../script.js'></script>
 </head>
 <body>
-<div class='column'>
+
 <h1 id="The-Quant-Testing-Framework-I-use-to-create-profitable-strategies">The Quant Testing Framework I use to create profitable strategies</h1><p>Here is my setup for creating profitable strategies in quant. The framework is quite large and still expanding, meaning that I will post each of its aspects individually, and explain how they all fit together.</p>
 <p>The modules I have created are:</p>
 <ul>
@@ -31,7 +31,7 @@
 <ul>
     <li>Module: yggdrasil.py  #Contains the class Yggdrasil<ul>
         <li>class: Yggdrasil <li>#This is the root of all my strategies and analysis. Creates a general
-            instance of a test.</li><ul>
+            instance of a test.</li>
                 <li>Instance variables:<ul>
                     <li>stock_universe: StockUniverse object which contains the list of stocks that will be used in this test</li>
                     <li>cur_strat: StrategyHelper object which sets and executes the basic framework of the given strategy in this test</li>
@@ -58,8 +58,8 @@
                     <li>__ set_title(self): Private method called upon instantiation which sets the title of the strategy if needed<br/></li>
                 </ul>
                 </li>
-            </ul>
-        </li>
+
+
         <li>free code: Saves the results of an example test run in a JSON file.<br/><ul>
             <li>The set of parameters is defined first and then the strategy is tested upon a list of variousstocks. In the given example, the set of parameters is the shift of the data and the parameters of the strategy being used, which is Mean Reversion in this case defined by two metrics.<ul>
                 <li>These are the size of the rolling data used to compute metrics like the mean, and the cutoff z-score used to enter/exit the strategy. Everything else is held constant.</li>
@@ -71,54 +71,54 @@
     </ul>
     </li>
 </ul>
-<span class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">json</span><code><code>
+<code>
+import  useful_methods
+from  market_analy  import full_stocks
+from  strategy_analy  import StockAnalyzer
+from  strategy_helper  import StrategyHelper
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">useful_methods</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">market_analy</span><span class="w"> </span><span class="kn">import</span> <span class="n">full_stocks</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">strategy_analy</span><span class="w"> </span><span class="kn">import</span> <span class="n">StockAnalyzer</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">strategy_helper</span><span class="w"> </span><span class="kn">import</span> <span class="n">StrategyHelper</span>
 
+ Yggdrasil :
+     class="fm">__init__ ( self , freq , strategy_ , custom , shift_= 0 , num_points= 500 , stock_list= class="kc">None ):
+       self.strat_list= []
+       self.cur_strat= StrategyHelper (freq , strategy_ , custom=custom , shift=shift_ , num_points=num_points )
+       self.stock_universe= StockAnalyzer (stock_list ,self.cur_strat )
+       self.cur_strat.run_method (stock_list )
+       self.analysis= None
+       self.title=self.__set_title ()
 
-<span class="k">class</span><span class="w"> </span><span class="nc">Yggdrasil</span><span class="p">:</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">freq</span><span class="p">,</span> <span class="n">strategy_</span><span class="p">,</span> <span class="n">custom</span><span class="p">,</span> <span class="n">shift_</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">num_points</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">stock_list</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">strat_list</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">cur_strat</span> <span class="o">=</span> <span class="n">StrategyHelper</span><span class="p">(</span><span class="n">freq</span><span class="p">,</span> <span class="n">strategy_</span><span class="p">,</span> <span class="n">custom</span><span class="o">=</span><span class="n">custom</span><span class="p">,</span> <span class="n">shift</span><span class="o">=</span><span class="n">shift_</span><span class="p">,</span> <span class="n">num_points</span><span class="o">=</span><span class="n">num_points</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">stock_universe</span> <span class="o">=</span> <span class="n">StockAnalyzer</span><span class="p">(</span><span class="n">stock_list</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cur_strat</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">cur_strat</span><span class="o">.</span><span class="n">run_method</span><span class="p">(</span><span class="n">stock_list</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">analysis</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__set_title</span><span class="p">()</span>
+      class="nf">__set_title ( self ):
+        title= ( 'freq: '+self.cur_strat.freq+ '_ '+ 'num of data points: '+ str ( self.cur_strat.num_points )+
+                 '_ custom: '+ str ( self.cur_strat.custom )+ '_ shift: '+ str ( self.cur_strat.shift )
+                  '_ start date: '+ str ( self.cur_strat.start )+ '_ end date: '+ str ( self.cur_strat.end )
+                 + '_ strategy:'+ str ( self.cur_strat.strategy )+ '' )
+        return title
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">__set_title</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">title</span> <span class="o">=</span> <span class="p">(</span><span class="s1">'freq: '</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">cur_strat</span><span class="o">.</span><span class="n">freq</span> <span class="o">+</span> <span class="s1">'_ '</span> <span class="o">+</span> <span class="s1">'num of data points: '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cur_strat</span><span class="o">.</span><span class="n">num_points</span><span class="p">)</span> <span class="o">+</span>
-                 <span class="s1">'_ custom: '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cur_strat</span><span class="o">.</span><span class="n">custom</span><span class="p">)</span> <span class="o">+</span> <span class="s1">'_ shift: '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cur_strat</span><span class="o">.</span><span class="n">shift</span><span class="p">)</span>
-                 <span class="o">+</span> <span class="s1">'_ start date: '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cur_strat</span><span class="o">.</span><span class="n">start</span><span class="p">)</span> <span class="o">+</span> <span class="s1">'_ end date: '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cur_strat</span><span class="o">.</span><span class="n">end</span><span class="p">)</span>
-                 <span class="o">+</span> <span class="s1">'_ strategy:'</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cur_strat</span><span class="o">.</span><span class="n">strategy</span><span class="p">)</span> <span class="o">+</span> <span class="s1">''</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">title</span>
+<span class="c1" style="margin-bottom: 0">#Generates the various parameters which can be tested in a clean manner.
+para_test= []
+for shift in range ( 1 ):
+    for roll in range ( 10 , 21 , 5 ):
+        for cutoff in range ( 11 , 13 , 1 ):
+            for stock in full_stocks [ 0 : 100 ]:
+                para_test.append ([stock , shift , roll , cutoff/ 10 ])
+</span>
+<span class="c1" >#Runs the tests for various combinations of the parameters. Only two full stock iterations are ran for brevity.
+stock_pass_test= []
+stock_pass_condition= False
+for x in para_test :
+    strategy= [ 'Mean Rev' ]+ x [ 2 : 4 ]
+    ygg= Yggdrasil ( '5m' , strategy , True , shift_=x [ 1 ], num_points= 250 , stock_list= [x [ 0 ]])
+</span>
+    <span class="c1" >#Condition for stock classification is given here to filter the backtests
+    results= [ygg.cur_strat.results [x ] for x in [ 'Profit' , 'Number of Completed Trades' ]]
+    if results [ 0 ]&gt; 0 and results [ 1 ]&gt; 30 :
+        stock_pass_test.append (ygg.cur_strat.get_params ())
+    </span>
+<span class="c1" >#Data from all the tests is stored in a JSON file for easy viewing and extraction
+with open ( 'example_data.json' , 'w' ) as pdf :
+    json.dump (stock_pass_test , pdf , indent= 2 )
+</span>
+</code>
+<h2 >Data</h2>Link to the JSON file is given: <a href="https://github.com/sponge-mi-boi/Quant-data/blob/main/example_data.json">data</a>
 
-<span class="c1"><span style="color:purple;"> #Generates the various parameters which can be tested in a clean manner.</span> </span>
-<span class="n">para_test</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">for</span> <span class="n">shift</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">roll</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">cutoff</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
-            <span class="k">for</span> <span class="n">stock</span> <span class="ow">in</span> <span class="n">full_stocks</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">100</span><span class="p">]:</span>
-                <span class="n">para_test</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">stock</span><span class="p">,</span> <span class="n">shift</span><span class="p">,</span> <span class="n">roll</span><span class="p">,</span> <span class="n">cutoff</span> <span class="o">/</span> <span class="mi">10</span><span class="p">])</span>
-
-<span class="c1" style="color:purple;">#Runs the tests for various combinations of the parameters. Only two full stock iterations are ran for brevity. </span>
-<span class="n">stock_pass_test</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="n">stock_pass_condition</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">para_test</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">100</span> <span class="o">*</span><span class="mi">2</span><span class="p">]:</span>
-    <span class="n">strategy</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'Mean Rev'</span><span class="p">]</span> <span class="o">+</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
-    <span class="n">ygg</span> <span class="o">=</span> <span class="n">Yggdrasil</span><span class="p">(</span><span class="s1">'5m'</span><span class="p">,</span> <span class="n">strategy</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="n">shift_</span><span class="o">=</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">num_points</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span> <span class="n">stock_list</span><span class="o">=</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
-
-    <span class="c1"style="color:purple;">#Condition for stock classification is given here to filter the backtests </span>
-    <span class="n">results</span> <span class="o">=</span> <span class="p">[</span><span class="n">ygg</span><span class="o">.</span><span class="n">cur_strat</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">'Profit'</span><span class="p">,</span> <span class="s1">'Number of Completed Trades'</span><span class="p">]]</span>
-    <span class="k">if</span> <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">results</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">30</span><span class="p">:</span>
-        <span class="n">stock_pass_test</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ygg</span><span class="o">.</span><span class="n">cur_strat</span><span class="o">.</span><span class="n">get_params</span><span class="p">())</span>
-
-<span class="c1"style="color:purple;">#Data from all the tests is stored in a JSON file for easy viewing and extraction </span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'example_data.json'</span><span class="p">,</span> <span class="s1">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">pdf</span><span class="p">:</span>
-    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">stock_pass_test</span><span class="p">,</span> <span class="n">pdf</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-</code></pre></div>
-<h2 >Data</h2><p>Link to the JSON file is given -> <button><a href="https://github.com/sponge-mi-boi/Quant-data/blob/main/example_data.json">data</a></button></p>
-</div>
 </body>

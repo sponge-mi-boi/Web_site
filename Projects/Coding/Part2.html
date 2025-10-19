@@ -121,7 +121,7 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">__mean_rev</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">stock_uni</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">roll_value</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span><span class="n">cutoff_value</span> <span class="o">=</span> <span class="mf">1.1</span><span class="p">):</span>
 
         
-        <span class="c1">#Data Extraction occurs first</span>
+        <span class="c1" style="margin-bottom:0">#Data Extraction occurs first</span>
         <span class="n">allocation</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">stock_uni</span><span class="p">)):</span>
             <span class="n">allocation</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">stock_uni</span><span class="p">))</span>
@@ -164,10 +164,10 @@
         <span class="n">data_compare</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
         
-        <span class="c1">#The initial investment is given</span>
+        <span class="c1" style="margin-bottom:0">#The initial investment is given</span>
         <span class="n">input_money_initial</span> <span class="o">=</span> <span class="mi">10000</span>
 
-        <span class="c1">#The strategy is set up ready to execute with the given parameters </span>
+        <span class="c1" style="margin-bottom:0">#The strategy is set up ready to execute with the given parameters </span>
         <span class="n">upper_bound</span> <span class="o">=</span> <span class="n">cutoff_value</span>
         <span class="n">lower_bound</span> <span class="o">=</span> <span class="o">-</span><span class="n">cutoff_value</span>
         <span class="n">base_data</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s1">'close'</span><span class="p">]</span>
@@ -195,7 +195,7 @@
         <span class="n">price_inde_x</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">allocation</span><span class="p">)))</span> <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">2</span><span class="p">]</span>
 
      
-        <span class="c1">#This is the execution of the strategy across the given data set</span>
+        <span class="c1" style="margin-bottom:0">#This is the execution of the strategy across the given data set</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">data_compare</span><span class="o">.</span><span class="n">index</span><span class="p">)):</span>
              <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
              <span class="n">value_sell_list</span> <span class="o">=</span> <span class="n">temp</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">sell_index</span><span class="p">]</span>
@@ -255,7 +255,7 @@
                 <span class="n">index</span><span class="o">+=</span><span class="mi">1</span>
              <span class="n">result_trades</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">result_trades</span><span class="p">)]</span> <span class="o">=</span> <span class="p">[[</span><span class="n">buy</span><span class="p">],</span> <span class="nb">sum</span><span class="p">(</span><span class="n">alloc</span><span class="p">),</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
 
-        <span class="c1">#The results of the completed simulation are stored and computed if needed </span>
+        <span class="c1" style="margin-bottom:0">#The results of the completed simulation are stored and computed if needed </span>
         <span class="k">if</span> <span class="n">trades_duration_final</span><span class="p">:</span>
             <span class="n">avg_duration</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">trades_duration_final</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
@@ -274,7 +274,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">start</span> <span class="o">=</span> <span class="n">data_compare</span><span class="p">[</span><span class="s1">'Date_Time'</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">end</span> <span class="o">=</span> <span class="n">data_compare</span><span class="p">[</span><span class="s1">'Date_Time'</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
-        <span class="c1">#The data is analyzed and certain metrics which can be used to track its performance are calculated and stored</span>
+        <span class="c1" style="margin-bottom:0">#The data is analyzed and certain metrics which can be used to track its performance are calculated and stored</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">data</span>
         <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">'Current Amount'</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">'Current Amount'</span><span class="p">]</span><span class="o">/</span><span class="n">input_money_initial</span>
         <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">'Portfolio Return'</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">'Current Amount'</span><span class="p">]</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span>
@@ -347,7 +347,7 @@
         <span class="k">for</span> <span class="n">metric</span> <span class="ow">in</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">:</span>
             <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">metric</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">metric</span><span class="p">])</span>
 
-        <span class="c1">#The resulting data of all the completed trades and the results of the performance of this strategy on the given data set are stored to this instance of a test. </span>
+        <span class="c1" style="margin-bottom:0">#The resulting data of all the completed trades and the results of the performance of this strategy on the given data set are stored to this instance of a test. </span>
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">results</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">data</span>
@@ -358,11 +358,11 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">__mean_rev</span><span class="p">(</span><span class="n">stock_uni</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 
 
-<span class="c1">#free code</span>
+<span class="c1" style="margin-bottom:0">#free code</span>
 <span class="n">ygg_ex</span> <span class="o">=</span> <span class="n">Yggdrasil</span><span class="p">(</span><span class="s1">'h'</span><span class="p">,[</span><span class="s1">'Mean Rev'</span><span class="p">,</span><span class="mi">25</span><span class="p">,</span><span class="mf">1.3</span><span class="p">],</span><span class="kc">True</span><span class="p">,</span><span class="n">stock_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'AAPL'</span><span class="p">])</span>
-<span class="n">useful_methods</span><span class="o">.</span><span class="n">format_</span><span class="p">(</span><span class="s1">'Data'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">ygg_ex</span><span class="o">.</span><span class="n">cur_strat</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>                                  <span class="c1">#A display method for convenience </span>
+<span class="n">useful_methods</span><span class="o">.</span><span class="n">format_</span><span class="p">(</span><span class="s1">'Data'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">ygg_ex</span><span class="o">.</span><span class="n">cur_strat</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>                                  <span class="c1" style="margin-bottom:0">#A display method for convenience </span>
 <span class="n">values</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">ygg_ex</span><span class="o">.</span><span class="n">cur_strat</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span><span class="n">ygg_ex</span><span class="o">.</span><span class="n">cur_strat</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span> 
-<span class="n">useful_methods</span><span class="o">.</span><span class="n">format_output</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">'Results'</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="n">values</span><span class="p">)</span>                                   <span class="c1">#Another display method for convenience</span>
+<span class="n">useful_methods</span><span class="o">.</span><span class="n">format_output</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">'Results'</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="n">values</span><span class="p">)</span>                                   <span class="c1" style="margin-bottom:0">#Another display method for convenience</span>
 </code>
 
 
@@ -386,8 +386,8 @@
 <li>['max draw', '-2.4838']</li>
 <li>['exposure pct', '84.1102']</li>
 </ol>
-<p>Data: ->
-<a href="https://github.com/sponge-mi-boi/Quant-data/blob/main/Part2_data.md">Link</a></p>
+Data:
+<a href="https://github.com/sponge-mi-boi/Quant-data/blob/main/Part2_data.md">Link</a>
 
 </body>
 </html>
