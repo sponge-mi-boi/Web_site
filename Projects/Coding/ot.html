@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>t</title>
+  <style>html {
+      color: white;
+      background-color: black;
+      font-family: Arial, sans-serif;
+  }
+  body {
+      margin: auto
+
+      flex: 1;
+      flex-direction: column;
+      max-width: 60em;
+      gap: 0;
+      align-items: center;
+      justify-content: space-between;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+  }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+        color:lightyellow''
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <script
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
+  type="text/javascript"></script>
+</head>
+<body>
+<h1 id="revised-hypothesis-and-approach">Revised Hypothesis and
+Approach</h1>
+<p>The first step is to realize I need a more precise, hypothesis.
+Therefore, my revised hypothesis, or objective, is that pairs-based,
+cointegration, testing on hourly data, will be executed, well. In this
+situation, well, means that <code>total_return_percentage</code>, will
+be greater than 0, <code>sharpe</code>, will be greater than 2, and
+<code>alpha</code>will be greater than 1. These quantities will be
+defined exactly. # Overview/Setup It is time to start<span
+class="math inline">\(\,\)</span>quantifying this process.
+Mathematically, I will<span class="math inline">\(\,\)</span> define the
+following quantities: <span
+class="math inline">\(NC{}=\{s_i\}_{i=1}^n\)</span>: the set of
+assets<span class="math inline">\(\,\)</span>in the portfolio , where
+each label<span class="math inline">\(\,i\)</span>, is an index, which
+just labels the asset,<span class="math inline">\(\,\)</span>and there
+are <span class="math inline">\(n\)</span>, total assets in the
+portfolio <span class="math inline">\(\,\)</span> This quantity can be
+indicated in total by <span class="math inline">\(NC\)</span>, where
+<span class="math inline">\(NC\)</span> stands for non-cash assets. The
+total portfolio, then, <span class="math inline">\(P\)</span>, can be
+defined as the sum of the available cash, and the sum of the non-cash
+assets. <span class="math inline">\(P = NC \cup  C\)</span> where <span
+class="math inline">\(C=\{c\}\)</span>, is just the cash of the
+portfolio, represented by a symbol. With each asset <span
+class="math inline">\(\,s_i\)</span>, there is an associated time
+series, which is essentially the price of the asset as a function of
+time <span class="math inline">\(p_i(t),\)</span> where<span
+class="math inline">\(\,t\in \mathcal{R}\)</span>. Of course, <span
+class="math inline">\(t\)</span> is usually taken to be positive, unless
+the reference point is chosen, such that previous values are looked at
+This is exactly represented as the Cartesian product of <span
+class="math inline">\(\,\)</span><span
+class="math inline">\(p_i{}:\)</span> <span
+class="math inline">\(\{s_i\}\times\,\mathcal{R}\Rightarrow
+\mathcal{R}^{}\)</span>, where there is a price function for each asset.
+Then, also there is a ‘quantity’ function, which is essentially the
+number of the discrete chunks of the asset <span
+class="math inline">\(\,\)</span>which is being held<span
+class="math inline">\(\,\)</span>in the portfolio,<span
+class="math inline">\(\,q_i(t){}\,\,\)</span> Therefore, the total value
+of an asset in the portfolio is then defined as <span
+class="math inline">\({}v_i(t{})\)</span>=<span
+class="math inline">\(q_i(t)*p_i(t{}){}\)</span> The value of<span
+class="math inline">\(\,\)</span>a<span
+class="math inline">\(\,\)</span>portfolio<span
+class="math inline">\(\,v(P{}\)</span>)=<span
+class="math inline">\(v(NC)+v{}(C)=\sum_{i=1}^nv_i(t{}\)</span>) + <span
+class="math inline">\(c(t{})\)</span> where <span
+class="math inline">\(c(t){}{}\)</span> is the amount of liquid cash in
+the portfolio as a function of time The initial value of a portfolio is
+usually just the amount of initial cash, <span
+class="math inline">\(c_i\)</span>{<span
+class="math inline">\({}\)</span>which is allocated to be able to used
+to hold positions, meaning <span
+class="math inline">\(\,v_P(t)=c(t_i)=c_i\)</span>,</p>
+<p>Consider entering a long position<span
+class="math inline">\(\,\)</span>at time <span
+class="math inline">\({}t_a\)</span>, where <span
+class="math inline">\(q_i\)</span>, shares are bought of stock <span
+class="math inline">\(i\)</span>, with price <span
+class="math inline">\(p_i(t_a)\)</span>, meaning its value at that time
+is <span class="math inline">\(v(t_a)\)</span>. This means <span
+class="math inline">\(c(t_a)=c_i-q(t_a)p(t_a),v(t_a)=0+q(t_a)p(t_a)\)</span>,
+but the total value of the portfolio<span
+class="math inline">\(\,v_P\)</span> would remain unchanged. For a short
+position, the situation would be exactly the opposite <span
+class="math inline">\(c(t_a)=c_i+q(t_a)p(t_a),v(t_a)=0-q(t_a)p(t_a)\)</span>,
+where by custom, usually the quantities are taken to be negative for
+short positions.</p>
+<p>The gist of the approach is to find a relationship such that the
+value of <span class="math inline">\(p_i(t+\delta t)\)</span>, is known
+at time <span class="math inline">\(t\)</span>, given that its
+known<span class="math inline">\(\,\)</span> for all times <span
+class="math inline">\(0\leq t&#39;\leq t\)</span>. Markets are usually
+modeled to be random, meaning that each <span
+class="math inline">\(p_i(t)\)</span>, is actually a random variable,
+meaning it can take values from any set of values in <span
+class="math inline">\(\mathcal{R}^{+}\)</span>, with the probabilities
+being described<span class="math inline">\(\,\)</span>by some
+probability measure <span class="math inline">\(dp\)</span>. What this
+means is that each stock can have a price, given by <span
+class="math inline">\(p\)</span>, with the probability <span
+class="math inline">\(dp\)</span>. This means that the sum of all
+probabilities should equal <span class="math inline">\(1\)</span>,
+meaning <span class="math inline">\(\int_{p\in \mathcal{R}
+}{d}p=1\)</span>, and the expected value of <span
+class="math inline">\(p\)</span>, in that time slice <span
+class="math inline">\(t\)</span>, would be <span
+class="math inline">\(\int_{p\in \mathcal{R} \,}{d}p\,p=E(p)\)</span>.
+Note that this is independent of <span class="math inline">\(t\)</span>
+in the sense that it is for a fixed time slice, and there is a whole
+family of probability measures, and distributions, for each time slice
+<span class="math inline">\(t\)</span>. A probability distribution would
+be the expression of <span class="math inline">\(p\)</span>, in terms of
+a subset, or the entirety of the real numbers. This means <span
+class="math inline">\(p\Rightarrow p(x),x\in \mathcal{R
+},dp=p_{pd}(x)dx\)</span>, where the <span
+class="math inline">\(p_{pd}(x)\)</span>, is the probability
+distribution function, or the probability density function, of <span
+class="math inline">\(p\)</span>.</p>
+<p>Stock prices are usually represented to be Gaussian, meaning
+that<span
+class="math inline">\(\,p_{pd}(x)=f(x)=\frac{1}{\sqrt{2\pi\sigma
+{}}}e^{-\frac{(x-\mu)^2}{2\sigma }}\)</span><br />
+Then, <span class="math inline">\(E(p){} = \int{}pf(x)dx=\int
+xf(x)dx\)</span>, <span
+class="math inline">\(V(p)=\int{f(p)dp(p-E(p))^2\\ {}}\)</span> .</p>
+<p>For the value of the portfolio, <span
+class="math inline">\(v_P(t)\)</span>, over time, the average of it is
+<span class="math inline">\(\mu=E_t(v_P)=\int_{t_i } ^{t_f } dtv_P(t)
+,\)</span> over the time period <span
+class="math inline">\([t_i,t_f]\)</span>. The variance<span
+class="math inline">\(\,V_t(v_P)=\int_{t_i } ^{t_f } dt(v_P(t)
+-E_t(v_P(t)))^2 =\sigma ^2\)</span> is defined for the time period <span
+class="math inline">\([t_i,t_f \ ]\)</span> The most common, or
+frequent, metric that is used to assess the performance of the portfolio
+across time is the Sharpe ratio, <span
+class="math inline">\(SR=\frac{\mu}{\sigma }\)</span>, which is also
+defined for the time period <span class="math inline">\([t_i,t_f \
+]\)</span> The total return of the portfolio is <span
+class="math inline">\(TR=\frac{v_P(t_f )\ - v_P(t_i) }{v_P(t_i )
+}\)</span>, for the time period <span
+class="math inline">\([t_i,t_f]\)</span></p>
+<p>The portfolio<span class="math inline">\(\,\)</span>’s performance is
+always compared to some benchmark asset<span
+class="math inline">\({}\)</span>, usually the <span
+class="math inline">\(SP\)</span> 500, meaning <span
+class="math inline">\(v_B(t)\)</span>, where all the initial cash is
+invested into <span class="math inline">\(\ B\)</span>, and held until
+the end of the trading period, meaning from <span
+class="math inline">\(t_i {}\ {}\)</span> to <span
+class="math inline">\(t_f\)</span>.</p>
+<p>Usually returns are used in comparing time series, meaning <span
+class="math inline">\(r_P(t)\)</span>, is compared to <span
+class="math inline">\(r_B(t )\,\)</span>. The idea is that usually the
+market is extremely related to portfolio, since the portfolio, is just a
+linear combination of a subset of the assets which make up the market.
+Therefore, the estimate is modeled as <span
+class="math inline">\(r_p(t)=\beta_p r_B(t)+\epsilon (t)\)</span>, where
+the <span class="math inline">\(\epsilon (t)\)</span>, is some random
+error term. This comes to how exactly the portfolio is constructed <span
+class="math inline">\({}\)</span>, and if <span
+class="math inline">\(\,\)</span>it is possible to get an net excess
+return<span class="math inline">\(\,\)</span>, such that the linear
+relationship is actually, <span class="math inline">\(r_p(t)=\beta_p
+r_B(t)+\epsilon (t) + \alpha ,\)</span> where <span
+class="math inline">\(\alpha ,\)</span> is the excess return A portfolio
+is beta-neutral <span class="math inline">\(\beta _P=0\)</span>, since
+this implies <span class="math inline">\(E_t(r_p(t))=E(\epsilon (t) ) +
+E(\alpha)=\alpha  \\.\)</span> Linearity implies that <span
+class="math inline">\(\sum_i\beta _i=\beta _P=0\)</span>, where <span
+class="math inline">\(\beta _i\)</span>, is the beta of the linear
+modeled relationship between <span class="math inline">\(s_i,B\)</span>.
+The covariance of two time series is defined as <span
+class="math inline">\(\,Cov_t(v_j,v_i)=\int_{t_i } ^{t_f } dt(v_i(t)
+-E_t(v_i(t)))(v_j(t) -E_t(v_j(t))) =\sigma _{ji}\)</span> defined for
+the time period <span class="math inline">\([t_i,t_j]\)</span>. Note
+<span class="math inline">\(Cov_t(v_i,v_i)=V_t(v_i)\)</span>,
+always.</p>
+<p>A stochastic process, or a time series, is stationary if <span
+class="math inline">\(E(v_P(t))=\mu(t)=\mu\)</span>, meaning its mean is
+constant in time. <span class="math inline">\(V(v_p(t))=\sigma
+(t)^2=\sigma ^2\)</span>, meaning its variance is constant in time.
+<span class="math inline">\(Cov(v_P(t) ,v_P(t+\delta t) = c(t,\delta
+t)=c(\delta t ) ,\forall \delta t\in  [0,t_b-t_a ] ,\)</span></p>
+<p>For two stocks, <span
+class="math inline">\(v_P(t)=v_1(t)+v_2(t)+c(t)=q_1(t)p_1(t)+q_2(t)p_2(t)+c(t\
+)\)</span><br />
+<span class="math inline">\(\beta _P=\beta _1(t)+\beta _2(t)=0\)</span>.
+Defining the beta for each of the prices, returns series, <span
+class="math inline">\(\ q_1(t)\beta _1(t)_p + q_2(t)\beta
+_2(t)_p=0\Rightarrow q_1(t)=-q_2(t)\frac{\beta _2(t)_p }{\beta _1(t)_p}
+{}\)</span>. If the shares of each stock are chosen with this
+proportion, then the expected returns of the portfolio will be exactly
+<span class="math inline">\(\alpha ,\)</span> the excess.</p>
+<p>The cointegration is defined as follows: <span
+class="math inline">\(p_i(t)=\beta _{ij}p_j(t)+\epsilon (t)\)</span>, if
+they have a linear relationship, meaning the Engle-Granger test has to
+return an alternative hypothesis. This essentially comes to, a test on
+if <span class="math inline">\(\epsilon (t)\)</span>, is<span
+class="math inline">\({}\)</span> basically stationary. #
+Data/Implementation Hourly data of the closing prices of the stocks in
+the <span class="math inline">\(SP\)</span> 500 which are<span
+class="math inline">\(\,\)</span>not <span
+class="math inline">\(NA\)</span>.</p>
+<p>These are all the stocks in the SP 500, or their symbols more
+specifically</p>
+<pre><code>stock_list = [&#39;A&#39;,...]</code></pre>
+<p>The data can be obtained from yahoo finance</p>
+<pre><code>import yfinance 
+df_hr = yfinance.download(stock_list,period=&#39;max&#39;,interval=&#39;1h&#39;)[&#39;Close&#39;]</code></pre>
+<p>Filtering which stocks are not <span
+class="math inline">\(NA\)</span> for more than 10 data points, just to
+get accurate results,<span class="math inline">\(\,\)</span></p>
+<pre><code>stocks_not = (df_hr.isna().sum() &gt; 10)
+stocks_not_sym = stocks_not[stocks_not].index
+df_hr = df_hr.drop(columns=stocks_not_sym)</code></pre>
+<p>This data can be stored<span class="math inline">\(\,\)</span>in a
+parquet<span class="math inline">\(\,\)</span>file</p>
+<pre><code>df_hr.to_parquet(&#39;Close_h.parquet&#39;)</code></pre>
+<p>There will be a total of roughly 3400 closing data prices. If the
+testing period is <span class="math inline">\(500\)</span> data points,
+there are roughly <span class="math inline">\(6\)</span> back testing
+periods It is seemingly plausible to define a pair of stocks as being
+cointegrated, if they are cointegrated across each of these back testing
+periods.</p>
+<p>To describe the general process more accurately, if a backtesting
+period has <span class="math inline">\(5/8\)</span> of all
+testing/training points , 2/8 of all the validating data points, and 1/8
+of all testing points, meaning <span class="math inline">\(100\)</span>,
+in this situation, the strategy should be valid at least in this
+timeframe. This will correspond to roughly 100/6, trading days, which
+seems reasonable.</p>
+<p>The process will be implemented as before, with the use of the
+methods of <code>runner_multiple</code> for separating the time periods,
+<code>runner</code>, for the parallelism, <code>x_filter</code>, for the
+cointegration filter.</p>
+<p>Note the characterization of each of the time periods, by where it
+starts relative to the start of the data, meaning multiples of 500</p>
+<pre><code>def runner(stock_pair, shift_parameter:int, filter_func,inputs=None,outputs=None,*args):  
+  
+parameters = args  
+  
+if inputs:  
+  
+    args = stock_pair[[x for x in stock_pair.columns if (str(shift_parameter) + inputs[0]) == x]]  
+    args = args.squeeze(1)  
+    args.index = [tuple(x) for x in args.index]  
+  
+    p_list = [[x[0],x[1],shift_parameter,args[x]] + list(parameters) for x in stock_pair.index]  
+  
+else:  
+    p_list = [[x[0], x[1], shift_parameter] + list(parameters) for x in stock_pair.index]  
+  
+with Pool(processes=15) as pool:  
+    filter_results = pool.map(filter_func, p_list)  
+filter_results = np.array(filter_results)  
+col = outputs  
+  
+val = [str(shift_parameter) +  &#39; &#39;  + col[x] for x in range(len(col))]  
+  
+series_coint = pd.DataFrame(index=stock_pair.index,data= filter_results,columns=val)  
+series_coint = series_coint[series_coint != 0].dropna(axis=0)  
+  
+return pd.concat([series_coint,stock_pair],axis=1,join=&#39;outer&#39;).dropna()
+
+def runner_multiple(stock_pair_list, shift_parameter_list, filter_func, *args):  
+    inner = [&#39; correlation&#39;]  
+    outer = [&#39;Sharpe Ratio&#39;,&#39;Total Return [%]&#39;,&#39;Alpha&#39;]  
+  
+    if len(shift_parameter_list) == 1:  
+        return runner(stock_pair_list, shift_parameter_list[0], filter_func, inner, outer,*args)  
+    return runner_multiple(runner(stock_pair_list, shift_parameter_list[0], filter_func,inner,outer,*args),shift_parameter_list[1:],  
+                           filter_func,*args)
+                           
+def cointegration_filter(cur_stock):  
+
+    cur_pair=get_time_period(list(cur_stock[0:2]), custom_data=True, num_data_points=500,shift=int(cur_stock[2])+1)  
+
+    model = m.OLS(cur_pair[cur_stock[0]], m.add_constant(cur_pair[cur_stock[1]])).fit()  
+    resudials = model.resid  
+    adf_result = adfuller(resudials)  
+    arr = np.zeros(2)  
+    if adf_result[1] &lt; .050000 + .0000000001:  
+  
+        arr = np.array([model.params.iloc[1],adf_result[1]])
+    return arr                           </code></pre>
+<p>The code which executes all these is</p>
+<pre><code>def run():  
+    full_data = pd.read_parquet(&#39;Close_h.parquet&#39;)
+    shape =full_data().shape  
+    full_stock_list = pd.read_parquet(&#39;Data/Prices/C_h_max.parquet&#39;).columns  
+    b_test_size = 500  
+    parameters = [x * b_test_size for x in list(range(int(shape[0]/b_test_size) - 1))]  
+
+    outer = [&#39;Beta&#39;,&#39;P&#39;] 
+    stock_pair = [(x,full_stock_list[y]) for x in full_stock_list for y in range(list(full_stock_list).index(x) + 1,len(full_stock_list) )]     
+    inner = None  
+  
+    runner_multiple(pd.DataFrame(index=stock_pair),parameters,cointegration_filter,inner,outer,&#39;h&#39;).to_parquet(&#39;Coint_h_.parquet&#39;)</code></pre>
+<p>For signal generation, the<span class="math inline">\(\,ADF\)</span>
+test will be executed on the residuals of the pairs of the stocks, for
+each time period, meaning there will be a total of p-values, each of
+which must be less than <span class="math inline">\(\,\)</span> .05 The
+stocks which have this for all time periods will be returned, with <span
+class="math inline">\(p-\)</span>values, and <span
+class="math inline">\(\beta {}\)</span>, of those linear
+relationship</p>
+<h1 id="analysis-of-results">Analysis of Results</h1>
+<p>The results are</p>
+<pre><code>              1000 Beta    1000 P  500 Beta     500 P    0 Beta       0 P
+[AIG, FTNT]   -0.083102  0.047680 -0.284665  0.017259  0.257739  0.039461
+[AME, XYL]     0.726617  0.046429 -0.533354  0.034288  0.579746  0.006538
+[APO, HWM]    -0.411172  0.015298  0.097011  0.006966  1.199704  0.000872
+[BDX, CAH]     0.135149  0.046288  0.214275  0.048949 -0.384267  0.000344
+[BDX, CBRE]    0.060702  0.049266  0.379405  0.015167  0.055965  0.000334
+[BDX, CDNS]   -0.121985  0.015403  0.262596  0.024705 -0.044974  0.005623
+[BDX, CPRT]   -0.154714  0.046403  0.181982  0.048639 -0.264519  0.006679
+[BDX, DHI]     0.063386  0.047875  0.363210  0.040529  0.011405  0.000897
+[BDX, EIX]     0.125288  0.042882 -0.195688  0.035605  0.039419  0.000868
+[BDX, EW]     -0.058409  0.018648  0.309808  0.046106  0.047884  0.000379
+[BDX, HLT]    -0.195437  0.041674  0.565638  0.005037 -0.008447  0.007146
+[BDX, LIN]     0.294134  0.046631  0.331551  0.041965 -0.043177  0.004620
+[BDX, MAR]    -0.158159  0.030317  0.475997  0.039473  0.000157  0.001231
+[BDX, MGM]    -0.103435  0.011550  0.310071  0.025108  0.070420  0.000277
+[BDX, ORLY]    0.125403  0.046683  0.251336  0.038608 -0.091899  0.001540
+[BDX, PTC]    -0.264898  0.020838  0.455175  0.018323  0.002720  0.001169
+[BDX, SNA]     0.379158  0.038147  0.342321  0.021637 -0.088651  0.001608
+[BDX, SWK]     0.107498  0.041371  0.388762  0.012328 -0.007670  0.001304
+[BDX, WY]      0.253453  0.037636  0.254308  0.031156  0.121255  0.000231
+[BR, JNJ]      0.555380  0.032972  0.369620  0.016312  1.497904  0.038210
+[BR, LH]       0.473417  0.034636  0.366693  0.005316  1.372902  0.007034
+[CAH, KDP]     1.362023  0.049249 -0.883024  0.027570 -0.161966  0.018422
+[CARR, ESS]    1.205232  0.011339  1.431153  0.018837  0.586101  0.004010
+[CZR, IBKR]    0.537455  0.007325 -1.310287  0.046855 -0.222065  0.034051
+[CZR, KDP]    -0.139386  0.030781 -1.180052  0.042852  1.208031  0.018901
+[CZR, ORLY]   -0.092348  0.025337  1.434448  0.045476 -0.490495  0.034259
+[CZR, PCG]    -0.139136  0.031334 -1.552383  0.047963  0.672767  0.035189
+[CZR, ROK]     0.661486  0.046493  2.302104  0.033505  0.351829  0.039953
+[D, DGX]       1.207393  0.025756  1.035669  0.000387  0.652909  0.008598
+[D, PM]        0.663087  0.008645  1.025006  0.035694  1.053789  0.045147
+[DLR, MPC]    -0.516878  0.001527 -0.099889  0.006386  0.502615  0.040538
+[ELV, SYK]     0.354081  0.020848 -0.687293  0.025601  0.384177  0.028553
+[HUBB, VLO]   -0.218121  0.002736  0.451207  0.026030  1.226155  0.038493
+[ISRG, REGN]   0.892592  0.008572  0.553883  0.006981  1.363003  0.017960
+[KMI, NI]      0.489898  0.017513  1.013257  0.023299  1.071053  0.008799
+[LII, REGN]    0.661044  0.023640  0.426604  0.027499  0.447949  0.031363
+[LII, ZBRA]    0.759033  0.029653  0.325289  0.040034  0.461861  0.005646
+</code></pre>
+<p>These are the ones which are cointegrated across 3 of the 5 time
+periods. It seems there are none which are cointegrated across all 5
+time periods. This could be due to regime shifts. Or, at the least,
+overall different market conditions.</p>
+<p>Portfolios are simulated, with a roll forward of 200, and 300, data
+points. The stocks, which are cointegrate The parameters of the roll,
+and the cutoff z-score, are triggers, which are triggers used to
+enter/exit pos The metrics of <code>total_return_percentage</code> &gt;
+0, <code>Sharpe</code> Rolling forward, with a validation period, to
+determine the mean reversion parameters, was done with the following
+code</p>
+<pre><code>def objective(trial:optuna.trial.Trial):  
+  
+    shape = pd.read_parquet(&#39;Data/Prices/C_h_max.parquet&#39;).shape  
+    b_test_size = 500  
+    parameters = [x * b_test_size for x in list(range(int(shape[0]/b_test_size) - 1))][0:5]  
+  
+    arr = pd.read_parquet(&#39;coint.parquet&#39;)  
+  
+    arr.index = [tuple(x) for x in arr.index]  
+    arr = arr[[x for x in arr.columns if &#39;Beta&#39; in x]]  
+    inner = [&#39; Beta&#39;]  
+  
+    outer = [&#39;Sharpe Ratio&#39;,&#39;Total Return [%]&#39;,&#39;Alpha&#39;]  
+  
+  
+    z_threshold = trial.suggest_float(&#39;z_threshold&#39;, 1.2, 1.9)  
+    roll = trial.suggest_int(&#39;roll&#39;,20,50,step=5)  
+    results = runner_multiple(arr, [0,500,1000], port_sim,inner,outer,&#39;h&#39;,z_threshold, roll, )  
+  
+    results = results[[x for x in list(results.columns) if &#39;Total Return&#39; in x]].mean(axis=1).sum()  
+  
+    return results</code></pre>
+<p>The results are (only a sample is shown)</p>
+<pre><code>       value  params_roll  params_z_threshold
+3  58.262771           45            1.140969
+0  56.390493           45            1.199639
+4  54.469744           35            1.251505
+5  54.280807           50            1.161072
+1  53.661921           40            1.235526
+7  53.661921           40            1.232752
+8  53.094989           50            1.269552
+9  52.923594           50            1.294377
+6  52.495792           50            1.287840
+2  45.287221           40            1.182545</code></pre>
+<p>The simulation of the portfolio, based on custom code, gave the
+results below The best stocks by total return were</p>
+<pre><code>
+1000 Sharpe Ratio  1000 Total Return [%]  1000 Alpha  500 Sharpe Ratio  500 Total Return [%]   500 Alpha  0 Sharpe Ratio  0 Total Return [%]    0 Alpha  1000 Beta  500 Beta    0 Beta
+(LII, ZBRA)           1.611765               0.713498    0.122776          5.045619              2.339839    0.451484        6.113495            4.683680   1.352321   0.537455 -1.310287 -0.222065
+(CZR, ROK)            2.975080               3.481201    0.872476          9.472084              4.546082    1.236299        2.131693            0.856918   0.109566  -0.139386 -1.180052  1.208031
+(ELV, SYK)            3.536863               3.126990    0.742342          9.563635              4.451920    1.221365        2.146127            0.856840   0.090308  -0.139136 -1.552383  0.672767
+(CZR, KDP)            1.684640               2.946003    1.039572          6.384076             11.039806    4.882317        7.506912           24.010073  48.755809   0.661486  2.302104  0.351829
+(CZR, PCG)            1.354914               4.814620    4.674047          3.403989             11.006988    8.085121        1.759185            5.525991   2.749191   0.354081 -0.687293  0.384177
+(CZR, IBKR)           4.283332               1.136713    0.226230          2.326260              0.282280    0.051063        4.817141            0.475679   0.086839   0.489898  1.013257  1.071053
+(KMI, NI)             5.627234              22.327100   41.515242          3.737291             23.853729  124.276119        1.258513            3.845521   1.555360   0.759033  0.325289  0.461861
+</code></pre>
+
+
+</body>
+</html>
