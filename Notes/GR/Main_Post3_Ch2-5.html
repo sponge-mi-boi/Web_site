@@ -5,7 +5,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>1</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 
-    <link rel="stylesheet" href="../../te.css">
+    <link rel="stylesheet" href="../../style.css">
     <script src="../../marked.min.js"></script>
     <script src ='../../script.js'></script>
     <!-- Load mathjax -->
@@ -43,20 +43,14 @@
     </script>
     <!-- End of mathjax configuration -->
 <body class="notes">
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=5b7b1496-aa9e-4889-bb54-8f14278b2abd">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Ch-2">The metric in general<a class="anchor-link" href="#Ch-2"></a></h1><h2 id="A-Closer-Look-at-the-Metric">A Closer Look at the Metric<a class="anchor-link" href="#A-Closer-Look-at-the-Metric"></a></h2><p>$g_{uv} = (1,-1,-1,-1)$ is the metric of Lorentzian spacetime. This is a measure of distance on this spacetime, as was indicated in the previous section. Consider the magnitude of the velocity vector of a particle traveling in this spacetime. The particle will be traveling on a path that is essentially a curve, or 1 dimensional. Therefore, like was done before with the geodesic equation, it can be defined by a parameter $\lambda$. (Note $r$ was used before, but of course what the parameter is called does not matter). If the path this particle takes in spacetime is $x(\lambda)$, then the velocity vector of the particle is $\dot{x} = v = \frac{dx}{d\lambda}$, whose magnitude defined by a metric $g$ is $v^2 = g_{uv}\frac{dx^u}{d\lambda}\frac{dx^v}{d\lambda}$. Note that given the Lorentzian spacetime metric $g_{uv} = \eta_{uv}$, then the magnitude of the velocity is ${(\frac{dx^0}{d\lambda})}^2 - {(\frac{dx^1}{d\lambda})}^2 - {(\frac{dx^2}{d\lambda})}^2 - {(\frac{dx^3}{d\lambda})}^2$. Note that unlike in Euclidean space, the magnitudes of vectors in Lorentzian spacetime can be negative.</p>
+<h1 id="Ch-2">The metric in general</h1><h2 id="A-Closer-Look-at-the-Metric">A Closer Look at the Metric</h2><p>$g_{uv} = (1,-1,-1,-1)$ is the metric of Lorentzian spacetime. This is a measure of distance on this spacetime, as was indicated in the previous section. Consider the magnitude of the velocity vector of a particle traveling in this spacetime. The particle will be traveling on a path that is essentially a curve, or 1 dimensional. Therefore, like was done before with the geodesic equation, it can be defined by a parameter $\lambda$. (Note $r$ was used before, but of course what the parameter is called does not matter). If the path this particle takes in spacetime is $x(\lambda)$, then the velocity vector of the particle is $\dot{x} = v = \frac{dx}{d\lambda}$, whose magnitude defined by a metric $g$ is $v^2 = g_{uv}\frac{dx^u}{d\lambda}\frac{dx^v}{d\lambda}$. Note that given the Lorentzian spacetime metric $g_{uv} = \eta_{uv}$, then the magnitude of the velocity is ${(\frac{dx^0}{d\lambda})}^2 - {(\frac{dx^1}{d\lambda})}^2 - {(\frac{dx^2}{d\lambda})}^2 - {(\frac{dx^3}{d\lambda})}^2$. Note that unlike in Euclidean space, the magnitudes of vectors in Lorentzian spacetime can be negative.</p>
 <p>In fact, it is possible to classify the vectors in Lorentzian spacetime by the possible magnitudes of their vectors. A vector $v$ is called timelike if $v^2 &gt; 0 \Rightarrow |{v^0}| &gt; |{v^r}|$ where $(v^r)^2 = (v^1)^2 + (v^2)^2 + (v^3)^2$, spacelike if $v^2 &lt; 0 \Rightarrow |{v^0}| &lt; |{v^r}|$, and lightlike if $v^2 = 0 \Rightarrow |{v^0}| = |{v^r}|$. This does not seem to make physical sense, but it actually does not fully have to. Recalling special relativity, the fastest a particle can travel is $c$. Then, on a graph of spacetime with the $ct$ axis on the vertical and the $r$ axis on the horizontal, it is not possible for a physical particle to travel in the part of spacetime with slope less than $c$. This allowed bounded space is called the light cone because for two spatial dimensions, it does form a cone. (In 3 spatial dimensions however, it forms a hyperbolid). Now, consider the set of all possible Lorentz transformations $\mathcal{L}$ seemingly defined by $ \mathcal{L}\quad  =? \quad Span\{L(x^1),L(x^2),L(x^3)\}$ where $L(x^i)$ describes a Lorentz transformation in the $x^i$ direction. How is the set of all vectors in this spacetime $V$ related to $\mathcal{L}$?</p>
 <p>Recall that Lorentz transformations are merely transformations between coordinate frames $L| x \rightarrow  x' = L(x)$ . The defining property of these transformations which ensures that all laws of physics are the same is that $g_{u'v'}x^{u'}x^{v'} = g_{uv}x^ux^v$ for any vector $x \in V$. A question arises then how does one define the transformation of a tensor? A tensor is just the tensor product of multiple vectors and /or their duals, meaning that each vector just transforms independently. In this case,</p>
 <p>$g = g_{uv}dx^udx^v \rightarrow g' = g'_{u'v'} {dx}^{u'}{dx}^{v'} = g'_{u'v'}L(x^u)L(x^v) = g'_{u'v'}L^{u'}_uL^{v'}_vdx^udx^v$. The $x'$ coordinates are just a different set of basis vectors, but recall that the defintion of a vector is invariant of the coordinates it is defined in, $g = g_{u'v'}dx^{u'}dx^{v'} = g_{uv}dx^udx^v $. $g$ is definitionally invaraint under $L$, meaning $g' = g \Rightarrow  g'_{u'v'}L^{u'}_uL^{v'}_vdx^udx^v = g_{uv}dx^udx^v \Rightarrow g'_{u'v'}L^{u'}_uL^{v'}_v = g_{uv} $. This defines the transformation law for the metric tensor.</p>
 <p>Now, consider the parity transformation $P|x = (x^0,x^i) \rightarrow x' = P(x) = (x^0,-x^i)$. This inverts the spatial part of vectors, but because the metric is $(x^0)^2 -(x^i)^2$, it is invariant. This means that parity must be considered as a Lorentz transform. Similarly, time reversal $T|x = (x^0,x^i) \rightarrow x' = T(x) = (-x^0,x^i)$ is also a Lorentz transformation.
 These are discrete transformations and are not connected to the rest of the Lorentz transformations in the sense that no combination of $L(x^i)$ can replicate what $P,T$ can do. Note that even if the velocity of a reference frame goes in the opposite direction, time and space do not ever change signs. Then, $\mathcal{L}$ can be partitioned as $\mathcal{L} = Span\{L(x^i)\} \oplus P \oplus T.$ Note this implies 4 distinct partitions which are disconnected $ Span\{L(x^i)\}, Span\{P L(x^i)\}, Span\{T L(x^i)\}, Span\{PT L(x^i)\}$. An element in any one of these groups cannot be represented by an element from any of the other three groups from just an element of those 3 groups. This is what it means to say that the set of all Lorentz transformations, also called the Lorentz group, is disconnected.</p>
 <p>For simplicity, consider the rest frame of a particle. All physical particles move on time-like paths and their velocity vectors are time-like. This is easily seen in their rest frame $(x^0,x^i) = (c\tau,0)$ where $\tau$ is the proper time of the particle. The magnitude of this vector is then $x^2 = c^2 \tau^2$, which is positive. Since the metric is invariant, in any other frame $x'$, $ c^2 \tau^2 = (ct)^2 -(x^i)^2$. Therefore, it is natural to use $\tau$ to be the parameter for time-like curves since each point on such a curve can always be described by $\tau$.</p>
-<h2 id="Looking-at-the-Christoffel-Symbols-Closer">Looking at the Christoffel Symbols Closer<a class="anchor-link" href="#Looking-at-the-Christoffel-Symbols-Closer"></a></h2><p>An expression for the Christoffel symbols would be nice for calculations. From earlier,
+<h2 id="Looking-at-the-Christoffel-Symbols-Closer">Looking at the Christoffel Symbols Closer</h2><p>An expression for the Christoffel symbols would be nice for calculations. From earlier,
 $\Gamma^\sigma _{\gamma \alpha} = \frac{1}{2} g^{\sigma v}(-\partial_v(g_{\alpha\gamma})  + \partial_\gamma (g_{v\alpha}) + \partial_\alpha (g_{v\gamma}))$.
 Consider the contraction, meaning matrix multiplication if the tensors are represented as matrices, $g_{uv} \Gamma^v_{\gamma \alpha} = g_{uv}\frac{1}{2} g^{v \eta}(-\partial_\eta(g_{\alpha\gamma})  + \partial_\gamma (g_{\eta\alpha}) + \partial_\alpha (g_{\eta\gamma}))$
 $= \frac{1}{2}\delta^\eta_u(-\partial_\eta(g_{\alpha\gamma})  + \partial_\gamma (g_{\eta\alpha}) + \partial_\alpha (g_{\eta\gamma})) = \frac{1}{2}(-\partial_u(g_{\alpha\gamma})  + \partial_\gamma (g_{u\alpha}) + \partial_\alpha (g_{u\gamma})$.</p>
@@ -65,21 +59,6 @@ $= \frac{1}{2}\delta^\eta_u(-\partial_\eta(g_{\alpha\gamma})  + \partial_\gamma 
 <p>Therefore, to calculate the partial derivative of $\det{g}$ with respect to a spacetime coordinate $\frac{\partial \det{g}}{\partial x^\beta } = \partial_\beta \det(g) = \partial_\beta (g_{u\gamma})\partial_{g_{ u \gamma}} \det(g) $ by the chain rule. From above, $\partial_\beta\det{g} = \partial_\beta (g_{u\gamma})\det(g) g^{u\gamma}   $
 $=\det(g)g^{u\gamma}(g_{uv} \Gamma^v_{\gamma \beta} + g_{\gamma v} \Gamma^v_{u \beta}) = \det(g)(\delta^\gamma_v\Gamma^v_{\gamma \beta} + \delta^u_v\Gamma^v_{u \beta}) = 2 \det(g) \Gamma^u_{u\beta}$.</p>
 <p>Finally, $\frac{\partial \ln((-g)^{\frac{1}{2}})}{\partial x^\beta} = \frac{1}{\det(-g)^{\frac{1}{2}}}\frac{1}{2(\det(-g))^{\frac{1}{2}}}\partial_\beta{\det(g)} = \Gamma^u_{u\beta}$. Essentially, the change in the determinant of the metric tensor in a coordinate direction is directly proportional to the (self-contracted) Christoffel symbol associated with that direction. This is a really useful formula which will be used in many situations.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7f84b60d-8b3d-4a75-b694-9a11279a010e">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-</div>
-</div>
-</div>
-</div>
-<main>
-</main>
+
 </body>
 </html>

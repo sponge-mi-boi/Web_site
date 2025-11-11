@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <title>Quant Finance</title>
-    <link rel="stylesheet" href="../../te.css">
+    <link rel="stylesheet" href="../../style.css">
     <script src="../../marked.min.js"></script>
     <script src ='../../script.js'></script>
 </head>
@@ -71,15 +71,15 @@
     </ul>
     </li>
 </ul>
-<code>
+<pre><code>
 import  useful_methods
 from  market_analy  import full_stocks
 from  strategy_analy  import StockAnalyzer
 from  strategy_helper  import StrategyHelper
 
 
- Yggdrasil :
-     class="fm">__init__ ( self , freq , strategy_ , custom , shift_= 0 , num_points= 500 , stock_list= class="kc">None ):
+ class Yggdrasil :
+      def __init__ ( self , freq , strategy_ , custom , shift_= 0 , num_points= 500 , stock_list= class="kc">None ):
        self.strat_list= []
        self.cur_strat= StrategyHelper (freq , strategy_ , custom=custom , shift=shift_ , num_points=num_points )
        self.stock_universe= StockAnalyzer (stock_list ,self.cur_strat )
@@ -87,38 +87,40 @@ from  strategy_helper  import StrategyHelper
        self.analysis= None
        self.title=self.__set_title ()
 
-      class="nf">__set_title ( self ):
+      def __set_title ( self ):
         title= ( 'freq: '+self.cur_strat.freq+ '_ '+ 'num of data points: '+ str ( self.cur_strat.num_points )+
                  '_ custom: '+ str ( self.cur_strat.custom )+ '_ shift: '+ str ( self.cur_strat.shift )
                   '_ start date: '+ str ( self.cur_strat.start )+ '_ end date: '+ str ( self.cur_strat.end )
                  + '_ strategy:'+ str ( self.cur_strat.strategy )+ '' )
         return title
 
-<span class="c1" style="margin-bottom: 0">#Generates the various parameters which can be tested in a clean manner.
+<span class="c1" style="margin-bottom: 0">#Generates the various parameters which can be tested in a clean manner.</span>
 para_test= []
 for shift in range ( 1 ):
     for roll in range ( 10 , 21 , 5 ):
         for cutoff in range ( 11 , 13 , 1 ):
             for stock in full_stocks [ 0 : 100 ]:
                 para_test.append ([stock , shift , roll , cutoff/ 10 ])
-</span>
-<span class="c1" >#Runs the tests for various combinations of the parameters. Only two full stock iterations are ran for brevity.
+
+<span class="c1" ># Runs the tests for various combinations of the parameters. Only two full stock iterations are ran for brevity.</span>
+
 stock_pass_test= []
 stock_pass_condition= False
 for x in para_test :
     strategy= [ 'Mean Rev' ]+ x [ 2 : 4 ]
     ygg= Yggdrasil ( '5m' , strategy , True , shift_=x [ 1 ], num_points= 250 , stock_list= [x [ 0 ]])
-</span>
-    <span class="c1" >#Condition for stock classification is given here to filter the backtests
+    <span class="c1" >  #Condition for stock classification is given here to filter the backtests</span>
+
     results= [ygg.cur_strat.results [x ] for x in [ 'Profit' , 'Number of Completed Trades' ]]
     if results [ 0 ]&gt; 0 and results [ 1 ]&gt; 30 :
         stock_pass_test.append (ygg.cur_strat.get_params ())
-    </span>
-<span class="c1" >#Data from all the tests is stored in a JSON file for easy viewing and extraction
+
+<span class="c1" >#Data from all the tests is stored in a JSON file for easy viewing and extraction </span>
+
 with open ( 'example_data.json' , 'w' ) as pdf :
     json.dump (stock_pass_test , pdf , indent= 2 )
-</span>
-</code>
-<h2 >Data</h2>Link to the JSON file is given: <a href="https://github.com/sponge-mi-boi/Quant-data/blob/main/example_data.json">data</a>
+
+</code></pre>
+<h2 >Data</h2>Link to the JSON file is given: <a style="max-width: 10em; align-items: center" href="https://github.com/sponge-mi-boi/Quant-data/blob/main/example_data.json">data</a>
 
 </body>

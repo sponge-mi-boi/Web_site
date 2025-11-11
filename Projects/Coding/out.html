@@ -5,7 +5,7 @@
   <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <title>c</title>
-    <link rel="stylesheet" href="../../te.css">
+    <link rel="stylesheet" href="../../style.css">
 </head>
 <body>
 <pre><code><br><span class='c1'># Pandas is a module which contains mainly Pandas.series and  Pandas.Dataframe, both of which are very reliable and efficient to use for time series analysis.
@@ -401,8 +401,8 @@ series.sort_values(inplace=boolean_inplace,by=function_to_sort,ascending=boolean
  z_threshold = 1.5
  series_close_indicator = (series_z_score &gt; z_threshold) &amp;(series_z_score.shift(1) &lt; z_threshold)
  
-<br><span class='c1'># A signal indicator event driven series</span>
-This is in contrast to state based signals which are usually not as good.   
+<br><span class='c1'># A signal indicator event driven series
+## This is in contrast to state based signals which are usually not as good.   </span>
 
 series_indicator_example = series_indicator &gt; k
 

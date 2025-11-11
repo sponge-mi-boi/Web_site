@@ -1,24 +1,47 @@
-﻿body{
+﻿html{
     display: flex;
     justify-content: center;
     align-items: center;
     font-family: Arial, sans-serif;
-    width: 90%;
+    flex-direction: column;
     background: black;
     color: white;
 }
+body{
+    flex-direction: inherit;
+    display: flex;
+    max-width: 100em;
+}
+code {
+    font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+    font-size: 85%;
+    margin: 0;
+    hyphens: manual;
+    color: lightgoldenrodyellow;
+}
+pre {
+    margin: 1em 0;
+    overflow: auto;
 
+}
+pre code {
+    padding: 0;
+    overflow: visible;
+    overflow-wrap: normal;
+    text-wrap: nowrap;
+    display: flex;
+    flex-direction: column;
+    max-width: 100em;
 
-.large{
-    font-size: 60px;
-    text-align: center;
 }
-.space{
-    margin: 20px;
+
+span.c1{
+    display: flex;
+    max-width: inherit;
+    color: turquoise;
+
 }
-.center{
-    text-align: center;
-}
+
 
 .column{
     display: flex;
@@ -35,9 +58,7 @@
 .p{
     font-size: 18px;
 }
-.large_ish{
-    font-size: xxx-large;
-}
+
 .hori{
     display: flex;
     justify-content: center;
@@ -46,23 +67,20 @@
     padding: 10px;
     flex-direction: row;
 }
-.shrink{
-    margin: 10px;
+
+.display.math{display: block; text-align: left; margin: 0.5rem auto; white-space: preserve-breaks; line-height: 1em}
+ul{
+    display: inherit;
+    justify-content: inherit;
+    align-items: inherit;
+    margin: -1em 0 auto;
 }
-.left{
-    text-align: left;
-    align-self: flex-start;
-}
-.buttons{
+a{
     display: flex;
     margin-top: -5px;
     justify-content: inherit;
     align-items: inherit;
     flex-direction: inherit;
-}
-
-.buttons a{
-    display: inline-block;
     margin: 10px;
     padding: 10px 20px;
     background: #444;
@@ -70,11 +88,11 @@
     text-decoration: none;
     border-radius: 6px;
     transition: background 0.3s;
-    flex-direction: inherit;
     white-space: nowrap;
+    max-width: fit-content;
 }
 
-.buttons a:hover{
+a:hover{
     background: #888;
 }
 

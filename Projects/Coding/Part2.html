@@ -3,13 +3,13 @@
 <html lang="en">
 <head>
     <title>Quant Finance</title>
-    <link rel="stylesheet" href="../../te.css">
-    <script src="../../marked.min.js"></script>
-    <script src ='../../script.js'></script>
+    <link rel="stylesheet" href="../../style.css">
+    <script src="../../marked.min.js"></script
+    <script src ='../../script.js'></script
 </head>
 <body>
 <h1>The Quant Testing Framework I use to create profitable strategies: Part 2</h1>
-<p>Hierarchy of classes/modules for reference</p>
+<p>Hierarchy of classes/modules for  reference</p>
 <ul><code>
 <li>Yggdrasil:<ul>
 <li>StockAnalyzer</li>
@@ -19,7 +19,7 @@
 </ul>
 </li>
 </ul>
-<p>Below, I post the module containing the class StrategyHelper and explain in detail.</p>
+<p>Below, I post the module containing the class StrategyHelper  and  explain in detail.</p>
 <ul>
 <li><p>Module: strategy_helper.py</p>
 <ul>
@@ -29,26 +29,26 @@
 <li>Instance variables:<ul>
 <li>num_points: Approximate number of data points which the strategy will be executed on.</li>
 <li>custom: Boolean of whether the data used will be custom (previously exported from Yahoo Finance via yfinance module) or it will be extracted live via the alpaca api</li>
-<li>freq: Frequency of trading and data which the strategy is acting on.</li>
+<li>freq: Frequency of trading  and  data which the strategy is acting on.</li>
 <li>shift: Number of days to shift the data given the number of data points. Note that this is done in days regardless of the freq being used.</li>
-<li>data: DataFrame of the whole trading strategy. Includes the rolling parameters such as the mean, rolling z score, the entry and exit points of when trades were executed and completed, the closing prices and return of each of the stocks in the portfolio, the closing prices and return of the base, and the date-time of all days in the data set. See the example given below.</li>
-<li>results: Dictionary of all the aspects, or metrics, of the trading strategy. Includes quantities like the Sharpe Ratio, profit percentage, beta, and average alpha.</li>
-<li>strategy: List with the name of the strategy being used and the parameters of that strategy.</li>
+<li>data: DataFrame of the whole trading strategy. Includes the rolling parameters such as the mean, rolling z score, the entry  and  exit points of when trades were executed  and  completed, the closing prices  and  return of each of the stocks in the portfolio, the closing prices  and  return of the base,  and  the date-time of all days in the data set. See the example given below.</li>
+<li>results: Dictionary of all the aspects, or metrics, of the trading strategy. Includes quantities like the Sharpe Ratio, profit percentage, beta,  and  average alpha.</li>
+<li>strategy: List with the name of the strategy being used  and  the parameters of that strategy.</li>
 <li>base: Dataframe of the data of the base which the strategy is being compared to, (in this case I just use SP 500)</li>
-<li>start: the start date of the data set. Mostly for reference.</li>
-<li>end: the end date of the data set. Mostly for reference.</li>
+<li>start: the start date of the data set. Mostly for  reference.</li>
+<li>end: the end date of the data set. Mostly for  reference.</li>
 </ul>
 </li>
 <li>Instance methods:<ul>
 <li>reset_params<ul>
-<li>Can reset, or use different, parameters for the given instance of the StrategyHelper object.</li>
-<li>Parameters are merely freq, num_points, shift, and custom.</li>
+<li>Can reset, or use dif ferent, parameters for  the given instance of the StrategyHelper object.</li>
+<li>Parameters are merely freq, num_points, shift,  and  custom.</li>
 </ul>
 </li>
 <li>get_params<ul>
-<li>returns a list containing the parameters of the strategy and the resulting metrics. Mostly for convenience.</li>
+<li>returns a list containing the parameters of the strategy  and  the resulting metrics. Mostly for  convenience.</li>
 <li>run_method</li>
-<li>Runs the strategy on a given set of stocks. Mostly for use in the Yggdrasil class constructor.</li>
+<li>Runs the strategy on a given set of stocks. Mostly for  use in the Yggdrasil class constructor.</li>
 <li>Parameters<ul>
 <li>stock_uni: List of stocks in the portfolio which the strategy will be executed on.</li>
 </ul>
@@ -56,11 +56,11 @@
 </ul>
 </li>
 <li>__ mean_rev __<ul>
-<li>Private method to execute the logic of mean reversion with the given parameters if that is the strategy which is chosen in the given instance of a test which is defined in Yggdrasil. Executed in run_method.</li>
+<li>Private method to execute the logic of mean reversion with the given parameters if  that is the strategy which is chosen in the given instance of a test which is def ined in Yggdrasil. Executed in run_method.</li>
 <li>Parameters:<ul>
 <li>stock_uni: the list of stocks the strategy is being tested on</li>
-<li>roll_value: the value of the size of the rolling data which will be used in generating the signal for mean reversion. Default value is 20.</li>
-<li>cutoff_value: the value of the z-score which will be used as the signal to enter and exit. Default value is 1.5.</li>
+<li>roll_value: the value of the size of the rolling data which will be used in generating the signal for  mean reversion. def ault value is 20.</li>
+<li>cutoff_value: the value of the z-score which will be used as the signal to enter  and  exit. def ault value is 1.5.</li>
 </ul>
 </li>
 </ul>
@@ -73,300 +73,307 @@
 </li>
 <li><p>free code:</p>
 <ul>
-<li>This executes the strategy of mean reversion with parameters of the rolling window having a value of 25 and the signal being a z score of 1.3. It is executed on hourly, custom data of 'AAPL', with the default size of $\approx$ 500 data points being generated. (Note in this case the actual number is 395. The method of data extraction will be made more accurate, but the initial goal was merely to obtain a large enough sample size, regardless of specifics, in order to accurately test the given strategy on different data sets.)</li>
-<li>The results of the strategy being evaluated with a set of metrics is given below the code, and the actual documentation of the backtest is given further below. Note that this example is merely for demonstration purposes of the backtesting and strategy generation framework, and the actual example strategy was not used for real alpha generation purposes.</li>
+<li>This executes the strategy of mean reversion with parameters of the rolling window having a value of 25  and  the signal being a z score of 1.3. It is executed on hourly, custom data of 'AAPL', with the def ault size of $\approx$ 500 data points being generated. (Note in this case the actual number is 395. The method of data extraction will be made more accurate, but the initial goal was merely to obtain a large enough sample size, regardless of specif ics, in order to accurately test the given strategy on dif ferent data sets.)</li>
+<li>The results of the strategy being evaluated with a set of metrics is given below the code,  and  the actual documentation of the backtest is given further below. Note that this example is merely for  demonstration purposes of the backtesting  and  strategy generation framework,  and  the actual example strategy was not used for  real alpha generation purposes.</li>
 </ul>
 </li>
 </ul>
-<code>
-<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">pandas.core.interchange.dataframe_protocol</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataFrame</span>
+<pre><code>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">market_analy</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_time_period</span><span class="p">,</span><span class="n">full_stocks</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">useful_methods</span>
+import pandas as pd
+import numpy as np
+from pandas.core.interchange.dataframe_protocol import DataFrame
 
-<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">'display.max_rows'</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">'display.max_column'</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">'display.width'</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+from market_analy import get_time_period,full_stocks
+import useful_methods
 
-<span class="k">class</span><span class="w"> </span><span class="nc">StrategyHelper</span><span class="p">:</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">freq</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span><span class="n">strategy</span><span class="p">:</span><span class="nb">list</span><span class="p">,</span> <span class="n">num_points</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span> <span class="n">shift</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">custom</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">num_points</span> <span class="o">=</span> <span class="n">num_points</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">custom</span> <span class="o">=</span> <span class="n">custom</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">freq</span> <span class="o">=</span> <span class="n">freq</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">shift</span> <span class="o">=</span> <span class="n">shift</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">strategy</span> <span class="o">=</span> <span class="n">strategy</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">params</span> <span class="o">=</span> <span class="n">strategy</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">strategy</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">strategy</span><span class="p">)]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">base</span> <span class="o">=</span> <span class="n">get_time_period</span><span class="p">(</span><span class="s1">'base'</span><span class="p">,</span> <span class="n">num_data_points</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_points</span><span class="p">,</span> <span class="n">custom_data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">custom</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">freq</span><span class="p">,</span>
-                                    <span class="n">shift</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">shift</span><span class="p">)</span>
+pd.set_option('display.max_rows',None)
+pd.set_option('display.max_column',None)
+pd.set_option('display.width',0)
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">start</span> <span class="o">=</span> <span class="s1">''</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">end</span> <span class="o">=</span> <span class="s1">''</span>
+classStrategyHelper:
+    def __init__(self,freq:str,strategy:list,num_points=500,shift=0,custom=False):
+        self.num_points=num_points
+        self.custom=custom
+        self.freq=freq
+        self.shift=shift
+        self.data=None
+        self.results={}
+        self.strategy=strategy[0]
+        self.params=strategy[len(strategy)-2:len(strategy)]
+        self.base=get_time_period('base',num_data_points=self.num_points,custom_data=self.custom,freq=self.freq,
+        shift=self.shift)
+
+        self.start=''
+        self.end=''
 
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">reset_params</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">freq</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">num_points</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span> <span class="n">shift</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">custom</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">num_points</span> <span class="o">=</span> <span class="n">num_points</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">custom</span> <span class="o">=</span> <span class="n">custom</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">freq</span> <span class="o">=</span> <span class="n">freq</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">shift</span> <span class="o">=</span> <span class="n">shift</span>
-        
-    <span class="k">def</span><span class="w"> </span><span class="nf">get_params</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">param_list</span> <span class="o">=</span><span class="p">{</span><span class="s1">'num points'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_points</span><span class="p">,</span> <span class="s1">'custom'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">custom</span><span class="p">,</span><span class="s1">'shift'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">shift</span><span class="p">,</span><span class="s1">'freq'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">freq</span><span class="p">,</span><span class="s1">'param data in terms of time attributes'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">,</span> <span class="s1">'start of the data set'</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">),</span> <span class="s1">'end of the data set'</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">end</span><span class="p">),</span> <span class="s1">'strategy'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">strategy</span><span class="p">}</span>
+    def reset_params(self,freq:str,num_points=500,shift=0,custom=False):
+        self.num_points=num_points
+        self.custom=custom
+        self.freq=freq
+        self.shift=shift
 
-        <span class="k">return</span> <span class="p">[</span><span class="n">param_list</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">results</span><span class="p">]</span>
+    def get_params(self):
+        param_list={'num points':self.num_points,'custom':self.custom,'shift':self.shift,'freq':self.freq,'param data in terms of time attributes':self.params,'start of the data set':str(self.start),'end of the data set':str(self.end),'strategy':self.strategy}
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">__mean_rev</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">stock_uni</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">roll_value</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span><span class="n">cutoff_value</span> <span class="o">=</span> <span class="mf">1.1</span><span class="p">):</span>
+        return[param_list,self.results]
 
-        
-        <span class="c1" style="margin-bottom:0">#Data Extraction occurs first</span>
-        <span class="n">allocation</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">stock_uni</span><span class="p">)):</span>
-            <span class="n">allocation</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">stock_uni</span><span class="p">))</span>
-        <span class="n">port</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">'Stock'</span><span class="p">:</span> <span class="n">stock_uni</span><span class="p">,</span> <span class="s1">'Allocation'</span><span class="p">:</span> <span class="n">allocation</span><span class="p">})</span>
+    def __mean_rev(self,stock_uni:list,roll_value=20,cutoff_value=1.1):
 
-        <span class="n">base</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base</span>
-        <span class="n">tab</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">skip_stock</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">stock_uni</span><span class="p">:</span>
-            <span class="n">data_org</span> <span class="o">=</span> <span class="n">get_time_period</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">num_data_points</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_points</span><span class="p">,</span><span class="n">custom_data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">custom</span><span class="p">,</span><span class="n">freq</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">freq</span><span class="p">,</span><span class="n">shift</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">shift</span><span class="p">)</span>
-            <span class="n">index_common</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data_org</span><span class="o">.</span><span class="n">index</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">base</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
-            <span class="n">data_org</span> <span class="o">=</span> <span class="n">data_org</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">index_common</span><span class="p">]</span>
-            <span class="n">base</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">index_common</span><span class="p">]</span>
-            <span class="n">data_org</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-            <span class="n">base</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-            <span class="n">tab</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data_org</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">skip_stock</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kc">None</span>
-        <span class="n">data_compare</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
-        <span class="n">u</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="n">roll</span> <span class="o">=</span> <span class="n">roll_value</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tab</span><span class="p">:</span>
-             <span class="n">data_compare</span><span class="p">[</span><span class="s1">'Date_Time'</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="s1">'Datetime'</span><span class="p">]</span>
-             <span class="n">data_compare</span><span class="p">[</span><span class="s1">'close '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">stock_uni</span><span class="p">[</span><span class="n">u</span><span class="p">])]</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="s1">'close'</span><span class="p">]</span>
-             <span class="n">data_compare</span><span class="p">[</span><span class="s1">'Daily_return None '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">stock_uni</span><span class="p">[</span><span class="n">u</span><span class="p">])]</span> <span class="o">=</span> <span class="p">(</span><span class="n">data_compare</span><span class="p">[</span><span class="s1">'close '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">stock_uni</span><span class="p">[</span><span class="n">u</span><span class="p">])]</span> <span class="o">-</span> <span class="n">data_compare</span><span class="p">[</span><span class="s1">'close '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">stock_uni</span><span class="p">[</span><span class="n">u</span><span class="p">])]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span><span class="o">/</span><span class="n">data_compare</span><span class="p">[</span><span class="s1">'close '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">stock_uni</span><span class="p">[</span><span class="n">u</span><span class="p">])]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-             <span class="n">data_compare</span><span class="p">[</span><span class="s1">'Rolling_Mean '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">stock_uni</span><span class="p">[</span><span class="n">u</span><span class="p">])]</span> <span class="o">=</span> <span class="n">data_compare</span><span class="p">[</span><span class="s1">'close '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">stock_uni</span><span class="p">[</span><span class="n">u</span><span class="p">])]</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="n">roll</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-             <span class="n">data_compare</span><span class="p">[</span><span class="s1">'Rolling_STD '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">stock_uni</span><span class="p">[</span><span class="n">u</span><span class="p">])]</span> <span class="o">=</span> <span class="n">data_compare</span><span class="p">[</span>
-                <span class="p">[</span><span class="s1">'close '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">stock_uni</span><span class="p">[</span><span class="n">u</span><span class="p">])]]</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="n">window</span><span class="o">=</span><span class="n">roll</span><span class="p">)</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-             <span class="n">data_compare</span><span class="p">[</span><span class="s1">'Z Score '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">stock_uni</span><span class="p">[</span><span class="n">u</span><span class="p">])]</span> <span class="o">=</span> <span class="p">(</span><span class="n">data_compare</span><span class="p">[</span><span class="s1">'close '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">stock_uni</span><span class="p">[</span><span class="n">u</span><span class="p">])]</span> <span class="o">-</span> <span class="n">data_compare</span><span class="p">[</span><span class="s1">'Rolling_Mean '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">stock_uni</span><span class="p">[</span><span class="n">u</span><span class="p">])])</span><span class="o">/</span><span class="n">data_compare</span><span class="p">[</span><span class="s1">'Rolling_STD '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">stock_uni</span><span class="p">[</span><span class="n">u</span><span class="p">])]</span>
-             <span class="n">index_drop</span> <span class="o">=</span> <span class="n">data_compare</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">roll</span><span class="p">))]</span>
-             <span class="n">data_compare</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">index_drop</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-             <span class="n">u</span><span class="o">+=</span><span class="mi">1</span>
-        <span class="n">data_compare</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mf">0.00</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">index_common</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">data_compare</span><span class="o">.</span><span class="n">index</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">base</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
-        <span class="n">data_compare</span> <span class="o">=</span> <span class="n">data_compare</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">index_common</span><span class="p">]</span>
-        <span class="n">base</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">index_common</span><span class="p">]</span>
 
-        <span class="n">base_</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-        <span class="n">base_</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">data_compare</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1" style="margin-bottom:0">#Data Extraction occurs first</span>
+          allocation=[]
+          for  x in range (0,len(stock_uni)):
+          allocation.append(1/len(stock_uni))
+           port=pd.DataFrame({'Stock':stock_uni,'Allocation':allocation})
 
-        
-        <span class="c1" style="margin-bottom:0">#The initial investment is given</span>
-        <span class="n">input_money_initial</span> <span class="o">=</span> <span class="mi">10000</span>
+           base=self.base
+           tab=[]
+           skip_stock=False
+           for i in stock_uni:
+               data_org=get_time_period(i,num_data_points=self.num_points,custom_data=self.custom,freq=self.freq,shift=self.shift)
+               index_common=[x for  x in data_org.index if x in base.index]
+               data_org=data_org.loc[index_common]
+               base=base.loc[index_common]
+               data_org.reset_index(inplace=True)
+               base.reset_index(inplace=True)
+               tab.append(data_org)
+           if skip_stock:
+               return None
+           data_compare=pd.DataFrame()
+           u=0
+           roll=roll_value
+           for i in tab:
+                data_compare['Date_Time']=i['Datetime']
+                data_compare['close '+str(stock_uni[u])]=i['close']
+                data_compare['Daily_return None '+str(stock_uni[u])]=(data_compare['close '+str(stock_uni[u])]-data_compare['close '+str(stock_uni[u])].shift(1))/data_compare['close '+str(stock_uni[u])].shift(1)
+                data_compare['Rolling_Mean '+str(stock_uni[u])]=data_compare['close '+str(stock_uni[u])].rolling(window=roll).mean().fillna(0)
+                data_compare['Rolling_STD '+str(stock_uni[u])]=data_compare[
+                   ['close '+str(stock_uni[u])]].rolling(window=roll).std().fillna(0)
+                data_compare['Z Score '+str(stock_uni[u])]=(data_compare['close '+str(stock_uni[u])]-data_compare['Rolling_Mean '+str(stock_uni[u])])/data_compare['Rolling_STD '+str(stock_uni[u])]
+                index_drop=data_compare.index[list(range(0,roll))]
+                data_compare.drop(index_drop,inplace=True)
+                u+=1
+           data_compare.fillna(0.00,inplace=True)
+           index_common=[x for  x in data_compare.index if x in base.index]
+           data_compare=data_compare.loc[index_common]
+           base=base.loc[index_common]
 
-        <span class="c1" style="margin-bottom:0">#The strategy is set up ready to execute with the given parameters </span>
-        <span class="n">upper_bound</span> <span class="o">=</span> <span class="n">cutoff_value</span>
-        <span class="n">lower_bound</span> <span class="o">=</span> <span class="o">-</span><span class="n">cutoff_value</span>
-        <span class="n">base_data</span> <span class="o">=</span> <span class="n">base</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s1">'close'</span><span class="p">]</span>
-        <span class="n">cur_money</span> <span class="o">=</span> <span class="n">input_money_initial</span>
-        <span class="n">columns_</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">stock</span> <span class="ow">in</span> <span class="n">port</span><span class="p">[</span><span class="s1">'Stock'</span><span class="p">]:</span>
-             <span class="n">data_compare</span><span class="p">[</span><span class="s1">'Sell '</span> <span class="o">+</span> <span class="n">stock</span><span class="p">]</span> <span class="o">=</span> <span class="n">data_compare</span><span class="p">[</span><span class="s1">'Z Score '</span> <span class="o">+</span> <span class="n">stock</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">upper_bound</span>
-             <span class="n">data_compare</span><span class="p">[</span><span class="s1">'Buy '</span> <span class="o">+</span> <span class="n">stock</span><span class="p">]</span> <span class="o">=</span> <span class="n">data_compare</span><span class="p">[</span><span class="s1">'Z Score '</span> <span class="o">+</span> <span class="n">stock</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">lower_bound</span>
-             <span class="n">columns_</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">'Sell '</span> <span class="o">+</span> <span class="n">stock</span><span class="p">)</span>
-             <span class="n">columns_</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">'Buy '</span> <span class="o">+</span> <span class="n">stock</span><span class="p">)</span>
-             <span class="n">columns_</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">'close '</span><span class="o">+</span><span class="n">stock</span><span class="p">)</span>
+           base_=base.copy()
+           base_.reset_index(inplace=True)
+           data_compare.reset_index(inplace=True,drop=True)
 
-        <span class="n">buy_counter</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">allocation</span><span class="p">)</span>
-        <span class="n">sell_counter</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">allocation</span><span class="p">)</span>
-        <span class="n">result_trades</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">'Action'</span><span class="p">:</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">stock_uni</span><span class="p">),</span><span class="s1">'Hold'</span><span class="p">)],</span> <span class="s1">'Current Amount'</span><span class="p">:</span> <span class="n">cur_money</span><span class="p">,</span> <span class="s1">'Action/DAY Number'</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="mi">0</span><span class="p">)})</span>
-        <span class="n">trades_pct</span><span class="p">,</span> <span class="n">trades_queue</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
-        <span class="n">trades_duration</span><span class="p">,</span> <span class="n">trades_duration_final</span> <span class="o">=</span> <span class="p">[],[]</span>
-        <span class="n">duration_counter</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="n">base_track</span><span class="p">,</span><span class="n">base_queue</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
-        <span class="n">completed_trades</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="n">temp</span> <span class="o">=</span> <span class="n">data_compare</span><span class="p">[</span><span class="n">columns_</span><span class="p">]</span>
-        <span class="n">alloc</span> <span class="o">=</span> <span class="p">[</span><span class="n">input_money_initial</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">allo</span><span class="p">)</span> <span class="k">for</span> <span class="n">allo</span> <span class="ow">in</span> <span class="n">allocation</span><span class="p">]</span>
-        <span class="n">sell_index</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">allocation</span><span class="p">)))</span> <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
-        <span class="n">buy_index</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">allocation</span><span class="p">)))</span> <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
-        <span class="n">price_inde_x</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">allocation</span><span class="p">)))</span> <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">2</span><span class="p">]</span>
 
-     
-        <span class="c1" style="margin-bottom:0">#This is the execution of the strategy across the given data set</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">data_compare</span><span class="o">.</span><span class="n">index</span><span class="p">)):</span>
-             <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
-             <span class="n">value_sell_list</span> <span class="o">=</span> <span class="n">temp</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">sell_index</span><span class="p">]</span>
-             <span class="n">value_buy_list</span> <span class="o">=</span> <span class="n">temp</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">buy_index</span><span class="p">]</span>
-             <span class="n">price_list</span> <span class="o">=</span> <span class="n">temp</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">price_inde_x</span><span class="p">]</span>
-             <span class="n">duration_counter</span> <span class="o">+=</span><span class="mi">1</span>
-             <span class="n">buy</span> <span class="o">=</span> <span class="p">[]</span>
-             <span class="k">for</span> <span class="n">value_buy</span><span class="p">,</span><span class="n">value_sell</span><span class="p">,</span><span class="n">price</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">value_buy_list</span><span class="p">,</span> <span class="n">value_sell_list</span><span class="p">,</span><span class="n">price_list</span><span class="p">):</span>
-                <span class="n">alloc_</span> <span class="o">=</span> <span class="n">allocation</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
-                <span class="n">cur_money</span> <span class="o">=</span> <span class="n">alloc</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
-                <span class="k">if</span> <span class="n">alloc_</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="n">value_sell</span> <span class="ow">and</span> <span class="n">cur_money</span> <span class="o">-</span> <span class="n">price</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">price</span> <span class="o">!=</span> <span class="mi">0</span> <span class="p">:</span>
-                       <span class="n">buy</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">'Sell_short'</span><span class="p">)</span>
-                       <span class="n">cur_money</span> <span class="o">=</span> <span class="n">cur_money</span> <span class="o">+</span> <span class="n">price</span>
-                       <span class="n">alloc</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">cur_money</span>
-                       <span class="n">sell_counter</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-                       <span class="n">trades_queue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">price</span><span class="p">)</span>
-                       <span class="n">trades_duration</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">duration_counter</span><span class="p">)</span>
-                       <span class="n">base_queue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">base_data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-                    <span class="k">elif</span> <span class="n">value_buy</span> <span class="ow">and</span> <span class="n">sell_counter</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">:</span>
-                       <span class="n">buy</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">'Buy_short'</span><span class="p">)</span>
-                       <span class="n">cur_money</span> <span class="o">=</span> <span class="n">cur_money</span> <span class="o">-</span> <span class="n">price</span>
-                       <span class="n">alloc</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">cur_money</span>
-                       <span class="n">sell_counter</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
-                       <span class="n">value</span> <span class="o">=</span> <span class="n">trades_queue</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-                       <span class="n">trades_pct</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">price</span> <span class="o">-</span> <span class="n">value</span><span class="p">)</span> <span class="o">/</span> <span class="n">value</span><span class="p">)</span>
-                       <span class="n">trades_duration_final</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">duration_counter</span> <span class="o">-</span> <span class="n">trades_duration</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
-                       <span class="n">val</span> <span class="o">=</span> <span class="n">base_queue</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-                       <span class="n">base_track</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">base_data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">val</span><span class="p">)</span> <span class="o">/</span> <span class="n">val</span><span class="p">)</span>
-                       <span class="n">completed_trades</span> <span class="o">+=</span> <span class="mi">1</span>
-                    <span class="k">else</span><span class="p">:</span>
-                        <span class="n">alloc</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">cur_money</span>
-                        <span class="n">buy</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">'Hold_short'</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">alloc_</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="n">value_sell</span> <span class="ow">and</span> <span class="n">buy_counter</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                       <span class="n">buy</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">'Sell'</span><span class="p">)</span>
-                       <span class="n">cur_money</span> <span class="o">=</span> <span class="n">cur_money</span> <span class="o">+</span> <span class="n">price</span>
-                       <span class="n">alloc</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">cur_money</span>
-                       <span class="n">buy_counter</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">-=</span><span class="mi">1</span>
-                       <span class="n">value</span> <span class="o">=</span> <span class="n">trades_queue</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-                       <span class="n">trades_pct</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">price</span> <span class="o">-</span> <span class="n">value</span><span class="p">)</span> <span class="o">/</span> <span class="n">value</span><span class="p">)</span>
-                       <span class="n">trades_duration_final</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">duration_counter</span> <span class="o">-</span> <span class="n">trades_duration</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
-                       <span class="n">val</span> <span class="o">=</span> <span class="n">base_queue</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-                       <span class="n">base_track</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">base_data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">val</span><span class="p">)</span><span class="o">/</span><span class="n">val</span><span class="p">)</span>
-                       <span class="n">completed_trades</span><span class="o">+=</span><span class="mi">1</span>
-                    <span class="k">elif</span> <span class="n">value_buy</span> <span class="ow">and</span> <span class="n">cur_money</span> <span class="o">-</span> <span class="n">price</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">price</span> <span class="o">!=</span> <span class="mi">0</span>  <span class="p">:</span>
-                       <span class="n">buy</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">'Buy'</span><span class="p">)</span>
-                       <span class="n">cur_money</span> <span class="o">=</span> <span class="n">cur_money</span> <span class="o">-</span> <span class="n">price</span>
-                       <span class="n">alloc</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">cur_money</span>
-                       <span class="n">buy_counter</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">+=</span><span class="mi">1</span>
-                       <span class="n">trades_queue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">price</span><span class="p">)</span>
-                       <span class="n">trades_duration</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">duration_counter</span><span class="p">)</span>
-                       <span class="n">base_queue</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">base_data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-                    <span class="k">else</span><span class="p">:</span>
-                        <span class="n">alloc</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">cur_money</span>
-                        <span class="n">buy</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">'Hold'</span><span class="p">)</span>
-                <span class="n">index</span><span class="o">+=</span><span class="mi">1</span>
-             <span class="n">result_trades</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">result_trades</span><span class="p">)]</span> <span class="o">=</span> <span class="p">[[</span><span class="n">buy</span><span class="p">],</span> <span class="nb">sum</span><span class="p">(</span><span class="n">alloc</span><span class="p">),</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="c1" style="margin-bottom:0">#The initial investment is given</span>
+          input_money_initial=10000
 
-        <span class="c1" style="margin-bottom:0">#The results of the completed simulation are stored and computed if needed </span>
-        <span class="k">if</span> <span class="n">trades_duration_final</span><span class="p">:</span>
-            <span class="n">avg_duration</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">trades_duration_final</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">avg_duration</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="n">non_cash_profit</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="k">for</span> <span class="n">buy_count</span><span class="p">,</span><span class="n">price</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">buy_counter</span><span class="p">,</span><span class="n">price_list</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">buy_count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">non_cash_profit</span> <span class="o">+=</span> <span class="n">price</span> <span class="o">*</span> <span class="n">buy_count</span>
-        <span class="n">profit_pct</span> <span class="o">=</span> <span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">alloc</span><span class="p">)</span> <span class="o">+</span> <span class="n">non_cash_profit</span> <span class="o">-</span> <span class="n">input_money_initial</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="o">/</span><span class="n">input_money_initial</span>
-        <span class="n">input_values_port</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'Upper Bound'</span><span class="p">:</span> <span class="n">upper_bound</span><span class="p">,</span> <span class="s1">'Lower Bound'</span><span class="p">:</span> <span class="n">lower_bound</span><span class="p">,</span> <span class="s1">'Number of Completed Trades'</span><span class="p">:</span> <span class="n">completed_trades</span><span class="p">,</span>
-                           <span class="s1">'Average Duration'</span><span class="p">:</span> <span class="n">avg_duration</span><span class="p">,</span> <span class="s1">'Remaining Trades'</span><span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">buy_counter</span><span class="p">),</span><span class="s1">'Final_money'</span> <span class="p">:</span> <span class="nb">sum</span><span class="p">(</span><span class="n">alloc</span><span class="p">),</span> <span class="s1">'Profit'</span><span class="p">:</span><span class="nb">sum</span><span class="p">(</span><span class="n">alloc</span><span class="p">)</span> <span class="o">+</span> <span class="n">non_cash_profit</span> <span class="o">-</span> <span class="n">input_money_initial</span><span class="p">,</span> <span class="s1">'Profit %'</span><span class="p">:</span> <span class="n">profit_pct</span><span class="p">}</span>
-        <span class="n">result_trades</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">result_trades</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">cur</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">data_compare</span><span class="p">,</span><span class="n">result_trades</span><span class="p">],</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">input_values_port</span><span class="p">,</span> <span class="n">cur</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">start</span> <span class="o">=</span> <span class="n">data_compare</span><span class="p">[</span><span class="s1">'Date_Time'</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">end</span> <span class="o">=</span> <span class="n">data_compare</span><span class="p">[</span><span class="s1">'Date_Time'</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="c1" style="margin-bottom:0">#The strategy is set up ready to execute with the given parameters</span>
+          upper_bound=cutoff_value
+          lower_bound=-cutoff_value
+          base_data=base.loc[:,'close']
+          cur_money=input_money_initial
+          columns_=[]
+          for stock in port['Stock']:
+            data_compare['Sell '+stock]=data_compare['Z Score '+stock]&gt;upper_bound
+            data_compare['Buy '+stock]=data_compare['Z Score '+stock]&lt;lower_bound
+            columns_.append('Sell '+stock)
+            columns_.append('Buy '+stock)
+            columns_.append('close '+stock)
 
-        <span class="c1" style="margin-bottom:0">#The data is analyzed and certain metrics which can be used to track its performance are calculated and stored</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">data</span>
-        <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">'Current Amount'</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">'Current Amount'</span><span class="p">]</span><span class="o">/</span><span class="n">input_money_initial</span>
-        <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">'Portfolio Return'</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">'Current Amount'</span><span class="p">]</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span>
-        <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">'Base Adj_close '</span><span class="p">]</span> <span class="o">=</span> <span class="n">base_</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'close'</span><span class="p">)</span>
-        <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">'Base Return'</span><span class="p">]</span> <span class="o">=</span> <span class="n">base_</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'close'</span><span class="p">)</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span>
-        <span class="n">buy_tracker</span><span class="p">,</span><span class="n">count</span><span class="p">,</span> <span class="n">sell_tracker</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span>
-        <span class="n">total</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">'Action'</span><span class="p">])</span>
-        <span class="n">index</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">'Action'</span><span class="p">]:</span>
-            <span class="n">track</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
-                <span class="k">if</span> <span class="n">allocation</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
-                   <span class="k">if</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'Buy'</span><span class="p">:</span>
-                      <span class="n">buy_tracker</span><span class="o">+=</span><span class="mi">1</span>
-                   <span class="k">if</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'Sell'</span> <span class="ow">and</span> <span class="n">buy_tracker</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-                      <span class="n">buy_tracker</span><span class="o">-=</span><span class="mi">1</span>
-                   <span class="k">if</span> <span class="n">buy_tracker</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                      <span class="n">track</span><span class="o">+=</span><span class="mi">1</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'Buy'</span> <span class="ow">and</span> <span class="n">sell_tracker</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
-                        <span class="n">sell_tracker</span> <span class="o">-=</span> <span class="mi">1</span>
-                    <span class="k">if</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'Sell'</span><span class="p">:</span>
-                        <span class="n">sell_tracker</span> <span class="o">+=</span> <span class="mi">1</span>
-                    <span class="k">if</span> <span class="n">sell_tracker</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                        <span class="n">track</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="k">if</span> <span class="n">track</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">stock_uni</span><span class="p">):</span>
-               <span class="n">index</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
-            <span class="n">count</span><span class="o">+=</span><span class="mi">1</span>
-        <span class="n">values</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'leng before'</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])}</span>
-        <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
-        <span class="n">values</span><span class="p">[</span><span class="s1">'leng after'</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+           buy_counter=[0]*len(allocation)
+           sell_counter=[0]*len(allocation)
+           result_trades=pd.DataFrame({'Action':[np.full(len(stock_uni),'Hold')],'Current Amount':cur_money,'Action/DAY Number':int(0)})
+           trades_pct,trades_queue=[],[]
+           trades_duration,trades_duration_final=[],[]
+           duration_counter=0
+           base_track,base_queue=[],[]
+           completed_trades=0
+           temp=data_compare[columns_]
+           alloc=[input_money_initial*abs(allo)for allo in allocation]
+           sell_index=[x for  x in list(range(0,3*len(allocation)))if x%3==0]
+           buy_index=[x for  x in list(range(0,3*len(allocation)))if x%3==1]
+           price_inde_x=[x for  x in list(range(0,3*len(allocation)))if x%3==2]
 
-        <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
-             <span class="n">useful_methods</span><span class="o">.</span><span class="n">format_</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">stock_uni</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-             <span class="k">return</span> <span class="kc">None</span>
-        <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">'Portfolio Return'</span><span class="p">]</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
-            <span class="n">useful_methods</span><span class="o">.</span><span class="n">format_</span><span class="p">(</span><span class="s1">'N'</span><span class="p">,</span><span class="n">stock</span><span class="p">)</span>
-            <span class="k">return</span> <span class="kc">None</span>
-        <span class="n">pct_exposure</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">index</span><span class="p">)</span><span class="o">/</span><span class="n">total</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
-        <span class="n">avg_port_return</span><span class="p">,</span> <span class="n">avg_port_std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">'Portfolio Return'</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">'Portfolio Return'</span><span class="p">])</span>
-        <span class="n">val</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">'Portfolio Return'</span><span class="p">]</span>
-        <span class="n">max_list</span> <span class="o">=</span> <span class="n">val</span><span class="o">.</span><span class="n">cummax</span><span class="p">()</span>
-        <span class="n">draw_</span> <span class="o">=</span> <span class="p">(</span><span class="n">val</span> <span class="o">-</span> <span class="n">max_list</span><span class="p">)</span><span class="o">/</span><span class="n">max_list</span>
-        <span class="n">draw</span> <span class="o">=</span> <span class="n">draw_</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-        <span class="n">draw</span> <span class="o">=</span> <span class="n">draw</span><span class="p">[</span><span class="o">~</span><span class="n">draw</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">])]</span>
-        <span class="n">max_draw</span> <span class="o">=</span> <span class="n">draw</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
-        <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">'Draw down'</span><span class="p">]</span> <span class="o">=</span> <span class="n">draw_</span>
-        <span class="k">if</span> <span class="n">avg_port_return</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">avg_port_std</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="kc">None</span>
-        <span class="n">sharpe_ratio_</span> <span class="o">=</span> <span class="p">(</span><span class="n">avg_port_return</span><span class="p">)</span><span class="o">/</span><span class="n">avg_port_std</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">freq</span> <span class="o">==</span> <span class="s1">'1d'</span><span class="p">:</span>
-            <span class="n">length</span> <span class="o">=</span> <span class="mi">252</span>
-        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">freq</span> <span class="o">==</span> <span class="s1">'1h'</span><span class="p">:</span>
-            <span class="n">length</span> <span class="o">=</span> <span class="mi">252</span><span class="o">*</span><span class="mi">7</span>
-        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">freq</span> <span class="o">==</span> <span class="s1">'5m'</span><span class="p">:</span>
-            <span class="n">length</span> <span class="o">=</span> <span class="mi">252</span><span class="o">*</span><span class="mi">7</span><span class="o">*</span><span class="mi">12</span>
-        <span class="n">sharpe_ratio_</span> <span class="o">=</span> <span class="n">sharpe_ratio_</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">length</span><span class="p">)</span>
-        <span class="n">cov_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">'Portfolio Return'</span><span class="p">]</span> <span class="p">)</span><span class="o">-</span> <span class="mi">1</span><span class="p">,</span><span class="s1">'Portfolio Return'</span><span class="p">],</span>
-                       <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">'Base Return'</span><span class="p">]</span> <span class="p">)</span><span class="o">-</span> <span class="mi">1</span><span class="p">,</span><span class="s1">'Base Return'</span><span class="p">])</span>
-        <span class="n">beta_</span> <span class="o">=</span> <span class="n">cov_</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="n">cov_</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
 
-        <span class="n">alpha_</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">'Portfolio Return'</span><span class="p">]</span> <span class="o">-</span> <span class="n">beta_</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">'Base Return'</span><span class="p">]</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">beta_</span><span class="p">)</span><span class="o">*</span> <span class="mf">.0002</span>
-        <span class="n">values_</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'beta'</span><span class="p">:</span> <span class="n">beta_</span><span class="p">,</span><span class="s1">'sharpe ratio'</span><span class="p">:</span> <span class="n">sharpe_ratio_</span><span class="p">,</span> <span class="s1">'avg alpha'</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">alpha_</span><span class="p">)</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">),</span>
-                    <span class="s1">'avg std values'</span><span class="p">:</span> <span class="n">avg_port_std</span><span class="p">,</span>
-                           <span class="s1">'mean'</span><span class="p">:</span> <span class="n">avg_port_return</span><span class="p">,</span> <span class="s1">'max draw'</span><span class="p">:</span> <span class="n">max_draw</span><span class="p">,</span> <span class="s1">'exposure pct'</span><span class="p">:</span> <span class="n">pct_exposure</span><span class="p">}</span>
-        <span class="n">values_</span> <span class="o">=</span> <span class="n">values</span> <span class="o">|</span> <span class="n">values_</span>
-        <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">'alpha'</span><span class="p">]</span> <span class="o">=</span> <span class="n">alpha_</span>
-        <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">|</span><span class="n">values_</span>
-        <span class="k">for</span> <span class="n">metric</span> <span class="ow">in</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">:</span>
-            <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">metric</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">metric</span><span class="p">])</span>
+            <span class="c1" style="margin-bottom:0">#This is the execution of the strategy across the given data set</span>
+                  for i in range(0,len(data_compare.index)):
+                  index=0
+                  value_sell_list=temp.iloc[i,sell_index]
+                  value_buy_list=temp.iloc[i,buy_index]
+                  price_list=temp.iloc[i,price_inde_x]
+                  duration_counter+=1
+                  buy=[]
+                  for value_buy,value_sell,priceinzip(value_buy_list,value_sell_list,price_list):
+                  alloc_=allocation[index]
+                  cur_money=alloc[index]
+                  if alloc_&lt;0:
+                  if value_sell and cur_money-price&gt;0 and price!=0:
+                  buy.append('Sell_short')
+                          cur_money=cur_money+price
+                          alloc[index]=cur_money
+                          sell_counter[index]+=1
+                          trades_queue.append(price)
+                          trades_duration.append(duration_counter)
+                          base_queue.append(base_data.iloc[i])
+                       elif value_buy  and  sell_counter[index]&gt;0:
+                          buy.append('Buy_short')
+                          cur_money=cur_money-price
+                          alloc[index]=cur_money
+                          sell_counter[index]-=1
+                          value=trades_queue.pop(0)
+                          trades_pct.append((price-value)/value)
+                          trades_duration_final.append(duration_counter-trades_duration.pop(0))
+                          val=base_queue.pop(0)
+                          base_track.append((base_data.iloc[i]-val)/val)
+                          completed_trades+=1
+                       else:
+                           alloc[index]=cur_money
+                           buy.append('Hold_short')
+                   if alloc_&gt;0:
+                       if value_sell and buy_counter[index]&gt;0:
+                          buy.append('Sell')
+                          cur_money=cur_money+price
+                          alloc[index]=cur_money
+                          buy_counter[index]-=1
+                          value=trades_queue.pop(0)
+                          trades_pct.append((price-value)/value)
+                          trades_duration_final.append(duration_counter-trades_duration.pop(0))
+                          val=base_queue.pop(0)
+                          base_track.append((base_data.iloc[i]-val)/val)
+                          completed_trades+=1
+                       elif value_buy and cur_money-price&gt;0 and price!=0 :
+                          buy.append('Buy')
+                          cur_money=cur_money-price
+                          alloc[index]=cur_money
+                          buy_counter[index]+=1
+                          trades_queue.append(price)
+                          trades_duration.append(duration_counter)
+                          base_queue.append(base_data.iloc[i])
+                       else:
+                           alloc[index]=cur_money
+                           buy.append('Hold')
+                   index+=1
+                result_trades.loc[len(result_trades)]=[[buy],sum(alloc),i+1]
 
-        <span class="c1" style="margin-bottom:0">#The resulting data of all the completed trades and the results of the performance of this strategy on the given data set are stored to this instance of a test. </span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">results</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="k">return</span> <span class="n">data</span>
+            <span class="c1" style="margin-bottom:0">#The results of the completed simulation are stored  and  computed if  needed
+            </span>
+                  if trades_duration_final:
+                      avg_duration=np.mean(trades_duration_final)
+                      else:
+                      avg_duration=0
+                      non_cash_profit=0
+                    for buy_count,priceinzip(buy_counter,price_list):
+                     if buy_count&gt;0:
+                      non_cash_profit+=price*buy_count
+                      profit_pct=(sum(alloc)+non_cash_profit-input_money_initial)*100/input_money_initial
+                      input_values_port={'Upper Bound':upper_bound,'Lower Bound':lower_bound,'Number of Completed Trades':completed_trades,
+                                  'Average Duration':avg_duration,'Remaining Trades':sum(buy_counter),'Final_money':sum(alloc),'Profit':sum(alloc)+non_cash_profit-input_money_initial,'Profit %':profit_pct}
+               result_trades.drop(0,inplace=True)
+           result_trades.reset_index(drop=True,inplace=True)
+           cur=pd.concat([data_compare,result_trades],axis=1)
+           data=[input_values_port,cur]
+           self.start=data_compare['Date_Time'].iloc[0]
+           self.end=data_compare['Date_Time'].iloc[-1]
 
-    
-    <span class="k">def</span><span class="w"> </span><span class="nf">run_method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">stock_uni</span><span class="p">:</span> <span class="nb">list</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">strategy</span> <span class="o">==</span> <span class="s1">'Mean Rev'</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">__mean_rev</span><span class="p">(</span><span class="n">stock_uni</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="c1" style="margin-bottom:0">#The data is analyzed  and  certain metrics which can be used to track its perfor mance are calculated  and  stored
+            </span>
+           x=data
+           x[1]['Current Amount']=x[1]['Current Amount']/input_money_initial
+           x[1]['Portfolio Return']=x[1]['Current Amount'].pct_change()
+           x[1]['Base Adj_close ']=base_.get('close')
+           x[1]['Base Return']=base_.get('close').pct_change()
+           buy_tracker,count,sell_tracker=0,1,0
+           total=len(x[1]['Action'])
+           index=[]
+           x[1].drop(0,inplace=True)
+           for y in x[1]['Action']:
+               track=0
+               for i in range(0,len(y[0])):
+                   if allocation[i]&gt;=0:
+                      if y[0][i]=='Buy':
+                         buy_tracker+=1
+                      if y[0][i]=='Sell' and buy_tracker!=0:
+                         buy_tracker-=1
+                      if buy_tracker==0:
+                         track+=1
+                   else:
+                       if y[0][i]=='Buy'  and  sell_tracker!=0:
+                           sell_tracker-=1
+                       if y[0][i]=='Sell':
+                           sell_tracker+=1
+                       if sell_tracker==0:
+                           track+=1
+               if track==len(stock_uni):
+                  index.append(count)
+               count+=1
+           values={'leng befor e':len(x[1])}
+           x[1]=x[1].drop(index)
+           values['leng after']=len(x[1])
+
+           if x[1].empty:
+                useful_methods.for mat_(y=stock_uni[0])
+                returnNone
+           x[1].reset_index(inplace=True)
+           if x[1]['Portfolio Return'].empty:
+               useful_methods.for mat_('N',stock)
+               returnNone
+           pct_exposure=(1-len(index)/total)*100
+           avg_port_return,avg_port_std=np.mean(x[1]['Portfolio Return']),np.std(x[1]['Portfolio Return'])
+           val=x[1]['Portfolio Return']
+           max_list=val.cummax()
+           draw_=(val-max_list)/max_list
+           draw=draw_.copy()
+           draw=draw[~draw.isin([-np.inf,np.inf])]
+           max_draw=draw.min()
+           x[1]['Draw down']=draw_
+           if avg_port_return==0oravg_port_std==0:returnNone
+           sharpe_ratio_=(avg_port_return)/avg_port_std
+           if self.freq=='1d':
+               length=252
+           elif self.freq=='1h':
+               length=252*7
+           elif self.freq=='5m':
+               length=252*7*12
+           sharpe_ratio_=sharpe_ratio_*np.sqrt(length)
+           cov_=np.cov(x[1].loc[0:len(x[1]['Portfolio Return'])-1,'Portfolio Return'],
+                          x[1].loc[0:len(x[1]['Base Return'])-1,'Base Return'])
+           beta_=cov_[0][1]/cov_[1][1]
+
+           alpha_=x[1]['Portfolio Return']-beta_*x[1]['Base Return']-(1-beta_)*.0002
+           values_={'beta':beta_,'sharpe ratio':sharpe_ratio_,'avg alpha':np.mean(alpha_)*len(x[1].index),
+                       'avg std values':avg_port_std,
+                              'mean':avg_port_return,'max draw':max_draw,'exposure pct':pct_exposure}
+           values_=values|values_
+           x[1]['alpha']=alpha_
+           x[0]=x[0]|values_
+           for metric in x[0]:
+               x[0][metric]=float(x[0][metric])
+
+            <span class="c1" style="margin-bottom:0">#The resulting data of all the completed trades  and  the results of the perfor mance of this strategy on the given data set are stored to this instance of a test.
+            </span>
+                self.data=data[1]
+                self.results=data[0]
+                return data
+
+
+          def run_method(self,stock_uni:list):
+            if self.strategy=='Mean Rev':
+               self.__mean_rev(stock_uni,self.params[0],self.params[1])
 
 
 <span class="c1" style="margin-bottom:0">#free code</span>
-<span class="n">ygg_ex</span> <span class="o">=</span> <span class="n">Yggdrasil</span><span class="p">(</span><span class="s1">'h'</span><span class="p">,[</span><span class="s1">'Mean Rev'</span><span class="p">,</span><span class="mi">25</span><span class="p">,</span><span class="mf">1.3</span><span class="p">],</span><span class="kc">True</span><span class="p">,</span><span class="n">stock_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'AAPL'</span><span class="p">])</span>
-<span class="n">useful_methods</span><span class="o">.</span><span class="n">format_</span><span class="p">(</span><span class="s1">'Data'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">ygg_ex</span><span class="o">.</span><span class="n">cur_strat</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>                                  <span class="c1" style="margin-bottom:0">#A display method for convenience </span>
-<span class="n">values</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">ygg_ex</span><span class="o">.</span><span class="n">cur_strat</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span><span class="n">ygg_ex</span><span class="o">.</span><span class="n">cur_strat</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span> 
-<span class="n">useful_methods</span><span class="o">.</span><span class="n">format_output</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">'Results'</span><span class="p">,</span><span class="n">i</span><span class="o">=</span><span class="n">values</span><span class="p">)</span>                                   <span class="c1" style="margin-bottom:0">#Another display method for convenience</span>
-</code>
+ygg_ex=Yggdrasil('h',['Mean Rev',25,1.3],True,stock_list=['AAPL'])
+useful_methods.for mat_('Data',y=ygg_ex.cur_strat.data)
+<span class="c1" style="margin-bottom:0">#A display method for  convenience></span>
+values=list(zip(ygg_ex.cur_strat.results.keys(),ygg_ex.cur_strat.results.values()))
+useful_methods.for mat_output(title='Results',i=values)
+<span class="c1" style="margin-bottom:0">#Another display method for  convenience</span>
+            </code>
+    </pre>
 
 
-<h2 id="Results-and-Data-for-the-Example-given-above">Results and Data for the Example given above</h2><p>Results</p>
+<h2 id="Results- and -Data-for -the-Example-given-above">Results  and  Data for  the Example given above</h2><p>Results</p>
 <ol>
 <li>['Upper Bound', '1.3']</li>
 <li>['Lower Bound', '-1.3']</li>
@@ -376,7 +383,7 @@
 <li>['Final_money', '7,622.3442']</li>
 <li>['Profit', '291.2442']</li>
 <li>['Profit %', '2.9124']</li>
-<li>['leng before', '471.0']</li>
+<li>['leng befor e', '471.0']</li>
 <li>['leng after', '396.0']</li>
 <li>['beta', '0.8832']</li>
 <li>['sharpe ratio', '-1.0839']</li>
@@ -387,7 +394,7 @@
 <li>['exposure pct', '84.1102']</li>
 </ol>
 Data:
-<a href="https://github.com/sponge-mi-boi/Quant-data/blob/main/Part2_data.md">Link</a>
+<a style="max-width: 5em; justify-content: center;align-items: center" href="https://github.com/sponge-mi-boi/Quant-data/blob/main/Part2_data.md">Link</a>
 
 </body>
 </html>

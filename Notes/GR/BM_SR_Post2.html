@@ -5,7 +5,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>1</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 
-    <link rel="stylesheet" href="../../te.css">
+    <link rel="stylesheet" href="../../style.css">
     <script src="../../marked.min.js"></script>
     <script src ='../../script.js'></script>
     <!-- Load mathjax -->
@@ -43,35 +43,35 @@
     </script>
     <!-- End of mathjax configuration -->
 <body class="notes">
-<main>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a4016d77-634d-43a7-a7b0-4f0d6b673bc8">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="EM-as-a-connection-between-SR-and-GR">EM as a connection between SR and GR<a class="anchor-link" href="#EM-as-a-connection-between-SR-and-GR"></a></h1><p>Now, I will take a preliminary step to connect SR to GR in terms of formalism. The best way to do so is to look at the covariant version of EM. Consider the Maxwell's equations with $c = 1, \epsilon_0 = 1, \mu_0 = 1$, such that $\nabla \cdot E = \rho$ , $J + \frac{\partial \textbf{E}}{\partial t} = \nabla \times \textbf{B}$ ,$\nabla$ ⋅ $B$  = 0 , $\frac{\partial \textbf{B}}{\partial t} = - \nabla \times \textbf{E}$ with charge density $\rho$ and current density $J$. To make these equations covariant, they need to be considered as part of a vector or tensor in some way. A first step would be to connect all the source terms in an obvious way by defining the vector with 4 components $j = \begin{bmatrix} \rho \\ J_1 \\ J_2 \\ J_3 \end{bmatrix} = (\rho, J^i) $. To combine the fields, define the fields in terms of a scalar and vector potential $E = -\nabla A^0 -\partial_t A, B = \nabla \times A$ as before, and combine the potential terms into one vector $A = (A^0,A^i)$. Taking curls and divergences is symbolic of operations done on one forms, meaning it seems we should express all quantities in terms of the basis one forms $dx^\alpha$. Then, $A^* = (A^0,-A^i) = A_\alpha dx^\alpha$ by the mapping using the metric. Consider now the space of two-forms on this vector space. There are 6 unique ones as mentioned earlier $dx^\alpha \wedge dx^\beta \equiv \omega^{\alpha \beta}$. Then, taking the exterior derivative of $A^*$, $d A^* = \partial_u A_\alpha dx^u \wedge dx^\alpha = (\partial_u A_\alpha - \partial_\alpha A_u)dx^u \wedge dx^\alpha = (\partial_u A_\alpha - \partial_\alpha A_u) \omega^{u\alpha}$. Define this quantity to be the 2 dimensional tensor of rank $(0,2)$, $F = dA^*$, then $F_{uv} = \partial_u A_v - \partial_v A_u$. The components in terms of $E,B$ are $F_{0i} = \partial_0 A_i - \partial_i A_0 =  - E_i $, $F_{ij} = \partial_i A_j - \partial_j A_i = \epsilon_{ijk}B^k$. The full tensor then represented as a matrix is $F_ = \begin{bmatrix} 0 &amp; -E_1 &amp; -E_2 &amp; -E_3 \\ E_1 &amp; 0 &amp; B_3 &amp; -B_2 \\ E_2 &amp; -B_3 &amp; 0 &amp; B_1 \\ E_3 &amp; B_2 &amp; -B_1 &amp; 0 \end{bmatrix} $.</p>
+
+
+
+
+
+
+
+<h1 id="EM-as-a-connection-between-SR-and-GR">EM as a connection between SR and GR</h1><p>Now, I will take a preliminary step to connect SR to GR in terms of formalism. The best way to do so is to look at the covariant version of EM. Consider the Maxwell's equations with $c = 1, \epsilon_0 = 1, \mu_0 = 1$, such that $\nabla \cdot E = \rho$ , $J + \frac{\partial \textbf{E}}{\partial t} = \nabla \times \textbf{B}$ ,$\nabla$ ⋅ $B$  = 0 , $\frac{\partial \textbf{B}}{\partial t} = - \nabla \times \textbf{E}$ with charge density $\rho$ and current density $J$. To make these equations covariant, they need to be considered as part of a vector or tensor in some way. A first step would be to connect all the source terms in an obvious way by defining the vector with 4 components $j = \begin{bmatrix} \rho \\ J_1 \\ J_2 \\ J_3 \end{bmatrix} = (\rho, J^i) $. To combine the fields, define the fields in terms of a scalar and vector potential $E = -\nabla A^0 -\partial_t A, B = \nabla \times A$ as before, and combine the potential terms into one vector $A = (A^0,A^i)$. Taking curls and divergences is symbolic of operations done on one forms, meaning it seems we should express all quantities in terms of the basis one forms $dx^\alpha$. Then, $A^* = (A^0,-A^i) = A_\alpha dx^\alpha$ by the mapping using the metric. Consider now the space of two-forms on this vector space. There are 6 unique ones as mentioned earlier $dx^\alpha \wedge dx^\beta \equiv \omega^{\alpha \beta}$. Then, taking the exterior derivative of $A^*$, $d A^* = \partial_u A_\alpha dx^u \wedge dx^\alpha = (\partial_u A_\alpha - \partial_\alpha A_u)dx^u \wedge dx^\alpha = (\partial_u A_\alpha - \partial_\alpha A_u) \omega^{u\alpha}$. Define this quantity to be the 2 dimensional tensor of rank $(0,2)$, $F = dA^*$, then $F_{uv} = \partial_u A_v - \partial_v A_u$. The components in terms of $E,B$ are $F_{0i} = \partial_0 A_i - \partial_i A_0 =  - E_i $, $F_{ij} = \partial_i A_j - \partial_j A_i = \epsilon_{ijk}B^k$. The full tensor then represented as a matrix is $F_ = \begin{bmatrix} 0 &amp; -E_1 &amp; -E_2 &amp; -E_3 \\ E_1 &amp; 0 &amp; B_3 &amp; -B_2 \\ E_2 &amp; -B_3 &amp; 0 &amp; B_1 \\ E_3 &amp; B_2 &amp; -B_1 &amp; 0 \end{bmatrix} $.</p>
 <p>Then, from the property of the exterior derivative $d^2 = 0$, it's easy to see $dF = 0$. In explicit form, $\partial_\alpha F_{uv}dx^\alpha \wedge dx^u \wedge dx^v =\partial_\alpha F_{uv} \omega^{\alpha uv}= 0$ and since there are exactly 4 unique basis 3 forms in this vector space, there are 3 components contributing to each basis element, meaning the spatial components give the 3 form component $\partial_k F_{ij}\omega^{k ij} + \partial_i F_{jk}\omega^{i jk} + \partial_j F_{ki}\omega^{j ki} = (\partial_k F_{ij} + \partial_i F_{jk} + \partial_j F_{ki}) \omega^{i jk} = 0 $. In terms of $E,B$, $\partial_i B_i = \nabla \cdot B = 0$. The other elements are $\omega^{0 ij}$ meaning<br/>
 $(\partial_0 F_{ij} + \partial_j F_{0i} + \partial_i F_{j0}) \omega^{i jk} = 0 \Rightarrow \partial_t B_k - \partial_j E_i + \partial_i E_j = 0 \Rightarrow \partial_t B_k = -(\nabla \times E)_k$. Both of the magnetic source equations have been derived.</p>
 <p>To get electric source equations, consider the swap of $E$ and $-B$ in the Maxwell's equations.
 Note that if there were no electric sources (or if there were magnetic sources), the equations would look identical. This encourages the guess $dF^ = J^*$, where $F^` = \begin{bmatrix} 0 &amp; -B_1 &amp; -B_2 &amp; -B_3 \\ B_1 &amp; 0 &amp; -E_3 &amp; E_2 \\ B_2 &amp; E_3 &amp; 0 &amp; -E_1 \\ B_3 &amp;- E_2 &amp; E_1 &amp; 0 \end{bmatrix} $ (just a random defined matrix for now), and $J^*$ is the 3-form version of $j$, defined $J^* = j_\alpha \omega^{\beta \gamma \eta }$ with each index not equaling the other. Identical to above, the spatial components give $\partial_i E_i = j_0$ since 0 is the only non spatial index for $J^*$, which gives $\nabla \cdot E = \rho $. Similarly, the other 3 components give $\partial_t E_k + \partial_j B_i - \partial_i B_j = -j_k \Rightarrow \partial_t E_k + j_k = (\nabla \times B)_k$.</p>
 <p>Therefore, the covariant form of Maxwell's equations are $dF = 0, dF^` = J^*$. In component notation, $\partial_\alpha F_{uv} + \partial_v F_{\alpha u} + \partial_u F_{v \alpha} = 0$ for the first equation. For the second, it can be done by component. For example, $\partial_0F^`_{12} + \partial_2F^`_{01}+\partial_1F^`_{20} = j_3 \Rightarrow \partial_0F_{03} + \partial_2(F_{23}) +\partial_1 F_{13} = j_3 \Rightarrow \partial_\alpha F_{\alpha 3} = j_3$. In general, $\partial_\alpha F^{\alpha u} = j^u$</p>
-<h1 id="The-Hodge-Dual">The Hodge Dual<a class="anchor-link" href="#The-Hodge-Dual"></a></h1><p>To understand this better, one needs to know the exact mapping given by the exchange of the fields above. The volume form is defined as $dx^0 \wedge dx^1 \wedge dx^2 \wedge dx^3 = \omega^{0123}$ in 4 dimensions. This is a four form and the only independent one in a 4 dimensional space. There needs to be a specified orientation however since the indices can be put in any order to define the volume form. In 3d for example, the common one is the xyz orientation, also known as right handedness. Therefore, in Lorentzian spacetime, $\omega^{0123}$ is taken as the positive direction. A swap of any two indices makes this basis 4-form negative, meaning it is completely antisymmetric as expected of forms. Therefore, one can intuitively define the Hodge dual of a form as follows. Given a $p$ form in a space of dimension $n$, the volume form is $\omega^{0...(n-1)}$, and a $p$ form is  $\eta = \omega^{0...(p-1)}$. The Hodge dual of a p-form is intuitively defined as $ \eta \wedge \eta^` = \omega^{0...(n-1)}$. Note that this is not the mathematically rigorous definition, but it captures the essential idea. The result is a $n - p$ form. In 4d spacetime, it would be as follows $(dx^0)^` = \omega^{123}, (dx^1)^`= -\omega^{023}, (dx^2)^` =  \omega^{013}, (dx^3)^` = -\omega^{012}$. To preserve handedness, the indices of the dual are introduced in the cyclic order as defined in the volume form, but the actual basis forms of the dual are defined in increasing order usually. Therefore, only one component as a sign switch while the rest do not. In the two forms case,
+<h1 id="The-Hodge-Dual">The Hodge Dual</h1><p>To understand this better, one needs to know the exact mapping given by the exchange of the fields above. The volume form is defined as $dx^0 \wedge dx^1 \wedge dx^2 \wedge dx^3 = \omega^{0123}$ in 4 dimensions. This is a four form and the only independent one in a 4 dimensional space. There needs to be a specified orientation however since the indices can be put in any order to define the volume form. In 3d for example, the common one is the xyz orientation, also known as right handedness. Therefore, in Lorentzian spacetime, $\omega^{0123}$ is taken as the positive direction. A swap of any two indices makes this basis 4-form negative, meaning it is completely antisymmetric as expected of forms. Therefore, one can intuitively define the Hodge dual of a form as follows. Given a $p$ form in a space of dimension $n$, the volume form is $\omega^{0...(n-1)}$, and a $p$ form is  $\eta = \omega^{0...(p-1)}$. The Hodge dual of a p-form is intuitively defined as $ \eta \wedge \eta^` = \omega^{0...(n-1)}$. Note that this is not the mathematically rigorous definition, but it captures the essential idea. The result is a $n - p$ form. In 4d spacetime, it would be as follows $(dx^0)^` = \omega^{123}, (dx^1)^`= -\omega^{023}, (dx^2)^` =  \omega^{013}, (dx^3)^` = -\omega^{012}$. To preserve handedness, the indices of the dual are introduced in the cyclic order as defined in the volume form, but the actual basis forms of the dual are defined in increasing order usually. Therefore, only one component as a sign switch while the rest do not. In the two forms case,
     $(dx^0 \wedge dx^1)^` = dx^2 \wedge dx^3,(dx^1 \wedge dx^3)^` = -dx^0 \wedge dx^2, (dx^1 \wedge dx^2)^` $$= dx^0 \wedge dx^3, (dx^0 \wedge dx^2)^` = -dx^1 \wedge dx^3$, etc.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=3b878147-a548-4cb5-a7a0-9a2dbce676c2">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-</div>
-</div>
-</div>
-</div>
-</main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>

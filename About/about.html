@@ -4,27 +4,29 @@
 <head>
     <meta charset="UTF-8">
     <title>About</title>
-    <link rel='stylesheet' href='../te.css'>
+    <link rel='stylesheet' href='../style.css'>
     <style>li{margin:0} ul{margin:0} h4{margin:0}</style>
 </head>
+<body style=" justify-content: space-evenly; align-items: center; align-self: center">
 <h1>About</h1>
-<div style="align-self: center; display: flex;gap: 1em">
-    <div class="column" style="border-style: solid;  align-self: baseline; padding:1em; margin-top: 2em; margin-bottom: 2em; max-width: 40em">
+<div class="column" style="flex-direction: row; justify-content: flex-start" >
+    <div class="column" style="border-style: solid;  padding:1em; margin-left: -1em; margin-top: 2em; margin-bottom: 2em; max-width: 40em">
         <h2 style="margin-top: 0">Skills</h2>
-        <ul><li>
+
             Python: Created a backtesting framework. Current project on the most profitable alpha generation strategies for time Series data.
-                <ul>
+                <ul style="flex-direction: column">
                     <br>
                     <li><h4 style="margin-top: -20px" >Pandas</h4>: Extensive use of Dataframes and Time Series structures. Used for data collection, analysis, and storage.</li>
                     <li> <h4>Numpy</h4> : Use of Numpy along with packages such as Numba to maximize both performance time and storage for backtesting massive amounts of data.</li>
-                    <li><h4>VectorBt</h4>: Use in most effectively simulating portfolios in backtesting.</li>
+
+                    <li style="margin-left: -7.6em"><h4>VectorBt</h4>: Use in most effectively simulating portfolios in backtesting.</li>
+
                     <li><h4>Optuna</h4>: Use in optimizing parameters for strategies. Primarily Bayesian optimization was used.</li>
                     <li><h4>joblib</h4>: Use in the implementation of parallel processing to massively speed up my backtesting framework.</li>
                     <li><h4>Plotly</h4>: Use in effectively visualizing and analyzing the implementation of various strategies.</li>
                 </ul>
-            </li>
-            <br>
-            <a href="../Projects/Coding/version_one.html" style="margin-left: 14em; margin-bottom: 1em; margin-top: 0em">Framework</a>
+         <ul style="gap: 2em">
+            <a href="../Projects/Coding/version_one.html" >Framework</a>
             <li>
             <h4>Java</h4>: Years of experience in terms of study and the implementation of object oriented frameworks in various contexts, including my first prototype of the backtesting framework of my current project.
             </li>
@@ -38,8 +40,8 @@
     <div class="column" style="border-style: solid;  align-self: flex-start; padding:1em; margin-top: 2em; margin-bottom: 2em; max-width: 40em">
     <h2 style="margin-top: 0">Past Research</h2>
             <ul>
-                <li>
-                    <h4>QFT in the Early Universe</h4>: A focus on the cosmological foundations of the universe and the emergence of <br>classical systems from quantum fluctuations. Attempted to theoretically model this process, with a focus on the mechanics of entanglement and coherent systems.
+                <li style="margin-left: -1em; margin-right: 1em">
+                    <h4 style="margin: 0">QFT in the Early Universe</h4>: A focus on the cosmological foundations of the universe and the emergence of <br>classical systems from quantum fluctuations. Attempted to theoretically model this process, with a focus on the mechanics of entanglement and coherent systems.
                 </li>
                     <br>
                 <li>
