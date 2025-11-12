@@ -1,0 +1,175 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head><meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>1</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+
+    <link rel="stylesheet" href="../../style.css">
+    <script src="../../marked.min.js"></script>
+    <script src ='../../script.js'></script>
+    <!-- Load mathjax -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS_CHTML-full,Safe"> </script>
+    <script type="text/x-mathjax-config">
+        init_mathjax = function() {
+            if (window.MathJax) {
+            // MathJax loaded
+                MathJax.Hub.Config({
+                    TeX: {
+                        equationNumbers: {
+                        autoNumber: "AMS",
+                        useLabelIds: true
+                        }
+                    },
+                    tex2jax: {
+                        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                        processEscapes: true,
+                        processEnvironments: true
+                    },
+                    displayAlign: 'center',
+                    messageStyle: 'none',
+                    CommonHTML: {
+                        linebreaks: {
+                        automatic: true
+                        }
+                    }
+                });
+
+                MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+            }
+        }
+        init_mathjax();
+    </script>
+    <!-- End of mathjax configuration -->
+<body>
+<h1 style="margin: 0"> 1</h1>
+<div class="display math">
+The definition of analysis is the rigorous study of subjects in mathematics to really define precisely. Examples would include complex analysis, which is the study of complex functions and complex numbers, real analysis, which is the same for real functions, harmonic analysis which is the same for waves, and functional analysis which is about the functions themselves. Calculus is defined on top of real analysis
+A lot of rules taken to be true by default need to be developed analytically or else there would be contradictions that arise
+The explanation of simple things by rigor leads to the possible ability to explain complex things with the same rigor and know that it is consistent, or not.
+</div>
+    <h1 style="margin: 0"> 2</h1>
+<div class="display math">
+$\mathcal N \rightarrow \mathcal Z \rightarrow \mathcal Q \rightarrow \mathcal R$ will be constructed in detail. Using it is obviously not difficult but defining it is not so easy, such as the difference between using a computer and building it . The number system will be rederived from a set of fundamental postulates the most common of which is the Peano axioms.
+A natural number is any element of the set $\mathcal N = \{0,1,...\}$. However, what exactly is the nature of this set and where does it come from, Well, it can all be constructed from the zero number $0$ and the increment operation in the following manner where $SUC(n)=n_{++}$ is defined as the successor of $n$
+Axiom: $0$ is a natural number.
+Axiom: If $n$ is a natural number $n_{++}$ is too.
+Note the symbols $1,2,...$ are used to define or represent $0_{++}, 1_{++},...$ .
+For example,
+a proposition: 3 is a natural number
+Proof: $0$ is a natural number by the first axiom. Then, $1 = 0_{++}$ is a natural number by the second axiom. Then, $2 = 1 _{++} = 0 _{++_{++}}$ is a natural number by the second axiom again. Then, $2_{++} = 3$ is a natural number by the second axiom once again.
+However, note the issue. A number defined such that a successive natural number is merely 'a wrapped around' number which can already exist in the set.
+ex) $0 \rightarrow 1 \rightarrow 0$ where $0$ is the successor of $1$ is allowed by the above ax.
+To solve this, the following axiom is defined.
+Axiom: $0$ is not the successor of any $x\in \mathcal N$.
+However, note that a number can be defined as the successor of itself and that its successor can be another number in the set that is already defined.
+Axiom: Different natural numbers must have different successors
+$\forall n,m| n,m \in \mathcal N \land n\neq m \Rightarrow n_{_{++}} = SUC(n) \neq m_{_{++}} = SUC(m),$
+Let $P(n)$ be any property or statement about a natural number $n, (P(0) \land (\forall n \in \mathcal N, P(n) \Rightarrow P(n_{++})) )\Rightarrow \forall n \in \mathcal N, P(n)$ . This is called the axiom schema, or an axiom about axioms, called the principle of induction, where it can be$\,$ used to generate$\,$ any number of axioms.
+These set of 5 statements are called the Peano axioms. An assumption can be made that such a system in fact exists
+Recursive definition of a sequence: Suppose for each natural number $n$, there is a function $f_n:\mathcal N \rightarrow \mathcal N$ . If $c$ is a natural number, $a_0 = c, a_{n++} = f_n(a_n)$ can be defined uniquely where $a_n \leftrightarrow n$
+Proof. $a_0$ is unique by the axiom that 0 is not a successor and if $a_n$ is unique, then its successor $a_{n++}$ is unique since the successor for any given $n$ is unique. There each value of $a_n$ is unique and each $n$ has an $a_n.$
+Note that all the relations that have been defined are only the operation of incrementing
+Any set of elements which has a 1-1 mapping with $\mathcal N$ such a $SUC(n)$ is preserved can be identified with $\mathcal N$ itself, and this isomorphism can actually be used to define the set of all such sets.
+Other operations can now be defined in terms of the Peano axioms
+Addition: Let $m \in \mathcal N$. To add $0$ to $m$, define $0 + m = m$. Now suppose that $n+m$ is defined uniquely. Then $SUC(n) + m = SUC(n+m)$ defines addition
+$0 + m = m$ and then $1 + m = SUC(0)+ m = SUC(m+0) = SUC(m)$, and to really continue $2 + m = SUC(1) + m = SUC(1+m) = SUC(SUC(m))$. For example $m = 5 \Rightarrow 2 + 5 = SUC(SUC(5)) = SUC(6) = 7$ . From before this $f(m)_n = m + n$ where such a function $f(m)$ is defined for each such value of $m$
+This leads to many lemmas which can be proved
+Lemma: $\forall n \in \mathcal N, n+0 = n$
+Proof: $n=0 \Rightarrow 0 + 0 = 0 = n$ from the definition of addition for $0$. $0 + m = m$. If $n+ 0 = n \Rightarrow SUC(n) + 0 = SUC(n + 0) = SUC(n)$ which proves it
+Lemma: $\forall n,m \in \mathcal N, n +SUC(m) = SUC(n+m)$,
+Proof: $n = 0 \Rightarrow$ $0 + SUC(m) = SUC(m)  = SUC(0 + m)$. If $n +SUC(m) = SUC(n+m), \Rightarrow SUC(n)  +SUC(m) = SUC(n+SUC(m)) = SUC(SUC(n+m ))=SUC(SUC(n)+m))$
+Corollary: $SUC)(n) = n + 1$
+Proof: $SUC(n) = SUC(n+0)= n + SUC(0) = n + 1$
+Proposition: $\forall n,m \in \mathcal N, n+ m = m+n, \text{commutativity}$}
+Proof: $n =0 \Rightarrow 0 + n = n$ by the definition of addition and $n+ 0 = n$ by the previous lemma  meaning that $0 + n = n + 0$. If $n + m = m + n \Rightarrow SUC(n) +m = SUC(n+m)$ by the definition of addition and $m + SUC(n) = SUC(m + n) = SUC(n+m)$ where the above lemma is used with the made assumption meaning that $m + n = n + m$
+Proposition: $\forall m,p,n \in \mathcal  N,(m + p) + n = m + (p + n),\text {associativity{,}}$
+Proof: $m = 0 \Rightarrow (m+p )+ n = p + n, m + (p+n) =p + n$ by the definition of addition. If $(m+p) + n = m +(p + n)$ then,$(SUC(m) + p) + n  = SUC(m+p) + n = SUC((m+p)+n) = SUC(m + (p +n)) = SUC(m) + (p + n)$ meaning that
+Proposition: Let $m,q,n\in\mathcal N$ such that $m + q = m + c$ Then, $q = c$
+Proof: $m = 0 \Rightarrow 0 + q =  0, 0 + c$ meaning that by the definition of addition $q = c$. Then, if $m + q = m + c$ $SUC(m) +q = SUC(m + q), SUC(m) + c = SUC(m + c) \Rightarrow SUC(m+q)=SUC(m+c) \Rightarrow m+q =m + c\Rightarrow q = c$ with the axiom on the uniqueness of successor of natural numbers being used in the second to last equality.
+Definition: A natural number $n$ is said to be positive if it is not equal to 0 meaning $n \neq 0$
+Proposition: If $a$ is positive and $b \in\mathcal N$ , then $a+b$ is positive, and also is $b+a$ by the above proposition of commutativity
+Proof: If $b = 0 \Rightarrow a + 0 = a$ which is positive Then if $a + b$ is positive $a + SUC(b) = SUC(a +b)$  must be positive since $a+b$ is positive meaning that $a + b \neq 0$ and $0$ is not the successor of any natural number.
+Corollary: If $a,b\in\mathcal\,N$ such that $a+b=0$, then $a=0,b=0$
+Proof: $a \neq 0 \lor b\neq0$ let's assume. If $a \neq 0$ $a+b$ is positive by the previous proposition,$a + b \neq 0$.If $b\neq0,a+b = b + a$ is positive similarly $a + b \neq 0$. Therefore, $a,b,0$
+Lemma: Let $a$ be a positive number. Then there exists an unique $b$ such that $SUC( b   =a)$
+Proof: a is a positive number means that $a \neq 0$ . Therefore by the uniqueness of successors in the statement of an previous axiom $a$ is the unique successor of some $b \in \mathcal N$
+Definition: Let $n,m \in \mathcal N$, $n$ is greater than or equal to $m$ , writing $n\geq m, m \leq n$ if $\exists a \in \mathcal N, n = m + a$
+Note this implies $SUC n > n$ since a previous corollary states $SUC n = n + 1$ and $1 \in \mathcal N$ . Therefore, there is no largest natural number $n$.
+Proposition: Let $a,b,c\in \mathcal N$
+Order is reflexive $a \geq a$
+Order is transitive $a \geq b,b \geq c \Rightarrow a \geq c$
+Order is antisymmetric $a\geq b, b \geq a \Rightarrow a = b$
+Addition preserves order $a \geq b \Leftrightarrow a + c \geq b + c$
+$a < b\Leftrightarrow SUC(a) \leq b$
+$a < b \Leftrightarrow b = a + d, \exists d \in \mathcal N$
+Proof: $a + 0 = a,\forall a \in \mathcal N$ by a previous proposition. This means by implication $a \geq a$ $a \geq b \wedge\,b\geq c \Rightarrow a = b + i, b =c + p, \exists i,p \in \mathcal N\Rightarrow a =  (c + p) + i, p + i \in \mathcal N \Rightarrow a = c +(p+i ),$ where the propositions of associativity was used and the definition of addition of the natural numbers
+$a \geq b \wedge\,\ b\geq a \Rightarrow a = b + r, b = a + p, r,p \in\mathcal N \Rightarrow a = (a+p) + r = a + (p+r) \Rightarrow a + 0 = a +(p+r) \Rightarrow 0 = p + r \ \Rightarrow p = 0,r=0 \Rightarrow a = b$ where the propositions of associativity, commutativity, and the definition of addition of the natural numbers were used
+$a \geq b \Rightarrow a = b + i, i\in\mathcal\ N$ $\Rightarrow a + c =(b+i)+c = b + (i + c) = b +(c+i) = (b + c) +  i \Rightarrow a + c \geq b + c$ . The sufficient statement proof is exactly the same in reverse
+$b< a\Rightarrow b \leq a \wedge\,a\neq\,b\Rightarrow,a=b+i,i\in\mathcal{\,N},1=1\Rightarrow\,a+1=a+1=(b+i)+1 = b + (i+1\,)\Rightarrow (a+1) = SUC a \leq b,(i+1)\in\mathcal{} {,N}$  $a < b \Rightarrow a \leq b, a \neq b \Rightarrow a + i= b$. If $i=0\Rightarrow a = b,$ which is a contradiction. Therefore $i$ must be positive
+Proposition: Trichotomy, Let $a,\, b \in \mathcal N.$ Then either $, a < b, a = b,\, a > b$.
+Proof: $a < b \Rightarrow a \neq b$. If $a > b$ also $a \geq b$. Since $, a\leq b\Rightarrow a = b$ by the above proposition, which is a contradiction. In the same way, $a > b \Rightarrow a \leq b$ is not true and $a \neq b$ . Therefore, only one of these statements is true by definition. Assume $a=0$$\Rightarrow 0 \leq b, \forall b$ since $0+b=b,\forall b$ meaning $0 < b \not\lor b=0$ . If $a< b,a=b,a>b \Rightarrow SUC(a) \leq b$ by the above proposition, $SUC(a) = a + 1 = b + 1 = SUC(b)\Rightarrow SUC(a)< b$ by above propositions, $SUC(a) = a + 1 = (b + i) + 1 = b +(i+1)\Rightarrow SUC(a) \geq b$ in each of the situations.
+Proposition: The strong principle of induction, Let $m_0 \in \mathcal  N$  and $P(m)$ be an arbitrary statement about the natural number $m\,$ meaning that $P(m') \forall m' \in m_0 \leq m' < m$ is true means $P(m)$, is also true. $P(m)$ then is true for all $m \geq m_0, m \in \mathcal N$
+Proof: This is essentially an induction on an induction. If we define $Q(n)=\{ P(m) |\,\forall m,m_0 \leq m < n\}$ . If $n = 0 \Rightarrow Q(0)$ is true by default since $\not\exists a < 0, a \in \mathcal N$. $Q(n),\Rightarrow P(n)\Rightarrow\,P(i), SUC(i) = n$ Note $Q(n)=\{ P(m) |\,\forall m,m_0 \leq m \leq i\} = Q(i)\land P(i)$means $Q(SUC(n)) = Q(n) \land P(n),P(n)$
+Exc) Let $n \in \mathcal N, P(SUC(m)) \Rightarrow P(m), P(n)$ is also true say. Prove that $P({}m)$ is true for all $m\leq n, m \in \mathcal {,N}$
+$n=0 \Rightarrow P(m)$ by default is true since $\not\exists m$ . $P(n$) $\Rightarrow$ $P m$ $\forall m \leq n$  $P SUC n$
+Multiplication is built from the iteration of iterations of increment operations meaning the iteration additions
+Definition: Multiplication.
+Let $m \in \mathcal N$ To multiply $0$ to $m$, we $0 \times m = 0$ . Say that $n \times n$ is defined. Then $SUC(n) \times m = (n \times m) + m$
+Lemma: Multiplication is commutative
+Proof:
+$n = 0$ $n \times m = 0 \times m = 0, m \times n = m \times 0 = 0 + 0 + ... + 0 = 0$ since that is the definition of multiplication. $n \times m = m \times n \Rightarrow SUC(n) \times m = (n \times m ) + m, m \times SUC(n) = m + m + ... + m = (m + m + ... + m) + m = (m \times n) + m = (n \times m) + m$where the inductive hypothesis was used in the last step and the definition of multiplication
+
+Lemma:
+$n \times m \in \mathcal N$
+Proof:
+$n = 0 \Rightarrow n \times m = 0 \times m = 0 \in \mathcal N$. $n \times m \in \mathcal N \Rightarrow SUC(n) \times m = (n \times m) + m  \in \mathcal N$  since the sum of two natural numbers is in the set of natural numbers
+
+From now on, $n \times m$ will be denoted as $nm$ since commutation has been proven
+
+Lemma: The natural numbers have no $0$ divisors.
+Let $n,m \in \mathcal N \Rightarrow n \times m = 0 \Leftrightarrow n \lor m = 0$ . If $n,m$ are both positive $nm$ is also positive.
+Proof:
+$n \times m = 0 \Rightarrow n + ... + n = 0 \Rightarrow n = 0 \lor m = 0$ by one of the above lemmas where $0$ is the result of addition only if the added values are both $0$ themselves or if there has been nothing added.
+$n = 0 \lor m = 0 \Rightarrow 0 \times m  = 0, n \times 0 = 0$ where the above lemma was used in the last step
+
+Proposition: Distributive Law
+For $a,b,c \in \mathcal N \Rightarrow a(b+c) = ab + ac, (b+c)a = ba + ca$
+Proof:
+Commutativity implies that $a(b+c) = (b+c) a ,$ meaning that proving only the first, $c = 0 \Rightarrow,a(b+0) = ab, ab + ac = ab + a(0) =  ab$. $a(b+c) = ab + ac\Rightarrow a(b+ SUC(c)) = a (b+ (c + 1)) = a ((b+c) + 1$)$a(SUC(b+c))$$,ab + aSUC(c) = ab + ac + a = a(b+c) + a = a(SUC(b+c))$
+
+Proposition: Multiplication is associative
+$a,b,c \in \mathcal N \Rightarrow (a \times b) \times c = a \times (b\times c)$
+Proof:
+$a = 0 \Rightarrow (0 b) c = 0 c = 0,  0(bc) = 0$ since $bc \in \mathcal N$. $(ab)c = a(bc) \Rightarrow (SUC(a)b)c = ((a +1)b)c = ((ab) + b)c = (ab)c + bc,SUC(a)(bc) = (a + 1) bc = a(bc) +bc = (ab)c + bc$ where the distributive law was used in the las part of the first
+
+Proposition: Multiplication preserves order
+If $a,b \in \mathcal N \land a < b, c$ is positive, $\Rightarrow ac < bc$ .
+Proof: $a < b \Rightarrow b = a + d$ where $d$ is positive $\Rightarrow, bc = ac + dc, dc \,$ is positive since both d and c are positive $\Rightarrow ac < bc$
+
+Corollary: Cancellation
+$a,b,c \in \mathcal, N, ac = bc , c \neq 0 \Rightarrow a = b$
+Proof:
+By the trichotomy of order $a < b, a = b, a > b$ are the mutually exclusive properties. $a < b \Rightarrow ac < bc$ by the above proposition which is a contradiction. $a > b \Rightarrow ac > bc$ which is also a contradiction. Therefore $a = b$
+
+Note also the definitions of statements in logical math. Theorems are huge statements which are used a lot which can be proven, propositions are slightly smaller ones, corollaries are related to propositions and are a bit smaller, and lemmas are even smaller even though logically they are all the same. They are just for human organization
+
+Proposition: Euclidean Algorithm. Let $n \in \mathcal N , q$ is a positive number. $\Rightarrow \exists m,r \in \mathcal N, 0 \leq r < q \land n = mq + r$
+
+Note that this is the beginning of number theory.
+
+Proof:
+$n = 0 \Rightarrow n = mq + r \Rightarrow 0 = mq + r\Rightarrow mq = 0, r = 0$ by one of the above propositions $m = 0$ since q is positive. $n = mq +r \Rightarrow SUC(n)= n + 1 = m'q + r' \Rightarrow mq + r + 1 = m'q + r'  \Rightarrow mq + SUC(r) = m'q + r'$ $r'$ can be defined with $SUC(r\,$) which always exists since the successor of any natural number exists which implies by one of the above lemma $mq' = mq$ which implies by an above lemma $m = m'$
+
+Definition: Exponentiation
+Let $m \in \mathcal N, m^0 =1$ by definition  $m^n \Rightarrow m^{SUC(n)} = m^n \times m$ if $m^n , n\in \mathcal N$
+
+Multiplication is used to define
+
+Exc) Prove $(a + b$ )$'^2$ $= a ^2 + 2ab + b^2$ .
+$(a+b ) ^2 = (a + b)  \times (a + b)  = a \times  (a + b) + b \times (a + b\,) = a \times a + a \times b + b\times a  + b \,\times b$ $=a ^2 + 2\times (a+b) + b^2$ where the fact that the sum of two natural numbers is a natural number is used to apply the distributive law twice, and the definition of multiplication is used along with the fact the product of two natural numbers is a natural number
+
+</div></body>
+
+</html>

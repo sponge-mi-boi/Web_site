@@ -68,9 +68,9 @@ span.c1{
     flex-direction: row;
 }
 
-.display.math{display: block; text-align: left; margin: 0.5rem auto; white-space: preserve-breaks; line-height: 1em}
+.display.math{display: block; text-align: left; margin: 0.5rem auto; white-space: preserve-breaks; line-height: 2em}
 ul{
-    display: inherit;
+
     justify-content: inherit;
     align-items: inherit;
     margin: -1em 0 auto;
