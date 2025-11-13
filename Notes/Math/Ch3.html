@@ -1,0 +1,198 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head><meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>1</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+
+    <link rel="stylesheet" href="../../style.css">
+    <script src="../../marked.min.js"></script>
+    <script src ='../../script.js'></script>
+    <!-- Load mathjax -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS_CHTML-full,Safe"> </script>
+    <script type="text/x-mathjax-config">
+        init_mathjax = function() {
+            if (window.MathJax) {
+            // MathJax loaded
+                MathJax.Hub.Config({
+                    TeX: {
+                        equationNumbers: {
+                        autoNumber: "AMS",
+                        useLabelIds: true
+                        }
+                    },
+                    tex2jax: {
+                        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                        processEscapes: true,
+                        processEnvironments: true
+                    },
+                    displayAlign: 'center',
+                    messageStyle: 'none',
+                    CommonHTML: {
+                        linebreaks: {
+                        automatic: true
+                        }
+                    }
+                });
+
+                MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+            }
+        }
+        init_mathjax();
+    </script>
+    <!-- End of mathjax configuration -->
+<body>
+<h1 style="margin: 0"> 3</h1>
+<div class="display math">
+
+Set theory is almost the foundation for every other subfield of mathematics
+There are many subtleties but that is for a study of set theory
+
+An overcomplete list of axioms out of all the possible axioms
+Sets have elements and are defined as a (unordered)
+
+Un formally, a set $A$ is any unordered collection of objects.
+The definition of an object is not clear, but there is a good recursive definition, which is to define a set itself as an object. The empty set can also be defined as an object by definition, meaning the set with nothing in it
+However, not all objects are sets
+Note however this is possible in the situation of pure set theory, where numbers are defined as sets of sets in the following sense: $\,0 = \{\}, 1 = \{0\} = \{\{\}\}, 2 = \{0,1\}$ and etc. This is actually logically easier but practically tougher
+
+Two sets are equal if every element in $A$ is also in $B$ and vice versa, and the count of similar objects in the set is taken to not really be important, meaning $\{A,A\}=\{A\}$for example
+
+$ARB = A = B \Rightarrow ARA\, \forall A$ since every element in $A$ is of course 'every element in $A$'
+Then, $ARB \Rightarrow BRA$ since if A and B contain the same elements, then of course the converse is true.
+$ARB,BRC \Rightarrow ARC$ is true since if $A,B$ contain the same elements and $A,C$ also contain the same elements, then $B,C$ also contains the same elements
+Therefore, the relation$\,R=\,\in \,$ is actually an equivalence relation between sets, called the membership.
+
+If $a,b$ are objects, or sets, then the union operation is commutative, and associative.
+Proof:
+$A,B,C \Rightarrow$$A\cup(B\cup{C}) = (A\cup B) \cup C$ since the first statement implies that $x\in A,$ or $x \in B \cup C \Rightarrow x \in A,$or $x \in B$ or $x \in C$ which is the same as the second statement.
+
+Set inclusion partially orders sets meaning that some sets are ordered if they are subsets of each other, but there are sets which are not related at all, meaning they contain totally different elements.
+
+Axiom of Specification is the statement let $A$ be a set and $\forall x\in A, P(x)$ is a property related to $x$. Then there exists a set $\{x \in A| P(x)\}$ where $P(x)$ is true.
+
+Sets form a Boolean algebra
+Let $A,B,C$ be sets and $A,B,C \in X$.
+a) There is a minimal element. $A\cup\emptyset = A, A\cap\emptyset=\emptyset$.
+b) There is a maximal element. $A\cup X = X, A \cap X = A$.
+c) There is an identity. $A \cap A = A, A \cup A = A$.
+d) Commutativity for both operations
+e) Associativity for both operations
+f) Distributivity for both operations in relation to the other
+g) $A\cup(X-A)=X,A\cap(X-A=\emptyset$
+h) $X-(A\cup B) = (X - A) \cap (X-B), X - (A \cap B) = (X - A) \cup(X-B$
+Note the duality between the two operations, with the mapping $A\rightarrow X - A$ which flips each operation, and set.
+
+The axiom of replacement is that $A$ be a set and $\forall x \in A,y$ where $y$ is some other object, $P(x,y)$ is a statement relating both $x,y$ such that there is at most one $y$ for which $P(x,y)$ is true. Then there exists a set $\{y|P(x,y),\exists x\}$ such that $P(x,z),\forall z \in$ the previous mentioned set
+
+ex)$\{3,4,5\},P(x,y)=(y=1)$ which is true for every object in the first set, such that $P(x,y)$ for exactly one $y$, meaning that in this situation, the axiom of replacement yields a set which is slightly smaller than the original set
+A set of the form $\{f(x)|x\in\,A\}=\{y:y=f(x)\exists\,x\in\,A\}$
+
+Axiom of infinity is that there exists a set $\mathcal{ N}$ such that the Peano axioms hold. The elements are called natural numbers
+The empty set is $\emptyset$
+It is unique since if there were two such sets, they would contain exactly the same elements, meaning no elements, making them equal by the definition of the equality of sets
+
+Lemma: Let $A$ be a non-empty set. Then, $\exists x | x \in A$
+Proof: Assume this is not true. Then $\forall x, x \notin A$ means that $A = \emptyset$. However, $A\neq\emptyset$ . So this must be true
+
+Singleton sets and pair sets are defined to exist, meaning that if $a$ is an object $\exists \{a\}$ whose only element is $a$, which exists for every object $a$. Also if $a,b$ are objects $\exists \{a,b\}$
+This definition can be extended for any natural number of objects.
+
+Note the definition of equality implies that $\{a,b\}=\{b,a\}, \{a,a\}=\{a\}$
+Given any two sets $A,B$ there exists a set $A \cup B$ called the union $A,B$ whose elements consist of all elements which belong to A,B, or both.
+Ex) $\{1,2\} \cup \{2,\,3\} = \{1,2,3\}$
+
+Sets form a Boolean algebra in the sense they have a group operation, a field operation, and a group to field operation.
+a) They are a group, $G$, if they have an operation which has the properties of the existence of an identity, an inverse for each element, associativity, and closure. If there is no inverse for each element, it's$\,{}{}$a semi-group.
+b) They are also a ring, $R$, if they have an additional operation, which has the properties of associativity, closure, and an identity. However an inverse is not necessary, and the group operation must also be commutative, and it must be distributive with respect to the ring operation.
+Actually these do not form groups in the traditional sense, but only a semigroup, because of the lack of an inverse. However, consider the operation of a symmetric difference $A + B = (A - B) \cup (B - A) = A \cup B - A \cap B$ where the $A + B$ is the symmetric difference operation. Note this describes all the points which are in X or Y, but not both. This operation follows the axioms of a group under the subsets of the set it is defined.
+$A + B \in X,$
+$A + \emptyset = A , A + A = \emptyset$ means that $A = A^{-1},I = \emptyset$. $(A + B) + C = (A + B) \cup C - (A + B) \cap C = (A \cup B - A \cap B) \cup C - (A \cup B - A \cap B) \cap C$$=  A \cup (B \cup C) - A \cap (B \cup C) - {}A {}\cup (B \cap C)- A \cap (B\cap C)  =  A \cup (B \cup C - (B \cap C)) - A \cap (B \cup C-B\cap C) {} = A \cup (B+C{})- A \cap(B+C{})$ $= A +(B+C\,)$
+
+Axiom of regularity states that for every nonempty set $A$ there is at least one element $x$ of A which is either not a set, or is disjoint from $A$
+This prevents the set containing itself paradox.
+
+If an universal set exists, meaning a set which contains all sets, $X = X \cup A$, $A\neq\emptyset$ since the existence of an universal set implies the existence of a set which contains itself. Then, consider the set of sets which do not contain themselves. $\Omega = \{x| x \notin x\}$. Does $\Omega\in\Omega$? If it does , then $\Omega \in \Omega$$\Rightarrow\Omega\notin\Omega$ since $\Omega$ is the set of sets which do not contain themselves. However, if it doesn't $\Omega\notin\Omega$$\Rightarrow\Omega\in\Omega$ since it is a set which does not contain itself. Therefore, both assumptions lead to a paradox, meaning the statement is invalid to make. Therefore, sets are taken to not contain themselves
+
+This paradox is avoided if the following assumption is made.
+$A$ is a set means that $\exists x\in A$ such that $x$ is not a set or is disjoint from $A$. To see this, say that it is possible to have a set which contains itself, ad this axiom. Consider the set which contains itself .$A = \{x,A\}$ is the general form of this set. Then, the set $\{A\}$ must contain an element $y$, such that $y$ is disjoint from $\{A\}$, or it is not a set. However, this means that $y = A$. If $y$ is not a set, this is not possible, meaning by exhaustion $y$ is disjoint from $\{A\}$, which means that $A,\{A\}$ are disjoint sets. However, both contain $A$ by definition, meaning that the $\nexists\,A$, which is a member of itself.
+
+A function is a 'mapping' defined by a property $P(x,y),x\in X, y \in \,Y$ such that there is exactly one $y\in Y,$ for which $P(x,y)$, where $x\in X \rightarrow f(x)\in \ Y$ is the unique element $f(x)\in\ Y$ such that $P(x,f(x))$
+
+ex) Let $X = \mathcal{N},Y=\mathcal{N},P(x,y)=(y=SUC(x))$ . The uniqueness of the successor function means that there is exactly one $y$ for each $x$ for which $P(x,y)$. Therefore, the increment function can be defined $\forall x, f:\mathcal{N}\rightarrow\mathcal{N},f(x) = SUC(x)$ meaning for example then $f(4) = 5, f(2n+3) = (2n + 3) + 1= 2n + 4,$
+Note it is possible to define a decrement function $f: \mathcal{N} - \{0\} \rightarrow \mathcal{N}, x = SUC(y)$
+
+ex) The square root function on the real numbers $f: \mathcal{R} \rightarrow \mathcal{R},P(x,y)=(x=y^2),$ is not a function since $x=4\rightarrow\,y=2,-2$ meaning that $y$ is not unique, and $x=-1\rightarrow\,P(x,y)$ is not true $\forall y \in \mathcal{R}$ , meaning that $X,Y$ should both be restricted to the half line $f: [0,\infty)\rightarrow [0,\infty),P(x,y)=(x=y^2)$
+
+ex) The constant function $f:\mathcal{N}\rightarrow\mathcal{N},P(x,y)=(y=7)$ has all inputs directed to one output, which is fine, because each input has exactly one output, $f(x) = 7,\forall x \in \mathcal{N}$
+
+$P(x,y)\Leftrightarrow\ f(x) = y$
+
+Equality of functions is defined as two functions $f:X\rightarrow\,Y,g:X\rightarrow\,Y$ on the same domain and range, being equal $f = g$ if $f(x)=g(x)\,\forall\,x$
+
+Composition of functions is defined for functions $f: X\rightarrow\,Y,g:Y\rightarrow,Z$ where the range of $f$ is the same set as the domain of $g$ with the definition $g\odot f: X \rightarrow Z,P(x,z)=(P(x,y)\land\,P(y,z))=g(f(x))$
+
+Composition is associative since $f: X\rightarrow\,Y,g: Y\rightarrow\,Z,h:Z \rightarrow\\ W,f\odot(g\odot\,h)$ is a function $X\rightarrow\,W$ since $g\odot\,\,h$ is a function from $Y\rightarrow\,W$ and $f\odot\,g,X\rightarrow\,Z,(f\odot\ g)\odot \,h,X\rightarrow\,W$ meaning they both have the same domain and range, and $((f\odot{g\,})\odot{h{})}(x) = f(g(h))(x)=f(g\odot\,h)(x)=(f\odot{\,(g\,}\odot{h{}))}(x)$
+
+A function is one to one, or injective, $x\neq x' \Rightarrow f(x)\neq f(x)=f(x')$ which is the same condition as $f(x)=f(x')\Rightarrow\,x=x'$
+ex) $f:\mathcal{Z}\rightarrow\, \mathcal{Z},f(n)=n^2$ is not one to one since $-1,1\rightarrow\,1$. However, $g: \mathcal{N}\rightarrow \mathcal{Z}$ is now one to one, if the domain is restricted.
+
+A function is onto, or surjective, $f(X)=Y,\exists\,x\in\,X,f(x)=y,\forall\ y$
+
+A function is bijective, or a one to one correspondence, if it is both injective and surjective.
+Therefore, if $f$ is bijective, there exists an inverse mapping $f^{-1}:Y\rightarrow\,\,X$ called the inverse of f
+
+$g\odot\,f,g(f(x)):X\rightarrow\,\,Z$ is injective since $f(x')=f(x)\Rightarrow\,x'=x,g(f(x))=g(f(x'))\Rightarrow\,f(x)=f(x')\Rightarrow\,x=x'\forall\,x$
+It is also surjective since $g(f(X))=g(Y)=Z$
+
+The empty function is injective $E:\emptyset\rightarrow\,X$ for any set $X$, it is surjective if $X=\emptyset$, and also bijective in the last situation
+
+$g\odot\,f=g\odot\,f'\Rightarrow\,g(f(x))=g(f'(x))\forall{x}$ Since $g(y)=g(y')\Rightarrow\,y'=y,\forall{y,y'},f(x)=f'(x),\forall{f(x),f'(x)}\Rightarrow{f(x)=f'(x)}$. Not necessarily true if $g$ is not injective, since $g(f(x))=g(f'(x))$ is possible without $f(x)=f'(x)$
+
+
+If a function $f: X\rightarrow Y$, then $f(S) = \{f(x):x\in S\},S \subset X$, and is called the image of $S$ under the given map
+
+Note that $f(S)$ can be smaller than $\,S$
+
+For $U\subset Y, f^{-1}(U)=\,\{x\in\,X|f(x)\in\,U\,\}\,$ is called the inverse image of $U$
+An inverse image existing does not mean that $f$ is invertible
+
+Axiom, of the power set is that if $X,Y\rightarrow\exists\,Y^X,$ which is the set of all functions from $X$ to $Y$
+If $Y$ has $n$ elements,$X,m$, $n^m$ elements is the total number of elements in the power set
+Then,$2^X$, the set of all subsets of $X$, is a set also
+
+Axiom of Union is that if elements of a set are sets$,$ there exists a set such that all of its elements are the elements of the sets in this set of sets$\cup_{\alpha\in\,I\,}A_\alpha$ can be defined where $I$ is a set of $\alpha$ call the index set,$y\in\cup_{\alpha\in\,I\,{}}\,A_\alpha$ means that $y\in\,A_\alpha\,\exists\alpha\in\,I$. The union is defined as an element which is in all of the indexed sets
+
+An ordered pair is defined for any objects $x,y$, as the tuple $(x,y)$ which is equivalent to another ordered pair only if the components are equal
+If $X,Y$ are sets, the Cartesian product is defined as $X\times\,Y=\{(x,y)|x\in\,X,y\in,Y\}$ which is equivalent to $a\in(X\times\,{}Y)\Leftrightarrow\exists\,x\in\,X,y\in\,{}Y,a=(x,y)$
+$X\times\,Y{}$ is usually different from $Y\times\,X{}$
+
+If $f:$ is a function from $X\times{}Y$ to $Z$, then $f$ can be looked at as the mapping of a single element, an ordered pair $(x,y)$ to an output in $Z$. Technically, it can also be thought of as a multivalued function from $X,Y$ to $Z$, and both notions are identical in this situation.
+For example, $+:\mathcal{N}\times \mathcal{N}\rightarrow\,\mathcal{N}$ is another way of looking at the addition operation,$(x,y)\rightarrow\,x+y$
+An ordered n-tuple is $(x_1,...,x_n\,$$),x_i$ are all objects, one for each natural number $i$ between $1,n$. The Cartesian product of $n$ sets $(X_i)_i$ is defined as $\Pi_{i=1}^nX_i=\{(x_i)_i|x_i\in\,$$X_i\forall\,1\leq\,i\leq\ {}n$$\}$
+A function from a Cartesian product, to any other set, can be thought of as a function of $n$ variables, a function of one variable, or anything in between. There will be no need to distinguish between all of these, since they all can be put in isomorphism with each other.
+
+The one tuple will be identified with $x$ itself  $\forall$$x$, since they can be put in isomorphism with themselves
+The empty Cartesian product gives the 0 tuple, as the element of a singleton $\{()\}$
+If the Cartesian product of a set is taken with itself, it is usually denoted $X^n=\Pi_{i=1{}}^nX$
+The Peano axioms define the natural numbers in terms of $n,SUC(n),...$ which is more like an ordered counting, then the actual size of sets or objects if defined. This is the difference between cardinals and ordinals. To define cardinality, two sets $X,Y$ are said to be equal in size, or have the same card, if $f:X \rightarrow{Y}$ exists where $f$ is a bijection.
+
+The notion of having equal cardinality is an equivalence relation
+
+A set $X$ is to have cardinality equal to $n,$$\,,$ if it has equal cardinality with $\{i\in \mathcal{N{}{}}|i\leq\,i\leq\,n\}$ and can also be said to have $n$ elements
+
+Let $X$ have cardinality $n$. Then, $X$ cannot have any other cardinality.
+This is true because of the lemma $X$ has cardinality $n$ means that $X-\{x\},x\in\,{X}$ has cardinality $n-1$
+Proof: $\exists\,f:X \rightarrow{\{i=\mathcal{N}\,|}1\leq\,i\leq\,n\}$ is a bi, meaning that $f(x)$ is a natural number. A bi can be formed from $X -\{x\}$ to ${\{i=\mathcal{N}\,|}1\leq\,i\leq\,n-1\}$ by the following rule: $\forall\,x',f(x')< f(x),g(x')=f(x'),\forall\,x',f(x')>f(x),g(x')=f(x')-1$
+Then, $n=0,X=\emptyset,\mathcal{C}(X)=0,n,\Rightarrow\,X, \mathcal{C}(X)=n+1\Rightarrow\,X-{x}$ has cardinality $m-1$ if $X$ has another cardinality $m$, which means that $m-1=n\Rightarrow\,m=n+1$ which is a contradiction, meaning that $n+1$ is the only possible cardinality $X$ can have.
+
+A set is finite if it has cardinality $n$ for some $n\in \mathcal{N}$,and is called infinite if not.
+
+The set of natural numbers $\mathcal{N}$ is infinite.
+Proof: Say there is a bijection $f:\mathcal{N}\rightarrow\,\{i\in\mathcal{N}| 1 \leq i{}\leq{}n\}$ . If a possible bijection is formed, such that $\mathcal{N}-\{i\in\mathcal{N}| 1 \leq i{}\leq{}n\}$$\rightarrow\{i\in\mathcal{N}| 1 \leq i{}\leq{}n\}$, then $n+1$ is not included in this bijection, or any $n$ greater, meaning that such a bijection
+cannot be formed
+
+A cardinal arithmetic can be created in terms of unions and Cartesian products, and powersets, instead of the arithmetic created, Peano, by the Peano axioms, but that is another discussion, even though it is fairly straightforward.
+</div></body>
+</html>
