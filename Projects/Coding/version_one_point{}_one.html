@@ -12,6 +12,23 @@
   type="text/javascript"></script>
 </head>
 <body>
+<h1> Summary/Overview</h1>
+Cointegration of stock pairs was done across a backtesting period of 500 points, with a roll forward of 200 on hourly data, based on 470 individual stocks from the SP 500 across 5 time periods with the use of the Engel Granger Test. None of them passed all 5 periods with a p-value < .05, but a few pairs were able to pass 3/5 periods, with exactly one being able to pass 4/5.
+
+The categorization of time periods is done by the starting datetime index, where 0 is roughly an hourly datetime in 2022, randomly chosen. <br><br>
+
+The graph of the trading positions given in the 4th time period, characterized by a shift of 1500, is shown below
+<img style="width: 100em;margin-top: 2em" src="Example_graph_version_one_pointt_one.png" alt=""></img><br>
+The results of the stock pair being simulated across the first three time periods it passed are shown.
+
+<pre><code>
+1000 Sharpe Ratio  1000 Total Return [%]  1000 Alpha  500 Sharpe Ratio  500 Total Return [%]   500 Alpha  0 Sharpe Ratio  0 Total Return [%]    0 Alpha  1000 Beta  500 Beta    0 Beta
+(LII, ZBRA)           1.611765               0.713498    0.122776          5.045619              2.339839    0.451484        6.113495            4.683680   1.352321   0.537455 -1.310287
+</code></pre>
+
+
+
+
 <h1 id="revised-hypothesis-and-approach">Revised Hypothesis and
 Approach</h1>
 <p>The first step is to realize I need a more precise, hypothesis.
@@ -347,10 +364,12 @@ periods. It seems there are none which are cointegrated across all 5
 time periods. This could be due to regime shifts. Or, at the least,
 overall different market conditions.</p>
 <p>Portfolios are simulated, with a roll forward of 200, and 300, data
-points. The stocks, which are cointegrate The parameters of the roll,
-and the cutoff z-score, are triggers, which are triggers used to
-enter/exit pos The metrics of <code>total_return_percentage</code> &gt;
-0, <code>Sharpe</code> Rolling forward, with a validation period, to
+points. The stocks, which are coint, are listed as the indices, to keep track of how they perform on each of the time periods. The parameters of the roll,
+and the cutoff z-score are triggers, used to
+enter/exit positions.
+The metrics of <code>total_return_percentage</code> &gt;
+0, <code>Sharpe</code> > 1.0, and at least 30 trades are used to filter the results.
+Rolling forward, with a validation period, to
 determine the mean reversion parameters, was done with the following
 code</p>
 <pre><code>def objective(trial:optuna.trial.Trial):  
@@ -388,7 +407,8 @@ code</p>
 6  52.495792           50            1.287840
 2  45.287221           40            1.182545</code></pre>
 <p>The simulation of the portfolio, based on custom code, gave the
-results below The best stocks by total return were</p>
+results below.
+The best stocks by total return were</p>
 <pre><code>
 1000 Sharpe Ratio  1000 Total Return [%]  1000 Alpha  500 Sharpe Ratio  500 Total Return [%]   500 Alpha  0 Sharpe Ratio  0 Total Return [%]    0 Alpha  1000 Beta  500 Beta    0 Beta
 (LII, ZBRA)           1.611765               0.713498    0.122776          5.045619              2.339839    0.451484        6.113495            4.683680   1.352321   0.537455 -1.310287 -0.222065
