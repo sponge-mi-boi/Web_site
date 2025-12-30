@@ -6,50 +6,46 @@
     <script src="../../marked.min.js"></script>
     <script src ='../../script.js'></script>
 </head>
-<body style="display: flex;  flex-direction: column; align-items: center; margin: 0 5em">
+<body style="display: grid;  grid-template-columns: auto auto auto; grid-template-rows: auto auto auto auto; gap: 0; grid-template-areas: 'top top top' 'left-one ar right-one' 'left-two ar right-two' 'left-three ar right-three';align-items: center;justify-items: center">
+<div style="display: flex; grid-area: top;flex-direction: column;align-items: center;" >
     <h1 >Alpha-Generation Backtesting Framework</h1>
     <h4>This is a documentation and description of my Python-based signal generation and analysis framework to create alpha-generating (α Gen) strategies based on time-series data of various stocks in the SP 500.</h4>
-    <div style="align-self: baseline; display: flex; align-items: center; justify-content: space-between">
-        <div class="column" style="max-width: 40em; align-self: baseline; border-style: solid">
+</div>
+        <div style="max-width: 40em;flex-direction: column;padding: 1em;align-self: flex-start; display: flex;align-items: center; border-style: solid; grid-area: left-one">
             This provides an overview of the approach, including list of methods that will be experimented, the tools that will be used, and the approaches which will be looked at. <br>
 
             <br>
-            <a href="output_b.html">Overview (|) </a>
-            <a href="output___.html">Pandas Dataframe reference</a>
+            <a href="Overview_first_version_0_0.html">Overview (|) </a>
+            <a href="DataFrame_reference.html">Pandas Dataframe reference</a>
            <br>
+        </div>
+<div style="max-width: 40em; flex-direction: column;; display: flex;align-items: center; border-style: solid; margin: 2em;padding: 1em;grid-area: right-one">
 
             <div style="font-size: medium"><h3 style="margin-bottom: 0">Version 0.1 </h3></div>
             <p>            The initial focus is on OOP design for efficiency,
                 but different classes of strategies and methods of portfolio allocation will be tested and analyzed later.</p>
 
 
-                <a href="Part1.html"> Basic α Gen. Framework: Part 1 (|)</a>
-                <a href="Part2.html"> Basic α Gen. Framework: Part 2 (|)</a>
+                <a href="Version_0_1_Part1.html"> Basic α Gen. Framework: Part 1 (|)</a>
+                <a href="Version_0_1_Part2.html"> Basic α Gen. Framework: Part 2 (|)</a>
 
 
             Conclusion: Using OOP is horrible for strategy testing since it seems it is difficult to define an instance of a
             strategy with a method that is scalable, and it does not seem natural to give such a description.
         </div>
-        <svg style="margin: 1em 0 10em 0" width="210">
 
-            <line x1="10" y1="5" x2="100" y2="5" stroke="white" stroke-width="3"/>
-            <polygon points="100,0 100,10 110,5" fill="white"/>
-        </svg>
-        <div class="column" style="align-items: baseline; justify-content: space-evenly;">
-            <div class="column" style="max-width: 40em; align-self: baseline; border-style: solid">
+    <div style="flex-direction: column; display: flex;align-items: center; max-width: 40em; margin-top: -5em;align-self: start;border-style: solid;padding: 1em; ;grid-area: left-two;">
                 <div style="font-size: medium">
                     <h3 style="margin-bottom: 0">Version 0.2 </h3> </div>
                 <p>
                     A module of various methods is used and the focus is on execution, not architecture.
                 </p>
 
-                <a href="output_.html">Function based Framework: Part 1 (|) </a>
+                <a href="Version_0_2.html">Function based Framework: Part 1 (|) </a>
             </div>
-            <svg style="margin-bottom: -10em" width="210">
-                <line x1=105 y1="10" x2="105" y2="50" stroke="white" stroke-width="3"/>
-               <polygon points="100,50 110,50,105,60" fill="white"/>
-            </svg>
-            <div class="column" style="max-width: 40em; margin-top: 5em; align-self: baseline; border-style: solid;">
+
+<div style="flex-direction: column; display: flex;align-items: center; border-style: solid; padding: 1em;; max-width: 40em;grid-area: right-two">
+
                 <h3 style="margin-bottom: 0">Version 1.0</h3>
                 <p>
                 The operations are fully vectorized with the use of Dataframes instead of series with lists. The result is a working
@@ -59,19 +55,15 @@
                 stocks which satisfy various attributes are categorized. Also, graphs are given of greatly performing pairs in the
                 example time period. Parameter optimization will be done next, along with validation testing.
                 </p>
-                    <a href="version_one_preview.html">The set up for the execution of the custom methods.</a>
-                    <a href="version_one.html">Function based, Working, Backtesting Framework </a>
+                    <a href="Version_1_preview.html">The set up for the execution of the custom methods.</a>
+                    <a href="Version_1.html">Function based, Working, Backtesting Framework </a>
                 Conclusion: It seems the idea is right, but some of the results are not as accurate, because I actually implemented
                 the beta-based, portfolio weights, wrong. The full, correctly implemented, list of methods, along with optimization
                 parameters, will be implemented.
             </div>
-        </div>
-    </div>
-    <svg style="margin-bottom: -10em" width="210">
-        <line x1=0 y1="10" x2="100" y2="10" stroke="white" stroke-width="3"/>
-        <polygon points="0,10 5,15 5,2-1" fill="white"/>
-    </svg>
-    <div class="column" style="max-width: 40em; align-self: baseline; border-style: solid;margin-top: -5.0em">
+
+<div style="flex-direction: column; align-self: start;display: flex;align-items: center; max-width: 40em; margin-top: -15em; margin-bottom: 2em; border-style: solid;padding: 1em; grid-area: left-three">
+
         <div style="font-size: medium">
             <h3 style="margin-bottom: 0">Version 1.1 </h3> </div>
         <p>
@@ -79,8 +71,18 @@
             based wights for the entry/exit is corrected, and the best stock pairs are shown. Also, the mathematical framework is given
             for this whole process, and in generality
         </p>
-            <a href="version_one_point%7B%7D_one.html">Revised Backtesting Example and Results with a full report </a>
-            <a href="f.html">Graphs</a>
+            <a href="Version_1_.html">Revised Backtesting Example and Results with a full report </a>
+            <a href="Version_1_Graphs_.html">Graphs</a>
     </div>
+<div style="flex-direction: column; align-self: start;display: flex;align-items: center; max-width: 40em; margin-top: 5em; margin-bottom: 2em; border-style: solid;padding: 1em; grid-area: right-three">
+
+    <div style="font-size: medium">
+        <h3 style="margin-bottom: 0">Version 1.2 </h3> </div>
+    <p>
+        Cointegration is done on daily data, with as much precision, with the goal being to conduct a rolling forward, validating backtest which is replicable. Future goals are to do this over several periods to find patterns in terms of cointegrated assets and to find optimal parameters to a greater degree of accuracy.
+    </p>
+    <a href="Version_1_2.html">Report </a>
+    <a href="Version_1_%202_Graphs.html">Graphs</a>
+</div>
 </body>
 </html>

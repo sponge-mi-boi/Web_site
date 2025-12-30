@@ -1,0 +1,197 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" href="../../style.css">
+<title>t</title>
+
+<script
+src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
+type="text/javascript"></script>
+</head>
+<body >
+<h1> Results/Overview</h1 >
+<p>
+PCAR, IP are the cointegrated pair which perform consistently out-of-sample at daily frequency with Sharpe > 2, Alpha > 1.4 individually as a pair for a maximally invested portfolio.
+    Here is the graph of its performance upon one testing period z_threshold = 1.5, roll = 2 9, initial_cash = 1000 </p>
+<img style="width: 100em;margin-top: 2em; align-self: center" src="Version_1_2_Example.png" alt=""></img>
+
+<div style="display: flex" >     <img style="width: 50em;margin-top: 2em; align-self: center" src="Version_1_2_Hist.png" alt=""></img>
+    <img style="width: 50em;margin-top: 2em; margin-left: 2em; align-self: flex-end" src="Version_1_2_Table.png" alt=""></img>
+</div>
+<h1> Hypothesis/Background</h1 >
+<p>The goal is to finalize the back testing process and to arrive at a tangible result as related to cointegration pairs.
+
+<span class="math inline">\(V(a)\)</span>is the value of an asset, <span class="math inline">\(C\)</span> is the amount of cash, <span class="math inline">\(P\)</span> is the portfolio object, <span class="math inline">\(M\)</span> is the market, and <span class="math inline">\(A=\{a_i\}\)</span> is the set of all non-cash assets, <span class="math inline">\(A_S\)</span> is the non-cash short value of the assets, and <span class="math inline">\(A_ L\)</span> is the non-cash long value of the assets, with <span class="math inline">\(\delta V(a )\)</span> is the change in the value of the asset over a given <span class="math inline">\(\delta t = 1\)</span> unit in time, and all values being considered functions of time <span class="math inline">\(V(a).\)</span><span class="math inline">\(w_i = w(a_i)\)</span> is the weight of asset <span class="math inline">\(a_i\)</span>, with <span class="math inline">\(\sum_iw(a_i) = 1 - w_c\)</span>, where the <span class="math inline">\(w_c\)</span> is the weight of the cash.<span class="math inline">\(\beta (V(a_i )) = \beta (V(a_i),V(M ) )  = \beta _i\)</span> is the beta of the asset <span class="math inline">\(V(a_i)\)</span> on a given time period with respect to the defined market.
+
+Note the relationship that if there are <span class="math inline">\(n\)</span> points in time, there are <span class="math inline">\(n-1\)</span> changes in time, meaning if <span class="math inline">\(V(a)(t_i)=V_i\)</span>, the return series of the asset <span class="math inline">\(\delta V(a)\)</span> is defined as <span class="math inline">\(\delta V(a)(t)=V(a)(t)-V(a)(t-1)\)</span>. Then, <span class="math inline">\(\Delta{}V(t)=V_0\prod_{t=1}^n\delta  {}V(a ) t\)</span>, meaning <span class="math inline">\(V(t_n) = V_i + \Delta V(t)\)</span>
+The value of a portfolio is the sum of the assets and the cash in it defined on the interval <span class="math inline">\([t_i,t_f]\)</span> with the initial condition <span class="math inline">\(V(P)(t _ i ) = C( t_ i) = C_0\)</span>, meaning the initial amount is just the cash allocated to be used.
+At any other time <span class="math inline">\(t > t_i\)</span>,  <span class="math inline">\(V(P)=C+V(A)=C+V(A_L)-V(A_S),\delta (V(P))=V(P)-C_0=C+V(A_L)-V(A_S)- C_0 = \delta C+V(A_L)-V(A_S)\)</span>
+At the next given moment in time,
+<span class="math inline">\(V(A_S{}) =\delta V(P)_{S},V(A_L) =\delta V(P)_{L}\)</span> , <span class="math inline">\(\delta V(P)=\delta C+\delta V(A_L)-\delta V(A_S)\)</span>
+
+A portfolio should always be continuous in value as a function of time <span class="math inline">\(V(P)(t)\)</span>.
+However, if there are <span class="math inline">\(n\)</span> total entries/exits of positions in the given time period for the assets in the portfolio, <span class="math inline">\(C(t),V(A)(t)\)</span> will have <span class="math inline">\(n\)</span> total jumps each. Therefore, <span class="math inline">\(V(P)(t)\)</span> 's behavior is primarily on the behavior of the assets during the time periods between each of the jumps, and the placement of the jumps, along with the number of them.
+If there are no jumps, the value of the portfolio is the value of each of its assets
+If the assets are just trending up during the time period, there is no point in having any jumps, and the best portfolio would be <span class="math inline">\(n=0\)</span> jumps. If there are some different trends, the ideal portfolio is to have a long positions during trending up periods, and short positions during trending  periods. Of course, the goal is to predict the next trend, given the trends up to that point in time.
+<span class="math inline">\(\sum\delta C\)</span> over the entire interval is just a sum of the entry/exit prices of each of the positions held, meaning a finite sum of jumps, while there is no evolution essentially between each of these jumps, meaning that the evaluation of the assets determines the portfolio at these time steps
+
+Given a <span class="math inline">\(C_0\)</span>, there is a choice as to how much of the investment of the cash should be in each of the assets, and how much cash to not invest. The portfolio with the maximal possible return would be to invest all the cash into the most profitable asset. However, this is not actually known. If each asset has an initial investment of <span class="math inline">\(w_iC_0\)</span>, and <span class="math inline">\(w_cC_0\)</span> is the amount of cash not invested, <span class="math inline">\(V(A{})=(1-w_c)C_0\prod_t(1+\delta V({}A{}){})\)</span>   since <span class="math inline">\(V(a_{i\ })={}w_iC_0\prod_t(1+\delta V(a_{i }){})\)</span>, which means <span class="math inline">\(V(P)=\sum_iV(a_i{}){}+C_0(1-\sum_iw_i)=\sum_i{}w_iC_0\prod_t(1+\delta V({}(a_{i }){}){}+ \ C_0(1-\sum_iw_i)=C_0 +C_ 0\sum_iw_i (\ (\prod_t(1+\delta V({}(a_{i }))-1)\)</span>  <span class="math inline">\(\Rightarrow \delta {V(P{)=}}\sum_iw_i (1+\delta V (a_{i })-1)=\sum_iw_i\delta V(a_i\ )\)</span>
+<span class="math inline">\(\beta (\delta (V(P),\delta (V(M{}) )=\beta (\sum_iw_i\delta V(a_i\ ),\delta V(M{} )  )=\sum_iw_i\beta (\delta (V(a_i {}) )\)</span>
+
+<span class="math inline">\(n\)</span> sample-points<span class="math inline">\(\ \hat{Y},\hat{X },Y=\beta X+\alpha {}\)</span><span class="math inline">\(,Q=\sum_{i=1}^n(\hat{Y} _i-Y)^2\)</span><span class="math inline">\(=\sum_{i=1}^n(\hat{Y} _i-{}{}{}(\beta X+\alpha){}) {}^2\ {}\)</span> <span class="math inline">\(\Rightarrow \partial_\beta Q =\sum-2X(\hat{Y} _i-{}{}{}(\beta X+\alpha)) = 0, \partial_\alpha  Q =\sum-2(\hat{Y} _i-{}{}{}(\beta X+\alpha))=nE(\hat Y{})-\beta E(X)n+\alpha\ n=0\)</span> <span class="math inline">\(\Rightarrow E(Y)=\beta E(X)+\alpha \,\)</span> <span class="math inline">\(\Rightarrow \sum-X(\hat{Y} _i-{}{}{}(\beta X+E(Y)-\beta E(X)))\)</span><span class="math inline">\(\Rightarrow \sum-X({Y}-E(Y)) +\beta X^2-\beta XE(X)=\sum-X({Y}-E(Y)) +E(X\ )({Y}-E(Y))+\beta X^2-\beta XE(X\ )-\ E(X\ )({Y}-E(Y))\)</span> <span class="math inline">\(=\sum-(X-E(X\ ) )({Y}-E(Y)) +\beta X(X-E(X\ ))-\ E(X\ )({Y}-E(Y))\)</span>  <span class="math inline">\(=nCov(X,Y\ )+\sum\beta X(X-E(X\ ))-\ E(X\ )({Y}-E(Y))-\ \sum\beta E(X\ \  )({X}-E(X))=nCov(X,Y\ )+\sum\beta (X^2-2E(X\ \  )({X}\ -E(X)^2)=-nCov(X,Y\ {}) +\beta nCov(X,X\ {}) =0\Rightarrow \beta =\frac{Cov(X,Y)}{Var(X) }\)</span> <span class="math inline">\(\Rightarrow \alpha =E(Y)-\beta E(X\ ),\)</span>
+Defining the vectors <span class="math inline">\(\ Y=>Y_i\,\hat{Y }=>\hat {Y_i}\)</span> <span class="math inline">\((\hat{Y}-Y)^T(\hat{Y}-Y\Rightarrow \partial_Y{Q}=(\hat{Y}-Y)^T(-1)+(-1)^T(\hat{Y}-Y)=\sum_i(\hat{Y}-Y)_i(-1)+\sum_i(-1)(\hat{Y}-Y)=-2\sum_i(\hat{Y}- (\beta X+\alpha){})=0\)</span>
+
+(t_i,t_f,test_len,roll_len) = n periods`
+A viable strategy is defined perhaps by the following factors
+The period of testing <span class="math inline">\((t_0,t_f)\)</span>
+Return/Metric Statistics
+Total return across this period <span class="math inline">\(TR = V(P)_f - C_0\)</span>
+Sharpe ratio <span class="math inline">\(SR = \frac{E(V(P))}{\mathcal{V(} V(P)){}}\)</span>
+Signal generation:
+Size of the roll: <span class="math inline">\(r\)</span>
+No trading on the period<span class="math inline">\((t_0,t_0+r)\)</span>
+Trading on the period <span class="math inline">\((t_0+r,t_f)\)</span>
+Given a signal time series <span class="math inline">\(X(t)\)</span>, <span class="math inline">\(E(r,X)\)</span> is the rolling mean series of size r, defined on the interval <span class="math inline">\((t_0+r,t_f)\)</span> , the standard deviation<span class="math inline">\(\mathcal{STD}(r,X)=\sqrt(\sum_{t=t_0}^r(X(t)-E(r,X))^2)\)</span>, and the z-score <span class="math inline">\(Z(t)=\frac{X(t)-E(r,X)(t)}{\mathcal{STD}(r,X )(t)}\)</span>
+<span class="math inline">\(X(t)=\delta V(a_i)(t)\)</span> is the usual setup in standard mean reversion of a stock
+<span class="math inline">\(X(t)=V(a_1)(t)-V(a_2)(t\beta  (V(a_1{}),V({}a_2))\)</span> is the setup in cointegration if <span class="math inline">\(\text{Coint}(V(a_1),V(a_2) )\)</span> is true.
+In this situation <span class="math inline">\(X(t)\)</span> is defined on the interval <span class="math inline">\((t_0+r',t_f),,r'< r \,\)</span>
+                                                    <span class="math inline">\(\ \beta  (V(a_1{}),V({}a_2))\)</span> can be calculated as a rolling quantity on <span class="math inline">\((t_0+r,t_f)\)</span>
+                                                    <span class="math inline">\(\delta V(P{{}})=\delta (\sum_iV(a_i))+\delta C=\beta (\delta (V(P\ ),\delta (V(M{})) ) \delta (V(M{}){}\ )+\alpha +\epsilon {}\)</span>
+                                                    <span class="math inline">\(\delta V(P)=\delta\sum_iV(a_i) \Rightarrow \beta ( \delta\sum_iV(a_i),\delta (V(M{})) )=\sum_i\beta (\delta{}V(a_i{)},\delta (V(M{})) )\)</span>
+                                                    <span class="math inline">\(V(a_i)=q_iP(a_i)\)</span> <span class="math inline">\(V(a_1)(t)=V(a_2)(t\beta  (V(a_1{}),V({}a_2){}\Rightarrow q_1P(a_1 )=q_2P(a_2\beta  (V(a_1{}),V({}a_2) )\)</span>
+                                                    <span class="math inline">\(\ \Rightarrow q_1\frac{P(a_1 )}{P(a_2 ){}\beta  (V(a_1{}),V({}a_2) ) }=q_2\)</span>
+                                                    <span class="math inline">\(V(P ) > 0\)</span> is the condition to always be able to pay off the loss of the portfolio
+Setting a static cap of <span class="math inline">\(V\)</span> to be <span class="math inline">\(C_0\)</span>, <span class="math inline">\(|q_1|=[\frac{C_0}{P(a_1 )}]\)</span>
+</p>
+<h1> Data/Approach</h1 >
+<p>
+The data is of daily frequency from the <span class="math inline">\(SP\, 500\)</span> of <span class="math inline">\(46 {}6\)</span> stocks. There are roughly 2515 data points, which have no NA values in total.
+There are <span class="math inline">\(466*(465 )/2\)</span> pairs which are possible, meaning to reduce the amount of pairs which can be back tested, the cointegration test is executed on each of these pairs. To set some relevant bench<span class="math inline">\({}\)</span>mark, the data is tested for cointegration`(t_i,t_f,test_len,roll_len)` = <span class="math inline">\((0,17 50,500,250 )\)</span>, meaning a period of the given range with the given length of the test, 500, and the roll of the test up to the next range, 250. There are 6 periods here, and the condition for the benchmark is that 2 of the periods must pass the Engle-Granger test with a <span class="math inline">\(FILTER =\)</span> (p-value < 0.0500).
+</p>
+<pre><code>
+def cointegration_filter(cur_stock,graphs=False):
+    cur_pair=get_time_period(cur_stock['stock_list'],True, freq=cur_stock['freq'], num_data_points=cur_stock['num_p'],shift=int(cur_stock['shift_parameter'])+1)
+    cur_stock = cur_stock['stock_list']
+
+    model = m.OLS((cur_pair[cur_stock[0]] ), m.add_constant( (cur_pair[cur_stock[1]]))).fit()
+    results = coint(np.log(cur_pair[cur_stock[0]] ),np.log(cur_pair[cur_stock[1]]))[1]
+    if graphs:
+    return model.resid.rolling(28).mean().vbt.plot(title=tuple(cur_stock[0:2]).__str__()). to_html(include_plotlyjs='cdn',include_mathjax=False,auto_play =False,full_html=False)
+    arr = np.array([False])
+    if results < .05 + .001 +0:
+    arr = np.array([True])
+    return arr
+</code></pre><p>
+There are 500 plus pairs which satisfy this condition. If the condition is to pass 3 of the periods, the amount of pairs is 47.
+Using the first condition, each of the pairs will be tested on the remaining points with a range of test, and roll.
+
+
+    <br>
+Note there is a few approaches here it seems.
+There can be the chosen parameters, or there can be the chosen time period, but either one can be chosen first to optimize, and be accurate
+
+<br>
+Optimization of parameters and selection of assets can be done on the same period.<br>
+The condition for a successful test as a first filter
+
+<span class="math inline">COND =SR > 1.7, TR > 0</span> where the given values are the averages over the periods</p>
+<pre><code>
+def port_sim(pa,graphs=False):
+    stock_one,stock_two = pa['stock_list']
+    init_money = pa['init_money']
+    args=pa['parameters_']
+    outer=pa['outer']
+    freq = pa['freq']
+    shift_parameter = pa['shift_parameter'] - 500
+    va_ = get_time_period(pa['stock_list']+['SPY'], custom_data=True, num_data_points=pa['num_p'] ,shift=shift_parameter + 501,freq= pa['freq'])
+    va = va_[pa['stock_list']]
+    rolling = args[1]
+    r= va[stock_one].rolling(rolling).cov(va[stock_two])
+    var = va[stock_two].rolling(rolling).var()
+    beta = r/var
+    pa =  pa['stock_list']
+
+    va_diff =  va[stock_one] - beta * va[pa[1]]
+
+    list_r = va_diff.rolling(rolling)
+    z_score = (va_diff - list_r.mean()) / list_r.std()
+
+    z_score = z_score.dropna()
+
+    z_threshold = args[0]
+    exits = ((z_score > z_threshold) & (z_score.shift(1) < z_threshold)) + 0
+    entries = ((z_score < -1 * z_threshold) & (z_score.shift(1) > -1 * z_threshold))+0
+    init_cash = init_money
+    a_1 = (init_cash/va[pa[0]])
+    a_2 = ((a_1*(va[pa[0]]/va[pa[1]])*(1/beta)) + 0)
+
+    entries_exits = a_1*(entries - exits) + 0
+    entries_exits_ = -a_2*(entries - exits) + 0
+    entries_exits = pd.concat([entries_exits,entries_exits_],axis=1)
+
+    entries_exits.columns = pa[0:2]
+    entries_exits = entries_exits.replace(0,np.nan).ffill().fillna(0,)
+
+
+    data_close = va[pa].loc[entries_exits.index]
+    sold_ideal = (1/data_close * init_cash).astype(int)
+    quantities_practical = (entries_exits/entries_exits.abs())*(sold_ideal * ((sold_ideal < entries_exits.abs()) + 0) + ( entries_exits.abs()* (entries_exits.abs() <= sold_ideal) + 0))
+    entries_exits = quantities_practical
+    benchmark = va_['SPY'].pct_change()
+    benchmark_ = (1+benchmark).cumprod()
+
+    p = v.Portfolio.from_orders(close=data_close, log= True, size=entries_exits,size_type='TargetAmount',
+    init_cash=init_cash, freq=freq,cash_sharing=True)
+    metrics = [x for x in p.stats().index if 'Trade' not in x ]
+    metrics.remove('Benchmark Return [%]')
+    metrics.remove('Win Rate [%]')
+    metrics_values = pd.concat([p.stats()[metrics].to_frame(),p.returns_stats(benchmark_rets=benchmark).iloc[-7:].to_frame()]).squeeze()
+
+
+
+
+
+    r = p.value().pct_change().rolling(rolling).cov(benchmark)/benchmark.rolling(rolling).cov()
+    beta_ = p.value().pct_change().cov(benchmark)/benchmark.cov(benchmark)
+    if bol:
+    if not graphs:
+        return  [metrics_values[x] for x in metrics_values.keys() if any([y in x for y in outer])] + [len(p.positions.records_readable)]
+</code></pre><p>
+    There was attempted optimization with `Optuna`
+</p><pre><code>
+    def objective(trial:optuna.trial.Trial):
+        pairs = pd.read_parquet('Cointegration7periods017 50.parquet')
+        pairs = pairs.drop(columns=pairs.columns[-4])
+        pairs =     pairs[pairs.sum(axis=1) > 2].index
+        parameters =    list(range(1750, 2500 - 200*2, 250 ))
+
+        name = 'cidt.parquet'
+        z_threshold = trial.suggest_float('z_threshold', 1.1, 1.8)
+        roll = trial.suggest_int('roll', 20,40,step=10)
+        results = runner_multiple(pd.DataFrame(index=[tuple(x) for x in pairs if 'SPY' not in x]), parameters,port_sim,init_money=1000,inner=None,num_p=  500,outer=['Total Return' , 'Sharpe', 'Alpha', 'Num'],freq='d', parameters_=[z_threshold,roll])
+
+        results = results[[x for x in list(results.columns) if 'Alpha' in x]].mean(axis=1).mean()
+        return results
+    </code></pre>
+ <p>
+    Condition: Maximize the average Alpha of the pairs which pass $FILTER$ and satisfy
+     <span class="math inline" > COND</span>
+    The defined best strat which results
+     <span class="math inline" >\(STRAT =(\text{Coint},a_1,a_2,r=25,r'={} 2 5,z_{\text{cutoff}} =1.  5 9)\)</span>
+
+    Using this strategy with<br >
+    Period:  <span class="math inline" >\((1750,2150,2158,2515) \)</span>
+ <br>    And the condition for a successful test <span class="math inline" >\(COND_2 = SR>1.7, TR > 0, A > 1\)</span>
+   <br>  There are 5 pairs which satisfy <span class="math inline" >\(COND_2\)</span> and the graphs are shown below
+     <a href="Version_1_%202_Graphs.html">Link</a>
+ </p>
+<h1> Results/Conclusion</h1 >
+<p >
+There could be state bias in terms of the two year period being tested on. However, it could still be accurate if it not actually be able to be classified as one state.
+<br>There could be a more general strategy of determining cointegration based on a first set of points and then executing it on the next period, and then rolling forward. Similar to the above, but not necessarily looking for long term execution of <span class="math inline">\(5 0 0\)</span> points, but rather in the <span class="math inline">\(1 0 0\)</span> range
+    <br></br>However, this can be replicated as outlined to reasonable accuracy</p>
+</body>
+</html>

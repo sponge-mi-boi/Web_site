@@ -41,7 +41,9 @@ span.c1{
     color: turquoise;
 
 }
-
+span.display{
+    margin: 0;
+}
 
 .column{
     display: flex;
@@ -68,7 +70,7 @@ span.c1{
     flex-direction: row;
 }
 
-.display.math{display: block; text-align: left; margin: 0.5rem auto; white-space: preserve-breaks; line-height: 2em}
+.display.math{display: block; text-align: left; margin: 0.5rem 0; white-space: preserve-breaks; line-height: 2em; max-width: 100em}
 ul{
 
     justify-content: inherit;
