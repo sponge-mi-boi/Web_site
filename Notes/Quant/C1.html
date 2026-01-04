@@ -43,25 +43,25 @@
   <!-- End of mathjax configuration -->
 </head>
 <body>
-<h1 id="Chapter-1" style="align-self: baseline">Chapter 1</h1><h2 id="Content" style="align-self: baseline">Content</h2>
-<div class="math display">
-Usually, probability is learned in two diff manners, meaning as a continuation of discrete probabilities and later as a measure define on the sigma algebra of a set. The latter is useful for especially uncountable spaces, and is completely rigorous.
+<h1 id="Chapter-1" style="align-self: baseline">Chapter 1</h1>
+<div class="math display">(Note: This will be based on my notes from Shreve, Volume 2, Chapter 1/2)
 
+Usually, probability is learned in two different manners, meaning as a continuation of discrete probabilities and later as a measure define on the sigma algebra of a set. The latter is useful for especially uncountable spaces, and is completely rigorous.
 
-An infinite probability space is used to model a random situation with infinitely many p
+An infinite probability space is used to model a random situation with infinitely many possible
 Consider an experiment with the infinite number of tosses of coins. The set of infinite sequences of each possible toss is the sample space. Another example is the unit interval
 
 Definition: Let $\Omega$ be a nonempty set and let $\mathcal F$ be a collection of subsets of $\Omega$ . $\mathcal F$ is a $\sigma-$algebra provided
 $\emptyset \in \mathcal F$
-if $A \in \mathcal F \Rightarrow A^c \in \mathcal F$
-if $\{A\}_i \in \mathcal F\Rightarrow \cup_{n=1}^\infty A_n \in \mathcal F$
-If $A,B \in$ a sigma algebra then the unions of the sets in a sigma algebra are also in the sigma algebra and the entire set $\Omega$ being the compliment of the empty set is in it too.
+  if $A \in \mathcal F \Rightarrow A^c \in \mathcal F$
+  if $\{A\}_i \in \mathcal F\Rightarrow \cup_{n=1}^\infty A_n \in \mathcal F$
+  If $A,B \in$ a sigma algebra then the unions of the sets in a sigma algebra are also in the sigma algebra and the entire set $\Omega$ being the compliment of the empty set is in it too.
 
 Note that $\mathcal{F{}}$ $\subset P(\Omega)$, meaning the powerset of $\Omega$. Therefore, there are $\Omega$, being of cardinality $|\Omega{}{}|{}{}$, meaning ${2^{|\Omega{}|{}}{}}^{|\Omega{}|{}}$ = $2^{|\Omega{}|{}{^2}}$
 
 Definition: Let $\Omega$ be an nonempty and let $\mathcal F$ be a algebra of subsets of it. A probability measure $P$ is a function that to $\forall A \in \mathcal F | P(A)\in\mathcal R, P:\mathcal{F{}}\rightarrow \mathcal{R}$ where a number is assigned in .  It is require
-$P(\Omega) = 1$
-$\{A\}_i \in \mathcal F \Rightarrow P(\cup_{n=1}^\infty A_n)= \sum_{n=1{}}^\infty$$P(A_n)$  : countable additivity, note that the sequence of sets is disjoint
+  $P(\Omega) = 1$
+  $\{A\}_i \in \mathcal F \Rightarrow P(\cup_{n=1}^\infty A_n)= \sum_{n=1{}}^\infty$$P(A_n)$  : countable additivity, note that the sequence of sets is disjoint
 $(\Omega,\mathcal F, P)$ is called a probability space
 
 $P(\emptyset) = 0$ since $P(\emptyset ... \cup .... \emptyset)= P(\emptyset) = \sum_{n=1}^k P(\emptyset) = k P(\emptyset) \Rightarrow P(\emptyset) = 0$ is the only possibility for any integer $k$

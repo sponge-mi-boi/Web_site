@@ -9,50 +9,62 @@
 </head>
 <body style=" justify-content: space-evenly; align-items: center; align-self: center">
 <h1>About</h1>
-<div class="column" style="flex-direction: row; justify-content: flex-start" >
-    <div class="column" style="border-style: solid;  padding:1em; margin-left: -1em; margin-top: 2em; margin-bottom: 2em; max-width: 40em">
-        <h2 style="margin-top: 0">Skills</h2>
+<div style="display: grid;  grid-template-columns: auto auto; grid-row: auto; gap: 0; grid-template-areas: 'left right';align-items: center;justify-items: center">
 
+    <div class="column" style="border-style: solid;  padding:1em; grid-area : left; margin-top: 2em; max-width: 40em">
+        <h2 style="margin-top: 0">Skills</h2>
+            <ul>
+                <li>
             Python: Created a backtesting framework. Current project on the most profitable alpha generation strategies for time Series data.
-                <ul style="flex-direction: column">
-                    <br>
-                    <li><h4 style="margin-top: -20px" >Pandas</h4>: Extensive use of Dataframes and Time Series structures. Used for data collection, analysis, and storage.</li>
+
+                    <ul>
+                    <li><h4  >Pandas</h4> Extensive use of Dataframes and Time Series structures. Used for data collection, analysis, and storage.</li>
                     <li> <h4>Numpy</h4> : Use of Numpy along with packages such as Numba to maximize both performance time and storage for backtesting massive amounts of data.</li>
 
-                    <li style="margin-left: 0"><h4>VectorBt</h4>: Use in most effectively simulating portfolios in backtesting.</li>
+                    <li style="margin-left: 0"><h4>VectorBt</h4> Use in most effectively simulating portfolios in backtesting.</li>
 
-                    <li><h4>Optuna</h4>: Use in optimizing parameters for strategies. Primarily Bayesian optimization was used.</li>
-                    <li><h4>joblib</h4>: Use in the implementation of parallel processing to massively speed up my backtesting framework.</li>
-                    <li><h4>Plotly</h4>: Use in effectively visualizing and analyzing the implementation of various strategies.</li>
+                    <li><h4>Optuna</h4> Use in optimizing parameters for strategies. Primarily Bayesian optimization was used.</li>
+                    <li><h4>joblib</h4> Use in the implementation of parallel processing to massively speed up my backtesting framework.</li>
+                    <li><h4>Plotly</h4> Use in effectively visualizing and analyzing the implementation of various strategies.</li>
                 </ul>
-         <ul style="gap: 2em">
-            <a href="../Projects/Coding/Version_1.html" style="margin-right: 0" >Framework</a>
+                    </li>
+            </ul>
+
+            <a href="../Projects/Coding/Version_1_2.html" style="margin-right: 0" >Framework</a>
+        <ul>
             <li>
-            <h4>Java</h4>: Years of experience in terms of study and the implementation of object oriented frameworks in various contexts, including my first prototype of the backtesting framework of my current project.
+            <h4>Java</h4> Years of experience in terms of study and the implementation of object oriented frameworks in various contexts, including my first prototype of the backtesting framework of my current project.
             </li>
-            <br>
 
             <li>
-                <h4>Mathematica</h4>: Created programs to analyze physical systems and solve various differential equations of various levels of complexity
+                <h4>Mathematica</h4> Created programs to analyze physical systems and solve various differential equations of various levels of complexity
             </li>
-        </ul>
+            </ul>
     </div>
-    <div class="column" style="border-style: solid;  align-self: flex-start; padding:1em; margin-top: 2em; margin-bottom: 2em; max-width: 40em">
-    <h2 style="margin-top: 0">Past Research</h2>
+    <div class="column" style="border-style: solid;  padding:1em; grid-area : right; margin-top: 2em; max-width: 40em">
+    <h2 >Past Research/Projects</h2>
             <ul>
-                <li style="margin-left: -1em; margin-right: 1em">
-                    <h4 style="margin: 0">QFT in the Early Universe</h4>: A focus on the cosmological foundations of the universe and the emergence of <br>classical systems from quantum fluctuations. Attempted to theoretically model this process, with a focus on the mechanics of entanglement and coherent systems.
+                <li >
+                    <h4 style="margin: 0">QFT in the Early Universe</h4> A focus on the cosmological foundations of the universe and the emergence of <br>classical systems from quantum fluctuations. Attempted to theoretically model this process, with a focus on the mechanics of entanglement and coherent systems.
                 </li>
-                    <br>
                 <li>
-                    <h4>General Relativity Theoretical Study</h4>: A deep look at various topics in General Relativity, predominantly <br>the formulation of alternate descriptions and extensions of GR with torsion. Also, a focus on the mathematical foundations of the singularity theorems and their implications.
+                    <h4>General Relativity Theoretical Study</h4> A deep look at various topics in General Relativity, predominantly <br>the formulation of alternate descriptions and extensions of GR with torsion. Also, a focus on the mathematical foundations of the singularity theorems and their implications.
                 </li>
             </ul>
-        <br>
-         <a href="Copy%20of%20Resume%20-%20Google%20Docs.pdf">Resume</a>
-         <a href="CV.pdf">CV</a>
+        <a href="../Writings_Learnings/researchpapergrmath150b-7-2.pdf">Singularity Theorems</a>
+        <ul>
+                <li>
+                    <h4>Python Backtester</h4> Use of vectorized operations and various Python related frameworks such as Pandas to create a backtesting framework applicable to a broad range of strategies, defined as successful with Sharpe > 2.0, Alpha > 2.0, along with a rigorous back testing process based on statistical principles, including the use of roll-forward analysis. Successfully created the framework and tested with the use of cointegration across both various time periods and different possible stock pairs. This is still an ongoing project with future versions to be released and a possibility of collaboration with other programmers.
+                </li>
+            </ul>
+        <a href="../Projects/Coding/Version_1_2.html" style="margin-right: 0" >Framework</a>
+        <ul style="align-self: flex-start; margin:2em 0 0 0"><li>
+            <h4>Personal Links </h4>
+        </li></ul>
+        <div style="display: flex; align-self: center; align-items: center">
+        <a href="Resume.pdf">Resume</a>
         <a href="Research_Proposal.pdf">Research Proposal</a>
-
+    </div>
         </div>
 </div>
 </body>
