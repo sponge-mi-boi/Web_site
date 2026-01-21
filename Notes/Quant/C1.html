@@ -43,138 +43,88 @@
   <!-- End of mathjax configuration -->
 </head>
 <body>
-<h1 id="Chapter-1" style="align-self: baseline">Chapter 1</h1>
-<div class="math display">(Note: This will be based on my notes from Shreve, Volume 2, Chapter 1/2)
-
-Usually, probability is learned in two different manners, meaning as a continuation of discrete probabilities and later as a measure define on the sigma algebra of a set. The latter is useful for especially uncountable spaces, and is completely rigorous.
-
-An infinite probability space is used to model a random situation with infinitely many possible
-Consider an experiment with the infinite number of tosses of coins. The set of infinite sequences of each possible toss is the sample space. Another example is the unit interval
+<div class="display math">
+  <h1 style="margin-bottom: 0">Post 1</h1>
+  Note: (These are notes based on my study of Shreve and Bjork.)
+  <h2>Sample space and Sigma-Algebras</h2> Usually, probability is learned in two diff manners, meaning as a continuation of discrete probabilities and later as a measure define on the sigma algebra of a set. The latter is useful for especially uncountable spaces, and is completely rigorous.
 
 Definition: Let $\Omega$ be a nonempty set and let $\mathcal F$ be a collection of subsets of $\Omega$ . $\mathcal F$ is a $\sigma-$algebra provided
 $\emptyset \in \mathcal F$
-  if $A \in \mathcal F \Rightarrow A^c \in \mathcal F$
-  if $\{A\}_i \in \mathcal F\Rightarrow \cup_{n=1}^\infty A_n \in \mathcal F$
-  If $A,B \in$ a sigma algebra then the unions of the sets in a sigma algebra are also in the sigma algebra and the entire set $\Omega$ being the compliment of the empty set is in it too.
+if $A \in \mathcal F \Rightarrow A^c \in \mathcal F$
+if $\{A\}_i \in \mathcal F\Rightarrow \cup{}\{A_n\}_{n=1}^\infty  \in \mathcal F$
+If $A,B \in \mathcal F$, then the unions of the sets in a sigma algebra are also in the sigma algebra and the entire set $\Omega$ being the compliment of the empty set is in it too.
+Also, note
+$\emptyset\in \mathcal{F}\Rightarrow \emptyset^c=\Omega\in \mathcal{F}$. $\cap{}\{A_{i}\}_{i=1}^\infty =(\cup \{A_{i}^{c}\}_{n=1}^\infty )^c$ and since $A=\cup \{A_{i}^{c}\}_{n=1}^\infty \in \mathcal{F}$ and $A^c\in \mathcal{F}$, both by the definition of a $\sigma -$algebra, then ${}\cap \{A_{i}\}_{n=1}^\infty \in \mathcal{F}$. This means that countable intersections are also in a $\sigma -$algebra.
 
-Note that $\mathcal{F{}}$ $\subset P(\Omega)$, meaning the powerset of $\Omega$. Therefore, there are $\Omega$, being of cardinality $|\Omega{}{}|{}{}$, meaning ${2^{|\Omega{}|{}}{}}^{|\Omega{}|{}}$ = $2^{|\Omega{}|{}{^2}}$
+Note that $\mathcal{F{}}$ $\subset P(\Omega)$, meaning the powerset of $\Omega$. Therefore, $\Omega$ being of cardinality $|\Omega{}{}|{}{}$, implies that all possible subsets of $P(\Omega ){}$ has cardinality ${2^{|\Omega{}|{}}{}}^{|\Omega{}|{}}$ = $2^{|\Omega{}|{}{^2}}$.
+ <h2>Probability Measure</h2>Definition: Let $\Omega$ be an nonempty and let $\mathcal F$ be a set of subsets of it which form a $\sigma -$algebra. A probability measure $P$ is a function $\forall A \in \mathcal F | P(A)\in\mathcal R, P:\mathcal{F{}}\rightarrow \mathcal{R}$.  It is require
+$P(\Omega) = 1$
+$\{A_ n {}{}\}_{n=1}^\infty  \in \mathcal F \Rightarrow P(\cup \{A_n\}_{n=1}^\infty )= \sum_{n=1{}}^\infty$$P(A_n)$ where, $\{A_n\}_{n=1}^\infty ,$ are mutually disjoint by definition.
+This property is called, or defined, as countable additivity.
+$(\Omega,\mathcal F, P)$ is called a probability space.
 
-Definition: Let $\Omega$ be an nonempty and let $\mathcal F$ be a algebra of subsets of it. A probability measure $P$ is a function that to $\forall A \in \mathcal F | P(A)\in\mathcal R, P:\mathcal{F{}}\rightarrow \mathcal{R}$ where a number is assigned in .  It is require
-  $P(\Omega) = 1$
-  $\{A\}_i \in \mathcal F \Rightarrow P(\cup_{n=1}^\infty A_n)= \sum_{n=1{}}^\infty$$P(A_n)$  : countable additivity, note that the sequence of sets is disjoint
-$(\Omega,\mathcal F, P)$ is called a probability space
-
-$P(\emptyset) = 0$ since $P(\emptyset ... \cup .... \emptyset)= P(\emptyset) = \sum_{n=1}^k P(\emptyset) = k P(\emptyset) \Rightarrow P(\emptyset) = 0$ is the only possibility for any integer $k$
-Finite additivity is implied from infinite additivity by merely taking the infinite collection of sets to be the empty set along with any number of finite sets.
+Note $P(\emptyset) = 0$ since $P(\emptyset ... \cup .... \emptyset)= P(\emptyset) = \sum_{n=1}^k P(\emptyset) = k P(\emptyset) \Rightarrow P(\emptyset) = 0$ is the only possibility for any integer $k \in \mathcal Z$ .
+Finite additivity is implied from infinite (countable) additivity by merely taking the infinite collection of sets to be the empty set along with any number of finite sets.
 Note that if $A \in \Omega \Rightarrow A \cup A^c = \Omega \Rightarrow P(A \cup A^c)= P(\Omega)=1 = P(A) + P(A^c \,)  \Rightarrow P(A^c) = 1 - P(A)$
-$\emptyset\in \mathcal{F}\Rightarrow \emptyset^c=\Omega\in \mathcal{F}$. $\cap_iA_{i}=(\cup _iA_{i}^{c})^c$ and since $A=\cup _iA_{i}^{c}\in \mathcal{F}$ and $X^c\in \mathcal{F}$, both by the definition of a $\sigma -$algebra, then ${}\cap_iA_{i}\in \mathcal{F}$. This means that countable intersections are also in a $\sigma -$algebra.
-
-Ex) The probability of closed intervals $[a,b]$ is defined such that $P([a,b]) = b - a, 0 \leq a \leq b \leq 1$ This probability measure in the particular situation $[0,1]=\Omega{}$ is called the Lebesgue measure and is doted $\mathcal L$
-$\,$Note that this $\,$is a function $P:[0,1]\subset\,\mathcal{R{}}{}\Rightarrow{[0,}{}1]{}\subset\mathcal{R}$
-This measure denotes the length or gives that notion. Note that if $b=a$, the probability is zero, meaning that open intervals have the same probability as closed intervals: ${}\,P[a,b] = P(a) + P(b) +P(a,b)={}P(a,b)$
-The definition of an open interval is $(a,b)=\cup_{n=1}^\infty [a +1/n,b-1/n]$${}$
-The collection of sets which are defined in terms of closed intervals and including themselves is a $\sigma-$algebra, called the Borel $\sigma-$algebra of subsets of $[0,1]$: $\mathcal B [0,1]$ . The sets in this $\sigma-$ algebra are called Borel sets. These have a defined probability based on those of closed sets, which can be defined
-
-Ex) Consider the toss of a coin infinitely many times. Let $\Omega_\infty$ be the set of all possible out. Assume the probability of $H$, a heads is $p$, and the probability of $T$, tails is $q = 1 - p$ , and the tosses are independent. To construct a probability measure $P(\emptyset) = 0, P(\Omega) = 1$. These two sets form a $\sigma-$algebra trivially, denoted $\mathcal F_0$  .
-This is the $\sigma -$algebra$\,\ {}$,which is associated, or in a sense, can be created, based on the tossing of a coin $0$ times, $\Omega{}_0$.
-The next two sets can be defined $A_H$: the set of all sequences beginning with $H = \{\omega: \omega_1 = h\}$, $A_ T$: the set of all sequences beginning with $T = \{\omega: \omega_1 = t\}$,
-by setting $P(A_H) = p, P(A_T) = q$. These four sets do form a $\sigma-$algebra since $A_H^c = A_T$,$A_H\cup A_T=\Omega\in \mathcal{F}_1$, called $\mathcal F_1 = \{\emptyset,\Omega,A_H,A_T{}\}$. This is the $\sigma -$algebra which can be ${}\,$created by the tossing of a coin $1$ times,$\ {}\Omega_1.$
-Note $\,\ |\Omega_{{}1}| = 2, P(\Omega_{{{}1{}}}\ ) = \mathcal{F}_1$,
-Next $A_{HH} = \{\omega| \omega_1 = H, \omega_2 = H\}$, and similarly defined $A_{HT},A_{TH},A_{TT}$
-each with probability $P(A_{HH}) = p^2,P(A_{HT})=pq,P(A_{TH})=pq,P(A_{TT})=q^2$
-These probabilities define implicitly the probabilities of their compliments, and all of their unions with each other, which are possible. This means the cardinality of $\mathcal F_2$ is $2^4$ which is the cardinality of the power set of all the above 4 events. The process is similar for higher numbers of coin tosses
-
-Any finite number of tosses can be described probabilistically in this way and with the use of unions, even an infinite number of tosses can also be described. This probability for a single element $\in \Omega_\infty ,$ $HHHH...,HTHTHTHT,...$, are all the same. These are all actually just 0 since $pp...p... = qq....q... = pq....qpqpq...$ all converge for an infinite number of tosses.
-The possibility that in any given sequence one $T$ occurs is the compliment of an infinite sequence of $H$ which would than be 0. Such an event is said to occur almost surely.
-
-This means that $\mathcal F_\infty$ can be defined as the sets generated by finitely many coin tosses and essentially every other set that is required in order to have a $\sigma-$algebra.
-Note the cardinality$\,$of $|\Omega_\infty |{}$ is just that of the real numbers, since it is just all possible countable infinite digit sequences.
-Note however that $\mathcal{F}{\,}_{\infty }\neq P(\Omega_\infty {}) = P(\mathcal{R{}}{}$) , meaning there are some given elements or subsets of $\mathcal{R{}}$ $\,x\in P(\mathcal{R}{})$, which are not measurable, in the sense of a probability measure being used to define probabilities.
-Note the Borel sigma algebra, actually has cardinality which is the same as $\mathcal{R}$, since it is the smallest possible sigma algebra which can be formed out of the real numbers. It can be created based on all closed intervals of the form $[a,b],a,b\in \mathcal{Q\ }$. All complements and unions can be added into this sigma algebra, meaning that it can be defined to be a sigma algebra, but it would be formed out of all possible sequences of pairs of rational numbers, which has the cardinality of the real numbers .
+Ex) Consider $\Omega = \mathcal{R }$. The $\sigma -$algebra in this situation $\mathcal F =\mathcal B$   is called the Borel $\sigma-$algebra. Closed intervals are a part of this $\sigma -$algebra.
+The probability of closed intervals $[a,b]\subset \mathcal R{}$ is defined such that $P([x,y]) = \frac{x-y} {b - a }, a \leq x \leq y \leq 1$. This probability measure in the particular situation $[0,1]=\Omega{}$ is called the Lebesgue measure and is doted $\mathcal L$.
+This measure denotes the length of an interval. Note that if $b=a$, the probability is zero, meaning that open intervals have the same probability as closed intervals: ${}\,P([a,b]) = P(\{a\}) + P(\{b\}) +P(a,b)={}P((a,b){})$ .
 
 
-It is possible to find sets which are not in $\mathcal F_\infty$ but they are very difficult to construct.
+Ex) Consider the toss of a coin infinitely many times. Let $\Omega_\infty$ be the set of all possible outcomes. Assume the probability of $H$, a heads is $p$, and the probability of $T$, tails is $q = 1 - p$ , and the tosses are independent.
+$\Omega _ {n \ }$ is the set of possible outcomes with $\sigma -$algebra$\ \mathcal F_n$.
+Consider $0$ tosses, meaning $\Omega_0 = \emptyset$. $\mathcal F_0 =\{\emptyset,\Omega\}$. To construct a probability measure $P(\emptyset) = 0, P(\Omega) = 1$
 
-Consider the set $A_{n,m}=\{\omega | |\frac{H_n(\omega_1...\omega_n)}{n}-\frac{1}{2} |\,\leq \frac{1}{m}\}$
-For any given $m,n$: $H(\omega_1...\omega_n)$ is the number of $H$ in the first $n$ tosses, and has a probability which is defined in $F_{n}$.
-$P(H(\omega$))$=0$
-Therefore, the set $A_{n,m{}}$ can be given a probability in $F_n$ provided that in the process that $m \rightarrow \infty$ , $\exists N \leq n$ such that $A_{n,m\,{}}$ exists. This means that $A = \cap_m\cup_N\cap_{n=N{{}}}^\infty A_{n,m}$
+Consider $1$ tosses, meaning $\Omega_1 = \{H,T\}$. $\mathcal F_0 =\{\emptyset,\Omega,H,T\}$. To construct a probability measure $P(\emptyset) = 0, P(\Omega) = 1$.
 
-Definition: A random variable $X$ is a real valued function, defined such that
-$X: \Omega \rightarrow \mathcal R, \{X \in B\} = \{\omega\in\Omega | X(\omega) \in B\}$ for $\forall$ Borel subsets of$\mathcal \, R$ is in the $\sigma-$algebra $\mathcal F$
+This can be continued $n\rightarrow \infty$ with $|\Omega_n | = 2 ^ n$, $|\mathcal F _ n {}|    = 2^{2 ^ n{}}$.
 
-The collection of Borel subsets of $\mathcal R$ is indicated $B(\mathcal\,R)$
+Consider subsets of $\Omega_\infty \,$by itself and note there can be a partition of this space of infinite coin tosses based on the outcomes of each individual flip. The elements of $\Omega_\infty$ can be indicated by the outcomes of the sequence of coin tosses $w=\sum_{i\in \mathcal Z[0,\infty {)} }w_i$.
+$A_H$: the set of all sequences beginning with ${} A_H= \{\omega: \omega_1 = H\}$.
+$A_T$: the set of all sequences beginning with ${} A_T= \{\omega: \omega_1 = H\}$.
+These four sets do form a $\sigma-$algebra since $A_H^c = A_T$
+$A_H\cup A_T=\Omega$. The associated $\sigma -$algebra defined $\mathcal F_1 = \{\emptyset,\Omega,A_H,A_T{}\}$.
+The probability measure $P:\mathcal F _1\Rightarrow \mathcal R$ can be $P(A_ H )\ =p,P( A _ T \ )= q$.
+For two tosses, $A_{HH} = \{\omega| \omega_1 = H, \omega_2 = H\}$, and similarly defined $A_{HT},A_{TH},A_{TT}$. The probability measure can be defined $P(A_{HH}) = p^2,P(A_{HT})=pq,P(A_{TH})=pq,P(A_{TT})=q^2$
+These probabilities define implicitly the probabilities of their compliments, and all of their unions with each other.
 
-Ex) Define stock prices by the formula $S_0{}(\omega) = 4 \,{}{}\forall \Omega_{\infty}, S_1(\omega) = \begin{cases} 8 & \text{if} \omega_1 = H, \\ 2 & \text{if} \omega_1 = T \end{cases}$, $S_2$ is 16 if both are equal to $H$, 4 if they differ, and 1 if both are $T$. In general, the $n-th$ element differs from the previous one by a multiple of 2 if it is a $H$ and is divided by 2 if not
-$P\,(S_2 = 4) =  P(A_{HT} \cup A_{TH}) = 2pq$
-Taking a deeper look at this example, there is an underlying coin toss space, $\Omega_\infty {}$, which is of size$\,2^\mathcal{N}$. The sigma alg$\,\mathcal{F}_\infty {}$ is actually of the same size.{}
-The $i$th toss has the underlying sample space $\Omega$
+Any finite number of tosses can be described probabilistically in this way and with the use of unions, even an infinite number of tosses can also be described. This probability for a single element in $\Omega_\infty \,$ $w_a =HHHHTHHHTHTTTHTHTH...HTHTHTHT...$ is just 0 since $P(w _ a ) = \prod_{i\in \mathcal Z[0,\infty {)} }w_i = ppppppqpqpqpppqpqp.....=0$ $\forall 0 < p,q \leq 1 {}$
+The possibility that in any given sequence one $T$ occurs, $P(\{w:\exists\, T \in w\} \ )$ is the compliment of an infinite sequence of $H$, $P(\{w:\exists\, T \in w\} \ )= 1-P(\{HHHHHHH...\}{}) = 1 - 0 = 1$. Such an event is said to occur almost surely. Note therefore, there are events which occur with probability one, but there are possible outcomes where those events do not occur called null events $n \in \Omega_\infty$. However,
+the set of all such events, $N$, has probability measure, $P( N {)}=\sum_{n\in N {} \ } P(\{n\} {}) = 0$.
+This means that $\mathcal F_\infty$ can be defined as the sets generated by finitely many coin tosses and essentially' every other set that is required in order to have a $\sigma-$algebra', which is essentially $N$.
 
+Note the cardinality$\,$of $\Omega_\infty \,$is just that of the real numbers, since it is just all possible countable infinite digit sequences.
+Note however that $\mathcal F \neq P(\mathcal{R\ } )$, but $\mathcal{F } \subset P(\mathcal{R } {})$ meaning there are some subsets of $\mathcal{R{}}$ $\,x\in P(\mathcal{R}{})$, which are not measurable, in the sense of defining a probability measure to define probabilities. However,
+the Borel sigma algebra, actually has cardinality which is the same as $\mathcal{R}$since it is the smallest possible sigma algebra which can be formed out of the real numbers. It can be created based on all closed intervals of the form $[a,b],a,b\in \mathcal{Q\ }$. Open intervals are defined in terms of closed intervals$(a,b)=\cup\{[a +\frac{1 }{ n },b-\frac{1}{n}]\}_{n=1}^\infty$. All complements and unions can be added into this sigma algebra, meaning that it can be defined to be a sigma algebra, but it would be formed out of all possible sequences of pairs of rational numbers, which has the cardinality of the real numbers .
 
-The distribution of a random variable is by just looking at it a probability measure on $\mathcal R$ just not on the subsets of $\Omega$. The possible values of a random variable are merely all the Borel subsets which allow for that value of the random variable to be.
+Consider the set $A_{n,m}=\{\omega | \,|\frac{H_n(\omega_1...\omega_n)}{n}-\frac{1}{2} |\,\leq \frac{1}{m}\}$
+For any given $n$: $H(\omega_1...\omega_n)$ is the number of $H$ in the first $n$ tosses, and has a probability which is defined in $\mathcal F_{n}$.
+$\lim_{n\rightarrow \infty } \frac{H_n(\omega_1...\omega_n)}{n} = \frac{1}{2{}}$ if $\exists N\forall n\geq N |A_{n,m{}}$ is true $\forall m\geq 0$. This means that $A = \cap_m\cup_N\cap_{n=N{{}}}^\infty A_{n,m}$ is the set of all $w$ which satisfies the above limit, and $A\in \mathcal F$ since it is defined in terms of unions and intersections of sets which are in $\mathcal F$.
+
+<h2>Random Variables</h2> Definition: A random variable $X$ is a real valued function, defined such that $X: \Omega \rightarrow \mathcal R,$ meaning it maps elements of $\Omega$ to elements of $\mathcal{R{}}$
+Note a random variable induces a probability measure, called the distribution measure $\mu _X:\mathcal{B{}}\rightarrow \mathcal R$
+Note this is a measure on $(\mathcal{R}{},\mathcal{B\  )}$ and it uses $P$ defined on $(\Omega,\mathcal{F}{})$.
+$\ B\in \mathcal B | \{X \in B\} = \{\omega\in\Omega | X(\omega) \in B\}$, $\mu _X(B)=P(\{X\in B\})$. Note this is valid $\{X\in B\}\in \mathcal{B{}}$
+The possible values of a random variable are merely all the Borel subsets which allow for that value of the random variable to be.
 
 Random variables have distributions, but random variables can have the same distribution, while a single random variable can have two different distributions.
 
-Let $X\,(\Omega,\mathcal{F}$$,P)$ be a random variable defined on a probability space. The distribution measure of $X$ is the probability measure $\mu _X|\mu _X(B)=P(X\in B)$
+Ex) Define stock prices by the formula $S(n + 1 ) = \begin{cases}2{}S(n )\,w_n = H \\\frac{S(n)}{2}\, w_n= T{} \end{cases}$.
+This is a random variable
 
-Ex) Let $P\,$ be the uniform measure on $[\,0,1]$, the Lebesgue measure. Define $X(\omega) = \omega, Y(\omega) = 1 - \omega \forall \omega \in [0,1]$. Then, the distribution measure of $X, \mu_X[a,b] = P(\omega: a\leq X(\omega) \leq b) = P[a,b]=b-a, 0 <\leq a \leq b \leq 1$. $Y$ is a different random variable, but $\mu_Y[a,b] = P(\omega: a \leq Y(\omega{})\leq b) = P(\omega: a \leq 1 - \omega \leq b) = = P(\omega| -1+a \geq -\omega \geq-1 + b$$= P[1-b,1-a] = (1-a) - (1-b) = b - a = \mu_X[a,b], 0 \leq a \leq b \leq 1$
+
+
+Ex) Let $P\,$ be the uniform measure on $[\,0,1]$, the Lebesgue measure. Define two random variables $X(\omega) = \omega, Y(\omega) = 1 - \omega\ \forall \omega \in [0,1]$. Then, the distribution measure of $X , \mu _X([a,b]) = P(\{w\in \Omega:w \in [a,b {}]{}\})= b-a$ .$\mu_Y([a,b]) = P(\{ w{}|Y(w{}{}) \in [a,b]\})$$=P(\{ w{}|1-ws \in [a,b]\})= P(\{\omega: a \leq 1 - \omega \leq b \} ) =  P(\{\omega| -1(-1+a) \geq -1(-\omega{} \geq-1(-1 + b{})\}{})$$= P([1-b,1-a] {}) = (1-a) - (1-b) = b - a = \mu_X[a,b]$.
 Now consider if another probability measure $\tilde P$ is defined on $[0,1]$ as $\tilde P[a,b] =\int_a^b 2\omega d\omega = b^2 - a^2 , 0 \leq a \leq b \leq 1$ . In this situation $\tilde\mu_X[a,b]$ $=\tilde P \{\omega| a \leq X(\omega)\leq b\}=\tilde P [a,b] = b^2 - a^2, 0 \leq a \leq b \leq 1$ . Also,$\tilde\mu_Y[a.b] = (1-a)^2 - (1-b)^2$
 
-It is also possible that for every probability measure, there can also be an associated CDF
-$F(x) = P(X \leq x)\, x \in \mathcal R\,$
+It is also possible that for every probability measure, there can also be an associated CDF $F(x)=P(\{y:y\leq x\} {})$. Note this is the probability assigned to the Borel subset $(-\infty ,x]\in \mathcal B {} \subset\,{}2^\Omega$ with$\,\Omega=\mathcal R$,  $F(x )={}P(\{y:y\in  {}({}-\infty ,x ]\} )$ If $F(x{})$ is the derivative of some function, $f(x )\Rightarrow  F(x{}) = \int_{-\infty} ^xf(u )d {}u$. This gives the interpretation$\,dF(u) = f(u )du$. Then, $dF=dP(\{y:y\in dx\}{}\,)$. $f$ is called the pdf.
 
-Note for any closed interval $[a,b] = \cap_{n=1 }^\infty$ $(a-1/n,b]$. Note that if the distribution can be expressed as the integral of a non negative function $f$, it is also said to have a pdf.
+ex) Consider the random variable $Y$ defined on $\Omega_\infty ,$ $Y_n(w{}) = \begin{cases}1 \, w_n = H \\ 0 \, w _ n = T\end{cases}$ . Note this can be viewed as a sequence of random variables for each $n$, or it's a set of infinite sequence of possible outcomes of each of these variables, defined with respect to the entire space.
+Define new random variable $X = \sum_{n=1}^\infty \frac{Y_n}{2^n}$. This exists only on the entire space, as it's not defined for each $n$, but rather with respect to an infinite sequence of tosses.
+Note that for any interval $[\frac{k {}}{  2^n},\frac{k+1}{2^n}]  \subset [0,1$], $k\in \mathcal Z[0,\infty )\,{}$$P([\frac{k {}}{  2^n},\frac{k+1}{2^n}] ){}= \mathcal L{}([\frac{k {}}{  2^n},\frac{k+1}{2^n}]   ){ =\frac{k+1}{2^n} {}-\frac{k {}}{  2^n}}{} = \frac{ {}1 {}}{  2^n}$.
+$\mu_X  [\frac{k}{2^n},\frac{m}{2^n}] = P(\{w:X(w )\in [\frac{k}{2^n},\frac{m}{2^n}]\}{})\,$= $\frac{1}{2^n}(m-k)$ with $k < m$.
 
-ex) In the space of the set of possible sequences of coin tosses $Y_n(\omega)$  is said to be defined to have value of 1 if $\omega_n$ is H and 0 otherwise, if T.
-Define $X = \sum_{n=1}^\infty \frac{Y_n}{2^n}$. Note that for any interval $[k/2^n,\frac{k+1}{2^n}]  \subset [0,1$]
-the probability that this interval contains $X$ is $1/2^n$ in accordance w it.
-This measure is actually uniform on $[0,1$ ], $\mu_X  [\frac{k}{2^n},\frac{m}{2^n}] = \mu_X [\frac{k}{2^n},\frac{m - k + k}{2^n}] = \sum_{i=1}^{m-k}\mu_X [\frac{k + i}{2^n},\frac{i + 1 + k}{2^n}]$ = $\frac{1}{2^n}(m-k)$ with $k < m,$ and both are int
-
-Ex) $\phi(x)=\frac{1}{\sqrt{2\pi}{}}e^{-x^2/2}$ be the standard normal density, the standard normal pdf. The cdf associated with this pdf $N(x)=\int_{-\infty{}{}}^x\phi(x')dx'$ . Note that it is strictly increasing, mapping $\mathcal R$ to $(0,1)$, and so has a strictly increasing inverse function $N^{-1{}{}}(y) = y$. Now let $Y,$ be defined on a probability space such that $X = N^{-1}(Y)$. Then the measure is $\mu_X[a,b] = \int_a^b \phi(x)dx$ . This can be done for any uniform distribution, and is called the probability integral transform. (Seems to be just a change of variables)
-
-The definition of the Riemann integral is as follows: if $f$ is defined on $[a,b]$ ,partition the interval into intervals of a given length, such that $[x_0,x_1],...,[x_{n-1},x_n]$ where $a = x_ 0 < x_1 < ... < x_n = b$ . Denote this set of partition points $\Phi =\{x_i\}_i$ and the length of the longest interval in this partition by $||\Phi||$.
-For each subinterval $[x_{k-1},x_k]$ , we set $M_k=\max_{x_{k-1{}}\leq x \leq x_k{}}{}f(x)$ and $m_k$ is the minimum value of $f$ on that interval.
-The upper Riemann sum $RS_\Phi ^+(f) = \sum_{k=1}^n M_k(x_k - x_{k-1}),$ and the lower Riemann sum $RS_\Phi ^-(f) = \sum_{k=1}^n m_k(x_k - x_{k-1})$. As the max interval distance $||\Phi||,$ goes to 0, meaning that $n \rightarrow \infty$ and more and more partition points are added to the interval, both the upper and lower Riemann sum converge to the same limit, which is defined as the Riemann integral
-
-Now for countable lengths of $\Omega$ , the expectation value can be defined easily as the weighted sum $\,E{}(X\,) = \sum_{\omega \in \Omega{}}X(\omega)\mathcal P(\omega)$ on a probability space $(\Omega,\mathcal F, \mathcal P)$ of a random variable $X(\omega())$ defined on this space. However, for any uncountably infinite length of $\Omega$ if that set is not a subset of the real numbers, or it cannot be put into isomorphism with the real numbers, it is hard to define in full generality a partition of subintervals of $d\omega$ essentially, since it may not always be so obvious. Therefore, it makes more sense to actually partition the $y-$ axis in this situation, since the probability measure ensures that it is a subset of the real numbers, and is in the range $[0,1]$ .
-The partition in this situation $\Phi$ = $\{y_i\}_i$, and for every subinterval $[y_k,y_{k+1}]$, $A_k = \{\omega \in \Omega|y_k \leq X(\omega)\leq y_{k+1{}}\}$
-The lower sum is defined $LS_\Phi ^-(X) = \sum_{k=1}^n y_kP(A_k)$ . It converges as the maximal distance between the partition points decreases
-The limit is approaches $\int_\Omega X(\omega)dP(\omega)$ and is called the Lebesgue integral
-
-The integral can be shown to be linear, and has most of the behavior as regular int.
-The indicator$\,$function$\,\int_AX(\omega{}){}dP(\omega)=$$\,{}\int_\Omega{}\mathcal{I}_A(\omega)X(\omega{}){}dP(\omega){}\forall A\in \mathcal{F}$
-$E(X)=\int_\Omega{}X(\omega{}){}dP(\omega)$ is the $E(X)$ of a random variable$\,$if$\,E(|X|){}\leq \infty {}$
-
-The canonical example is the Dirichlet function which takes values of 1 at the rational numbers and values of 0 at the irrational numbers on the interval $[0,1\,]$
-The Lebesgue is merely $1(P(1)) + 0P(0)$ which is just 1 since the number of points that have value 0 is the number of rational numbers in this interval, which is countably infinite, and since each point has a probability measure of 0 by definition of the usual Lebesgue measure of the interval between points, meaning that the integral over the irrational numbers having a value of 1 should equal just 1 by definition of the probability measure summing to equal 1 meaning that the value of this integral is 1(1) = 1
-
-If the Riemann integral had attempted to be used, note the minimum of any subinterval will always be 0 since there is always a rational number in any given subinterval, but the maximum value will always be 1. Therefore, the minimum and maximum Riemann sums will give opposing values, meaning the Riemann integral is not well defined
-
-Note the Riemann, and the Lebesgue integrals differ only in the situation where the number of discontinuous of the function is not finite.
-This is the only situation where the left and right min and max defined sums diverge
-and is described in a better sense that the sum, or Lebesgue measure to be more precise, of all points which do not have the property of being continuous, or any given random property, is zero means that the function is almost everywhere has that property, meaning in the situation of that property being continuous, the Riemann integral is defined.
-
-Given a sequence of random var $\{X_i\}_i$  it is said to converge to another random var $X$ almost surely $\lim_{n\rightarrow \infty}X_n = X$ if the set of this random var has a probability of one. This is the same as the condition the set of var, which does not converge to the given $X$ is 0.
-Ex) The Strong Law of Large Numbers $Y_k(\omega)=\begin{cases}1\quad\omega_k=H\\0\quad\omega_k=T\end{cases}$ is a sequence of random variables defined on a fair coin toss space. Define $H_n = \sum_{j=1}^nY_k$ which is the number of heads obtained after the first $n$ tosses. The definition is that $\lim_{n\rightarrow \infty}\frac{H_n}{n} = 1/2$ almost surely, the expectation value of a single coin toss. It is almost surely because there are possible sequences, for example the sequence of all heads, which do not. However, the probability of all these sequences is 0 since the Lebesgue measure for a set of countable points is 0.
-
-Ex) Consider a sequence of normal densities $\{f_n\}$ such that $f_n(x) = \sqrt(\frac{n}{2\pi})\,e^{-nx^2/2}$ where $\mu = 0$  and $\mathcal V = 1/n$ . If $x > 0,x<0 \Rightarrow  \lim_{n\rightarrow \infty{}}f_n(x) = 0$, but the limit is $\infty$ for $x = 0$ . The sequence $\{f_n\}$ almost surely converges to $0$, since the set of points where it does not converge to $0$ has Lebesgue measure 0
-
-Note that the integral of $f_n(x),$ is equal to 1, no matter the value of $n$. However $\int_{-\infty}^\infty dx$ for the limiting fun is 0. This shows that the Lebesgue integral of the limiting function does not always equal the given limit of the Lebesgue integral of the function.
-
-The condition of mon0tone convergence is needed. If $0 \leq X_1 ... \leq X_n ...$ then, $\lim_{n\rightarrow \infty}EX_n = EX$. This essentially means the area under the curve decreases with each subsequent variable, so that the areas sum.
-
-Consider two measures $P(\omega),\tilde P(\omega) ,$ such that $Z(\omega)P = \tilde P$
-If $EZ = 1, \tilde P(A) = \int_A Z(\omega{}{)}dP(\omega)$ means that $\tilde P$ is a probability defined value of a measure
-Also $\tilde E X = E[XZ], EY = \tilde E[\frac{Y}{Z}]$ if $Z > 0$ in the latter statement
-$\tilde E{}\,(X)=\int_AX(\omega{}){}d\tilde P(\omega)=\int_AX(\omega )dP(\omega)Z(\omega)=E(XZ{{}})$. Note${}$$\,$ that $\int_AZ(\omega{}){}dP(\omega)=1$
-
-Ex)$P'[a,b\,$$] = \int_a^b 2\omega d\omega = b^2 - a^2, 0 \leq a \leq b \leq$ $1$
-$dP' = 2\omega d\omega = 2 \omega dP$ since $dP = dw$ is the standard Lebesgue measure on the interval, $0$ $1$
-Ex)$\,Z(w)=e^{-\theta X(w)-\frac{\theta ^2}{2}{}}\forall w\in \Omega$
-$E(Z),\phi(x)dx=dp$ is the measure$\,$ since $dP(w)=\mu _Xdw$, and the$\,$given measures$\,$are the correspond$\,$ ones defined$\,$on$\,$the$\,$real$\,$numbers.
-$Z = \frac{d\tilde\, P'}{dP}$ is called the Radon-Nikodym derivativve of $P'$ with respect to $P$
-
-
-Summary: $(\Omega,\mathcal F, \mathcal P)$ is a probability space, with the definitions being the set of all possible outcomes of a random experiment, the collection of subsets of the outcomes whose probability is defined, and the last is a mapping from that collection of subsets to the set of real numbers from 0 to 1.
-  </div>{}</body>
+Ex) $\phi(x)=\frac{1}{\sqrt{2\pi}{}}e^{-x^2/2}$ be the standard normal density, the standard normal pdf. The CDF associated with this PDF $N(x)=\int_{-\infty{}{}}^x\phi(x')dx'$ . Note that it is strictly increasing, mapping $\mathcal R$ to $(0,1)$, and so has a strictly increasing inverse function $N^{-1{}{}}(y) = y$. Now let $Y{}$ be defined on the probability space such that $X = N^{-1}(Y)$. Then the measure is $\mu_X([a,b]{}) = \int_a^b \phi(x)dx$ . This can be done for any uniform distribution, and is called the probability integral transform. (Seems to be just a change of variables)
+</div>
+</body>
 </html>
