@@ -13,18 +13,18 @@ type="text/javascript"></script>
 </head>
 <body >
 <h1> Results/Overview</h1 >
-<p>
-PCAR, IP are the cointegrated pair which perform consistently out-of-sample at daily frequency with Sharpe > 2, Alpha > 1.4 individually as a pair for a maximally invested portfolio.
-    Here is the graph of its performance upon one testing period z_threshold = 1.5, roll = 2 9, initial_cash = 1000 </p>
+
+    PCAR, IP are the cointegrated pair which perform consistently out-of-sample at daily frequency with Sharpe > 2, Alpha > 1.4 individually as a pair for a maximally invested portfolio.
+    Here is the graph of its performance upon one testing period z_threshold = 1.5, roll = 2 9, initial_cash = 1000
 <img style="width: 100em;margin-top: 2em; align-self: center" src="Version_1_2_Example.png" alt=""></img>
 
 <div style="display: flex" >     <img style="width: 50em;margin-top: 2em; align-self: center" src="Version_1_2_Hist.png" alt=""></img>
     <img style="width: 50em;margin-top: 2em; margin-left: 2em; align-self: flex-end" src="Version_1_2_Table.png" alt=""></img>
 </div>
 <h1> Hypothesis/Background</h1 >
-<p>The goal is to finalize the back testing process and to arrive at a tangible result as related to cointegration pairs.
+<p >The goal is to finalize the back testing process and to arrive at a tangible result as related to cointegration pairs.
 
-<span class="math inline">\(V(a)\)</span>is the value of an asset, <span class="math inline">\(C\)</span> is the amount of cash, <span class="math inline">\(P\)</span> is the portfolio object, <span class="math inline">\(M\)</span> is the market, and <span class="math inline">\(A=\{a_i\}\)</span> is the set of all non-cash assets, <span class="math inline">\(A_S\)</span> is the non-cash short value of the assets, and <span class="math inline">\(A_ L\)</span> is the non-cash long value of the assets, with <span class="math inline">\(\delta V(a )\)</span> is the change in the value of the asset over a given <span class="math inline">\(\delta t = 1\)</span> unit in time, and all values being considered functions of time <span class="math inline">\(V(a).\)</span><span class="math inline">\(w_i = w(a_i)\)</span> is the weight of asset <span class="math inline">\(a_i\)</span>, with <span class="math inline">\(\sum_iw(a_i) = 1 - w_c\)</span>, where the <span class="math inline">\(w_c\)</span> is the weight of the cash.<span class="math inline">\(\beta (V(a_i )) = \beta (V(a_i),V(M ) )  = \beta _i\)</span> is the beta of the asset <span class="math inline">\(V(a_i)\)</span> on a given time period with respect to the defined market.
+<span class="math inline">\(V(a)\)</span> is the value of an asset, <span class="math inline">\(C\)</span> is the amount of cash, <span class="math inline">\(P\)</span> is the portfolio object, <span class="math inline">\(M\)</span> is the market, and <span class="math inline">\(A=\{a_i\}\)</span> is the set of all non-cash assets, <span class="math inline">\(A_S\)</span> is the non-cash short value of the assets, and <span class="math inline">\(A_ L\)</span> is the non-cash long value of the assets, with <span class="math inline">\(\delta V(a )\)</span> is the change in the value of the asset over a given <span class="math inline">\(\delta t = 1\)</span> unit in time, and all values being considered functions of time <span class="math inline">\(V(a).\)</span><span class="math inline">\(w_i = w(a_i)\)</span> is the weight of asset <span class="math inline">\(a_i\)</span>, with <span class="math inline">\(\sum_iw(a_i) = 1 - w_c\)</span>, where the <span class="math inline">\(w_c\)</span> is the weight of the cash.<span class="math inline">\(\beta (V(a_i )) = \beta (V(a_i),V(M ) )  = \beta _i\)</span> is the beta of the asset <span class="math inline">\(V(a_i)\)</span> on a given time period with respect to the defined market.
 
 Note the relationship that if there are <span class="math inline">\(n\)</span> points in time, there are <span class="math inline">\(n-1\)</span> changes in time, meaning if <span class="math inline">\(V(a)(t_i)=V_i\)</span>, the return series of the asset <span class="math inline">\(\delta V(a)\)</span> is defined as <span class="math inline">\(\delta V(a)(t)=V(a)(t)-V(a)(t-1)\)</span>. Then, <span class="math inline">\(\Delta{}V(t)=V_0\prod_{t=1}^n\delta  {}V(a ) t\)</span>, meaning <span class="math inline">\(V(t_n) = V_i + \Delta V(t)\)</span>
 The value of a portfolio is the sum of the assets and the cash in it defined on the interval <span class="math inline">\([t_i,t_f]\)</span> with the initial condition <span class="math inline">\(V(P)(t _ i ) = C( t_ i) = C_0\)</span>, meaning the initial amount is just the cash allocated to be used.
