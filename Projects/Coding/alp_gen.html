@@ -15,15 +15,17 @@
             This provides an overview of the approach, including list of methods that will be experimented, the tools that will be used, and the approaches which will be looked at. <br>
 
             <br>
-            <a href="Overview_first_version_0_0.html">Overview (|) </a>
+            <a href="Overview_first_version_0_0.html">Overview  </a>
             <a href="DataFrame_reference.html">Pandas Dataframe reference</a>
            <br>
         </div>
-<div style="max-width: 40em; flex-direction: column;; display: flex;align-items: center; border-style: solid; margin: 2em;padding: 1em;grid-area: right-one">
+<!--<div style="max-width: 40em;flex-direction: column;padding: 1em;justify-content: space-evenly;  align-self: stretch; display: flex;align-items: center;  grid-area: ar">  <p style="font-size: xx-large; width: fit-content">&darr;</p> <p style="font-size: xx-large; width: fit-content">&darr;</p> <p style="font-size: xx-large; width: fit-content">&darr;</p> </div>-->
 
-            <div style="font-size: medium"><h3 style="margin-bottom: 0">Version 0.1 </h3></div>
+<div style="max-width: 40em;margin-top: 2em;  align-self: center; flex-direction: column;; display: flex;align-items: center; border-style: solid; padding: 1em;grid-area: right-three">
+
+            <div style="font-size: medium"><h3 style="margin-bottom: 0; ">Version 0.1 </h3></div>
             <p>            The initial focus is on OOP design for efficiency,
-                but different classes of strategies and methods of portfolio allocation will be tested and analyzed later.</p>
+                but different classes of strategies and methods of portfolio allocation will be tested and analyzed in the future.</p>
 
 
                 <a href="Version_0_1_Part1.html"> Basic α Gen. Framework: Part 1 (|)</a>
@@ -34,52 +36,52 @@
             strategy with a method that is scalable, and it does not seem natural to give such a description.
         </div>
 
-    <div style="flex-direction: column; display: flex;align-items: center; max-width: 40em; margin-top: -5em;align-self: start;border-style: solid;padding: 1em; ;grid-area: left-two;">
+    <div style="flex-direction: column; display: flex;justify-content: center; align-items: center; max-width: 40em; margin-top: -15em; align-self: flex-start;border-style: solid;padding: 1em; ;grid-area: left-three;">
                 <div style="font-size: medium">
                     <h3 style="margin-bottom: 0">Version 0.2 </h3> </div>
                 <p>
                     A module of various methods is used and the focus is on execution, not architecture.
                 </p>
 
-                <a href="Version_0_2.html">Function based Framework: Part 1 (|) </a>
+                <a href="Version_0_2.html">Function based Framework: Part 1  </a>
             </div>
 
-<div style="flex-direction: column; display: flex;align-items: center; border-style: solid; padding: 1em;; max-width: 40em;grid-area: right-two">
+<div style="flex-direction: column; display: flex;align-items: center;align-self: flex-start; border-style: solid; padding: 1em;; max-width: 40em;grid-area: right-two">
 
                 <h3 style="margin-bottom: 0">Version 1.0</h3>
                 <p>
                 The operations are fully vectorized with the use of Dataframes instead of series with lists. The result is a working
                 model of backtesting which was done on various pairs, or all found pairs through the ADF test,
                 of cointegrated stocks in the SP 500. Parallel processing is also used to speed up operations, which was accurately
-                implemented, and parquet files are used for storage. Walk forward testing is used based upon a series of 5 tests and
-                stocks which satisfy various attributes are categorized. Also, graphs are given of greatly performing pairs in the
+                implemented, and parquet files are used for storage. Walk forward testing is used based upon a series of 5 tests and there is also
+                classification of various stocks. Also, graphs are given of the highest performing pairs in the
                 example time period. Parameter optimization will be done next, along with validation testing.
                 </p>
                     <a href="Version_1_preview.html">The set up for the execution of the custom methods.</a>
                     <a href="Version_1.html">Function based, Working, Backtesting Framework </a>
                 Conclusion: It seems the idea is right, but some of the results are not as accurate, because I actually implemented
-                the beta-based, portfolio weights, wrong. The full, correctly implemented, list of methods, along with optimization
-                parameters, will be implemented.
+                the beta-based, portfolio weights, incorrectly. The full, correctly implemented, list of methods, along with optimization
+                parameters, will be next.
             </div>
 
-<div style="flex-direction: column; align-self: start;display: flex;align-items: center; max-width: 40em; margin-top: -15em; margin-bottom: 2em; border-style: solid;padding: 1em; grid-area: left-three">
+<div style="flex-direction: column; align-self: flex-start;display: flex;align-items: center; max-width: 40em; margin-top: -5em;  margin-bottom: 0; border-style: solid;padding: 1em; grid-area: left-two">
 
         <div style="font-size: medium">
             <h3 style="margin-bottom: 0">Version 1.1 </h3> </div>
         <p>
             Cointegration is done on hourly data, and there are fixes made as compared to the previous version. In particular, the beta
             based wights for the entry/exit is corrected, and the best stock pairs are shown. Also, the mathematical framework is given
-            for this whole process, and in generality
+            for the whole framework.
         </p>
-            <a href="Version_1_.html">Revised Backtesting Example and Results with a full report </a>
+            <a href="Version_1_.html">Revised Backtesting Example and Results with report </a>
             <a href="Version_1_Graphs_.html">Graphs</a>
     </div>
-<div style="flex-direction: column; align-self: start;display: flex;align-items: center; max-width: 40em; margin-top: 5em; margin-bottom: 2em; border-style: solid;padding: 1em; grid-area: right-three">
+<div style="flex-direction: column; align-self: start;display: flex;align-items: center; max-width: 40em; margin-bottom: 2em; border-style: solid;padding: 1em; grid-area: right-one">
 
     <div style="font-size: medium">
         <h3 style="margin-bottom: 0">Version 1.2 </h3> </div>
     <p>
-        Cointegration is done on daily data, with as much precision, with the goal being to conduct a rolling forward, validating backtest which is replicable. Future goals are to do this over several periods to find patterns in terms of cointegrated assets and to find optimal parameters to a greater degree of accuracy.
+        Cointegration is done on daily data, with the goal being to conduct a rolling forward, validating backtest which is replicable. Future goals are to do this over several periods to find patterns related to cointegrated assets and to find optimal parameters to a greater degree of accuracy.
     </p>
     <a href="Version_1_2.html">Report </a>
     <a href="Version_1_%202_Graphs.html">Graphs</a>
