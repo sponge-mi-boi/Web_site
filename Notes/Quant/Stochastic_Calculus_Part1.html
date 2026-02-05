@@ -45,7 +45,7 @@
 <body>
 <div class="display math">
   <h1 style="margin-bottom: 0">Post 1</h1>
-  Note: (These are notes based on my study of Shreve and Bjork.)
+  Note: These are notes based on my study of Shreve and Bjork.
   <h2>Sample space and Sigma-Algebras</h2> Usually, probability is learned in two diff manners, meaning as a continuation of discrete probabilities and later as a measure define on the sigma algebra of a set. The latter is useful for especially uncountable spaces, and is completely rigorous.
 
 Definition: Let $\Omega$ be a nonempty set and let $\mathcal F$ be a collection of subsets of $\Omega$ . $\mathcal F$ is a $\sigma-$algebra provided
@@ -69,7 +69,6 @@ Note that if $A \in \Omega \Rightarrow A \cup A^c = \Omega \Rightarrow P(A \cup 
 Ex) Consider $\Omega = \mathcal{R }$. The $\sigma -$algebra in this situation $\mathcal F =\mathcal B$   is called the Borel $\sigma-$algebra. Closed intervals are a part of this $\sigma -$algebra.
 The probability of closed intervals $[a,b]\subset \mathcal R{}$ is defined such that $P([x,y]) = \frac{x-y} {b - a }, a \leq x \leq y \leq 1$. This probability measure in the particular situation $[0,1]=\Omega{}$ is called the Lebesgue measure and is doted $\mathcal L$.
 This measure denotes the length of an interval. Note that if $b=a$, the probability is zero, meaning that open intervals have the same probability as closed intervals: ${}\,P([a,b]) = P(\{a\}) + P(\{b\}) +P(a,b)={}P((a,b){})$ .
-
 
 Ex) Consider the toss of a coin infinitely many times. Let $\Omega_\infty$ be the set of all possible outcomes. Assume the probability of $H$, a heads is $p$, and the probability of $T$, tails is $q = 1 - p$ , and the tosses are independent.
 $\Omega _ {n \ }$ is the set of possible outcomes with $\sigma -$algebra$\ \mathcal F_n$.
@@ -111,8 +110,6 @@ Random variables have distributions, but random variables can have the same dist
 
 Ex) Define stock prices by the formula $S(n + 1 ) = \begin{cases}2{}S(n )\,w_n = H \\\frac{S(n)}{2}\, w_n= T{} \end{cases}$.
 This is a random variable
-
-
 
 Ex) Let $P\,$ be the uniform measure on $[\,0,1]$, the Lebesgue measure. Define two random variables $X(\omega) = \omega, Y(\omega) = 1 - \omega\ \forall \omega \in [0,1]$. Then, the distribution measure of $X , \mu _X([a,b]) = P(\{w\in \Omega:w \in [a,b {}]{}\})= b-a$ .$\mu_Y([a,b]) = P(\{ w{}|Y(w{}{}) \in [a,b]\})$$=P(\{ w{}|1-ws \in [a,b]\})= P(\{\omega: a \leq 1 - \omega \leq b \} ) =  P(\{\omega| -1(-1+a) \geq -1(-\omega{} \geq-1(-1 + b{})\}{})$$= P([1-b,1-a] {}) = (1-a) - (1-b) = b - a = \mu_X[a,b]$.
 Now consider if another probability measure $\tilde P$ is defined on $[0,1]$ as $\tilde P[a,b] =\int_a^b 2\omega d\omega = b^2 - a^2 , 0 \leq a \leq b \leq 1$ . In this situation $\tilde\mu_X[a,b]$ $=\tilde P \{\omega| a \leq X(\omega)\leq b\}=\tilde P [a,b] = b^2 - a^2, 0 \leq a \leq b \leq 1$ . Also,$\tilde\mu_Y[a.b] = (1-a)^2 - (1-b)^2$
