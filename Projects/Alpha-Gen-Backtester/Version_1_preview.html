@@ -12,11 +12,12 @@
 <ul>
   <li>
     All possible stock pairs are generated from the SP 500 with enough data points with a daily frequency
-    over a 5 year time period. The data is extracted from Yahoo Finance and called with the help of a custom module called
+    over a 5-year time period. The data is extracted from Yahoo Finance and called with the help of a custom module called
     <code>market_analy.py</code>.
+
     The data ranges from 2020-09-11 00:00:00 to 2025-09-12 00:00:00 and is composed of 1257 data points with a total
     of 490 stocks. It is a DataFrame object of shape (1257,490). There are no NA points in this DataFrame because of
-    previous custom filteration of removing all stocks and points with a huge number of NA values.
+    previous custom filtration of removing all stocks and points with a huge number of NA values.
     Time periods are defined by shift parameters which is essentially the number of points shifted from the final index
     in the DataFrame, 2025-09-12 00:00:00. The set of 5 shift parameters upon which the data will be backtested are 700,
     600,500,400,300. Each data set will be 500 points long and the roll forward will be of 100 data points as implied.
@@ -42,15 +43,13 @@
   </li>
 </ul>
 
-<h2 id="code" style="align-self: baseline">Code</h2>
+<h2 id="code" style="margin:0">Code</h2>
 
 <pre><code>
-  <span class="c1">
-  # This is the setup method to execute the backtests.
-  </span>
-  def run():
-  <span class="c1">
-    # The DataFrame as defined above is extracted after being stored as a parquet file.
+   <span class="c1" style = 'margin:0'># This is the setup method to execute the backtests.
+  </span>def run():
+   <span class="c1" style = 'margin:-2em'>
+     # The DataFrame as defined above is extracted after being stored as a parquet file.
   </span>
     data = pd.read_parquet('Close_Data_approx_5y_d.parquet')
 
@@ -58,19 +57,18 @@
     initial_shift = 700
 
     full_stock = pd.read_parquet('Close_Data_approx_5y_d.parquet').columns
-
-  <span class="c1">
-    # This generates the list of stock pairs to be tested as tuples. Note that symmetric pairs are not
-    included.
+   <span class="c1" style = 'margin:-2em'>
+      # This generates the list of stock pairs to be tested as tuples. Note that symmetric pairs are not
+      included.
   </span>
     stock_pair = [(x,full_stock[y]) for x in full_stock for y in range(list(full_stock).index(x) + 1,len(full_stock) )]
-  <span class="c1">
-    # This generates the shift parameters.
+   <span class="c1" style = 'margin:-2em'>
+     # This generates the shift parameters.
   </span>
     parameters = [initial_shift - x *100 for x in list(range(3))]
 
     arr = pd.DataFrame(index = stock_pair)
-  <span class="c1">
+   <span class="c1" style = 'margin:-2em'>
     # This is the custom method which takes an empty DataFrame with the indices being the stock pairs
     and executes the ADF test on each of them in each of the time periods. It returns a DataFrame with the results for
     each stock pair with the columns being the metric and the time period it was found. For example, in this situation,
@@ -83,17 +81,17 @@
 
     print(pd.read_parquet('cointegrated_stocks_br_redone.parquet'))
 
-  <span class="c1">
-  # This is the custom cointegration filter method which takes as a parameter a list which includes
-  the stock pair being tested as the first two entries and the shift parameter of the time period this pair is being
-  tested on for cointegration in the last entry.
+   <span class="c1" style = 'margin:-2em'>
+    # This is the custom cointegration filter method which takes as a parameter a list which includes
+       the stock pair being tested as the first two entries and the shift parameter of the time period this pair is being
+       tested on for cointegration in the last entry.
   </span>
   def cointegration_filter(cur_stock):
-      <span class="c1">
+       <span class="c1" style = 'margin:-2em'>
       # This is a custom method which returns a DataFrame of the closing prices of each of the stocks.
       </span>
       cur_pair=get_time_period(list(cur_stock[0:2]), custom_data=True, num_data_points=500,shift=int(cur_stock[2])+1)
-      <span class="c1">
+       <span class="c1" style = 'margin:-2em'>
       # This executes the ADF test with the use of the statmodels module.
       </span>
       model = m.OLS(cur_pair[cur_stock[0]], m.add_constant(cur_pair[cur_stock[1]])).fit()
@@ -103,20 +101,19 @@
       if adf_result[1] < .050000 + .0000000001:
 
           arr = np.array([model.params.iloc[1],adf_result[1]])
-      <span class="c1">
+       <span class="c1" style = 'margin:-2em'>
       # This returns the filtered pair of stocks, meaning it returns as an np.array the beta value of the proposed lin
       relationship between the stocks as obtained from the ADF test and the p-value for reference if the p-value is less
       than .05. Otherwise, it returns an empty 2 element np.array.
       </span>
       return arr
 
-  <span class="c1">
-  # This is the custom data extraction method which returns the data of the stocks passed in based on the shift para
-  of the data set, meaning how much the end of the data set is shifted from the last possible index in the entire
-  DataFrame. Note the shift is set equal to 1 by default just to avoid the endpoints. The custom_data
-  parameter is defined to determine if the data set should be obtained from this DataFrame or based on the latest
-  data as defined by the alpaca live trading api. This is because I use this method for backtesting and live trading.
-  The frequency is also defined as parameter to indicate what frequency of data to obtain.
+   <span class="c1" style = 'margin:-2em'>
+    # This is the custom data extraction method which returns the data of the stocks passed in based on the shift para of the data set, meaning how much the end of the data set is shifted from the last possible index in the entire
+    DataFrame. Note the shift is set equal to 1 by default just to avoid the endpoints. The custom_data
+    parameter is defined to determine if the data set should be obtained from this DataFrame or based on the latest
+    data as defined by the alpaca live trading api. This is because I use this method for backtesting and live trading.
+    The frequency is also defined as parameter to indicate what frequency of data to obtain.
   Note that only the necessary part is shown.
   </span>
   def get_time_period( args, custom_data = False, num_data_points = 100,freq='d',details=False,shift =1):

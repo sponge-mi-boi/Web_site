@@ -15,6 +15,7 @@
             This provides an overview of the approach such as the tools that will be used, and the approaches which will be analyzed.
             <br><br> 
             <a href="Overview_first_version_0_0.html">Overview  </a>
+
            <br>
         </div>
 <!--<div style="max-width: 40em;flex-direction: column;padding: 1em;justify-content: space-evenly;  align-self: stretch; display: flex;align-items: center;  grid-area: ar">  <p style="font-size: xx-large; width: fit-content">&darr;</p> <p style="font-size: xx-large; width: fit-content">&darr;</p> <p style="font-size: xx-large; width: fit-content">&darr;</p> </div>-->
@@ -31,11 +32,11 @@
                 but different classes of strategies and methods of portfolio allocation will be tested and analyzed in the future.</p>
 
 
-                <a href="Version_0_1_Part1.html"> Basic α Gen. Framework: Part 1 (|)</a>
-                <a href="Version_0_1_Part2.html"> Basic α Gen. Framework: Part 2 (|)</a>
+                <a href="Version_0_1_Part1.html"> Basic α Gen. Framework: Part 1 </a>
+                <a href="Version_0_1_Part2.html"> Basic α Gen. Framework: Part 2 </a>
 
 
-            Conclusion: Using OOP is horrible for strategy testing since it seems it is difficult to define an instance of a
+            Conclusion: Using OOP is not suitable for strategy testing since it seems it is difficult to define an instance of a
             strategy with a method that is scalable, and it does not seem natural to give such a description.
         </div>
 
@@ -54,13 +55,12 @@
                 <h3 style="margin-bottom: 0">Version 1.0</h3>
                 <p>
                 The operations are fully vectorized with the use of Dataframes instead of series with lists. The result is a working
-                model of backtesting which was done on various pairs, or all found pairs through the ADF test,
-                of cointegrated stocks in the SP 500. Parallel processing is also used to speed up operations, which was accurately
-                implemented, and parquet files are used for storage. Walk forward testing is used based upon a series of 5 tests and there is also
+                model of backtesting which was done cointegrated pairs as filtered through the ADF test,
+                in the SP 500. Parallel processing is also used to improve performance and parquet files are used for storage. Walk forward testing is used based upon a series of 5 tests and there is also
                 classification of various stocks. Also, graphs are given of the highest performing pairs in the
                 example time period. Parameter optimization will be done next, along with validation testing.
                 </p>
-                    <a href="Version_1_preview.html">The set up for the execution of the custom methods.</a>
+                    <a href="Version_1_preview.html">The set-up for the execution of the custom methods.</a>
                     <a href="Version_1.html">Function based, Working, Backtesting Framework </a>
                 Conclusion: It seems the idea is right, but some of the results are not as accurate, because I actually implemented
                 the beta-based, portfolio weights, incorrectly. The full, correctly implemented, list of methods, along with optimization
@@ -89,5 +89,7 @@
     <a href="Version_1_2.html">Report </a>
     <a href="Version_1_%202_Graphs.html">Graphs</a>
 </div>
+<div style="flex-direction: column; align-self: start;display: flex;align-items: center; max-width: 40em; margin-bottom: 2em; border-style: solid;padding: 1em; grid-area: right-one">
+</div>div
 </body>
 </html>

@@ -9,7 +9,7 @@
 </head>
 <body style="align-items: baseline">
 <h2 id="module-of-methods" style="align-self: center">Module of methods</h2>
-<ul>
+<ul style = 'margin:0'>
 <li>The current setup is a simple module of various methods.</li>
 <li>Group of methods creates a list of stock pairs that should be tested
 for whatever requirement and then executes the given test on them with
@@ -18,7 +18,7 @@ with a cointegration filter.</li>
 </ul>
 <h2 id="the-basic-methods">The Basic Methods</h2>
 <h3 id="primary-variables">Primary Variables</h3>
-<ul>
+<ul style = 'margin:0'>
 <li><code>stock_pair_list</code>: list of stock pairs which were chosen
 at random, all possible combinations, or from whatever other filter
 based elsewhere</li>
@@ -27,7 +27,7 @@ characterizes the data range being selected. It is essentially the
 starting point of the data list, meaning how much the data has been
 rolled forward from its initial starting point, which varies by
 frequency of the data. It is measured units as that of the freq
-<ul>
+<ul style = 'margin:0'>
 <li>Note that this is based on a custom data extraction method which is
 very simple and merely is based on stored ‘close price’ from Yahoo
 finance which will be explained later in more detail</li>
@@ -36,13 +36,13 @@ finance which will be explained later in more detail</li>
  <h3>Fundamental Methods</h3>
 <li><code>cointegration_filter(one_pair):</code> executes the ADF test
 for a single pair of stocks
-<ul>
+<ul style = 'margin:0'>
 <li>runner_multiple(): takes a list of stock pairs and list of shift
 parameters and returns the list of pairs which pass the ADF test across
 all given data ranges</li>
 </ul></li>
 <li><code>runner()</code>:
-<ul>
+<ul style = 'margin:0'>
 <li><code>stock_pair_list,shift_parameter</code> -<code>&gt;</code>
 <code>list_of_pairs_with_required_p_value,shift_parameter</code></li>
 <li>takes a list of stock pairs as tuples and a shift parameter as an
@@ -51,9 +51,9 @@ integer and returns a list of stock pairs which pass the ADF test</li>
 </li>
 </ul></li>
 <li><code>runner_multiple()</code>:
-<ul>
+<ul style = 'margin:0'>
 <li><code>stock_pair_list, list_of_shift_parameters -&gt; list_of_pairs_with_required_p_values_final</code>
-<ul>
+<ul style = 'margin:0'>
 <li>handles the iterations over various data sets and returns all the
 pairs of stocks which pass the ADF test in the give<br />
 </li>

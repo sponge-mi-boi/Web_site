@@ -28,44 +28,54 @@
         the other modules.</li>
 </ul>
 <p>Below, I post the root module and explain in detail.</p>
-<ul>
-    <li>Module: yggdrasil.py  #Contains the class Yggdrasil<ul>
-        <li>class: Yggdrasil <li>#This is the root of all my strategies and analysis. Creates a general
+<ul style="margin:0">
+    <li>Module: yggdrasil.py
+       <ul style="margin:0"><li> Contains the class Yggdrasil</li></ul><ul style="margin:0">
+
+    <li>class: Yggdrasil <li> This is the root of all my strategies and analysis. Creates a general
             instance of a test.</li>
-                <li>Instance variables:<ul>
-                    <li>stock_universe: StockUniverse object which contains the list of stocks that will be used in this test</li>
+                <li>Instance variables:<ul style="margin:0">
+
+                <li>stock_universe: StockUniverse object which contains the list of stocks that will be used in this test</li>
                     <li>cur_strat: StrategyHelper object which sets and executes the basic framework of the given strategy in this test</li>
                     <li>strat_list: List of available executable strategies; mostly for convenience.</li>
                     <li>analysis: Various aspects of the stock list and the method being used; mostly for convenience</li>
                     <li>title: Defines the various aspects of the strategy being used; mostly for convenience</li>
                 </ul>
                 </li>
-                <li>Constructor<ul>
+                <li>Constructor
+                    <ul style="margin:0">
+
                     <li>__ init __ (self, freq, strategy_,custom,shift_= 0, num_points = 500, stock_list = None)</li>
                     <li>Creates an instance of a test which is made of a strategy and a list of stocks. Executes this test upon instantiation</li>
-                    <li>Parameters:<ul>
-                        <li>freq: the frequency of the strategy being used</li>
+                    <li>Parameters:   <ul style="margin:0">
+
+                    <li>freq: the frequency of the strategy being used</li>
                         <li>strategy_: the type of strategy being used</li>
-                        <li>custom: the type ofdata being used, if custom or live</li>
-                        <li>shift: how much the data isbeing shifted in its extraction. Measured in days regardless of the units of freq. Default value of 0.</li>
-                        <li>num_points: number of data points in the extracted data. Note that this does not always return the exact number passed,but has a minimal error range in most cases ( ±10). Default value is 500.</li>
-                        <li>stock_list: the list of stocks the strategy as defined by theprevious parameters will act on</li>
+                        <li>custom: the type being used, if custom or live</li>
+                        <li>shift: how much the data is shifted in its extraction. Measured in days regardless of the units of freq. Default value of 0.</li>
+                        <li>num_points: number of data points in the extracted data. Note that this does not always return the exact number passed,but has a minimal error range in most cases ( ± 10 ). Default value is 500.</li>
+                        <li>stock_list: the list of stocks the strategy as defined by the previous parameters will act on</li>
                     </ul>
                     </li>
                 </ul>
                 </li>
-                <li>Instance methods:<ul>
+                <li>Instance methods:
+                    <ul style="margin:0">
+
                     <li>__ set_title(self): Private method called upon instantiation which sets the title of the strategy if needed<br/></li>
                 </ul>
                 </li>
 
 
-        <li>free code: Saves the results of an example test run in a JSON file.<br/><ul>
-            <li>The set of parameters is defined first and then the strategy is tested upon a list of variousstocks. In the given example, the set of parameters is the shift of the data and the parameters of the strategy being used, which is Mean Reversion in this case defined by two metrics.<ul>
-                <li>These are the size of the rolling data used to compute metrics like the mean, and the cutoff z-score used to enter/exit the strategy. Everything else is held constant.</li>
+        <li>free code: Saves the results of an example test run in a JSON file.<br/>
+            <ul style="margin:0">
+
+            <li>The set of parameters is defined first and then the strategy is tested upon a list of various stocks. In the given example, the set of parameters is the shift of the data and the parameters of the strategy being used, which is Mean Reversion in this case defined by two metrics.<ul>
+            <li style="margin:1em">These are the size of the rolling data used to compute metrics like the mean, and the cutoff z-score used to enter/exit the strategy. Everything else is held constant.</li>
             </ul>
             </li>
-            <li>Note that in this example, I'm currently in the process of creating viable classes for stock classification, meaning that each allocation of stocks being tested asthe last parameter is merely just each individual stock only. The classification inthe example given is simply that the number of completed trades is above 30 in the given data set and the profit is positive.</li>
+            <li>Note that in this example, I'm currently in the process of creating viable classes for stock classification, meaning that each allocation of stocks being tested the last parameter is merely just each individual stock only. The classification in the example given is simply that the number of completed trades is above 30 in the given data set and the profit is positive.</li>
         </ul>
         </li>
     </ul>
@@ -94,7 +104,7 @@ from  strategy_helper  import StrategyHelper
                  + '_ strategy:'+ str ( self.cur_strat.strategy )+ '' )
         return title
 
-<span class="c1" style="margin-bottom: 0">#Generates the various parameters which can be tested in a clean manner.</span>
+<span class="c1" style = 'margin:0'  ># Generates the various parameters which can be tested in a clean manner.</span>
 para_test= []
 for shift in range ( 1 ):
     for roll in range ( 10 , 21 , 5 ):
@@ -102,25 +112,25 @@ for shift in range ( 1 ):
             for stock in full_stocks [ 0 : 100 ]:
                 para_test.append ([stock , shift , roll , cutoff/ 10 ])
 
-<span class="c1" ># Runs the tests for various combinations of the parameters. Only two full stock iterations are ran for brevity.</span>
+<span class="c1" style = 'margin:0' >#  Runs the tests for various combinations of the parameters. Only two full stock iterations are ran for brevity.</span>
 
 stock_pass_test= []
 stock_pass_condition= False
 for x in para_test :
     strategy= [ 'Mean Rev' ]+ x [ 2 : 4 ]
     ygg= Yggdrasil ( '5m' , strategy , True , shift_=x [ 1 ], num_points= 250 , stock_list= [x [ 0 ]])
-    <span class="c1" >  #Condition for stock classification is given here to filter the backtests</span>
-
+   
+   
+    <span class="c1" style = 'margin:0' >  # Condition for stock classification is given here to filter the backtests</span>
     results= [ygg.cur_strat.results [x ] for x in [ 'Profit' , 'Number of Completed Trades' ]]
     if results [ 0 ]&gt; 0 and results [ 1 ]&gt; 30 :
         stock_pass_test.append (ygg.cur_strat.get_params ())
 
-<span class="c1" >#Data from all the tests is stored in a JSON file for easy viewing and extraction </span>
-
+<span class="c1" style = 'margin:0' ># Data from all the tests is stored in a JSON file for easy viewing and extraction </span>
 with open ( 'example_data.json' , 'w' ) as pdf :
     json.dump (stock_pass_test , pdf , indent= 2 )
 
 </code></pre>
-<h2 >Data</h2>Link to the JSON file is given: <a style="max-width: 10em; align-items: center" href="https://github.com/sponge-mi-boi/Quant-data/blob/main/example_data.json">data</a>
+
 
 </body>
