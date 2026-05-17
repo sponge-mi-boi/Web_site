@@ -10,47 +10,55 @@
 </head>
 <body style="align-items: baseline">
 <h2 style="margin-bottom: 0">Hypothesis/Goals</h2>
-<p style="margin-bottom: -1em">Determine the most profitable strategies out of the ones given below. My prediction is that cointegration will perform the best individually, but regime based models will have the best overall results.</p>
-<h2 id="list-of-strategies">List of Strategies</h2>
+<p >Determine the most profitable strategies out of the ones given below. My prediction is that cointegration will perform the best individually, but regime based models will have the best overall results.</p>
+<h2 id="list-of-strategies">List of Strategies and Filters</h2>
+<h3 style="margin:1em">Strategy classes</h3>
 <ul>
-<li>Strategy classes that will be analyzed
-<ul >
-<li  style="margin-top: 2em" >Cointegration</li>
+<li>Cointegration </li>
 <li>Mean reversion time based</li>
 <li>Mean reversion cross-sectional </li>
 <li>Momentum, time based</li>
 <li>Momentum, cross-sectional</li>
-</ul><li  style="margin-top: 1em" > filters/ conditions/ approaches
-<ul  style="margin-top: 1em"><li > Market/ beta neutrality</li>
+</ul>
+<h3 style="margin:1em">Filters/ conditions/ approaches</h3>
+<ul>
+<li  >  Market/ beta neutrality</li>
   <li>Dollar neutrality</li>
   <li>Factor/ sectors neutrality</li>
   <li>PC neutrality/ PCA</li>
   <li>Hidden regime/state variables</li>
-<li>Optimization of parameters of the strategy classes </li>
-</ul></li>
 </ul>
+<h3 style="margin:1em">Optimization of parameters of the strategy classes </h3>
+  <ul>
+    <li>
+      Parameters optimization
+    </li>
+  </ul>
+
 <h2 id="approach">Approach</h2>
 <ul>
-<li>Backtesting on roughly 500 data points of several frequencies,
+
+  <li>Backtesting on roughly 500 data points of several frequencies,
 parameter optimization on roughly 200 data points, and testing on 100
 data points</li>
-<li>This will constitute one backtest and at least 4-5 such backtests
+
+  <li>This will constitute one backtest and at least 4-5 such backtests
 will be done with the use of the walk-forward analysis by roughly 100
 points.</li>
 </ul>
 
-
 <h2>Tools</h2>
   <ul>
 
-  <li>Yfinance    </li>
-  <li>Pandas Series/Dataframe</li>
-  <li>Optuna </li>
-<li>VectorBt</li >
-<li>Multiprocessing.pool</li >
-  <li>Statsmodels</li>
+    <li>Yfinance    </li>
+    <li>Pandas Series/Dataframe</li>
+    <li>Optuna </li>
+    <li>VectorBt</li >
+    <li>Multiprocessing.pool</li >
+    <li>Statsmodels</li>
     <li>DuckDB</li>
-  <li>Plotly</li>
-</ul>
+    <li>Plotly</li>
+    <li>Numpy</li>
+ </ul>
 </body>
 </html>
