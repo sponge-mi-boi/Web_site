@@ -1,0 +1,204 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+
+  <title>Mathematical Framework of Quantitative Backtesting</title>
+
+  <script
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
+          type="text/javascript"></script>
+  <style> </style>
+</head>
+<body style="width: 100em;margin:2em; white-space: pre;color: whitesmoke; line-height: 3em;  max-width: 20em">
+<h1 style="display: grid; place-items: center; font-size: xxx-large">Mathematical Framework of Quantitative Backtesting</h1>
+<h1>Overview</h1>4 back tests with positive alpha in all of them on the testing is goal \(\color{#3d73ff}\tau = [t_i,t_f] \) is the time period \(\color{#3d73ff}u \) is the set of assets
+
+Series for an asset \(\color{#3d73ff}i\in u \) over \(\color{#3d73ff}\tau \) has value series, return series, rolling mean, rolling std, rolling z-score, cross sectional mean, cross sectional z-score, and other statistical quantities defined for \(\color{#3d73ff}t\in \tau \)
+    \(\color{#3d73ff}v_t:[t_i,t_f]\rightarrow [0,\infty ) \) is the value/price of an asset
+    \(\color{#3d73ff}r_t:[t_i+1,t_f]\rightarrow [0,\infty ) \) is the return series of the asset
+    \(\color{#3d73ff}q_t:[t_i,t_f]\rightarrow \mathcal Z \) is the amount of held quantities of the asset
+    \(\color{#3d73ff}w_t:[t_i,t_f]\rightarrow [-1,1] \) is the weight of the asset
+
+Portfolios are defined by a vector of assets with weights \(\color{#3d73ff}w=(w_1,...,w_{|n|}){} \) for \(\color{#3d73ff}n \) assets.
+    Number of assets held \(\color{#3d73ff} q=(q_1,...,q_{|n| }) \) also describe it
+For \(\color{#3d73ff}u \) assets, \(\color{#3d73ff}w \) represents the vector of all the related weights \(\color{#3d73ff}w\in \color{#3d73ff}\mathcal{W}= \prod_{i\in u}[-1,1] \),  the set of all possible weights.
+    \(\color{#3d73ff}\mathcal W \subset \mathcal{R}^u \)
+Alternatively, it can be viewed as the decision series itself, \(\color{#3d73ff}d_t \).
+
+For a fully invested portfolio, \(\color{#3d73ff}\color{#3d73ff}\sum _{i\in \mathcal u } |w_i| = 1 \). Negative weights represent borrowed assets, meaning shorts, while positive weights represent bought assets, meaning longs.
+    Note this is the \(\color{#3d73ff}L^1 \)-norm defined on \(\color{#3d73ff}\mathcal R^u \).
+<h1>Portfolio Quantities</h1>\(\color{#3d73ff}v_p \) is the value of the portfolio.
+\(\color{#3d73ff}v_{p,t} =\sum_{i=1}^{|u|}q_{i,t   } v_{i,t} \)
+\(\color{#3d73ff}r_{p,t} =\sum_{i=1}^{|u   }r_{i,t} \)
+\(\color{#3d73ff}p\subset u \) is a portfolio
+    Then,
+      \(\color{#3d73ff}r_{p,t} \) is the portfolio returns (\(\color{#3d73ff}r_{P,t } =\frac{ v_{    p,t } - v_ {p,t-1 } }{v _ {p, t-1 } }{} \))
+      \(\color{#3d73ff}r_{i,t} \) is the returns of asset \(\color{#3d73ff} i \)
+      \(\color{#3d73ff}r_{i,t} \rightarrow  P_ {i,t} \) is the probability distribution of the asset return at time \(\color{#3d73ff}t \)
+      \(\color{#3d73ff}P_i \) is the probability that the asset will have the return value \(\color{#3d73ff}r_i \).
+
+If \(\color{#3d73ff}r_i\in \mathcal R \), \(\color{#3d73ff}P(r_i ) dr_i \) is the probability of asset having the value in the neighborhood of the value \(\color{#3d73ff}r_i \) with radius \(\color{#3d73ff}dr_i \).
+    Then, note \(\color{#3d73ff}P(r_i) = \mathcal G(r_i) \), a normal distribution by assumption.
+
+Actions are done on a series which can be either filters, strategies, or market actions, meaning a stochastic evolution of a Markov process
+    Actions are mappings from time to decisions, which are represented as operators.
+    Actions are done by users or by the market.
+An user can do actions \(\color{#3d73ff}o\in O \) defined as follows
+    \(\color{#3d73ff}q_{i,t+1} = q_{i,t} +k=l_k(q_{i,t}) \) is a long of size \(\color{#3d73ff}k \) of asset \(\color{#3d73ff}i. \)
+    \(\color{#3d73ff}\{l_k\}_{k\in \mathcal Z(0,\infty    )} = L \) is the set of all possible long operators
+    \(\color{#3d73ff}q_{i,t+1} = q_{i,t} -k=p_k(q_{i,  t} ) \) is a short of size \(\color{#3d73ff}k \) of asset \(\color{#3d73ff}i. \)
+    \(\color{#3d73ff}\{k _k\}_{k\in \mathcal Z(-\infty , 0    )} = S \) is the set of all possible short operators
+
+If \(\color{#3d73ff}k=0 \), \(\color{#3d73ff}q_{i,t+1}=q_{i,t}=I(q_{i,  t}) \) is identity operator
+    \(\color{#3d73ff}O=L\cup S\cup I \) is the set of all possible operators which can act on an asset.
+    \(\color{#3d73ff}o \)\(\color{#3d73ff}:\mathcal R^u\rightarrow \mathcal R ^u \) for all \(\color{#3d73ff}o \in O \)
+
+A sequence \(\color{#3d73ff}o_t \) of such operators is a decision series for the portfolio denoted \(\color{#3d73ff}d_t \)
+while the market can act on the portfolio through stochastic evolution defined by operators \(\color{#3d73ff}M_t \).
+
+Then, \(\color{#3d73ff}d_t:[t_i,t_f]\rightarrow \color{#3d73ff}L\cup S\cup I \) is a decision series \(\color{#3d73ff}d_t(w_t )=w_{t+1} \)
+\(\color{#3d73ff}d_t:\mathcal R^u  \rightarrow \mathcal R ^u \)
+    Then, note \(\color{#3d73ff}d_\tau = d_{t_f}...d_ {t_i} \) means \(\color{#3d73ff}d_\tau(w_{t_i }) =w_{t_f} \). This is net change of a portfolio over a time period
+
+To optimize is to choose \(\color{#3d73ff}d_t \) such that \(\color{#3d73ff}g(w,\lambda) \) is optimized, where \(\color{#3d73ff}g \) represents a desired goal
+    Markowitz optimization is \(\color{#3d73ff}g_t(w,\lambda) =r^Tw -\lambda w^T\Psi w \), \(\color{#3d73ff}\Psi=\text{Var}(r) \) is the covariance matrix of the assets
+    \(\color{#3d73ff}d_t \) can be chosen such that \(\color{#3d73ff}g_t \) is maximized at every \(\color{#3d73ff}t \), but the goal overall is to maximize \(\color{#3d73ff}r_\tau \) over a time period \(\color{#3d73ff}\tau \), meaning \(\color{#3d73ff}w_\tau \) is what must be chosen, the average weights over the period.
+
+\(\color{#3d73ff}\{M_t\}_{t=t_i}^  {t_f} \) is the set of market operators which represent the action of the market on a weight vector.
+All possible changes to \(\color{#3d73ff}w \) arise from a combination of decision operators and market.
+Evolution of a system \(\color{#3d73ff}w_{t+1}=M_t d_ t w_ t,\forall  \,t\in \tau \).
+
+Time filtration in terms of acting on different periods is done through indicator functions over the set of possible times \(\color{#3d73ff}1_{[t_i,t_f]\in \tau}{} \)
+\(\color{#3d73ff}w_{t_i}=0_u \), where \(\color{#3d73ff}0_u \) is the \(\color{#3d73ff}u- \)dimensional zero vector, usually.
+
+The weight of asset \(\color{#3d73ff}i \) is \(\color{#3d73ff}w_{i,t} = \frac{q_{i,t}v_{i,t}}{v_{p,t }} \) also.
+
+Note \(\color{#3d73ff}o\in \mathcal O \), \(\color{#3d73ff}o(w _{i,t{ }}) =\frac{o(q_{i,t })v_{i,t}}{v_{p,t }} \) changes only the quantities of the asset while the market \(\color{#3d73ff}w_{i,t+ 1} = M(w_{i ,t  })=q_{i,t}M(\frac{v_{i,t}}{v_{p,t }}) \) prices/values.
+<h1>Filters/Strategies</h1>\(\color{#3d73ff}\eta =\{\eta _i\}_{i\in \mathcal Z[1,|\eta |]} \) is the set of filter classes
+\(\color{#3d73ff}\gamma =\{\gamma _i\}_{i \in \mathcal Z[1,|\gamma |]} \) is the set of strategy classes
+    \(\color{#3d73ff}|\eta | \) is the number of filter classes and \(\color{#3d73ff}|\gamma | \) is the number of strategy classes.
+
+Strategies act on a single weight vector while filters \(\color{#3d73ff}\eta \) act on the power set of weights.
+
+The process \(\color{#3d73ff}w_{t_i}\rightarrow \mathcal F (w_{t_i}) \) where \(\color{#3d73ff}\mathcal F=\prod_{t\in \tau}{\eta _t } \) with \(\color{#3d73ff}\eta _t \) being the filter at time \(\color{#3d73ff}t \).
+    \(\color{#3d73ff}\eta _t \in \eta,\forall  \,t \) where a filter from the given set is chosen at each step.
+    \(\color{#3d73ff}\eta _t:\mathcal{W}\rightarrow \mathcal{O} \) where \(\color{#3d73ff}\mathcal{W} \) is the space of weight vectors and \(\color{#3d73ff}\mathcal{O} \) is the space of operators
+    \(\color{#3d73ff}2^\mathcal{W }\subset2^{\mathcal{ R}^u} \) is the powerset of this space, meaning all possible subsets of possible weight
+
+Assets have weights \(\color{#3d73ff}w_i \), but strategies also have weights \(\color{#3d73ff}\alpha _j \) distributed over the strategies themselves
+
+The weight vector for strategies \(\color{#3d73ff}\alpha_i \) is the decided trust in that strategy \(\color{#3d73ff}\gamma  _i \)
+    The net strategy acting on the portfolio is \(\color{#3d73ff}\gamma _p= \sum_{i=1} ^{|\gamma  |}\alpha _ i  \gamma  _i \)
+
+A signal time series \(\color{#3d73ff}z_t \) is any series which is derived from an underlying time series \(\color{#3d73ff}k_t \), which is usually \(\color{#3d73ff}r_t \) for an asset.
+    Each \(\color{#3d73ff}z_t \) can be associated to a strategy which belongs in the class \(\color{#3d73ff}\gamma _i \)
+
+A strategy is a mapping from a signal time series to a decision time series
+
+If \(\color{#3d73ff}d_{i,t},\,\forall  \,i\in u \) is the decision series for an asset,
+    A strategy for a portfolio \(\color{#3d73ff}F =\ \oplus _{i=1}^ u d _{i ,t } \) is the direct sum of disjoint decision time series.
+    In general, \(\color{#3d73ff}d_t =f(\{ \eta_t\}_{t=t_i}  ^ {t }{}) \) meaning a combination of different strategies, which are executed in terms of their relate \(\color{#3d73ff}z_t \)
+    For a single asset, \(\color{#3d73ff}F=f \) is a function \(\color{#3d73ff}\tau\rightarrow d_t \), or \(\color{#3d73ff}z_t\rightarrow d_t \). It is essentially a composition of a signal series with a decision time series.
+
+\(\color{#3d73ff}w \) is restricted sometimes to reduce the overall space of possible weights
+    This is done by a projection operator \(\color{#3d73ff}\mathcal P_{  n}\in \mathcal R^{n \times u} \) with the matrix elements \(\color{#3d73ff}\mathcal P_{ij}=\delta _{ij}1_{i \in n} \), where \(\color{#3d73ff}n< u \).
+
+Assets can have qualities which can be used to rank them or cluster them
+    Asset \(\color{#3d73ff}i \) has quality \(\color{#3d73ff}J \) such that \(\color{#3d73ff} i < j \) means \(\color{#3d73ff}J_i < J_j \), where \(\color{#3d73ff}< \) is the ordering of the real numbers. \(\color{#3d73ff}u_J=\{\min_J u,...,\max_Ju\}=\{u_{iJ}\}_{i\in u} \) is the ordered set, where \(\color{#3d73ff}< \)  induces an ordering on \(\color{#3d73ff}u \). This is defined as the set \(\color{#3d73ff}u \) ordered by quality \(\color{#3d73ff}J \)
+
+<h2>Rank Operators</h2>For \(\color{#3d73ff}k < u \), a rank operator can be defined which returns the assets that are within rank \(\color{#3d73ff}k \) as defined by the ordering implied by quality \(\color{#3d73ff}J \)
+A rank operator \(\color{#3d73ff}R_{ J,k} =\mathcal P_{\{j:j< k\}}{} \) is the selection of assets \(\color{#3d73ff}k \) with respect to quality \(\color{#3d73ff}J \)
+    The ordering is from least to greatest, meaning the bottom \(\color{#3d73ff}k \) are returned by the above operator.
+    The top \(\color{#3d73ff}k \) to be returned \(\color{#3d73ff} \color{#3d73ff}R_{J,n-k} =\mathcal P_{\{j: j \geq n-k\}}{} \) are defined by reversing the ordering defined by \(\color{#3d73ff}J \)
+
+Similarly, portfolios themselves can be acted on through orderings induced by a metric \(\color{#3d73ff}m \)
+    For a set of \(\color{#3d73ff}k' \) portfolios, \(\color{#3d73ff}R_{m,k} \) returns the \(\color{#3d73ff}k \subset k ' \) portfolios as ranked by the metric \(\color{#3d73ff}m \)
+Note threshold filters are just indicator functions over the set of assets/portfolios \(\color{#3d73ff}\mathcal  1_{i < J_0} \) for a given value of the aspect/metric.
+    Notice ranks and thresholds are equivalent to each
+        \(\color{#3d73ff}I_j = x, x\in \mathcal Z[0,u-1{]} \) is the indexing function of the ordered set and \(\color{#3d73ff}\mathcal 1_{I_j< J_0} \equiv\mathcal P_{i< j'} \) where \(\color{#3d73ff}j',J_{I_j'} < J_0 < J_{I_{j'  }+1 } \) by definition and is unique.
+        Both are isomorphic to each other, since, \(\color{#3d73ff} i\Leftrightarrow J_i \).
+
+A strategy is tested on many portfolios through a direct sum \(\color{#3d73ff}  \eta  ( \omega) \equiv \oplus_{i=1}^n\eta \) for \(\color{#3d73ff}n \) portfolios.
+
+Assets have aspects while portfolios have metrics which induce an ordering respectively
+
+The whole operation is a projection onto the space \(\color{#3d73ff}2^\tau \times 2^{\mathcal{R  ^u}} \)
+
+<h2>Strategy Classes</h2>The following strategies can be defined to act on the time period.
+
+\(\color{#3d73ff}f_{mt,R }  (z_0) *k_{i,t}=1_{z_{i,R,t}  > z_0}l_k+\color{#3d73ff}1_{z_{i,R,t}  < -z_0} s _k+ I(1_{t< t_i + R}) \) is momentum trending
+    \(\color{#3d73ff}\{f_{mt     , R }(z_0 )\}_{R\in \mathcal Z(0,\infty ),z_0 \in \mathcal{R}  } \) is the set of all possible momentum trending strategies.
+        Note this is a decision time series \(\color{#3d73ff}d_{i,t}=f_{mt     ,z_0,R }*k_{i,t} \) for asset \(\color{#3d73ff}i \) at time \(\color{#3d73ff} t \).
+
+\(\color{#3d73ff}\color{#3d73ff}f_{mv,  R }(z_0 )=1_{z_{i,R,t}  < -z_0}l_k+\color{#3d73ff}1_{z_{i,R,t}  > z_0} s _k+ I(1_{t< t_i + R}) \) is mean reversion
+    \(\color{#3d73ff}\{f_{mv      ,R  }(z_0 )\}_{R\in \mathcal Z(0,\infty ),z_0 \in \mathcal{R}    } \) is the set of all possible mean reversion strategies.
+
+\(\color{#3d73ff}z_0 \) is the threshold z-score, but it can be defined as 4 different quantities if the long/short entry/exit thresholds are required to be different.
+    \(\color{#3d73ff}z_0 \in \mathcal R^4 \).
+
+Cross sectional quantities are defined \(\color{#3d73ff}k_t:[t_i,t_f]\rightarrow \mathcal R \) , such that \(\color{#3d73ff}C_t=f(\cup _{i\in  u}k_{i,t }) \)
+    The cross sectional mean is \(\color{#3d73ff} \color{#3d73ff} \mu _{  t  }=  \sum_{i=1}^u \frac{ k    _ { i,t}}{u} \), the cross sectional standard deviation is \(\color{#3d73ff}\sigma  _ { t }   =\sqrt{\sum_{i=1} ^ u (k _ {i, t} - \mu  _ {i, t}  )^2} \), and the cross sectional z score of asset \(\color{#3d73ff}i \) is \(\color{#3d73ff}z_{  i, t } =\frac{(  k _ {i, t }  - \mu _ {  t   }   )}{\sigma _{  t  }} \). Note there is only one such quantity for a given \(\color{#3d73ff}t \).
+
+\(\color{#3d73ff}f_{c mv       }(z_0)=1_{z_{i,R,t}  < -z_0}l_k+\color{#3d73ff}1_{z_{i,R,t}  >  z_0} s _k \) is the cross mean reversion
+    \(\color{#3d73ff}\{f_{cm v    }(z_0 )\}_{z_0 \in \mathcal{R}  } \) is the set of all possible cross-sec mean reversion strategies.
+
+Related rolling quantities are \(\color{#3d73ff}\color{#3d73ff}\text{Cov}(r _{i,R ,t})  =\sqrt{\sum_{n = t - {R }}^ t(k _ {i, n} - \mu  _ {i, n , R}  )(m _ {i, n} - \mu  _ {m, n , R}  )} \) and \(\color{#3d73ff}\beta _ {i,R ,t}=\frac{Cov_{i,R,t}}{\sigma _{ {i,  R,   t } }} \).
+    There is also pairwise beta of assets with others.
+        The beta of asset \(\color{#3d73ff}i \) with \(\color{#3d73ff}j \) is \(\color{#3d73ff}\beta _{ij} \). Taking as a rolling quantity, the residual of \(\color{#3d73ff}i \) with \(\color{#3d73ff}j,\epsilon _{ij} \) is defined \(\color{#3d73ff}v_{i,t}= \beta _{ij,R,t}v  _ {j ,t} + \epsilon_{i,j  ,R, t} \)
+
+Cointegration is defined \(\color{#3d73ff}f_{co, R',R }(z_0,r_{i,t},r_{j,t} )\color{#3d73ff}\color{#3d73ff}=1_{z_{\epsilon_{ij} ,R,t}  < -  z_0}l_k+\color{#3d73ff}1_{z_{\epsilon _{ij },R,t}  > z_0} s _k+ I(1_{t< t_i + R+R'}) \)
+
+The market portfolio implements strategy \(\color{#3d73ff}f_{I,t} = l_ k(1 _{t= t_i }) + I(1 _{t > t _ i  }) \).
+    It acts on \(\color{#3d73ff}q_i =q_m \) with \(\color{#3d73ff}w_i=w_m=1 \). Note \(\color{#3d73ff}q = (q_m), w =(1) \).
+<h2>Neutrality Conditions</h2>In general, projections \(\color{#3d73ff}\mathcal P \) can be used to define neutrality conditions.
+
+If \(\color{#3d73ff}A\in \mathcal R^{|n|\times  | u|} \) where \(\color{#3d73ff}|n | < | u| \), then \(\color{#3d73ff}A \lambda =  \lambda a \) has solutions \(\color{#3d73ff}a _j \) such that \(\color{#3d73ff}\color{#3d73ff} A =\sum_i \lambda  _ i a{a^T} \)
+If \(\color{#3d73ff}a=0,P_ {{0}} =\sum_{i  }^{|u |- | n  }a_ia_i^T \) is the projection operator which describes the projection of the vector space on its null space.
+
+\(\color{#3d73ff}\mathcal {Ker}(A )  \neq 0 \) is the condition for a non trivial solution
+    \(\color{#3d73ff}\dim (\mathcal {Ker} (A) ) +  n = u \)
+The interpretation is \(\color{#3d73ff}u \) assets have \(\color{#3d73ff}k \) const equations
+
+If \(\color{#3d73ff}w \) is the vector which is returned from the strategies acting on the market, it is constrained with a projection onto \(\color{#3d73ff}\mathcal K(A)=A_{null} \color{#3d73ff}w _p \), gives the coefficients of \(\color{#3d73ff}w \) on that space
+    It is the best approximation of the raw strategies weights upon the constraints defined upon the portfolio
+
+Strategies give direction, not the weights.
+
+Any linearized operator \(\color{ }\color{#3d73ff}L(\sum _{i\in { }u}c_i w_ i)= \sum _{i\in  u }{} c_  i L ( w_i ) \) can be used to define a condition.
+    \(\color{#3d73ff} L(  w _ P) = L(\sum _{i\in { }u}c_i w_ i)=0 \) if this condition is required. This is a demand on the portfolio.
+    If \(\color{#3d73ff}L = \begin{bmatrix}l_1\\...\\l_n\end{bmatrix} \) are the horizontal vectors of the matrix representation of this operator, \(\color{#3d73ff}l_i\cdot w=0 \) is the requirement, written in terms of the inner product on this space.
+
+\(\color{#3d73ff}r_P = r^T w \) is the return of the portfolio and \(\color{#3d73ff}r_M \) is the return of the market
+    \(\color{#3d73ff}\beta _P = \mathcal{Cov}(r_P,r_M)=\mathcal{Cov}(\sum_{i=1}^{|u|}w_i r_i,r_M)=\sum_{i=1}^{|u|}w_i(r_i, r_M) =\sum_{i=1}^{|u|}w_i\beta _i = \beta ^T w \)
+
+To make the portfolio \(\color{#3d73ff}\beta - \)neutral means to make its correlation with respect to the market \(\color{#3d73ff}0 \), meaning \(\color{#3d73ff}\beta ^T w = 0 \) is the con.
+Another is PC neutrality \(\color{#3d73ff}\Psi \lambda = \psi \lambda \) where \(\color{#3d73ff}\psi_1^Tw=0 \) is the condition, \(\color{#3d73ff}\psi_1 \) is the first element in the reverse ordered set of \(\color{#3d73ff}\psi_i \), meaning the largest element.
+Another is dollar neutrality \(\color{#3d73ff}1^Tw=0 \), where \(\color{#3d73ff}1 = (1,...,1) \).
+<h2>Metrics and Statistical Indicators</h2>All metrics are defined in terms of time periods.
+    The time period \(\color{#3d73ff}\tau=[t_i,t_f] \) is an element of the set of all possible closed intervals \(\color{#3d73ff}\tau_\infty \)defined on \(\color{#3d73ff}\mathcal {R} \).
+
+Then, \(\color{#3d73ff}r_\tau:\tau_\infty \rightarrow \mathcal{R} \), where \(\color{#3d73ff}r_{\tau}=\prod_{t=1}^\tau(1+r_{p,t} ) \) is the return over the time period.
+    \(\color{#3d73ff}\color{#3d73ff}\alpha _{\tau}=\prod_{t=1}^\tau(1+r_{p,t} )-1 \) is the alpha.
+    \(\color{#3d73ff}\mu _{r,\tau}=(1+\alpha _\tau)^{\frac{1}{t_f-t_i{}}}-1 \) is the average increase per time step
+    \(\color{#3d73ff}SR_{\tau } =\frac{\mu _\tau}{\sigma _\tau } \) with \(\color{#3d73ff}\mu _\tau = \sum_{t=t_i+ {  }1}^{t_f}\frac{r_t}{ t_f-t_i} \) and \(\color{#3d73ff}\color{#3d73ff}\sigma  _ { t }   =\sqrt{ \sum_{t=t_i+ {  }1}^{t_f} (r _ { t} - \mu  _ { t}  )^2} \) is the Sharpe
+Rolling quantities, \(\color{#3d73ff}\forall  \,R\in \mathcal Z[0,|\tau|) \), are defined for a time series \(\color{#3d73ff}k_t:[t_i, t_f]\rightarrow \mathcal{R} \) such \(\color{#3d73ff}h_ t:[t_i+R,t_f] \). In general, \(\color{#3d73ff}h_t = f(\cup _{t-R}^tk_t ) \), meaning it depends on the \(\color{#3d73ff}R \) quantities of the time series before that set time.
+    The rolling mean for quantity \(\color{#3d73ff}i \) is a member of \(\color{#3d73ff}\{\mu _{i, t , R}\} _R \) with \(\color{#3d73ff} \color{#3d73ff} \mu _{i, t , R}=  \sum_{n=t-R}^t\frac{ k    _ {n, i}}{R} \)
+    There is a similarly defined set of standard deviation series \(\color{#3d73ff}\sigma  _ {i,  R,  t }   =\sqrt{\sum_{n = t - {R }}^ t(k _ {i, n} - \mu  _ {i, n , R}  )^2} \) and a z-score series \(\color{#3d73ff}z_{  i, t } =\frac{(  k _ {i, t }  - \mu _ {i, t , R  }   )}{\sigma _{{i, t , R  }}} \)
+
+There is also exp weighted averages
+    \(\color{#3d73ff}\text{EWM}( x)_t =(1-\gamma ) x_ t + \gamma \text{EWM}(x)_{t- 1} \) where \(\color{#3d73ff}\gamma \in [0,1] \) is the exponential weighted moving average.
+    \(\color{#3d73ff}x _ 0 \) is given, \(\color{#3d73ff}\text{EWM}(x)_0 = x_0 \).
+    This means \(\color{#3d73ff}\text{EWM}(x)_1 = (1-\gamma )x_1 + \gamma x_0,\color{#3d73ff}\text{EWM}(x)_2 = (1-\gamma )x_2 + \gamma x_1 = \color{#3d73ff}  (1-\gamma )x_ 2 + \gamma ( (1-\gamma )x_1 + \gamma x_ 0) = (1-\gamma )x_ 2 + \gamma ( x_1-\gamma x_1 + \gamma x_ 0) =(1-\gamma )x_ 2 + (\gamma -\gamma^2) x_1 + \gamma^2 x_ 0) \)
+        with \(\color{#3d73ff}\sum_{t= 1}^i w_t= \gamma ^i  + (1-\gamma ) + (1-\gamma )\gamma  + ... =\sum_{t=1}^i{}{}\gamma ^ {i-t}{{}}(1-\gamma )=\sum_{t=1}^i{}{}-\gamma ^ {i+1-t}{{}} + \sum_{t=1}^i{}{}\gamma ^ {i-t}{{}}=  -\gamma ^ {i }{{}} +\gamma ^0 = 1-\gamma ^i \)
+        as \(\color{#3d73ff}i\rightarrow \infty ,\gamma ^i\rightarrow 0,\sum_{t }  w_ t = 1 \).
+
+The market is also represented as different states and exhibits significantly different behavior dependent on the state.
+    Along with the return series, the probability distribution at a given time can be defined as \(\color{#3d73ff}P(r_t:r_{t-1} \,\cap \, S_t  ) \) where \(\color{#3d73ff}S_t \) is the state of the market.
+\(\color{#3d73ff}IC_{t+1} = \mathcal{Cov}{}(z_t,r_{t+1 } ) \) is the information coefficient of the signal \(\color{#3d73ff}z_t \), meaning its predictive power.
+    This will be explored in detail next.
+
+</body>
+</html>

@@ -6,26 +6,28 @@
     <script src="../../marked.min.js"></script>
     <script src ='../../script.js'></script>
 </head>
-<body style="display: grid;  grid-template-columns: auto auto auto; grid-template-rows: auto auto auto auto; gap: 0; grid-template-areas: 'top top top' 'left-one mid-one right-one' 'left-two mid-tw right-two' 'left-three mid-thr right-three';align-items: center;justify-items: center">
+<body style="display: grid;  grid-template-columns: auto auto auto; grid-template-rows: auto auto auto auto auto; gap: 0; grid-template-areas: 'top top top' 'left-one mid-one right-one' 'left-two mid-tw right-two' 'left-three mid-thr right-three' 'left-four mid-four right-four';align-items: end;justify-items: center">
 <div style="display: flex; grid-area: top;flex-direction: column;align-items: center;" >
     <h1 >Alpha-Generation Backtesting Framework</h1>
-    <h4>This is a documentation and description of my Python-based signal generation and analysis framework to create alpha-generating strategies based on time-series data of various stocks in the SP 500.</h4>
+    <h4>This is a documentation and description of the creation and implementation of my Python-based signal generation and analysis framework to create alpha-generating strategies based on time-series data of various stocks in the SP 500.</h4>
 </div>
         <div style="max-width: 40em;flex-direction: column;padding: 1em;align-self: flex-start; display: flex;align-items: center; border-style: solid; grid-area: left-one">
             This provides an overview of the approach such as the tools that will be used, and the approaches which will be analyzed.
-            <br><br> 
+            <br><br>
             <a href="Overview_first_version_0_0.html">Overview  </a>
+            <a href= "mathematical_framework.html">Mathematical Framework (Latest)</a>
+            <a href="https://github.com/sponge-mi-boi/Quant-data">Implementation </a>
 
-           <br>
         </div>
-<!--<div style="max-width: 40em;flex-direction: column;padding: 1em;justify-content: space-evenly;  align-self: stretch; display: flex;align-items: center;  grid-area: ar">  <p style="font-size: xx-large; width: fit-content">&darr;</p> <p style="font-size: xx-large; width: fit-content">&darr;</p> <p style="font-size: xx-large; width: fit-content">&darr;</p> </div>-->
-<div style="display: flex; grid-area: mid-one;align-self: center;font-size: 5em;" >&rArr;  </div>
-<div style="display: flex; grid-area: mid-tw; margin-top: -0.5em; align-self: flex-start;font-size: 5em;" >&swArr;  </div>
-<div style="display: flex; grid-area: mid-tw; margin-top: -3em; align-self: center;font-size: 5em;" >&rArr;  </div>
-<div style="display: flex; grid-area: mid-thr; margin-top: -3em; align-self: flex-start;font-size: 5em;" >&swArr;  </div>
-<div style="display: flex; grid-area: mid-thr; margin-top: -0.5em; align-self: flex-start;font-size: 5em;" >&seArr;  </div>
 
-<div style="max-width: 40em;margin-top: 2em;  align-self: center; flex-direction: column;; display: flex;align-items: center; border-style: solid; padding: 1em;grid-area: right-three">
+<!--<div style="max-width: 40em;flex-direction: column;padding: 1em;justify-content: space-evenly;  align-self: stretch; display: flex;align-items: center;  grid-area: ar">  <p style="font-size: xx-large; width: fit-content">&darr;</p> <p style="font-size: xx-large; width: fit-content">&darr;</p> <p style="font-size: xx-large; width: fit-content">&darr;</p> </div>-->
+<!--<div style="display: flex; grid-area: mid-one;align-self: center;font-size: 5em;" >&rArr;  </div>-->
+<!--<div style="display: flex; grid-area: mid-tw; margin-top: -0.5em; align-self: flex-start;font-size: 5em;" >&swArr;  </div>-->
+<!--<div style="display: flex; grid-area: mid-tw; margin-top: -3em; align-self: center;font-size: 5em;" >&rArr;  </div>-->
+<!--<div style="display: flex; grid-area: mid-thr; margin-top: -3em; align-self: flex-start;font-size: 5em;" >&swArr;  </div>-->
+<!--<div style="display: flex; grid-area: mid-thr; margin-top: -0.5em; align-self: flex-start;font-size: 5em;" >&seArr;  </div>-->
+
+<div style="max-width: 40em;margin-top: 2em;  align-self: center; flex-direction: column;; display: flex;align-items: center; justify-content: start; border-style: solid; padding: 1em;grid-area: left-four">
 
             <div style="font-size: medium"><h3 style="margin-bottom: 0; ">Version 0.1 </h3></div>
             <p>            The initial focus is on OOP design for efficiency,
@@ -40,7 +42,7 @@
             strategy with a method that is scalable, and it does not seem natural to give such a description.
         </div>
 
-    <div style="flex-direction: column; display: flex;justify-content: center; align-items: center; max-width: 40em; margin-top: -15em; align-self: flex-start;border-style: solid;padding: 1em; ;grid-area: left-three;">
+    <div style="flex-direction: column; display: flex;justify-content: center; align-items: center; max-width: 40em;margin: 2em 0 0  0;   align-self: flex-start;border-style: solid;padding: 1em; ;grid-area: right-three;">
                 <div style="font-size: medium">
                     <h3 style="margin-bottom: 0">Version 0.2 </h3> </div>
                 <p>
@@ -50,7 +52,7 @@
                 <a href="Version_0_2.html">Function based Framework: Part 1  </a>
             </div>
 
-<div style="flex-direction: column; display: flex;align-items: center;align-self: flex-start; border-style: solid; padding: 1em;; max-width: 40em;grid-area: right-two">
+<div style="flex-direction: column; display: flex;align-items: center;align-self: flex-start; border-style: solid;  margin:-20em 0 0  0; padding: 1em;; max-width: 40em;grid-area: left-three">
 
                 <h3 style="margin-bottom: 0">Version 1.0</h3>
                 <p>
@@ -67,7 +69,7 @@
                 parameters, will be next.
             </div>
 
-<div style="flex-direction: column; align-self: flex-start;display: flex;align-items: center; max-width: 40em; margin-top: -5em;  margin-bottom: 0; border-style: solid;padding: 1em; grid-area: left-two">
+<div style="flex-direction: column; align-self: flex-start;display: flex;align-items: center; max-width: 40em; margin-top: 0;  margin-bottom: 0; border-style: solid;padding: 1em; grid-area: right-two">
 
         <div style="font-size: medium">
             <h3 style="margin-bottom: 0">Version 1.1 </h3> </div>
@@ -79,7 +81,7 @@
             <a href="Version_1_.html">Revised Backtesting Example and Results with report </a>
             <a href="Version_1_Graphs_.html">Graphs</a>
     </div>
-<div style="flex-direction: column; align-self: start;display: flex;align-items: center; max-width: 40em; margin-bottom: 2em; border-style: solid;padding: 1em; grid-area: right-one">
+<div style="flex-direction: column; align-self: start; justify-self: start;display: flex;align-items: center; max-width: 40em;margin:-30em 0 0  0;  border-style: solid;padding: 1em; grid-area: left-two">
 
     <div style="font-size: medium">
         <h3 style="margin-bottom: 0">Version 1.2 </h3> </div>
@@ -89,7 +91,29 @@
     <a href="Version_1_2.html">Report </a>
     <a href="Version_1_%202_Graphs.html">Graphs</a>
 </div>
-<div style="flex-direction: column; align-self: start;display: flex;align-items: center; max-width: 40em; margin-bottom: 2em; border-style: solid;padding: 1em; grid-area: right-one">
-</div>div
+<div style="flex-direction: column; align-self: start;display: flex;align-items: center; max-width: 40em;margin:1em 0 2em 0;  border-style: solid;padding: 1em; grid-area: right-one">
+
+    <h3 style="display: flex; justify-content: center; margin: 0 0 1em 0">Version 1.3</h3>
+    <ul>
+        <li>Implemented cross-sectional mean reversion, cross-sectional momentum, cointegration, time based momentum, and mean reversion.</li>
+        <li>Implemented neutrality conditions of beta neutrality, PC(n) neutrality, dollar.</li>
+        <li>Implemented a regime detector based on state variables of correlation, volatility, trending,autocorrelation, and dispersion.</li>
+        <li>Implemented the use of rolling filters and EMA filters.</li>
+        <li>Implemented the classification of assets in terms of the related various aspects.</li>
+        <li>Implemented rank based weighting.</li>
+        <li>Implemented basic SQL storage.</li>
+        <li>Implemented optimization of parameters.</li>
+        <li>The goal is still 2.0 Sharpe and 1.7 alpha across time periods. <ul>
+            <li style="margin:1em 0 0 0">I have yet to find one which does this.</li>
+            <li>The closest is Sharpe > 1.5 and Alpha > 0.4 which was based on the implementation of regime based strategies and weighting, along with neutrality conditions.</li></ul></li>
+        <li>Improvements to focus on is more weighted strategy execution, a more accurate regime filter, perhaps.</li>
+        <li>Bayesian filtering needs to be added</li>
+    </ul>
+        <p>
+        </p>
+    <a href="https://github.com/sponge-mi-boi/Quant-data">GitHub</a>
+    <a href="">See above</a>
+    <a href="">See above</a>
+</div>
 </body>
 </html>
