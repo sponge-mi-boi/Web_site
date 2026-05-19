@@ -129,12 +129,12 @@ The whole operation is a projection onto the space \(\color{#3d73ff}2^\tau \time
 
 <h2>Strategy Classes</h2>The following strategies can be defined to act on the time period.
 
-\(\color{#3d73ff}f_{mt,R }  (z_0) *k_{i,t}=1_{z_{i,R,t}  > z_0}l_k+\color{#3d73ff}1_{z_{i,R,t}  < -z_0} s _k+ I(1_{t< t_i + R}) \) is momentum trending
-    \(\color{#3d73ff}\{f_{mt     , R }(z_0 )\}_{R\in \mathcal Z(0,\infty ),z_0 \in \mathcal{R}  } \) is the set of all possible momentum trending strategies.
-        Note this is a decision time series \(\color{#3d73ff}d_{i,t}=f_{mt     ,z_0,R }*k_{i,t} \) for asset \(\color{#3d73ff}i \) at time \(\color{#3d73ff} t \).
+\(\color{#3d73ff}\gamma _{mt,R }  (z_0) *k_{i,t}=1_{z_{i,R,t}  > z_0}l_k+\color{#3d73ff}1_{z_{i,R,t}  < -z_0} s _k+ I(1_{t< t_i + R}) \) is momentum trending
+    \(\color{#3d73ff}\{\gamma _{mt     , R }(z_0 )\}_{R\in \mathcal Z(0,\infty ),z_0 \in \mathcal{R}  } \) is the set of all possible momentum trending strategies.
+        Note this is a decision time series \(\color{#3d73ff}d_{i,t}=\gamma _{mt     ,z_0,R }*k_{i,t} \) for asset \(\color{#3d73ff}i \) at time \(\color{#3d73ff} t \).
 
-\(\color{#3d73ff}\color{#3d73ff}f_{mv,  R }(z_0 )=1_{z_{i,R,t}  < -z_0}l_k+\color{#3d73ff}1_{z_{i,R,t}  > z_0} s _k+ I(1_{t< t_i + R}) \) is mean reversion
-    \(\color{#3d73ff}\{f_{mv      ,R  }(z_0 )\}_{R\in \mathcal Z(0,\infty ),z_0 \in \mathcal{R}    } \) is the set of all possible mean reversion strategies.
+\(\color{#3d73ff}\color{#3d73ff}\gamma _{mv,  R }(z_0 )=1_{z_{i,R,t}  < -z_0}l_k+\color{#3d73ff}1_{z_{i,R,t}  > z_0} s _k+ I(1_{t< t_i + R}) \) is mean reversion
+    \(\color{#3d73ff}\{\gamma _{mv      ,R  }(z_0 )\}_{R\in \mathcal Z(0,\infty ),z_0 \in \mathcal{R}    } \) is the set of all possible mean reversion strategies.
 
 \(\color{#3d73ff}z_0 \) is the threshold z-score, but it can be defined as 4 different quantities if the long/short entry/exit thresholds are required to be different.
     \(\color{#3d73ff}z_0 \in \mathcal R^4 \).
@@ -142,16 +142,16 @@ The whole operation is a projection onto the space \(\color{#3d73ff}2^\tau \time
 Cross sectional quantities are defined \(\color{#3d73ff}k_t:[t_i,t_f]\rightarrow \mathcal R \) , such that \(\color{#3d73ff}C_t=f(\cup _{i\in  u}k_{i,t }) \)
     The cross sectional mean is \(\color{#3d73ff} \color{#3d73ff} \mu _{  t  }=  \sum_{i=1}^u \frac{ k    _ { i,t}}{u} \), the cross sectional standard deviation is \(\color{#3d73ff}\sigma  _ { t }   =\sqrt{\sum_{i=1} ^ u (k _ {i, t} - \mu  _ {i, t}  )^2} \), and the cross sectional z score of asset \(\color{#3d73ff}i \) is \(\color{#3d73ff}z_{  i, t } =\frac{(  k _ {i, t }  - \mu _ {  t   }   )}{\sigma _{  t  }} \). Note there is only one such quantity for a given \(\color{#3d73ff}t \).
 
-\(\color{#3d73ff}f_{c mv       }(z_0)=1_{z_{i,R,t}  < -z_0}l_k+\color{#3d73ff}1_{z_{i,R,t}  >  z_0} s _k \) is the cross mean reversion
-    \(\color{#3d73ff}\{f_{cm v    }(z_0 )\}_{z_0 \in \mathcal{R}  } \) is the set of all possible cross-sec mean reversion strategies.
+\(\color{#3d73ff}\gamma _{c mv       }(z_0)=1_{z_{i,R,t}  < -z_0}l_k+\color{#3d73ff}1_{z_{i,R,t}  >  z_0} s _k \) is the cross mean reversion
+    \(\color{#3d73ff}\{\gamma _{cm v    }(z_0 )\}_{z_0 \in \mathcal{R}  } \) is the set of all possible cross-sec mean reversion strategies.
 
 Related rolling quantities are \(\color{#3d73ff}\color{#3d73ff}\text{Cov}(r _{i,R ,t})  =\sqrt{\sum_{n = t - {R }}^ t(k _ {i, n} - \mu  _ {i, n , R}  )(m _ {i, n} - \mu  _ {m, n , R}  )} \) and \(\color{#3d73ff}\beta _ {i,R ,t}=\frac{Cov_{i,R,t}}{\sigma _{ {i,  R,   t } }} \).
     There is also pairwise beta of assets with others.
         The beta of asset \(\color{#3d73ff}i \) with \(\color{#3d73ff}j \) is \(\color{#3d73ff}\beta _{ij} \). Taking as a rolling quantity, the residual of \(\color{#3d73ff}i \) with \(\color{#3d73ff}j,\epsilon _{ij} \) is defined \(\color{#3d73ff}v_{i,t}= \beta _{ij,R,t}v  _ {j ,t} + \epsilon_{i,j  ,R, t} \)
 
-Cointegration is defined \(\color{#3d73ff}f_{co, R',R }(z_0,r_{i,t},r_{j,t} )\color{#3d73ff}\color{#3d73ff}=1_{z_{\epsilon_{ij} ,R,t}  < -  z_0}l_k+\color{#3d73ff}1_{z_{\epsilon _{ij },R,t}  > z_0} s _k+ I(1_{t< t_i + R+R'}) \)
+Cointegration is defined \(\color{#3d73ff}\gamma _{co, R',R }(z_0,r_{i,t},r_{j,t} )\color{#3d73ff}\color{#3d73ff}=1_{z_{\epsilon_{ij} ,R,t}  < -  z_0}l_k+\color{#3d73ff}1_{z_{\epsilon _{ij },R,t}  > z_0} s _k+ I(1_{t< t_i + R+R'}) \)
 
-The market portfolio implements strategy \(\color{#3d73ff}f_{I,t} = l_ k(1 _{t= t_i }) + I(1 _{t > t _ i  }) \).
+The market portfolio implements strategy \(\color{#3d73ff}\gamma _{I,t} = l_ k(1 _{t= t_i }) + I(1 _{t > t _ i  }) \).
     It acts on \(\color{#3d73ff}q_i =q_m \) with \(\color{#3d73ff}w_i=w_m=1 \). Note \(\color{#3d73ff}q = (q_m), w =(1) \).
 <h2>Neutrality Conditions</h2>In general, projections \(\color{#3d73ff}\mathcal P \) can be used to define neutrality conditions.
 

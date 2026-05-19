@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<script
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js"
+  type="text/javascript"></script>
+	<style>h2{margin: 0} body{width: 100em;margin:2em; white-space: pre-wrap;color: whitesmoke; line-height: 3em; }
+	a{color: lightpink}</style>
+
+</head>
+<body  >
+<h2>Version 1.3</h2>\(\color{#3d73ff}(500,250,150) \) is the length of the back testing periods with a roll forward of \(\color{#3d73ff}500 \).
+There are 4 tests which are executed in total for each chosen list or combination of strategies/filters.
+	The data starts 2016-04-29 and ends on 2026-05-20.
+	There are 2500 plus data points.
+		Training periods are of length 500
+		Validation periods of length 260
+		Testing periods of length 160 or 260
+		There are 4 overall tests, with a roll forward of 500
+
+For mathematical descriptions, look at <a href="mathematical_framework.html">Mathematical Framework</a>
+\(\color{#3d73ff}\gamma _{mv,30}(1.99) \) was used
+\(\color{#3d73ff}\color{#3d73ff}\gamma  _{cm v }(1.999) \) was used
+\(\color{#3d73ff} \gamma_{m t, 30 }(1.999) \) was used
+\(\color{#3d73ff}\eta _{regime} \), \(\color{#3d73ff}\eta _{pc(1)},\eta _d,\eta _b \) was used
+
+Cross asset mean reversion and time based momentum trending work well.
+	Cross asset mv alone is quite effective, showing positive SR in 3 different periods
+		<a href="(1260,%201520)dict_keys(%5B'cross_asset_mv'%5D).html"> Period 2</a>, <a href="(1760,%201910)dict_keys(%5B'cross_asset_mv'%5D).html"> Period 3</a>, <a href="(2260, 2410)dict_keys(['cross_asset_mv']).html"> Period 4</a>
+	Momentum trending alone works very well on some periods, but not as well on others.
+It works well on <a href="1_3(1260, 1410)dict_keys(['momentum_trending']).html">Period 2</a> but not on <a href="(1760,%201910)dict_keys(%5B'momentum_trending'%5D).html">Period 3</a>, meaning it seems to be regime dependent.
+	Combined both strategies in a regime filter, they seem to yield the best results so far.
+		Combined with beta neutrality, dollar neutrality, and PC neutrality in the first component, \(\color{#3d73ff}\alpha >0,SR>0 \) across \(\color{#3d73ff}3 \) of the periods
+		<a href="(760,%201020)dict_keys(%5B'cross_asset_mv',%20'momentum_trending'%5D).html">Period 1</a>, <a href="(1260,%201520)dict_keys(%5B'cross_asset_mv',%20'momentum_trending'%5D).html">Period 2</a>, <a href="(1760,%201910)dict_keys(%5B'cross_asset_mv',%20'momentum_trending'%5D).html">Period 3</a>
+
+Time based mean reversion must be reduced as it produces noisy signals, as it seems from the metrics, of the tests which execute those strategy.
+	\(\color{#3d73ff}\alpha <0,SR<0 \) consistently in these situations across time periods
+	An example is <a href="(1260,%201410)dict_keys(%5B'mv',%20'cross_asset_mv',%20'momentum_trending'%5D).html"> Period 2</a>
+</body></html>
+
