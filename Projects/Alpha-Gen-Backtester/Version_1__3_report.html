@@ -25,7 +25,7 @@ For mathematical descriptions, look at <a href="mathematical_framework.html">Mat
 \(\color{#3d73ff}\color{#3d73ff}\gamma  _{cm v }(1.999) \) was used
 \(\color{#3d73ff} \gamma_{m t, 30 }(1.999) \) was used
 \(\color{#3d73ff}\eta _{regime} ,  \color{#3d73ff}\eta _{pc(1)},\eta _d,\eta _b \) was used
-
+\(\color{#3d73ff} \gamma_{co, 30,30 }(1.999) \) was used
 Cross asset mean reversion and time based momentum trending work well.
 	Cross asset mv alone is quite effective, showing positive SR in 3 different periods
 		<a href="(1260,%201520)dict_keys(%5B'cross_asset_mv'%5D).html"> Period 2</a>, <a href="(1760,%201910)dict_keys(%5B'cross_asset_mv'%5D).html"> Period 3</a>, <a href="(2260, 2410)dict_keys(['cross_asset_mv']).html"> Period 4</a>
@@ -38,5 +38,9 @@ It works well on <a href="1_3(1260, 1410)dict_keys(['momentum_trending']).html">
 Time based mean reversion must be reduced as it produces noisy signals, as it seems from the metrics, of the tests which execute those strategy.
 	\(\color{#3d73ff}\alpha <0,SR<0 \) consistently in these situations across time periods
 	An example is <a href="(1260,%201410)dict_keys(%5B'mv',%20'cross_asset_mv',%20'momentum_trending'%5D).html"> Period 2</a>
+
+Cointegration works in some periods, but not others, showing it is regime dependent like any other strategy class.
+	Cointegration combined with pc neutrality of the first vector and dollar neutrality leads to positive alpha in all 4 periods, but not reliable Sharpe.
+    <a href="(760,%201020)dict_keys(%5B'cointegration'%5D).html">Period 1</a>, <a href="(1260,%201520)dict_keys(%5B'cointegration'%5D).html">Period 2 </a>, <a href="(1760,%202020)dict_keys(%5B'cointegration'%5D).html">Period 3 </a>, <a href="(2260,%202520)dict_keys(%5B'cointegration'%5D).html ">Period 4 </a>
 </body></html>
 
